@@ -54,7 +54,8 @@
                                             0
                                         </p>
                                     </div>
-                                    <i class="fa fa-bell text-white text-2xl" aria-hidden="true"></i>
+                                    <img src="{{ asset('images/bell.png') }}" class="w-8 h-8"alt="">
+                                    {{-- <i class="fa fa-bell text-white text-2xl" aria-hidden="true"></i> --}}
                                 </div>
                             </div>
                         </a>
