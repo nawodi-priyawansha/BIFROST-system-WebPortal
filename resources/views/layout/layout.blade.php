@@ -15,13 +15,17 @@
 </head>
 
 <body>
+    <div>
     @include('components.admin-header')
     <!-- Container for Sidebar and Main Content -->
-    <div class="flex h-screen overflow-hidden ">
+    <div class="flex h-screen overflow-hidden  ">
         @include('components.admin-sidebar')
         @yield('content')
     </div>
+</div><div>@include('components.footer')</div>
+    
     <script src="{{ asset('js/style.js') }}"></script>
+    </div>
 </body>
 
 </html>
