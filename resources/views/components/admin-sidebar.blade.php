@@ -19,7 +19,7 @@
                 <a href="#"
                     class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300">
                     <!-- Icon -->
-                    <i class="bi bi-grid-3x3-gap w-5 h-5 m-3"></i>
+                    <i class="bi bi-grid-3x3-gap w-5 h-5 m-3" onclick="toggleSidebar()"></i>
                     <!-- Text -->
                     <span class="sidebar-item-text" style="display: none;">Dashboard</span>
                 </a>
@@ -29,7 +29,7 @@
                 <a href="#"
                     class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300">
                     <!-- Icon -->
-                    <i class="bi bi-key w-5 h-5 m-3"></i>
+                    <i class="bi bi-key w-5 h-5 m-3" onclick="toggleSidebar()"></i>
                     <!-- Text -->
                     <span class="sidebar-item-text" style="display: none;">Access</span>
                 </a>
@@ -39,7 +39,7 @@
                 <a href="#"
                     class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300">
                     <!-- Icon -->
-                    <i class="bi bi-people w-5 h-5 m-3"></i>
+                    <i class="bi bi-people w-5 h-5 m-3" onclick="toggleSidebar()"></i>
                     <!-- Text -->
                     <span class="sidebar-item-text" style="display: none;">Client Management</span>
                 </a>
@@ -49,7 +49,7 @@
                 <a href="#"
                     class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300">
                     <!-- Icon -->
-                    <i class="bi bi-person-gear w-5 h-5 m-3"></i>
+                    <i class="bi bi-person-gear w-5 h-5 m-3" onclick="toggleSidebar()"></i>
                     <!-- Text -->
                     <span class="sidebar-item-text" style="display: none;">Workout Library</span>
                 </a>
@@ -59,7 +59,7 @@
                 <a href="#"
                     class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300">
                     <!-- Icon -->
-                    <i class="bi bi-list-check w-5 h-5 m-3"></i>
+                    <i class="bi bi-list-check w-5 h-5 m-3" onclick="toggleSidebar()"></i>
                     <!-- Text -->
                     <span class="sidebar-item-text" style="display: none;">Session/Class Module</span>
                 </a>
@@ -69,7 +69,7 @@
                 <a href="#"
                     class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300">
                     <!-- Icon -->
-                    <i class="bi bi-coin w-5 h-5 m-3"></i>
+                    <i class="bi bi-coin w-5 h-5 m-3" onclick="toggleSidebar()"></i>
                     <!-- Text -->
                     <span class="sidebar-item-text" style="display: none;">Financial</span>
                 </a>
@@ -79,7 +79,7 @@
                 <a href="#"
                     class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300">
                     <!-- Icon -->
-                    <i class="bi bi-broadcast-pin w-5 h-5 m-3"></i>
+                    <i class="bi bi-broadcast-pin w-5 h-5 m-3" onclick="toggleSidebar()"></i>
                     <!-- Text -->
                     <span class="sidebar-item-text" style="display: none;">Communication</span>
                 </a>
@@ -89,7 +89,7 @@
                 <a href="#"
                     class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300">
                     <!-- Icon -->
-                    <i class="bi bi-bar-chart w-5 h-5 m-3"></i>
+                    <i class="bi bi-bar-chart w-5 h-5 m-3" onclick="toggleSidebar()"></i>
                     <!-- Text -->
                     <span class="sidebar-item-text" style="display: none;">Statistics</span>
                 </a>
