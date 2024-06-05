@@ -1,34 +1,26 @@
 function toggleSidebar() {
+    console.log("Sidebar toggled");
+    const container = document.getElementById('container');
     const sidebar = document.getElementById('sidebar');
-    const sidebarTexts = document.querySelectorAll('.sidebar-item-text');
+    const screenWidth = window.innerWidth;
 
-    if (window.innerWidth < 768) { // Mobile view logic
-        if (sidebar.classList.contains('hidden')) {
-            sidebar.classList.remove('hidden');
-            sidebarTexts.forEach(text => text.style.display = 'inline');
+    if (screenWidth <= 720) {
+        // Toggle sidebar visibility for mobile view
+        if (container.classList.contains('w-[100%]')) {
+            container.classList.remove('w-[100%]');
+            sidebar.style.width = '0'; // Hide sidebar fully
         } else {
-            sidebar.classList.add('hidden');
-            sidebarTexts.forEach(text => text.style.display = 'none');
+            container.classList.add('w-[100%]');
+            sidebar.style.width = '16rem'; // Show sidebar fully
         }
-    } else { // Desktop view logic
-        if (sidebar.classList.contains('w-18')) {
-            sidebar.classList.remove('w-18');
-            sidebar.classList.add('w-80');
-            sidebarTexts.forEach(text => text.style.display = 'inline');
+    } else {
+        // Toggle sidebar width for larger screens
+        if (container.classList.contains('w-[60%]')) {
+            container.classList.remove('w-[60%]');
+            sidebar.style.width = '16rem'; // Set sidebar width to 16rem
         } else {
-            sidebar.classList.remove('w-80');
-            sidebar.classList.add('w-18');
-            sidebarTexts.forEach(text => text.style.display = 'none');
+            container.classList.add('w-[60%]');
+            sidebar.style.width = '4rem'; // Set sidebar width to 4rem
         }
     }
 }
-
-function hideSidebarOnLoad() {
-    const sidebar = document.getElementById('sidebar');
-    if (window.innerWidth < 768) { // Checks if the screen width is less than 768px
-        sidebar.classList.add('hidden');
-    }
-}
-
-window.onload = hideSidebarOnLoad;
-window.onresize = hideSidebarOnLoad; // Ensure the sidebar is hidden/shown correctly when the window is resized
