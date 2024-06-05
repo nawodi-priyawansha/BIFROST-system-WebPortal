@@ -18,7 +18,7 @@
     <div>
     @include('components.admin-header')
     <!-- Container for Sidebar and Main Content -->
-    <div class="flex h-screen overflow-hidden  ">
+    <div class="flex  overflow-hidden  ">
         @include('components.admin-sidebar')
         @yield('content')
     </div>

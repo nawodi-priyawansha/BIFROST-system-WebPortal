@@ -22,3 +22,4 @@ Route::get('/', function () {
 
 //admin dashboard route
 Route::get('/admin/dashboard', [DashboardController::class, 'viewdashboard'])->name('admindashboard');
+Route::get('/admin/financial', [DashboardController::class, 'viewfinancial'])->name('admin.financial');
