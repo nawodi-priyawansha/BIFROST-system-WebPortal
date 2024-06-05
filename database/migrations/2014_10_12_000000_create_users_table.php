@@ -14,12 +14,15 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->enum('user_type', ['super admin', 'admin', 'client', 'worker'])->default('client');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->unsignedInteger('pin1');
+            $table->unsignedInteger('pin2');
+            $table->unsignedInteger('pin3');
+            $table->unsignedInteger('pin4');
             $table->timestamps();
         });
+               
     }
 
     /**
