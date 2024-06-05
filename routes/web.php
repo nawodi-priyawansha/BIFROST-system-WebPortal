@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 
 
 /*
@@ -16,9 +17,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 
 //admin dashboard route
 Route::get('/admin/dashboard', [DashboardController::class, 'viewdashboard'])->name('admindashboard');
+
+// login 
+Route::post('login', [AuthController::class, 'login'])->name('login');
