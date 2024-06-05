@@ -12,7 +12,7 @@
 <body>
     <!-- Sidebar -->
     <aside id="sidebar"
-        class="relative bg-white h-full transition-all duration-300 flex flex-col text-md font-semibold mt-20 transition-width">
+        class="relative bg-white h-full transition-all duration-300 flex flex-col text-md font-semibold mt-20 animate-slide-in-from-left">
 
         <ul class="flex flex-col space-y-1 overflow-y-auto overflow-x-hidden scrollbar">
             <li>
@@ -21,17 +21,7 @@
                     <!-- Icon -->
                     <i class="bi bi-grid-3x3-gap w-5 h-5 m-3" onclick="toggleSidebar()"></i>
                     <!-- Text -->
-                    <span class="sidebar-item-text">Dashboard</span>
-                </a>
-                <hr class="border-t border-black" />
-            </li>
-            <li>
-                <a href="#"
-                    class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300">
-                    <!-- Icon -->
-                    <i class="bi bi-key w-5 h-5 m-3" onclick="toggleSidebar()"></i>
-                    <!-- Text -->
-                    <span class="sidebar-item-text">Access</span>
+                    <span class="sidebar-item-text" style="display: none;">Dashboard</span>
                 </a>
                 <hr class="border-t border-black" />
             </li>
@@ -41,7 +31,7 @@
                     <!-- Icon -->
                     <i class="bi bi-people w-5 h-5 m-3" onclick="toggleSidebar()"></i>
                     <!-- Text -->
-                    <span class="sidebar-item-text">Client Management</span>
+                    <span class="sidebar-item-text" style="display: none;">Profile</span>
                 </a>
                 <hr class="border-t border-black" />
             </li>
@@ -49,9 +39,9 @@
                 <a href="#"
                     class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300">
                     <!-- Icon -->
-                    <i class="bi bi-person-gear w-5 h-5 m-3" onclick="toggleSidebar()"></i>
+                    <i class="bi bi-flag w-5 h-5 m-3" onclick="toggleSidebar()"></i>
                     <!-- Text -->
-                    <span class="sidebar-item-text">Workout Library</span>
+                    <span class="sidebar-item-text" style="display: none;">Goals (SMART)</span>
                 </a>
                 <hr class="border-t border-black" />
             </li>
@@ -59,9 +49,9 @@
                 <a href="#"
                     class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300">
                     <!-- Icon -->
-                    <i class="bi bi-list-check w-5 h-5 m-3" onclick="toggleSidebar()"></i>
+                    <i class="bi bi-universal-access-circle w-5 h-5 m-3" onclick="toggleSidebar()"></i>
                     <!-- Text -->
-                    <span class="sidebar-item-text">Session/Class Module</span>
+                    <span class="sidebar-item-text" style="display: none;">Achievements</span>
                 </a>
                 <hr class="border-t border-black" />
             </li>
@@ -69,29 +59,9 @@
                 <a href="#"
                     class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300">
                     <!-- Icon -->
-                    <i class="bi bi-coin w-5 h-5 m-3" onclick="toggleSidebar()"></i>
+                    <i class="bi bi-gear w-5 h-5 m-3" onclick="toggleSidebar()"></i>
                     <!-- Text -->
-                    <span class="sidebar-item-text">Financial</span>
-                </a>
-                <hr class="border-t border-black" />
-            </li>
-            <li>
-                <a href="#"
-                    class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300">
-                    <!-- Icon -->
-                    <i class="bi bi-broadcast-pin w-5 h-5 m-3" onclick="toggleSidebar()"></i>
-                    <!-- Text -->
-                    <span class="sidebar-item-text">Communication</span>
-                </a>
-                <hr class="border-t border-black" />
-            </li>
-            <li>
-                <a href="#"
-                    class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300">
-                    <!-- Icon -->
-                    <i class="bi bi-bar-chart w-5 h-5 m-3" onclick="toggleSidebar()"></i>
-                    <!-- Text -->
-                    <span class="sidebar-item-text">Statistics</span>
+                    <span class="sidebar-item-text" style="display: none;">Settings</span>
                 </a>
                 <hr class="border-t border-black" />
             </li>
