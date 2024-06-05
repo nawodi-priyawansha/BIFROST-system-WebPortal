@@ -22,7 +22,8 @@ Route::get('/', function () {
 
 
 //admin dashboard route
-Route::get('/admin/dashboard', [DashboardController::class, 'viewdashboard'])->name('admindashboard');
+Route::get('/admin/dashboard', [DashboardController::class, 'viewdashboard'])->name('admindashboard'); 
+Route::get('/admin/financial', [DashboardController::class, 'viewfinancial'])->name('admin.financial');
 
 // login 
 Route::post('login', [AuthController::class, 'login'])->name('login');
