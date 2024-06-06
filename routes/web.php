@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
@@ -27,3 +28,24 @@ Route::get('/admin/financial', [DashboardController::class, 'viewfinancial'])->n
 
 // login 
 Route::post('login', [AuthController::class, 'login'])->name('login');
+
+Route::get('/admin-dashboard', function () {
+    return view('admin.user.dashboard');
+})->name('admin.dashboard')->middleware('checkUserType:admin');
+
+// Route::get('/user-dashboard', function () {
+//     return view('user.user.dashboard');
+// })->name('user.dashboard')->middleware('checkUserType:user');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/user-dashboard', function () {
+        // TO DO change return view user.user.dashboard
+        return view('user.user.profile');
+    })->name('user.dashboard');
+});
+
+
+// Route to handle unauthorized access
+Route::get('/unauthorized', function () {
+    return "You are not authorized to access this page.";
+});
