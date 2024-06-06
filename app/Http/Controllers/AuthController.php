@@ -37,6 +37,11 @@ class AuthController extends Controller
 
 
             if ($user) {
+                // Log the user in
+                Auth::login($user);
+
+                // Now Auth::user() should return the authenticated user
+                // dd(Auth::user());
                 if ($user->user_type == "admin" || $user->user_type == "super admin") {
                     return redirect()->route('admin.dashboard');
                 } elseif ($user->user_type == "client" || $user->user_type == "worker") {
@@ -50,5 +55,12 @@ class AuthController extends Controller
         } catch (Exception $e) {
             dd($e);
         }
+    }
+
+    // log out
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/'); // Redirect to the homepage or any other page
     }
 }
