@@ -41,9 +41,22 @@
                 <!-- nav-right -->
                 <div class="flex items-center h-20 justify-center ">
                     <div class="flex items-center md:gap-2">
-                        <a href="#" class=" text-gray-800 mr-20 hidden md:block">
-                            <div class=" text-gray-400">Logged in as <span class=" text-white">Umindu </span> |</div>
-                        </a>
+                        <!-- Container for displaying the logged-in user information -->
+                        <div class="text-gray-800 mr-20 hidden md:block">
+                            <!-- Inner container for the text, setting text color to gray -->
+                            <div class="text-gray-400">
+                                Logged in as
+                                <!-- Span to highlight the user's name in white color -->
+                                <span class="text-white">
+                                    @if (Auth::check())
+                                        <!-- Check if the user is authenticated -->
+                                        {{ Auth::user()->name }} <!-- Display the authenticated user's name -->
+                                    @else
+                                        Guest <!-- Display 'Guest' if no user is authenticated -->
+                                    @endif
+                                </span>
+                            </div>
+                        </div>
                         <a href="#" class=" text-gray-800">
                             <!-- component -->
                             <div class="flex justify-center items-center mr-10 mt-2">
@@ -59,14 +72,22 @@
                                 </div>
                             </div>
                         </a>
-                        <a href="#" class=" text-gray-800">
-                            <!-- component -->
-                            <div class="flex justify-center items-center mr-5  mt-2">
+                        <!-- Link that triggers the logout form submission when clicked -->
+                        <a href="#" class="text-gray-800"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <!-- Container for centering the logout icon -->
+                            <div class="flex justify-center items-center mr-5 mt-2">
+                                <!-- Inner container for the icon with margin adjustments for different screen sizes -->
                                 <div class="relative md:mb-4 mb-4">
-                                    <i class="fa fa-power-off text-red-500 text-2xl " aria-hidden="true"></i>
+                                    <!-- Logout icon styled with Font Awesome -->
+                                    <i class="fa fa-power-off text-red-500 text-2xl" aria-hidden="true"></i>
                                 </div>
                             </div>
                         </a>
+                        <!-- Hidden form for logging out, triggered by the above link -->
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf <!-- Laravel CSRF token for security -->
+                        </form>
                     </div>
                 </div>
             </div>
