@@ -12,7 +12,7 @@
 <body>
     <!-- Sidebar -->
     <aside id="sidebar"
-        class="relative bg-white h-full transition-all duration-300 flex flex-col text-md font-semibold mt-20 animate-slide-in-from-left">
+        class="relative bg-white h-full transition-all duration-300 flex flex-col text-md font-semibold mt-32 md:mt-20 transition-width">
 
         <ul class="flex flex-col space-y-1 overflow-y-auto overflow-x-hidden scrollbar">
             <li>
@@ -21,7 +21,7 @@
                     <!-- Icon -->
                     <i class="bi bi-grid-3x3-gap w-5 h-5 m-3" onclick="toggleSidebar()"></i>
                     <!-- Text -->
-                    <span class="sidebar-item-text" style="display: none;">Dashboard</span>
+                    <span class="sidebar-item-text">Dashboard</span>
                 </a>
                 <hr class="border-t border-black" />
             </li>
@@ -31,7 +31,7 @@
                     <!-- Icon -->
                     <i class="bi bi-people w-5 h-5 m-3" onclick="toggleSidebar()"></i>
                     <!-- Text -->
-                    <span class="sidebar-item-text" style="display: none;">Profile</span>
+                    <span class="sidebar-item-text">Profile</span>
                 </a>
                 <hr class="border-t border-black" />
             </li>
@@ -41,7 +41,7 @@
                     <!-- Icon -->
                     <i class="bi bi-flag w-5 h-5 m-3" onclick="toggleSidebar()"></i>
                     <!-- Text -->
-                    <span class="sidebar-item-text" style="display: none;">Goals (SMART)</span>
+                    <span class="sidebar-item-text">Goals (SMART)</span>
                 </a>
                 <hr class="border-t border-black" />
             </li>
@@ -51,7 +51,7 @@
                     <!-- Icon -->
                     <i class="bi bi-universal-access-circle w-5 h-5 m-3" onclick="toggleSidebar()"></i>
                     <!-- Text -->
-                    <span class="sidebar-item-text" style="display: none;">Achievements</span>
+                    <span class="sidebar-item-text">Achievements</span>
                 </a>
                 <hr class="border-t border-black" />
             </li>
@@ -61,7 +61,7 @@
                     <!-- Icon -->
                     <i class="bi bi-gear w-5 h-5 m-3" onclick="toggleSidebar()"></i>
                     <!-- Text -->
-                    <span class="sidebar-item-text" style="display: none;">Settings</span>
+                    <span class="sidebar-item-text">Settings</span>
                 </a>
                 <hr class="border-t border-black" />
             </li>
