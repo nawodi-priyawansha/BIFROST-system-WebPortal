@@ -15,14 +15,14 @@
     <header class='fixed z-20 flex items-center w-full bg-white header md:mb-4 lg:h-20 md:h-20'>
         <div class="container bg-black w-full">
             <div class="flex items-center justify-between">
-                <div class="flex items-center justify-between p-2 gap-x-8">
+                <div class="flex items-center justify-between p-2 gap-x-3 sm:gap-x-8">
                     <!-- Logo -->
                     <div class='md:mt-2'>
                         <img src="{{ asset('images/valhalla-logo.png') }}" alt="Logo" class='w-16 md:w-20' />
                     </div>
                     <div class="text-white font-bold">
                         <!-- Toggle button -->
-                        <button onclick="toggleSidebar()" class="cursor-pointer border-2 border-black p-2">
+                        <button onclick="toggleSidebar()" class="cursor-pointer border-2 border-black ">
                             <i id="toggle-icon"
                                 class="fa fa-bars text-2xl h-6 w-6 transform transition-transform duration-300"
                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -39,18 +39,17 @@
                     User Portal
                 </div> --}}
 
-                <div class="flex items-center bg-black p-4 rounded-lg space-x-4">
-                    <div class="text-white text-2xl cursor-pointer"><i class="bi bi-chevron-left"></i></div>
-                    <div class="flex items-center space-x-2">
-                        <div class="flex items-center justify-center">
-                            <div class="text-white text-3xl"><i class="bi bi-calendar2-minus"></i></div>
-                        </div>
+                <div class="flex items-center justify-center bg-black p-2 rounded-lg space-x-4 sm:space-x-1">
+                    <div class="text-white text-2xl cursor-pointer  md:block"><i class="bi bi-chevron-left"></i></div>
+                    <div class="flex items-center  flex-grow">
                         <div>
-                            <div class="text-red-500 text-sm">Day 2, WEEK 6</div>
-                            <div class="text-white text-sm">Today, 7th June, 2023</div>
+                            <div class="text-red-500 text-xs sm:text-xs">Day 2, WEEK 6</div>
+                            {{-- <div class="text-white text-xs hidden">Today</div> --}}
+                            <div class="text-white text-xs   sm:text-sm">Today 7th June, 2023</div>
+                            {{-- <div class="text-white text-xs hidden">7th June, 2023</div> --}}
                         </div>
                     </div>
-                    <div class="text-white text-2xl cursor-pointer"><i class="bi bi-chevron-right"></i></div>
+                    <div class="text-white text-2xl cursor-pointer w-2"><i class="bi bi-chevron-right"></i></div>
                 </div>
 
                 <!-- nav-right -->
