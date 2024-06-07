@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
-
+use App\Http\Controllers\MailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,4 +53,6 @@ Route::get('/unauthorized', function () {
 Route::get('/admin/dashboard', [DashboardController::class, 'viewdashboard'])->name('admindashboard'); 
 Route::get('/admin/financial', [DashboardController::class, 'viewfinancial'])->name('admin.financial');
 
-
+Route::post('send-forgot-password-email', [MailController::class, 'sendForgotPasswordEmail']);
+Route::get('/resetpassword/{token}', [MailController::class, 'resetpassword_index'])->name('resetpassword');
+Route::post('frogot-password/new-pin', [MailController::class, 'insert_new_pin'])->name('frogot-password');
