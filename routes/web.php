@@ -1,9 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MobileController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 
 
 /*
@@ -53,4 +55,8 @@ Route::get('/unauthorized', function () {
 Route::get('/admin/dashboard', [DashboardController::class, 'viewdashboard'])->name('admindashboard'); 
 Route::get('/admin/financial', [DashboardController::class, 'viewfinancial'])->name('admin.financial');
 
-
+//mobile route
+Route::get('/mobile/login',[MobileController::class,'login'])->name('mobile.login');
+Route::get('/mobile/forgetpin',[MobileController::class, 'forgetpin'])->name('mobile.pin');
+Route::get('/mobile/trainingday',[MobileController::class, 'trainingday'])->name('mobile.trainingday');
+Route::get('/mobile/readinessscore',[MobileController::class, 'readinessscore'])->name('mobile.readinessscore');
