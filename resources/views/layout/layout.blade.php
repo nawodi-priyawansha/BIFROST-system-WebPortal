@@ -16,16 +16,22 @@
 
 <body>
     <div>
-    @include('components.admin-header')
-    <!-- Container for Sidebar and Main Content -->
-    <div class="flex  overflow-hidden  ">
-        @include('components.admin-sidebar')
-        @yield('content')
+        @include('components.admin-header')
+        <!-- Container for Sidebar and Main Content -->
+        <div class="flex  overflow-hidden  ">
+            @include('components.admin-sidebar')
+            @yield('content')
+        </div>
     </div>
-</div><div>@include('components.footer')</div>
-    
+    <div>@include('components.footer')</div>
+
     <script src="{{ asset('js/style.js') }}"></script>
     </div>
+    <button id="scrollToTopBtn" title="Go to top"
+        class="hidden fixed bottom-5 right-5 z-50  w-8 h-8 items-center text-center justify-center bg-black text-white focus:outline-none">
+        <i class="fa fa-long-arrow-up text-white" aria-hidden="true"></i>
+    </button>
+    <script src="{{ asset('js/btnscrolltotop.js') }}"></script>
 </body>
 
 </html>

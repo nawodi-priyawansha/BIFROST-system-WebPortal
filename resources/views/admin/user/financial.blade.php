@@ -94,16 +94,20 @@
                         <span class="text-2xl font-bold">June 2018 </span>
                     </div>
 
-                    <div class="md:w-full grid grid-cols-4 md:flex flex-nowrap whitespace-nowrap border-black border-b py-2">
-                        <div class="w-auto flex-1 text-center p-2 border  flex-nowrap border-black  bg-black text-white relative  hover:bg-black hover:text-white hover:font-bold">
+                    <div
+                        class="md:w-full grid grid-cols-4 md:flex flex-nowrap whitespace-nowrap border-black border-b py-2">
+                        <div
+                            class="w-auto flex-1 text-center p-2 border  flex-nowrap border-black  bg-black text-white relative  hover:bg-black hover:text-white hover:font-bold">
                             <div class="font-medium text-xs ">July</div>
                             <div class="text-xs">$1,110,000</div>
                         </div>
-                        <div class="w-auto flex-1 text-center p-2 border flex-nowrap border-black relative  hover:bg-black hover:text-white hover:font-bold">
+                        <div
+                            class="w-auto flex-1 text-center p-2 border flex-nowrap border-black relative  hover:bg-black hover:text-white hover:font-bold">
                             <div class="text-xs">Aug.</div>
                             <div class="text-xs">$0.00</div>
                         </div>
-                        <div class="w-auto flex-1 text-center p-2 border flex-nowrap border-black relative  hover:bg-black hover:text-white hover:font-bold">
+                        <div
+                            class="w-auto flex-1 text-center p-2 border flex-nowrap border-black relative  hover:bg-black hover:text-white hover:font-bold">
                             <div class="text-xs">Sept.</div>
                             <div class="text-xs">$1,110,000</div>
                         </div>
@@ -112,15 +116,18 @@
                             <div class=" justify-center items-center text-xs text-littlegreen">RECEIVABLE</div>
                             <div class=" bottom-1 right-1 text-xs">$499</div>
                         </div>
-                        <div class="w-auto flex-1 text-center p-2 border flex-nowrap border-black  hover:bg-black hover:text-white hover:font-bold">
+                        <div
+                            class="w-auto flex-1 text-center p-2 border flex-nowrap border-black  hover:bg-black hover:text-white hover:font-bold">
                             <div class="text-xs">Oct.</div>
                             <div class="text-xs">$1,110,000</div>
                         </div>
-                        <div class="w-auto flex-1 text-center p-2 border flex-nowrap border-black  hover:bg-black hover:text-white hover:font-bold">
+                        <div
+                            class="w-auto flex-1 text-center p-2 border flex-nowrap border-black  hover:bg-black hover:text-white hover:font-bold">
                             <div class="text-xs">Nov.</div>
                             <div class="text-xs">$10,000</div>
                         </div>
-                        <div class="w-auto flex-1 text-center p-2 border flex-nowrap border-black  hover:bg-black hover:text-white hover:font-bold">
+                        <div
+                            class="w-auto flex-1 text-center p-2 border flex-nowrap border-black  hover:bg-black hover:text-white hover:font-bold">
                             <div class="text-xs">Dec.</div>
                             <div class="text-xs">$10,000</div>
                         </div>
@@ -129,15 +136,18 @@
                             <div class=" justify-center items-center text-xs text-red-600">PAYABLE</div>
                             <div class=" bottom-1 right-1 text-xs">$1250.00</div>
                         </div>
-                        <div class="w-full flex-1 text-center p-2 border flex-nowrap border-black  hover:bg-black hover:text-white hover:font-bold">
+                        <div
+                            class="w-full flex-1 text-center p-2 border flex-nowrap border-black  hover:bg-black hover:text-white hover:font-bold">
                             <div class="text-xs">Jan.</div>
                             <div class="text-xs">$1,110,000</div>
                         </div>
-                        <div class="w-full flex-1 text-center p-2 border flex-nowrap border-black  hover:bg-black hover:text-white hover:font-bold">
+                        <div
+                            class="w-full flex-1 text-center p-2 border flex-nowrap border-black  hover:bg-black hover:text-white hover:font-bold">
                             <div class="text-xs">Feb.</div>
                             <div class="text-xs">$0,000,000</div>
                         </div>
-                        <div class="w-auto flex-1 text-center p-2 border flex-nowrap border-black  hover:bg-black hover:text-white hover:font-bold">
+                        <div
+                            class="w-auto flex-1 text-center p-2 border flex-nowrap border-black  hover:bg-black hover:text-white hover:font-bold">
                             <div class="text-xs">March</div>
                             <div class="text-xs">$10,000</div>
                         </div>
@@ -146,11 +156,13 @@
                             <div class="justify-center items-center text-xs text-littlegreen">RECEIVABLE</div>
                             <div class=" bottom-1 right-1 text-xs">$499.25</div>
                         </div>
-                        <div class="w-auto flex-1 text-center p-2 border flex-nowrap border-black hover:bg-black hover:text-white hover:font-bold">
+                        <div
+                            class="w-auto flex-1 text-center p-2 border flex-nowrap border-black hover:bg-black hover:text-white hover:font-bold">
                             <div class="text-xs">April</div>
                             <div class="text-xs">$1,110,000</div>
                         </div>
-                        <div class="w-auto flex-1 text-center p-2 border flex-nowrap border-black  hover:bg-black hover:text-white hover:font-bold">
+                        <div
+                            class="w-auto flex-1 text-center p-2 border flex-nowrap border-black  hover:bg-black hover:text-white hover:font-bold">
                             <div class="text-xs">May</div>
                             <div class="text-xs">$10,000</div>
                         </div>
@@ -158,7 +170,8 @@
                             <div class="text-xs">June</div>
                             <div class="text-xs">$0,000,000</div>
                         </div>
-                        <div class="w-auto  flex-1 text-center p-2 border flex-nowrap whitespace-nowrap border-black bg-darkyellow relative">
+                        <div
+                            class="w-auto  flex-1 text-center p-2 border flex-nowrap whitespace-nowrap border-black bg-darkyellow relative">
                             <div class=" top-1 left-1 text-xs">BAS</div>
                             <div class="justify-center items-center text-xs text-littlegreen">RECEIVABLE</div>
                             <div class=" bottom-1 right-1 text-xs">$499.25</div>
@@ -177,12 +190,18 @@
                             <div class="bg-white p-4 rounded shadow flex-1">
                                 <h2 class="text-xl font-bold mb-4 text-center">Profit and Loss</h2>
                                 <div>
-                                    <div class="flex justify-between w-full border-black border-b py-2 "><span>Name</span><span>Amount</span></div>
-                                    <div class="flex justify-between w-full border-black border-b py-2"><span>Total Income</span><span>$2500.00</span></div>
-                                    <div class="flex justify-between w-full border-black border-b py-2"><span>Wages</span><span>$1500.00</span></div>
-                                    <div class="flex justify-between w-full  border-black border-b py-2"><span>Gross Profit</span><span>$1000.00</span></div>
-                                    <div class="flex justify-between w-full border-black border-b py-2"><span>Expenses</span><span>$500.00</span></div>
-                                    <div class="flex justify-between w-full  border-black border-b py-2 font-bold"><span>Net
+                                    <div class="flex justify-between w-full border-black border-b py-2 ">
+                                        <span>Name</span><span>Amount</span></div>
+                                    <div class="flex justify-between w-full border-black border-b py-2"><span>Total
+                                            Income</span><span>$2500.00</span></div>
+                                    <div class="flex justify-between w-full border-black border-b py-2">
+                                        <span>Wages</span><span>$1500.00</span></div>
+                                    <div class="flex justify-between w-full  border-black border-b py-2"><span>Gross
+                                            Profit</span><span>$1000.00</span></div>
+                                    <div class="flex justify-between w-full border-black border-b py-2">
+                                        <span>Expenses</span><span>$500.00</span></div>
+                                    <div class="flex justify-between w-full  border-black border-b py-2 font-bold">
+                                        <span>Net
                                             Profit</span><span>$1000.00</span></div>
                                 </div>
                             </div>
@@ -209,7 +228,8 @@
                                     <div>
                                         <h2 class="text-xl font-bold mb-4 text-center">Owed</h2>
                                         <div class="mb-2 flex justify-between items-center">
-                                            <h3 class="text-xs font-semibold text-gray-800 dark:text-white">Owed 0 - 14 days
+                                            <h3 class="text-xs font-semibold text-gray-800 dark:text-white">Owed 0 - 14
+                                                days
                                             </h3>
                                             <span class="text-xs text-gray-800 dark:text-white">
                                                 $26,4523.25</span>
@@ -222,7 +242,8 @@
                                     </div>
                                     <div>
                                         <div class="mb-2 flex justify-between items-center">
-                                            <h3 class="text-xs font-semibold text-gray-800 dark:text-white">Owed 14 - 30 days
+                                            <h3 class="text-xs font-semibold text-gray-800 dark:text-white">Owed 14 - 30
+                                                days
                                             </h3>
                                             <span class="text-xs text-gray-800 dark:text-white">$26,4523.25</span>
                                         </div>
@@ -234,7 +255,8 @@
                                     </div>
                                     <div>
                                         <div class="mb-2 flex justify-between items-center">
-                                            <h3 class="text-xs font-semibold text-gray-800 dark:text-white">Owed 30 - 60 days
+                                            <h3 class="text-xs font-semibold text-gray-800 dark:text-white">Owed 30 - 60
+                                                days
                                             </h3>
                                             <span class="text-xs text-gray-800 dark:text-white">$2,4523.25</span>
                                         </div>
@@ -246,7 +268,8 @@
                                     </div>
                                     <div>
                                         <div class="mb-2 flex justify-between items-center">
-                                            <h3 class="text-xs font-semibold text-gray-800 dark:text-white">Owed 60 - 90 days
+                                            <h3 class="text-xs font-semibold text-gray-800 dark:text-white">Owed 60 - 90
+                                                days
                                             </h3>
                                             <span class="text-xs text-gray-800 dark:text-white">$2,4523.25</span>
                                         </div>
@@ -268,7 +291,7 @@
                                                 style="width: 55%"></div>
                                         </div>
                                     </div>
-                                  
+
 
                                     <!-- End Progress -->
 
@@ -284,11 +307,12 @@
                     <div class="md:w-4/12 bg-white rounded-lg shadow-lg  ">
 
                         <h2 class="text-xl font-bold mb-4 text-center">Graph Heading</h2>
-                        <div class=" items-center justify-center flex"> <select class="mb-4 p-2 border rounded justify-center flex items-center">
-                            <option>View by Month</option>
-                            <!-- other options -->
-                        </select></div>
-                       
+                        <div class=" items-center justify-center flex"> <select
+                                class="mb-4 p-2 border rounded justify-center flex items-center">
+                                <option>View by Month</option>
+                                <!-- other options -->
+                            </select></div>
+
                         <div class=" mt-20 w-full">
                             <canvas id="myChart" height="300"></canvas>
                             <script>
@@ -298,7 +322,7 @@
                                     data: {
                                         labels: ['2018', '2019', '2020', '2021', '2022', '2023'],
                                         datasets: [
-    
+
                                             {
                                                 label: 'Height',
                                                 data: [500, 700, 600, 800, 500, 1200],
@@ -359,7 +383,7 @@
                                 });
                             </script>
                         </div>
-                      
+
                     </div>
                     <div class=" bg-white rounded-lg shadow-lg   md:w-4/12 md:flex gap-4">
                         <!-- Content for the first part (4/12 width) -->
@@ -623,7 +647,7 @@
                                     </div>
                                     <span class="ml-1">$90</span>
                                 </div>
-                
+
                                 <div class="flex items-center">
                                     <i class="fa fa-music mr-2" aria-hidden="true"></i>
                                     <div class=" w-32"><span class="text-sm ">Entertainment</span></div>
@@ -677,7 +701,8 @@
                                 </div>
                                 <div class="flex items-center">
                                     <i class="fa fa-bed text-sm " aria-hidden="true"></i>
-                                    <div class=" w-32 ml-2"><span class="text-[9.8px] ">Equipment/Furniture/Supplies</span></div>
+                                    <div class=" w-32 ml-2"><span
+                                            class="text-[9.8px] ">Equipment/Furniture/Supplies</span></div>
 
                                     <div class=" flex-1">
                                         <div
@@ -813,12 +838,12 @@
                                 </div>
 
 
-        
-                        
 
 
 
-                                
+
+
+
                             </div>
                             <div class="bg-yellow-400 text-center text-white font-bold py-2 mt-5 rounded-md">
                                 No Data Found
@@ -1036,6 +1061,7 @@
         });
     });
 </script>
+
 
 
 </html>
