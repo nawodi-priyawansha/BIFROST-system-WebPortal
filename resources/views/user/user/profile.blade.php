@@ -13,17 +13,17 @@
     @extends('layout.user-layout')
     @section('user-content')
         <!-- Container with overflow for scrolling and full width -->
-        <div class="container overflow-y-auto w-full" id="container">
+        <div class="container overflow-y-auto w-full bg-[#fafafa]" id="container">
             <!-- Main content area with top margin for large screens and smaller margin for medium screens -->
             <div class="w-full mt-36 lg:mt-24 md:mt-24">
                 <!-- Content section with gray background -->
-                <div class="mx-4 bg-[#fafafa]">
+                <div class="mx-4 ">
                     <!-- Header with breadcrumb and add new profile button -->
                     <div>
-                        <div class="justify-between flex">
+                        <div class="justify-between flex mx-4">
                             <div><span class="text-gray-700">Home / </span>Profile</div>
                             <div>
-                                <a href="">
+                                <a href="{{ route('usernewprofile') }}">
                                     <button class="bg-black text-white p-2 px-4 rounded-md">Add New Profile</button>
                                 </a>
                             </div>

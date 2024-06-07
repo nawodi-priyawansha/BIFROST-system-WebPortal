@@ -16,14 +16,15 @@
 
 <body>
     <div>
-    @include('components.user-header')
-    <!-- Container for Sidebar and Main Content -->
-    <div class="flex h-screen overflow-hidden  ">
-        @include('components.user-sidebar')
-        @yield('user-content')
+        @include('components.user-header')
+        <!-- Container for Sidebar and Main Content -->
+        <div class="flex overflow-hidden  ">
+            @include('components.user-sidebar')
+            @yield('user-content')
+        </div>
     </div>
-</div><div>@include('components.footer')</div>
-    
+    <div>@include('components.footer')</div>
+
     <script src="{{ asset('js/style.js') }}"></script>
     </div>
 </body>

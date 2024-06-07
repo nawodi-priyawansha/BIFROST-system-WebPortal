@@ -16,7 +16,7 @@
 
         <ul class="flex flex-col space-y-1 overflow-y-auto overflow-x-hidden scrollbar">
             <li>
-                <a href="#"
+                <a href="{{ route('userdashboard') }}"
                     class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300">
                     <!-- Icon -->
                     <i class="bi bi-grid-3x3-gap w-5 h-5 m-3" onclick="toggleSidebar()"></i>
@@ -26,7 +26,7 @@
                 <hr class="border-t border-black" />
             </li>
             <li>
-                <a href="#"
+                <a href="{{ route('userprofile') }}"
                     class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300">
                     <!-- Icon -->
                     <i class="bi bi-people w-5 h-5 m-3" onclick="toggleSidebar()"></i>
@@ -68,4 +68,5 @@
         </ul>
     </aside>
 </body>
+
 </html>

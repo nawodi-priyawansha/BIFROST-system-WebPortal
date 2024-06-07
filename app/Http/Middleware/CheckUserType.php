@@ -14,13 +14,12 @@ class CheckUserType
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle($request, Closure $next, $type)
+    public function handle($request, Closure $next, ...$types)
     {
         $user = Auth::user();
-        if ($user && $user->user_type === $type) {
+        if ($user && in_array($user->user_type, $types)) {
             return $next($request);
         }
-        // dd($user);
         // Redirect or abort if user type does not match
         return redirect('/unauthorized'); // Or use abort(403) to return a 403 Forbidden response
     }

@@ -14,4 +14,8 @@ class DashboardController extends Controller
      public function viewfinancial(){
       return view('admin.user.financial');
      }
+
+     public function viewaccess(){
+      return view('admin.user.access');
+     }
 }
