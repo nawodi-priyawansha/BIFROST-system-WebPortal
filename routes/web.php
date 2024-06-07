@@ -1,11 +1,17 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+
+use App\Http\Controllers\MobileController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
+
+
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\UserDashboardController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -63,8 +69,6 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/financial', [DashboardController::class, 'viewfinancial'])->name('adminfinancial');
 });
 
-
-
 //user dashboard route
 Route::middleware(['user'])->group(function () {
     // dashboard
@@ -74,3 +78,13 @@ Route::middleware(['user'])->group(function () {
     // Add new Profile
     Route::get('/user/new-profile', [UserDashboardController::class, 'viewnewprofile'])->name('usernewprofile');
 });
+//mobile route
+Route::get('/mobile/login',[MobileController::class,'login'])->name('mobile.login');
+Route::get('/mobile/forgetpin',[MobileController::class, 'forgetpin'])->name('mobile.pin');
+Route::get('/mobile/trainingday',[MobileController::class, 'trainingday'])->name('mobile.trainingday');
+Route::get('/mobile/readinessscore',[MobileController::class, 'readinessscore'])->name('mobile.readinessscore');
+
+Route::post('send-forgot-password-email', [MailController::class, 'sendForgotPasswordEmail']);
+Route::get('/resetpassword/{token}', [MailController::class, 'resetpassword_index'])->name('resetpassword');
+Route::post('frogot-password/new-pin', [MailController::class, 'insert_new_pin'])->name('frogot-password');
+
