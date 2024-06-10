@@ -25,9 +25,10 @@ use App\Http\Controllers\UserDashboardController;
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    return redirect('login');
 });
-
+// Display the login form
+Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
 // login 
 Route::post('login', [AuthController::class, 'login'])->name('login');
 // logout
@@ -53,7 +54,7 @@ Route::middleware(['admin'])->group(function () {
 // user login
 Route::middleware(['auth'])->group(function () {
     Route::get('/user-dashboard', function () {
-        // TO DO change return view user.user.dashboard
+        // return view user.user.dashboard
         return view('user.user.dashboard');
     })->name('user.dashboard');
 });
