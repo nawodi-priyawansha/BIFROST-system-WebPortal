@@ -13,59 +13,71 @@
 
     @section('content')
         <div class="w-full flex flex-col justify-between h-screen h-100%">
-            <div class="flex-grow items-center justify-center m-0 p-4 bg-cover bg-center bg-no-repeat" style="background-image: url('{{ asset('img/valhalla-bg.jpg') }}');">
-                <div class="justify-center items-center text-white text-center h-full pt-20">
+            <div class="flex-grow items-center justify-center m-0 bg-cover bg-center bg-no-repeat" style="background-image: url('{{ asset('img/valhalla-bg.jpg') }}');">
+                <div class="justify-center items-center text-white text-center h-full pt-8">
                     <div class="container mx-auto px-4 py-20">
                         <div class="section">
-                            <h2 class="text-2xl font-bold mb-4">DEADLIFT</h2>
-                            <table class="w-full text-white">
+                            <div class="flex flex-row justify-between items-center mb-8">
+                                <h2 class="text-xl font-bold ">DEADLIFT</h2>
+                                <div class="flex space-x-4">
+                                    <i class="bi bi-list-ul  text-2xl"></i>
+                                    <i class="bi bi-graph-up text-2xl"></i>
+                                </div>
+                            </div>
+                            <table class="w-full text-white text-center bg-black border-b">
                                 <thead>
-                                    <tr>
-                                        <th class="bg-opacity-20 bg-white p-4">Rep</th>
-                                        <th class="bg-opacity-20 bg-white p-4">Oct</th>
-                                        <th class="bg-opacity-20 bg-white p-4">Nov</th>
-                                        <th class="bg-opacity-20 bg-white p-4">Dec</th>
+                                    <tr class="border-b">
+                                        <th class="p-2">Rep</th>
+                                        <th class="p-2">Oct</th>
+                                        <th class="p-2">Nov</th>
+                                        <th class="p-2">Dec</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td class="p-4">1</td>
-                                        <td class="p-4">150kg</td>
-                                        <td class="p-4">130kg</td>
-                                        <td class="p-4">100kg</td>
+                                    <tr class="border-b">
+                                        <td class="p-2">1</td>
+                                        <td class="p-2">150kg</td>
+                                        <td class="p-2">130kg</td>
+                                        <td class="p-2">100kg</td>
                                     </tr>
-                                    <tr>
-                                        <td class="p-4">3</td>
-                                        <td class="p-4">120kg</td>
-                                        <td class="p-4">100kg</td>
-                                        <td class="p-4">80kg</td>
+                                    <tr class="border-b">
+                                        <td class="p-2">3</td>
+                                        <td class="p-2">120kg</td>
+                                        <td class="p-2">100kg</td>
+                                        <td class="p-2">80kg</td>
                                     </tr>
-                                    <tr>
-                                        <td class="p-4">5</td>
-                                        <td class="p-4">100kg</td>
-                                        <td class="p-4">80kg</td>
-                                        <td class="p-4">60kg</td>
+                                    <tr class="border-b">
+                                        <td class="p-2">5</td>
+                                        <td class="p-2">100kg</td>
+                                        <td class="p-2">80kg</td>
+                                        <td class="p-2">60kg</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                         <div class="section mt-8">
-                            <h2 class="text-2xl font-bold mb-4">AMRAP 5</h2>
-                            <table class="w-full text-white">
+                            <div class="flex flex-row justify-between  items-center mb-8">
+                                <h2 class="text-xl font-bold ">AMRAP 5</h2>
+                                <div class="flex space-x-4">
+                                    <i class="bi bi-list-ul  text-2xl"></i>
+                                    <i class="bi bi-graph-up text-2xl"></i>
+                                </div>
+                            </div>
+                            <table class="w-full text-white text-center bg-black">
                                 <thead>
-                                    <tr>
-                                        <th class="bg-opacity-20 bg-white p-4"></th>
-                                        <th class="bg-opacity-20 bg-white p-4">Oct</th>
-                                        <th class="bg-opacity-20 bg-white p-4">Nov</th>
-                                        <th class="bg-opacity-20 bg-white p-4">Dec</th>
+                                    <tr class="border-b">
+                                        <th class="p-2"></th>
+                                        <th class="p-2">Oct</th>
+                                        <th class="p-2">Nov</th>
+                                        <th class="p-2">Dec</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td class="p-4">Rounds</td>
-                                        <td class="p-4">8</td>
-                                        <td class="p-4">6</td>
-                                        <td class="p-4">5</td>
+                                    <tr class="border-b">
+                                        <td class="p-2">Rounds</td>
+                                        <td class="p-2">8</td>
+                                        <td class="p-2">6</td>
+                                        <td class="p-2">5</td>
                                     </tr>
                                 </tbody>
                             </table>
