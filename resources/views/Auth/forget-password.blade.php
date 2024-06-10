@@ -21,8 +21,8 @@
             <form action="/send-forgot-password-email" method="POST">
                 @csrf
                 <input type="email" class="w-11/12 sm:w-11/12 mt-5 h-10 text-black border" name="email" placeholder="example@gmail.com" required>
-                <div class="rounded-sm sm:w-44 w-1/2 h-10 flex items-center justify-center mx-auto mt-5 hover:bg-black bg-gray-400 transition-colors duration-300">
-                    <button type="submit" class="text-black text-xs sm:text-lg hover:text-white text-center font-bold">RESET PASSWORD</button>
+                <div class="rounded-sm sm:w-44 w-1/2 h-10 flex items-center justify-center mx-auto mt-5  bg-gray-400 transition-colors duration-300">
+                    <button type="submit" class="text-black text-xs sm:text-lg hover:text-white text-center font-bold hover:bg-black w-full h-full border hover:border-white border-black">RESET PASSWORD</button>
                 </div>
             </form>
             
