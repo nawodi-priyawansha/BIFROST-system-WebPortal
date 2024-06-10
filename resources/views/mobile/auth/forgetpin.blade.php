@@ -17,8 +17,8 @@
             <h1 class=" text-lg font-semibold text-white mt-10">Email</h1>
 
             <input type="text" class="w-11/12 sm:w-11/12 mt-5 h-10 text-black border">
-            <div class="rounded-sm sm:w-44 w-1/2 h-10 flex items-center justify-center mx-auto mt-5 hover:bg-black bg-gray-400 transition-colors duration-300" style="background-color: #676768,">
-                <button class="text-black text-xs sm:text-lg  hover:text-white text-center font-bold ">RESET PASSWORD</button>
+            <div class="rounded-sm sm:w-44 w-1/2 h-10 flex items-center justify-center mx-auto mt-5 border-white border  bg-gray-400 transition-colors duration-300" style="background-color: #676768,">
+                <button class="text-black text-xs sm:text-lg   text-center font-bold ">RESET PASSWORD</button>
             </div>
 
         </div>

@@ -13,6 +13,7 @@ export default {
         'lightgrey':"#F4F4F4",
         'darkyellow':"#FBBA15",
         'prograsblue':'#14BEFD',
+        'weightgrey':'#3C3D3F',
       },
       //  screens: {
       //   '11inch': { 'max': '1366px' }, // 11-inch MacBook Air

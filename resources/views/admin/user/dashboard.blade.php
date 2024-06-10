@@ -10,7 +10,7 @@
 <body>
     @extends('layout.layout')
     @section('content')
-      <div class="container">
+      <div class="container" id="container">
         <div class="mt-24">fffffffffffffff</div>
       </div>
     @endsection

@@ -23,4 +23,8 @@ class MobileController extends Controller
     public function readinessscore(){
         return view("mobile.user.readinessscore");
     }
+
+    public function workout(){
+        return view("mobile.user.workout");
+    }
 }
