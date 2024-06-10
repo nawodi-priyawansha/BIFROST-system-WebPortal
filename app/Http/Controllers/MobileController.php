@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\FuncCall;
 
 class MobileController extends Controller
 {
@@ -27,4 +28,13 @@ class MobileController extends Controller
     public function workout(){
         return view("mobile.user.workout");
     }
+
+    public function workouttimer(){
+        return view("mobile.user.workout-timer");
+    }
+
+    public function histroyview(){
+        return view("mobile.user.history");
+    } 
+    
 }

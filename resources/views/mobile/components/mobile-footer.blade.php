@@ -26,6 +26,8 @@
             '{{ route('mobile.trainingday') }}',
             '{{ route('mobile.readinessscore') }}',
             '{{ route('mobile.workout') }}',
+            '{{ route('mobile.workouttimer') }}',
+            '{{ route('mobile.histroyview') }}',
            
         ];
 
