@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Support\Str;
-use App\Mail\FrogetPassword;
 use Illuminate\Http\Request;
 use App\Models\PasswordReset;
 use Illuminate\Support\Facades\DB;
@@ -40,12 +39,11 @@ class MailController extends Controller
                 // Redirect with success message if the email is sent successfully
                 return redirect()->back();
             } catch (\Exception $e) {
-                // TO DO return error page
-                //    dd($e);
-                return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
+                return view('error.server');
             }
         }
-        // TO DO return alert invalid pin
+        // return alert invalid email
+        return redirect()->back()->with('error', 'Please enter a correct email address.');
     }
 
     public function resetpassword_index($token)
@@ -62,10 +60,13 @@ class MailController extends Controller
             if ($differenceInMinutes <= 10) {
                 return view('auth.reset-pin', compact('token'));
             } else {
-                //  TO DO expire page link
-                dd("expire");
+                //expire page link
+                return view('error.page-expired');
+                // dd("expire");
             }
         }
+        //expire page link
+        return view('error.page-expired');
     }
 
     // change pin number
@@ -102,18 +103,18 @@ class MailController extends Controller
 
                         return view('auth.login');
                     } else {
-                        // TO DO link page not found
+                        return view('error.server');
 
                     }
                 }
-                // TO DO link page not found
-                dd($request);
+                return view('error.server');
             } else {
-                //  TO DO expire page link
-                dd($request);
+                //expire page link
+                return view('error.page-expired');
+                // dd($request);
             }
         } else {
-            // TO DO link page not found
+            return view('error.server');
         }
     }
 }

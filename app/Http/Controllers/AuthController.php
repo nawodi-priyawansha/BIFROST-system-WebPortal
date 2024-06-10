@@ -51,12 +51,17 @@ class AuthController extends Controller
 
 
             // If no user is found, redirect back with an error message
-            return redirect()->back();
+            return redirect()->back()->with('error', 'Please enter a correct pin number.');
         } catch (Exception $e) {
-            dd($e);
+            // return redirect()->back();
+            return redirect()->back()->with('error', 'Please enter a correct pin number.');
         }
     }
 
+    public function showLoginForm()
+    {
+        return view('auth.login');
+    }
     // log out
     public function logout()
     {
