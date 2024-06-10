@@ -45,7 +45,7 @@
                 class="w-12 h-12 sm:w-20 sm:h-20 text-black text-center bg-white rounded" name="pin_4" id="pin_4"
                 disabled>
         </div>
-        <a href="#" class="text-white underline mb-4 block">Forget Pin?</a>
+        <a href="{{ route('forget.password') }}" class="text-white underline mb-4 block">Forget Pin?</a>
         <div class="text-sm">
             &copy; 2024 Valhalla Performance. All rights reserved. System by JPLMS.
         </div>

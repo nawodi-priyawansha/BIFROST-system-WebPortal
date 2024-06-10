@@ -21,7 +21,7 @@
                         <div class="justify-between flex">
                             <div><span class="text-gray-700">Home / </span>Add New Profile</div>
                             <div>
-                                <a href="{{ route('usernewprofile') }}">
+                                <a href="{{ route('userprofile') }}">
                                     <button class="bg-black text-white p-2 px-4 rounded-md">Back</button>
                                 </a>
                             </div>
