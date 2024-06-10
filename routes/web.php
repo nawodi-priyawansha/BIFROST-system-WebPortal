@@ -32,6 +32,11 @@ Route::get('/', function () {
 Route::post('login', [AuthController::class, 'login'])->name('login');
 // logout
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+// Display the forget password form
+Route::get('forget/password', function () {
+    return view('auth.forget-password');
+})->name('forget.password');
+
 
 // reset pin nummber
 Route::post('send-forgot-password-email', [MailController::class, 'sendForgotPasswordEmail']);
@@ -49,7 +54,7 @@ Route::middleware(['admin'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/user-dashboard', function () {
         // TO DO change return view user.user.dashboard
-        return view('user.user.profile');
+        return view('user.user.dashboard');
     })->name('user.dashboard');
 });
 

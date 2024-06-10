@@ -54,10 +54,9 @@
         </div>
 
         </div>
-        <div class="rounded-sm sm:w-32 w-1/3 h-10 flex items-center justify-center mx-auto mt-5  bg-gray-400 transition-colors duration-300"
-            style="background-color: #676768">
+        <div class="rounded-sm sm:w-32 w-1/3 h-10 flex items-center justify-center mx-auto mt-5  bg-gray-400 transition-colors duration-300">
             <button
-                class="text-black text-xs sm:text-lg  hover:text-white text-center font-bold hover:bg-black w-full h-full">CONFIRM</button>
+                class="text-black text-xs sm:text-lg hover:text-white text-center font-bold hover:bg-black w-full h-full border hover:border-white border-black">CONFIRM</button>
         </div>
         <div class="text-sm mt-4">
             &copy; 2024 Valhalla Performance. All rights reserved. System by JPLMS.

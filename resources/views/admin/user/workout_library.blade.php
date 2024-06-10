@@ -10,13 +10,13 @@
 <body>
     @extends('layout.layout')
     @section('content')
-
          <!-- Main content (Dashboard) -->
          <div class="container transition-width mt-24 flex-grow" id="container">
           <div class="breadcrumb text-sm mb-4">
-              <a href="#" class="text-gray-500 no-underline hover:underline">Home</a> / <span><strong> Dashboard
+              <a href="#" class="text-gray-500 no-underline hover:underline">Home</a> / <span><strong> Workout Library
                   </strong></span>
           </div>
+          
       </div>
     @endsection
 </body>
