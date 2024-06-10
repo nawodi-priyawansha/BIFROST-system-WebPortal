@@ -12,7 +12,7 @@
 <body>
     <!-- Sidebar -->
     <aside id="sidebar"
-        class="relative  bg-white h-full transition-all duration-300 flex flex-col text-md font-semibold mt-20 transition-width">
+        class="relative  bg-white h-full transition-all duration-700 flex flex-col text-md font-semibold mt-20 transition-width">
 
         <ul class="flex flex-col space-y-1 overflow-y-auto overflow-x-hidden scrollbar">
             <li>
@@ -21,7 +21,7 @@
                     <!-- Icon -->
                     <i class="bi bi-grid-3x3-gap w-5 h-5 m-3" onclick="toggleSidebar()"></i>
                     <!-- Text -->
-                    <span class="sidebar-item-text">Dashboard</span>
+                    <span class="sidebar-item-text whitespace-nowrap">Dashboard</span>
                 </a>
                 <hr class="border-t border-black" />
             </li>
@@ -31,7 +31,7 @@
                     <!-- Icon -->
                     <i class="bi bi-key w-5 h-5 m-3" onclick="toggleSidebar()"></i>
                     <!-- Text -->
-                    <span class="sidebar-item-text">Access</span>
+                    <span class="sidebar-item-text whitespace-nowrap">Access</span>
                 </a>
                 <hr class="border-t border-black" />
             </li>
@@ -41,7 +41,7 @@
                     <!-- Icon -->
                     <i class="bi bi-people w-5 h-5 m-3" onclick="toggleSidebar()"></i>
                     <!-- Text -->
-                    <span class="sidebar-item-text">Client Management</span>
+                    <span class="sidebar-item-text whitespace-nowrap">Client Management</span>
                 </a>
                 <hr class="border-t border-black" />
             </li>
@@ -51,7 +51,7 @@
                     <!-- Icon -->
                     <i class="bi bi-person-gear w-5 h-5 m-3" onclick="toggleSidebar()"></i>
                     <!-- Text -->
-                    <span class="sidebar-item-text">Workout Library</span>
+                    <span class="sidebar-item-text whitespace-nowrap">Workout Library</span>
                 </a>
                 <hr class="border-t border-black" />
             </li>
@@ -61,7 +61,7 @@
                     <!-- Icon -->
                     <i class="bi bi-list-check w-5 h-5 m-3" onclick="toggleSidebar()"></i>
                     <!-- Text -->
-                    <span class="sidebar-item-text">Session/Class Module</span>
+                    <span class="sidebar-item-text whitespace-nowrap">Session/Class Module</span>
                 </a>
                 <hr class="border-t border-black" />
             </li>
@@ -71,7 +71,7 @@
                     <!-- Icon -->
                     <i class="bi bi-coin w-5 h-5 m-3" onclick="toggleSidebar()"></i>
                     <!-- Text -->
-                    <span class="sidebar-item-text">Financial</span>
+                    <span class="sidebar-item-text whitespace-nowrap">Financial</span>
                 </a>
                 <hr class="border-t border-black" />
             </li>
@@ -81,7 +81,7 @@
                     <!-- Icon -->
                     <i class="bi bi-broadcast-pin w-5 h-5 m-3" onclick="toggleSidebar()"></i>
                     <!-- Text -->
-                    <span class="sidebar-item-text">Communication</span>
+                    <span class="sidebar-item-text whitespace-nowrap">Communication</span>
                 </a>
                 <hr class="border-t border-black" />
             </li>
@@ -91,7 +91,7 @@
                     <!-- Icon -->
                     <i class="bi bi-bar-chart w-5 h-5 m-3" onclick="toggleSidebar()"></i>
                     <!-- Text -->
-                    <span class="sidebar-item-text">Statistics</span>
+                    <span class="sidebar-item-text whitespace-nowrap">Statistics</span>
                 </a>
                 <hr class="border-t border-black" />
             </li>
