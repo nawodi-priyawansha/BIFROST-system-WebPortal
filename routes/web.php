@@ -88,6 +88,7 @@ Route::get('/mobile/login',[MobileController::class,'login'])->name('mobile.logi
 Route::get('/mobile/forgetpin',[MobileController::class, 'forgetpin'])->name('mobile.pin');
 Route::get('/mobile/trainingday',[MobileController::class, 'trainingday'])->name('mobile.trainingday');
 Route::get('/mobile/readinessscore',[MobileController::class, 'readinessscore'])->name('mobile.readinessscore');
+Route::get('/mobile/workout',[MobileController::class, 'workout'])->name('mobile.workout');
 
 Route::post('send-forgot-password-email', [MailController::class, 'sendForgotPasswordEmail']);
 Route::get('/resetpassword/{token}', [MailController::class, 'resetpassword_index'])->name('resetpassword');

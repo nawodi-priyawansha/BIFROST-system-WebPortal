@@ -20,20 +20,19 @@
             </div>
 
         </div>
-
+        <label class=" items-center hidden">
+            <input type="radio" name="portal" value="user" class="mr-2" onclick="enablePinFields()"checked>
+            User Portal
+        </label>
         <div class="flex justify-center  w-full  gap-4 mt-20 sm:gap-4 p-1  sm:p-1">
-            <input type="text" maxlength="1"
-                class=" w-20 h-20  text-black text-center bg-white rounded" name="pin_1" id="pin_1"
-                disabled>
-            <input type="text" maxlength="1"
-                class="w-20 h-20   text-black text-center bg-white rounded" name="pin_2" id="pin_2"
-                disabled>
-            <input type="text" maxlength="1"
-                class="w-20 h-20  text-black text-center bg-white rounded" name="pin_3" id="pin_3"
-                disabled>
-            <input type="text" maxlength="1"
-                class="w-20 h-20   text-black text-center bg-white rounded" name="pin_4" id="pin_4"
-                disabled>
+            <input type="text" maxlength="1" class=" w-20 h-20  text-black text-center bg-white rounded"
+                name="pin_1" id="pin_1">
+            <input type="text" maxlength="1" class="w-20 h-20   text-black text-center bg-white rounded"
+                name="pin_2" id="pin_2">
+            <input type="text" maxlength="1" class="w-20 h-20  text-black text-center bg-white rounded"
+                name="pin_3" id="pin_3">
+            <input type="text" maxlength="1" class="w-20 h-20   text-black text-center bg-white rounded"
+                name="pin_4" id="pin_4">
         </div>
         <a href="#" class="text-white underline mt-10 block">Forget Pin?</a>
 
