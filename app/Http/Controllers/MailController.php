@@ -45,6 +45,7 @@ class MailController extends Controller
                 return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
             }
         }
+        // TO DO return alert invalid pin
     }
 
     public function resetpassword_index($token)

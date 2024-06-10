@@ -14,7 +14,7 @@
 <body class="font-sans">
     @extends('layout.user-layout')
     @section('user-content')
-        <div class="container overflow-y-auto w-full bg-slate-50" id="container">
+        <div class="container overflow-y-auto w-full bg-slate-50 flex-grow" id="container">
             <div class=" ">
                 <div class="mt-24 mx-4">
                     <div>
@@ -38,9 +38,9 @@
                                 <!-- Name -->
                                 <div class="form-group flex flex-wrap md:flex-nowrap items-center ">
                                     <label for="name"
-                                        class="block text-gray-700 font-bold w-full md:w-1/4 mb-1 md:mb-0 pr-4">Name</label>
+                                        class="block text-gray-700 font-bold w-full md:w-1/4 mb-1 md:mb-0 pr-4">Name <span class="text-red-500">*</span></label></label>
                                     <input type="text" id="name" name="name"
-                                        class="form-control w-full md:w-3/4 border rounded px-4 py-2">
+                                        class="form-control w-full md:w-3/4 border rounded px-4 py-2" required>
                                 </div>
                                 <div class="sm:hidden">
                                     {{-- PC view hidden part - this div are not showing PC --}}

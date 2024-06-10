@@ -16,7 +16,7 @@
     @extends('layout.user-layout')
     @section('user-content')
         <!-- Container with overflow for scrolling and full width -->
-        <div class="container overflow-y-auto w-full bg-[#fafafa]" id="container">
+        <div class="container overflow-y-auto w-full bg-[#fafafa] flex-grow" id="container">
             <!-- Main content area with top margin for large screens and smaller margin for medium screens -->
             <div class="w-full mt-36 lg:mt-24 md:mt-24">
                 <!-- Content section with gray background -->
