@@ -70,6 +70,7 @@
                 // Reset pin fields to empty when portal changes
                 field.value = '';
             });
+
         }
 
         function login() {
@@ -93,19 +94,32 @@
         // Enable pin fields if a portal is already selected on page load
         enablePinFields();
 
-        const inputs = document.querySelectorAll('input[type="text"]');
+        const inputs = document.querySelectorAll('input[name^="pin"]');
         inputs.forEach((input, index) => {
             input.addEventListener('input', function() {
                 // Remove non-numeric characters
                 this.value = this.value.replace(/[^0-9]/g, '');
+
                 // Move focus to the next input field if a single digit is entered
-                login();
                 if (this.value.length === 1 && index < inputs.length - 1) {
+                    this.type = 'password'; // Change to password to show dot
                     inputs[index + 1].focus();
                 }
-                // Call login function when pin_4 is filled
+
+                // Call login function when all pin fields are filled
                 if (this.id === 'pin_4' && this.value.length === 1) {
+                    this.type = 'password'; // Change to password to show dot
                     login();
+                }
+            });
+
+            input.addEventListener('focus', function() {
+                this.type = 'text'; // Show text when focusing
+            });
+
+            input.addEventListener('blur', function() {
+                if (this.value.match(/^[0-9]$/)) {
+                    this.type = 'password'; // Hide digit by switching to password
                 }
             });
         });
