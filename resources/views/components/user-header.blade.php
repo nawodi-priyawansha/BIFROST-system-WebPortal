@@ -33,24 +33,26 @@
                         <!-- Toggle button -->
                     </div>
                 </div>
-
-                <!-- menu -->
-                {{-- <div class="navigation  text-white text-2xl font-bold hidden md:block">
-                    User Portal
-                </div> --}}
-
-                <div class="flex items-center justify-center bg-black p-2 rounded-lg space-x-4 sm:space-x-1">
-                    <div class="text-white text-2xl cursor-pointer  md:block"><i class="bi bi-chevron-left"></i></div>
-                    <div class="flex items-center  flex-grow">
-                        <div>
-                            <div class="text-red-500 text-xs sm:text-xs">Day 2, WEEK 6</div>
-                            {{-- <div class="text-white text-xs hidden">Today</div> --}}
-                            <div class="text-white text-xs   sm:text-sm">Today 7th June, 2023</div>
-                            {{-- <div class="text-white text-xs hidden">7th June, 2023</div> --}}
+                @if (Request::is('user/dashboard'))
+                    <!-- menu -->
+                    <div class="flex items-center justify-center bg-black p-2 rounded-lg space-x-4 sm:space-x-1">
+                        <div class="text-white text-2xl cursor-pointer  md:block"><i class="bi bi-chevron-left"></i>
                         </div>
+                        <div class="flex items-center  flex-grow">
+                            <div>
+                                <div class="text-red-500 text-xs sm:text-xs">Day 2, WEEK 6</div>
+                                {{-- <div class="text-white text-xs hidden">Today</div> --}}
+                                <div class="text-white text-xs   sm:text-sm">Today 7th June, 2023</div>
+                                {{-- <div class="text-white text-xs hidden">7th June, 2023</div> --}}
+                            </div>
+                        </div>
+                        <div class="text-white text-2xl cursor-pointer w-2"><i class="bi bi-chevron-right"></i></div>
                     </div>
-                    <div class="text-white text-2xl cursor-pointer w-2"><i class="bi bi-chevron-right"></i></div>
-                </div>
+                @else
+                    <div class="navigation  text-white text-2xl font-bold hidden md:block">
+                        User Portal
+                    </div>
+                @endif
 
                 <!-- nav-right -->
                 <div class="flex items-center h-20 justify-center ">

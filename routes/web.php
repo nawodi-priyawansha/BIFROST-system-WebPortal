@@ -55,7 +55,7 @@ Route::middleware(['admin'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/user-dashboard', function () {
         // return view user.user.dashboard
-        return view('user.user.dashboard');
+        return redirect('/user/dashboard');
     })->name('user.dashboard');
 });
 
@@ -94,7 +94,7 @@ Route::get('/mobile/workouttimer',[MobileController::class, 'workouttimer'])->na
 Route::get('/mobile/histroyview',[MobileController::class, 'histroyview'])->name('mobile.histroyview');
 
 // Display the forget password form
-Route::get('forget/password', function () {
+Route::get('forgot/password', function () {
     return view('mobile.auth.forgetpin');
 })->name('mobileforget.password');
 
