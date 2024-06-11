@@ -13,6 +13,7 @@ class AuthController extends Controller
     // login
     public function login(Request $request)
     {
+        // dd($request);
         try {
             // Validate the request
             $request->validate([
@@ -39,13 +40,22 @@ class AuthController extends Controller
             if ($user) {
                 // Log the user in
                 Auth::login($user);
-
-                // Now Auth::user() should return the authenticated user
-                // dd(Auth::user());
-                if ($user->user_type == "admin" || $user->user_type == "super admin") {
-                    return redirect()->route('admin.dashboard');
-                } elseif ($user->user_type == "client" || $user->user_type == "worker") {
-                    return redirect()->route('user.dashboard');
+                if ($request->type == "mobile") {
+                    if ($user->user_type == "client") {
+                        return view('mobile.user.trainingday');
+                    } else {
+                        return redirect()->back()->with('error', 'Please enter a correct pin number.');
+                    }
+                } elseif ($request->type == "web") {
+                    if ($user->user_type == "admin" || $user->user_type == "super admin") {
+                        return redirect()->route('admin.dashboard');
+                    } elseif ($user->user_type == "worker") {
+                        return redirect()->route('user.dashboard');
+                    } else {
+                        return redirect()->back()->with('error', 'Please enter a correct pin number.');
+                    }
+                } else {
+                    return redirect()->back()->with('error', 'Something is wrong.');
                 }
             }
 
@@ -63,9 +73,14 @@ class AuthController extends Controller
         return view('auth.login');
     }
     // log out
-    public function logout()
+    public function logout(Request $request)
     {
         Auth::logout();
-        return redirect('/'); // Redirect to the homepage or any other page
+        if ($request->type == "web") {
+            return redirect('/'); // Redirect to the homepage or any other page
+        }
+        elseif ($request->type == "mobile"){
+            return redirect('/mobile/login');
+        }
     }
 }

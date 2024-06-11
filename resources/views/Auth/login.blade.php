@@ -30,12 +30,15 @@
                 </label>
             </div>
         </div>
+        <div class=" items-center hidden">
+            <input type="text" name="type" value="web">
+        </div>
         <h2 class="text-2xl sm:text-4xl font-bold mb-8">Sign In</h2>
         @if (session('error'))
-                <div class="bg-red-500 text-white p-4 rounded-md mb-4 mt-10">
-                    {{ session('error') }}
-                </div>
-            @endif
+            <div class="bg-red-500 text-white p-4 rounded-md mb-4 mt-10">
+                {{ session('error') }}
+            </div>
+        @endif
         <div class="flex justify-center gap-4 sm:gap-4 mb-8  mt-10">
             <input type="text" maxlength="1"
                 class="w-12 h-12 sm:w-20 sm:h-20 text-black text-center bg-white rounded" name="pin_1" id="pin_1"

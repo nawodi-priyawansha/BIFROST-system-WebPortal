@@ -93,6 +93,11 @@ Route::get('/mobile/workout',[MobileController::class, 'workout'])->name('mobile
 Route::get('/mobile/workouttimer',[MobileController::class, 'workouttimer'])->name('mobile.workouttimer');
 Route::get('/mobile/histroyview',[MobileController::class, 'histroyview'])->name('mobile.histroyview');
 
+// Display the forget password form
+Route::get('forget/password', function () {
+    return view('mobile.auth.forgetpin');
+})->name('mobileforget.password');
+
 Route::post('send-forgot-password-email', [MailController::class, 'sendForgotPasswordEmail']);
 Route::get('/resetpassword/{token}', [MailController::class, 'resetpassword_index'])->name('resetpassword');
 Route::post('frogot-password/new-pin', [MailController::class, 'insert_new_pin'])->name('frogot-password');

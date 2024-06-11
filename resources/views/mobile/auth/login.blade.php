@@ -12,7 +12,7 @@
 <body class="flex items-center justify-center min-h-screen m-0 p-4 bg-cover bg-center bg-no-repeat"
     style="background-image: url('{{ asset('img/valhalla-bg.jpg') }}');">
     <form class=" text-white text-center p-4 sm:p-10 w-full max-w-md rounded-3xl mb-12 sm:mb-44" method="POST"
-        action="#" id="form">
+        action="{{ route('login') }}" id="form">
         @csrf
         <div class=" ">
             <div class="flex  justify-center ">
@@ -20,12 +20,18 @@
             </div>
 
         </div>
-        <label class=" items-center hidden">
-            <input type="radio" name="portal" value="user" class="mr-2" onclick="enablePinFields()"checked>
+        <div class=" items-center hidden">
+            <input type="radio" name="portal" value="client" class="mr-2" onclick="enablePinFields()"checked>
+            <input type="text" name="type" value="mobile">
             User Portal
-        </label>
+        </div>
+        @if (session('error'))
+            <div class="bg-red-500 text-white p-4 rounded-md mb-4 mt-10">
+                {{ session('error') }}
+            </div>
+        @endif
         <div class="flex justify-center  w-full  gap-4 mt-20 sm:gap-4 p-1  sm:p-1">
-            <input type="text" maxlength="1" class=" w-20 h-20  text-black text-center bg-white rounded"
+            <input type="text" madivxlength="1" class=" w-20 h-20  text-black text-center bg-white rounded"
                 name="pin_1" id="pin_1">
             <input type="text" maxlength="1" class="w-20 h-20   text-black text-center bg-white rounded"
                 name="pin_2" id="pin_2">
@@ -34,7 +40,7 @@
             <input type="text" maxlength="1" class="w-20 h-20   text-black text-center bg-white rounded"
                 name="pin_4" id="pin_4">
         </div>
-        <a href="#" class="text-white underline mt-10 block">Forget Pin?</a>
+        <a href="{{ route('mobileforget.password') }}" class="text-white underline mt-10 block">Forget Pin?</a>
 
     </form>
     <script>
