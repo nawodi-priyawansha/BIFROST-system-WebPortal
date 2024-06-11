@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use PhpParser\Node\Expr\FuncCall;
+use Illuminate\Support\Facades\Auth;
 
 class MobileController extends Controller
 {

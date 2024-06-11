@@ -101,6 +101,7 @@
                         <!-- Hidden form for logging out, triggered by the above link -->
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf <!-- Laravel CSRF token for security -->
+                            <input type="text" value="web" name="type" hidden>
                         </form>
                     </div>
                 </div>

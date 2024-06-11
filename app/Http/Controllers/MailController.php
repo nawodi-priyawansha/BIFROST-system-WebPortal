@@ -107,6 +107,7 @@ class MailController extends Controller
 
                     }
                 }
+                // TO DO return rederect back with error message
                 return view('error.server');
             } else {
                 //expire page link
