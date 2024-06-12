@@ -16,7 +16,7 @@
               <a href="#" class="text-gray-500 no-underline hover:underline">Home</a> / <span><strong> Client Management
                   </strong></span>
           </div>
-          
+          <p>Access Type: {{ $accessType }}</p>
       </div>
     @endsection
 </body>
