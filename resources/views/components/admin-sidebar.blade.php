@@ -36,7 +36,7 @@
                 <hr class="border-t border-black" />
             </li>
             <li>
-                <a href="#"
+                <a href="{{ route('viewadminclientmanagement') }}"
                     class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300">
                     <!-- Icon -->
                     <i class="bi bi-people w-5 h-5 m-3" onclick="toggleSidebar()"></i>
@@ -46,7 +46,7 @@
                 <hr class="border-t border-black" />
             </li>
             <li>
-                <a href="#"
+                <a href="{{ route('viewworkoutlibrary') }}"
                     class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300">
                     <!-- Icon -->
                     <i class="bi bi-person-gear w-5 h-5 m-3" onclick="toggleSidebar()"></i>
@@ -56,7 +56,7 @@
                 <hr class="border-t border-black" />
             </li>
             <li>
-                <a href="#"
+                <a href="{{ route('viewsession') }}"
                     class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300">
                     <!-- Icon -->
                     <i class="bi bi-list-check w-5 h-5 m-3" onclick="toggleSidebar()"></i>
@@ -76,7 +76,7 @@
                 <hr class="border-t border-black" />
             </li>
             <li>
-                <a href="#"
+                <a href="{{ route('viewviewcommunication') }}"
                     class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300">
                     <!-- Icon -->
                     <i class="bi bi-broadcast-pin w-5 h-5 m-3" onclick="toggleSidebar()"></i>
@@ -86,7 +86,7 @@
                 <hr class="border-t border-black" />
             </li>
             <li>
-                <a href="#"
+                <a href="{{ route('viewviewstatistics') }}"
                     class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300">
                     <!-- Icon -->
                     <i class="bi bi-bar-chart w-5 h-5 m-3" onclick="toggleSidebar()"></i>

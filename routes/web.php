@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\AccessController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ClientManagementController;
+use App\Http\Controllers\CommunicationController;
 use App\Http\Controllers\DashboardController;
-
+use App\Http\Controllers\FinancialController;
 use App\Http\Controllers\MobileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -11,8 +13,10 @@ use Illuminate\Support\Facades\Route;
 
 
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\SessionController;
+use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\UserDashboardController;
-
+use App\Http\Controllers\WorkoutLibraryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,9 +77,21 @@ Route::middleware(['admin'])->group(function () {
     // access
     Route::get('/admin/access', [AccessController::class, 'viewaccess'])->name('admindaaccess');
     Route::post('/setdata/{name}/{email}', [AccessController::class, 'setData']);
-
     // financial
-    Route::get('/admin/financial', [DashboardController::class, 'viewfinancial'])->name('adminfinancial');
+    Route::get('/admin/financial', [FinancialController::class, 'viewfinancial'])->name('adminfinancial');
+    // client management
+    Route::get('/admin/clientmanagement', [ClientManagementController::class, 'viewclientmanagement'])->name('viewadminclientmanagement');
+    //workout librabry
+    Route::get('/admin/workoutlibrary', [WorkoutLibraryController::class, 'viewworkoutlibrary'])->name('viewworkoutlibrary');
+    // session
+    Route::get('/admin/session', [SessionController::class, 'viewsession'])->name('viewsession');
+    // communication
+    Route::get('/admin/communication', [CommunicationController::class, 'viewcommunication'])->name('viewviewcommunication');
+    //statistic
+    Route::get('/admin/statistics', [StatisticsController::class, 'viewstatistics'])->name('viewviewstatistics');
+
+
+
 });
 
 //user dashboard route
@@ -88,13 +104,13 @@ Route::middleware(['user'])->group(function () {
     Route::get('/user/new-profile', [UserDashboardController::class, 'viewnewprofile'])->name('usernewprofile');
 });
 //mobile route
-Route::get('/mobile/login',[MobileController::class,'login'])->name('mobile.login');
-Route::get('/mobile/forgetpin',[MobileController::class, 'forgetpin'])->name('mobile.pin');
-Route::get('/mobile/trainingday',[MobileController::class, 'trainingday'])->name('mobile.trainingday');
-Route::get('/mobile/readinessscore',[MobileController::class, 'readinessscore'])->name('mobile.readinessscore');
-Route::get('/mobile/workout',[MobileController::class, 'workout'])->name('mobile.workout');
-Route::get('/mobile/workouttimer',[MobileController::class, 'workouttimer'])->name('mobile.workouttimer');
-Route::get('/mobile/histroyview',[MobileController::class, 'histroyview'])->name('mobile.histroyview');
+Route::get('/mobile/login', [MobileController::class, 'login'])->name('mobile.login');
+Route::get('/mobile/forgetpin', [MobileController::class, 'forgetpin'])->name('mobile.pin');
+Route::get('/mobile/trainingday', [MobileController::class, 'trainingday'])->name('mobile.trainingday');
+Route::get('/mobile/readinessscore', [MobileController::class, 'readinessscore'])->name('mobile.readinessscore');
+Route::get('/mobile/workout', [MobileController::class, 'workout'])->name('mobile.workout');
+Route::get('/mobile/workouttimer', [MobileController::class, 'workouttimer'])->name('mobile.workouttimer');
+Route::get('/mobile/histroyview', [MobileController::class, 'histroyview'])->name('mobile.histroyview');
 
 // Display the forget password form
 Route::get('forgot/password', function () {
@@ -104,4 +120,3 @@ Route::get('forgot/password', function () {
 Route::post('send-forgot-password-email', [MailController::class, 'sendForgotPasswordEmail']);
 Route::get('/resetpassword/{token}', [MailController::class, 'resetpassword_index'])->name('resetpassword');
 Route::post('frogot-password/new-pin', [MailController::class, 'insert_new_pin'])->name('frogot-password');
-

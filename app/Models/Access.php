@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Access extends Model
 {
+
     use HasFactory;
+    protected $table = 'access';
     protected $fillable = [
         'dashboard',
         'access',
