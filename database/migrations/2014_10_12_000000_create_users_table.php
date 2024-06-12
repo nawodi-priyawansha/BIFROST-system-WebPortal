@@ -16,10 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->enum('user_type', ['super admin', 'admin', 'client', 'worker'])->default('client');
             $table->string('email')->unique();
-            $table->unsignedInteger('pin1');
-            $table->unsignedInteger('pin2');
-            $table->unsignedInteger('pin3');
-            $table->unsignedInteger('pin4');
+            $table->unsignedInteger('pin');
             $table->timestamps();
         });
                

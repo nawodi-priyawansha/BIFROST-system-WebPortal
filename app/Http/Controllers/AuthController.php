@@ -22,6 +22,7 @@ class AuthController extends Controller
                 'pin_3' => 'required|integer|min:0|max:9',
                 'pin_4' => 'required|integer|min:0|max:9',
             ]);
+            $pin = $request->pin_1 . $request->pin_2 . $request->pin_3 . $request->pin_4;
 
             $user = User::where(function ($query) use ($request) {
                 if ($request->portal === 'admin') {
@@ -30,10 +31,7 @@ class AuthController extends Controller
                     $query->where('user_type', 'client')->orWhere('user_type', 'worker');
                 }
             })
-                ->where('pin1', $request->pin_1)
-                ->where('pin2', $request->pin_2)
-                ->where('pin3', $request->pin_3)
-                ->where('pin4', $request->pin_4)
+                ->where('pin', $pin)
                 ->first();
 
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccessController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 
@@ -70,7 +71,9 @@ Route::middleware(['admin'])->group(function () {
     // dashboard
     Route::get('/admin/dashboard', [DashboardController::class, 'viewdashboard'])->name('admindashboard');
     // access
-    Route::get('/admin/access', [DashboardController::class, 'viewaccess'])->name('admindaaccess');
+    Route::get('/admin/access', [AccessController::class, 'viewaccess'])->name('admindaaccess');
+    Route::post('/setdata/{name}/{email}', [AccessController::class, 'setData']);
+
     // financial
     Route::get('/admin/financial', [DashboardController::class, 'viewfinancial'])->name('adminfinancial');
 });
