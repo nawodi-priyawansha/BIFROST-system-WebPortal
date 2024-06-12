@@ -8,6 +8,7 @@ use PhpParser\Node\Expr\FuncCall;
 class DashboardController extends Controller
 {
      public function viewdashboard(){
+
         return view('admin.user.dashboard');
      }
 
@@ -15,7 +16,4 @@ class DashboardController extends Controller
       return view('admin.user.financial');
      }
 
-     public function viewaccess(){
-      return view('admin.user.access');
-     }
 }
