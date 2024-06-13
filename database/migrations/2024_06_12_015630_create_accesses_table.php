@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('access', function (Blueprint $table) {
+        Schema::create('accesses', function (Blueprint $table) {
             $table->id();
             $table->enum('dashboard', ['enable', 'disable'])->default('disable');
             $table->enum('access', ['enable', 'disable'])->default('disable');
@@ -40,6 +40,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('access');
+        Schema::dropIfExists('accesses');
     }
 };
