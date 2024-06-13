@@ -32,7 +32,6 @@ class WorkoutLibraryController extends Controller
 
     public function listworkoutlibrary(Request $request)
     {
-        // dd($request);
         // Validate the request data
         $request->validate([
             'category' => 'required|exists:category_options,id',
@@ -41,16 +40,39 @@ class WorkoutLibraryController extends Controller
             'link' => 'required|url',
         ]);
 
-        // Create a new workout library entry
-        WorkoutLibrary::create([
-            'category_options_id' => $request->input('category'),
-            'type' => $request->input('type'),
-            'workout' => $request->input('workout'),
-            'link' => $request->input('link'),
-        ]);
+        // Check if the request has an 'id' for updating an existing entry
+        if ($request->id) {
+            // Find the existing workout library entry by id
+            $workoutLibrary = WorkoutLibrary::find($request->id);
 
-        // Redirect back with a success message
-        return redirect()->back()->with('success', 'Workout library entry added successfully!');
+            // Check if the entry exists
+            if ($workoutLibrary) {
+                // Update the workout library entry
+                $workoutLibrary->update([
+                    'category_options_id' => $request->input('category'),
+                    'type' => $request->input('type'),
+                    'workout' => $request->input('workout'),
+                    'link' => $request->input('link'),
+                ]);
+
+                // Redirect back with a success message
+                return redirect()->back()->with('success', 'Workout library entry updated successfully!');
+            } else {
+                // Redirect back with an error message if the entry is not found
+                return redirect()->back()->with('error', 'Workout library entry not found!');
+            }
+        } else {
+            // Create a new workout library entry
+            WorkoutLibrary::create([
+                'category_options_id' => $request->input('category'),
+                'type' => $request->input('type'),
+                'workout' => $request->input('workout'),
+                'link' => $request->input('link'),
+            ]);
+
+            // Redirect back with a success message
+            return redirect()->back()->with('success', 'Workout library entry added successfully!');
+        }
     }
 
 
