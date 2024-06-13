@@ -34,7 +34,7 @@ Route::get('/', function () {
 });
 // Display the login form
 Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
-// login 
+// login
 Route::post('login', [AuthController::class, 'login'])->name('login');
 // logout
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
@@ -52,7 +52,7 @@ Route::post('frogot-password/new-pin', [MailController::class, 'insert_new_pin']
 // admin login
 Route::middleware(['admin'])->group(function () {
     Route::get('/admin-dashboard', function () {
-        return view('admin.user.dashboard');
+        return redirect('/admin/dashboard');
     })->name('admin.dashboard');
 });
 
