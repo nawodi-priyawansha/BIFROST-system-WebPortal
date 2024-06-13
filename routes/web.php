@@ -89,6 +89,10 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/updateaccesstype', [AccessController::class, 'updateAccess']);
     // chane access page
     Route::post('/updateaccesspage', [AccessController::class, 'updateAccessPage']);
+    //  next button
+    Route::get('/users/{user}', [AccessController::class, 'nextShow'])->name('user.show');
+    // previous button
+    Route::get('/previous-show/{id}', [AccessController::class, 'previousShow'])->name('previous.show');
 
 
 

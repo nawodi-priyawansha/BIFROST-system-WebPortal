@@ -43,6 +43,7 @@ function setData(name, email, id) {
         },
         success: function (response) {
             console.log(response);
+            alert('User updated successfully');
         },
         error: function (xhr, status, error) {
             console.error(error); // Handle error

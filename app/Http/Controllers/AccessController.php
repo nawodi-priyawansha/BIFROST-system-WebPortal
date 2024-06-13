@@ -14,9 +14,10 @@ class AccessController extends Controller
         // Fetch the first 5 users with their access types
         $users = User::join('accesses', 'users.id', '=', 'accesses.user_id')
             ->select('users.*', 'accesses.*')
+            ->orderBy('accesses.id', 'asc')
             ->take(5)
             ->get();
-
+        // dd($users);
         return view('admin.user.access', compact('users'));
     }
 
@@ -53,7 +54,7 @@ class AccessController extends Controller
             ], 404);
         }
     }
-    
+
     // delete user
     public function deleteData(Request $request)
     {
@@ -103,7 +104,7 @@ class AccessController extends Controller
         }
         // Generate a unique 4-digit random PIN
         do {
-            $pin = str_pad(random_int(0, 9999), 4, '0', STR_PAD_LEFT);
+            $pin = str_pad(random_int(1000, 9999), 4, '0', STR_PAD_LEFT);
         } while (User::where('pin', $pin)->exists());
 
         // Assuming you have a 'pin' field in your User model to store the PIN
@@ -147,18 +148,18 @@ class AccessController extends Controller
             'id' => 'required|integer',
             'name' => 'required|string',
         ]);
-    
+
         $id = $request->input('id');
         $name = $request->input('name');
-    
+
         $access = Access::find($id);
-    
+
         if (!$access) {
             return response()->json([
                 'message' => 'Access record not found'
             ], 404);
         }
-    
+
         switch ($name) {
             case 'dashboard':
                 $access->dashboard = $access->dashboard === 'enable' ? 'disable' : 'enable';
@@ -203,14 +204,49 @@ class AccessController extends Controller
                     'message' => 'Invalid column name'
                 ], 400);
         }
-    
+
         $access->save();
-    
+
         return response()->json([
             'message' => 'Access type updated successfully',
             'access' => $access
         ]);
     }
-    
-    
+
+    // next button function
+    public function nextShow($id)
+    {
+        // dd($id);
+        $users = User::join('accesses', 'users.id', '=', 'accesses.user_id')
+            ->select('users.*', 'accesses.*')
+            ->where('accesses.id', '>=', $id)
+            ->orderBy('accesses.id', 'asc') // Order by user id in ascending order
+            ->take(5)
+            ->get();
+
+
+        // dd($users);
+        if ($users->isEmpty()) {
+            return redirect()->back();
+        }
+
+        return view('admin.user.access', compact('users'));
+    }
+
+    // previous button function
+    public function previousShow($id)
+    {
+        $users = User::join('accesses', 'users.id', '=', 'accesses.user_id')
+            ->select('users.*', 'accesses.*')
+            ->where('accesses.id', '<', $id)
+            ->orderByDesc('accesses.id') // Order by accesses id in descending order
+            ->take(5)
+            ->get();
+
+        if ($users->isEmpty()) {
+            return redirect()->route('admindaaccess')->with('error', 'No users found.');
+        }
+
+        return view('admin.user.access', compact('users'));
+    }
 }
