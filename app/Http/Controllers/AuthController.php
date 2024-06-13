@@ -76,8 +76,7 @@ class AuthController extends Controller
         Auth::logout();
         if ($request->type == "web") {
             return redirect('/'); // Redirect to the homepage or any other page
-        }
-        elseif ($request->type == "mobile"){
+        } elseif ($request->type == "mobile") {
             return redirect('/mobile/login');
         }
     }
