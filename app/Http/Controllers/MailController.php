@@ -88,11 +88,9 @@ class MailController extends Controller
                 if ($pin === $confirmPin) {
                     $user = User::where('email', $passwordReset->email)->first();
                     if ($user) {
-                        $user->pin1 = $request->pin_1;
-                        $user->pin2 = $request->pin_2;
-                        $user->pin3 = $request->pin_3;
-                        $user->pin4 = $request->pin_4;
+                        $user->pin = $request->pin_1 . $request->pin_2 . $request->pin_3 . $request->pin_4;
                         $user->save();
+                
 
                         // Generate a new token
                         $newToken = Str::random(60);
