@@ -74,9 +74,24 @@ Route::get('/unauthorized', function () {
 Route::middleware(['admin'])->group(function () {
     // dashboard
     Route::get('/admin/dashboard', [DashboardController::class, 'viewdashboard'])->name('admindashboard');
-    // access
+
+
+
+    // access page Routes
     Route::get('/admin/access', [AccessController::class, 'viewaccess'])->name('admindaaccess');
-    Route::post('/setdata/{name}/{email}', [AccessController::class, 'setData']);
+    // Change user name and email
+    Route::post('/updatedata', [AccessController::class, 'setData']);
+    // delete user
+    Route::post('/deletedata', [AccessController::class, 'deleteData']);
+    // reset pin
+    Route::post('/resetpin', [AccessController::class, 'resetPin']);
+    // chane access type
+    Route::post('/updateaccesstype', [AccessController::class, 'updateAccess']);
+    // chane access page
+    Route::post('/updateaccesspage', [AccessController::class, 'updateAccessPage']);
+
+
+
     // financial
     Route::get('/admin/financial', [FinancialController::class, 'viewfinancial'])->name('adminfinancial');
     // client management
@@ -89,7 +104,6 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/communication', [CommunicationController::class, 'viewcommunication'])->name('viewviewcommunication');
     //statistic
     Route::get('/admin/statistics', [StatisticsController::class, 'viewstatistics'])->name('viewviewstatistics');
-
 
 
 });

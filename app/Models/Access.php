@@ -9,7 +9,7 @@ class Access extends Model
 {
 
     use HasFactory;
-    protected $table = 'access';
+    // protected $table = 'access';
     protected $fillable = [
         'dashboard',
         'access',
