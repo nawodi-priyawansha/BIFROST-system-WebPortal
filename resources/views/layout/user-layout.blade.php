@@ -27,6 +27,7 @@
 
     <script src="{{ asset('js/style.js') }}"></script>
     </div>
+    
 </body>
 
 </html>

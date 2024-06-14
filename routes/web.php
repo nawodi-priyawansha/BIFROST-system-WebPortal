@@ -15,7 +15,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\StatisticsController;
+use App\Http\Controllers\UserAchievementsController;
 use App\Http\Controllers\UserDashboardController;
+use App\Http\Controllers\UserGoalController;
+use App\Http\Controllers\UserProfileController;
+use App\Http\Controllers\UserSettingController;
 use App\Http\Controllers\WorkoutLibraryController;
 
 /*
@@ -72,11 +76,9 @@ Route::get('/unauthorized', function () {
 
 //admin dashboard route
 Route::middleware(['admin'])->group(function () {
+
     // dashboard
     Route::get('/admin/dashboard', [DashboardController::class, 'viewdashboard'])->name('admindashboard');
-
-
-
     // access page Routes
     Route::get('/admin/access', [AccessController::class, 'viewaccess'])->name('admindaaccess');
     // Change user name and email
@@ -119,10 +121,20 @@ Route::middleware(['user'])->group(function () {
     // dashboard
     Route::get('/user/dashboard', [UserDashboardController::class, 'viewdashboard'])->name('userdashboard');
     // profile
-    Route::get('/user/profile', [UserDashboardController::class, 'viewprofile'])->name('userprofile');
+    Route::get('/user/profile', [UserProfileController::class, 'viewprofile'])->name('userprofile');
     // Add new Profile
     Route::get('/user/new-profile', [UserDashboardController::class, 'viewnewprofile'])->name('usernewprofile');
+    //achievements
+    Route::get('/user/achivements', [UserAchievementsController::class, 'viewachievement'])->name('userachievements');
+    //goal
+    Route::get('/user/goal', [UserGoalController::class, 'viewgoal'])->name('usergaol');
+    //setting
+    Route::get('/user/setting', [UserSettingController::class, 'viewsetting'])->name('usersetting');
+
+
 });
+
+
 //mobile route
 Route::get('/mobile/login', [MobileController::class, 'login'])->name('mobile.login');
 Route::get('/mobile/forgetpin', [MobileController::class, 'forgetpin'])->name('mobile.pin');

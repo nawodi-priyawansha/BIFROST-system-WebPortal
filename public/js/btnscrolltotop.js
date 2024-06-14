@@ -1,4 +1,6 @@
 // public/js/app.js or your main JS file
+
+// naviagte top button
     document.addEventListener("DOMContentLoaded", function() {
         // Get the button
         let mybutton = document.getElementById("scrollToTopBtn");
