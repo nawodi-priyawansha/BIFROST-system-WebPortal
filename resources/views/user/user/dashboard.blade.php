@@ -69,8 +69,8 @@
                                 <div class=" bg-white shadow rounded-lg p-6 mx-4 px-4">
                                     <div class="mb-5">
                                         <label for=""
-                                            class="text-white p-2 px-4 rounded-md bg-[#fb1018] whitespace-nowrap">Session
-                                            Dashboard</label>
+                                            class="text-white p-2 px-4 rounded-md bg-[#fb1018] whitespace-nowrap">Workout-
+                                            Deadlift</label>
                                     </div>
                                     <!-- Table with session details -->
                                     <div class="">
@@ -88,7 +88,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td class="py-2 pb-4">Strength</td>
-                                                        <td class="py-2 pb-4">2 x 10 bar only</td>
+                                                        <td class="py-2 pb-4">3 Rep MAX</td>
                                                         <td class="py-2 pb-4 justify-end flex  sm:flex-row">
                                                             <input type="text"
                                                                 class="form-input border rounded-md border-black mr-3 w-full sm:w-24">
