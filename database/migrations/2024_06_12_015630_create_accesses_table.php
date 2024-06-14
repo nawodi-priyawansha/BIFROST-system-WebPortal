@@ -27,7 +27,7 @@ return new class extends Migration
             $table->enum('achievements', ['enable', 'disable'])->default('disable');
             $table->enum('settings', ['enable', 'disable'])->default('disable');
             $table->enum('access_type', ['read', 'write'])->default('write');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->unique();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 

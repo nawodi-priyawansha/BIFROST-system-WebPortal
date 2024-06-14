@@ -14,7 +14,7 @@
 
 </head>
 
-<body>
+<body onload="checkScreenSize()">
     <div>
         @include('components.user-header')
         <!-- Container for Sidebar and Main Content -->

@@ -9,47 +9,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <title>Workout Library</title>
-    <style>
-        .popup {
-            display: none;
-        }
-
-        .popup-content {
-            animation-duration: 0.4s;
-        }
-
-        .popup-content.show {
-            animation-name: slideIn;
-        }
-
-        .popup-content.hide {
-            animation-name: slideOut;
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateY(-50%);
-                opacity: 0;
-            }
-
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        @keyframes slideOut {
-            from {
-                transform: translateY(0);
-                opacity: 1;
-            }
-
-            to {
-                transform: translateY(-50%);
-                opacity: 0;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 </head>
 
 <body class="font-sans antialiased">
@@ -119,7 +79,9 @@
 
                                     <div class="p-4 bg-gray-100 text-center rounded-b-lg">
                                         <button class="bg-black text-white px-8 py-2 rounded mr-2"
-                                            type="submit">Add</button>
+                                            type="submit" id="addButton">Add</button>
+                                        <button class="bg-black text-white px-8 py-2 rounded mr-2"
+                                            type="submit" id="updateButton" hidden>Update</button>
                                         <button type="button"
                                             class="bg-gray-300 text-black px-8 py-2 rounded hover:bg-gray-400"
                                             onclick="closePopup()">Cancel</button>
@@ -156,10 +118,6 @@
                                     <td dir="rtl"
                                         class="p-3 border-s-2 border-y-2 border-gray-300 bg-gray-100 justify-center flex space-x-2">
                                         <div dir="ltr" class="space-x-3">
-                                            {{-- <a>
-                                                <i class="text-[#fd8300] bi bi-pencil"></i>
-                                                <i href="#" class="text-black">Edit</i>
-                                            </a> --}}
                                             <form
                                                 action="{{ route('workout-library.delete', ['id' => $workoutLibrary->id]) }}"
                                                 method="POST">
@@ -172,7 +130,7 @@
                                                 </a>
                                                 <button type="submit" class=" gap-4"
                                                     onclick="return confirm('Are you sure you want to delete this entry?')">
-                                                    <i class="bi bi-trash"></i> Delete
+                                                    <i class="text-[#fd8300] bi bi-trash"></i> Delete
                                                 </button>
                                             </form>
 
@@ -185,83 +143,8 @@
                 </div>
             </div>
         </div>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                var popup = document.getElementById('popupForm');
-                var openBtn = document.getElementById('openPopupBtn');
-                var closeBtn = document.querySelector('.close');
-
-                if (openBtn) {
-                    openBtn.addEventListener('click', function() {
-                        popup.style.display = 'flex';
-                        document.querySelector('.popup-content').classList.add('show');
-                    });
-                }
-
-                closeBtn.addEventListener('click', function() {
-                    document.querySelector('.popup-content').classList.remove('show');
-                    document.querySelector('.popup-content').classList.add('hide');
-                    setTimeout(function() {
-                        popup.style.display = 'none';
-                        document.querySelector('.popup-content').classList.remove('hide');
-                    }, 400);
-                });
-
-                window.addEventListener('click', function(event) {
-                    if (event.target == popup) {
-                        document.querySelector('.popup-content').classList.remove('show');
-                        document.querySelector('.popup-content').classList.add('hide');
-                        setTimeout(function() {
-                            popup.style.display = 'none';
-                            document.querySelector('.popup-content').classList.remove('hide');
-                        }, 400);
-                    }
-                });
-            });
-
-            // edit function 
-            function edit(id, categoryName, type, workout, link) {
-                document.getElementById('workoutId').value = id;
-                document.getElementById('workout').value = workout;
-                document.getElementById('link').value = link;
-
-                // Set the correct category option
-                var categorySelect = document.getElementById('category');
-                for (var i = 0; i < categorySelect.options.length; i++) {
-                    if (categorySelect.options[i].text === categoryName) {
-                        categorySelect.selectedIndex = i;
-                        break;
-                    }
-                }
-
-                // Set the correct type option
-                var typeSelect = document.getElementById('type');
-                for (var i = 0; i < typeSelect.options.length; i++) {
-                    if (typeSelect.options[i].value === type) {
-                        typeSelect.selectedIndex = i;
-                        break;
-                    }
-                }
-
-                var popup = document.getElementById('popupForm');
-                popup.style.display = 'flex';
-                document.querySelector('.popup-content').classList.add('show');
-            }
-
-            //  close popup
-            function closePopup() {
-                var popup = document.getElementById('popupForm');
-                document.querySelector('.popup-content').classList.remove('show');
-                document.querySelector('.popup-content').classList.add('hide');
-                setTimeout(function() {
-                    popup.style.display = 'none';
-                    document.querySelector('.popup-content').classList.remove('hide');
-                }, 400);
-            }
-
-            document.querySelector('.close').addEventListener('click', closePopup);
-        </script>
     @endsection
+    <script src="{{ asset('js/admin.js') }}" defer></script>
 </body>
 
 </html>
