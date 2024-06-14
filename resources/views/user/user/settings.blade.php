@@ -8,8 +8,8 @@
     <title>Document</title>
 </head>
 <body>
-    @extends('layout.layout')
-    @section('content')
+    @extends('layout.user-layout')
+    @section('user-content')
          <!-- Main content (Dashboard) -->
          <div class="container transition-width mt-24 flex-grow" id="container">
           <div class="breadcrumb text-sm mb-4">
