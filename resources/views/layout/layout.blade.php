@@ -14,7 +14,7 @@
 
 </head>
 
-<body>
+<body onload="checkScreenSize()">
     <div>
         @include('components.admin-header')
         <!-- Container for Sidebar and Main Content -->
