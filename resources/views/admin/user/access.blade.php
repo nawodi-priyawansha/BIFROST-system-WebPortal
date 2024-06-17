@@ -28,6 +28,9 @@
                 <a href="#" class="text-gray-500 no-underline hover:underline">Home</a> / <span><strong> Access
                     </strong></span>
             </div>
+            <div>
+                <h1 class="text-2xl font-bold mb-5"> Access</h1>
+            </div>
             @foreach ($users as $user)
                 <div class="card bg-white p-4 rounded-lg shadow-md border mb-4">
                     <table class="w-full">
@@ -67,7 +70,7 @@
                                     <div class="input-container">
                                         <input type="checkbox" id="access_{{ $user->id }}" name="access"
                                             {{ $user->access == 'enable' ? 'checked' : '' }}
-                                            onclick="accesspage({{ $user->id }}, this.name)" 
+                                            onclick="accesspage({{ $user->id }}, this.name)"
                                             {{ in_array($user->user_type, ['client', 'worker']) ? 'disabled' : '' }}/>
                                         <label for="access_{{ $user->id }}">Access</label>
                                     </div>
@@ -75,7 +78,7 @@
                                         <input type="checkbox" id="clientManagement_{{ $user->id }}"
                                             name="client_management"
                                             {{ $user->client_management == 'enable' ? 'checked' : '' }}
-                                            onclick="accesspage({{ $user->id }}, this.name)" 
+                                            onclick="accesspage({{ $user->id }}, this.name)"
                                             {{ in_array($user->user_type, ['client', 'worker']) ? 'disabled' : '' }}/>
                                         <label for="clientManagement_{{ $user->id }}">Client Management</label>
                                     </div>
@@ -83,35 +86,35 @@
                                         <input type="checkbox" id="workoutLibrary_{{ $user->id }}"
                                             name="workout_library"
                                             {{ $user->workout_library == 'enable' ? 'checked' : '' }}
-                                            onclick="accesspage({{ $user->id }}, this.name)" 
+                                            onclick="accesspage({{ $user->id }}, this.name)"
                                             {{ in_array($user->user_type, ['client', 'worker']) ? 'disabled' : '' }}/>
                                         <label for="workoutLibrary_{{ $user->id }}">Workout Library</label>
                                     </div>
                                     <div class="input-container">
                                         <input type="checkbox" id="session_{{ $user->id }}" name="session"
                                             {{ $user->session == 'enable' ? 'checked' : '' }}
-                                            onclick="accesspage({{ $user->id }}, this.name)" 
+                                            onclick="accesspage({{ $user->id }}, this.name)"
                                             {{ in_array($user->user_type, ['client', 'worker']) ? 'disabled' : '' }}/>
                                         <label for="session_{{ $user->id }}">Session</label>
                                     </div>
                                     <div class="input-container">
                                         <input type="checkbox" id="financial_{{ $user->id }}" name="financial"
                                             {{ $user->financial == 'enable' ? 'checked' : '' }}
-                                            onclick="accesspage({{ $user->id }}, this.name)" 
+                                            onclick="accesspage({{ $user->id }}, this.name)"
                                             {{ in_array($user->user_type, ['client', 'worker']) ? 'disabled' : '' }}/>
                                         <label for="financial_{{ $user->id }}">Financial</label>
                                     </div>
                                     <div class="input-container">
                                         <input type="checkbox" id="communication_{{ $user->id }}" name="communication"
                                             {{ $user->communication == 'enable' ? 'checked' : '' }}
-                                            onclick="accesspage({{ $user->id }}, this.name)" 
+                                            onclick="accesspage({{ $user->id }}, this.name)"
                                             {{ in_array($user->user_type, ['client', 'worker']) ? 'disabled' : '' }}/>
                                         <label for="communication_{{ $user->id }}">Communication</label>
                                     </div>
                                     <div class="input-container">
                                         <input type="checkbox" id="statistics_{{ $user->id }}" name="statistics"
                                             {{ $user->statistics == 'enable' ? 'checked' : '' }}
-                                            onclick="accesspage({{ $user->id }}, this.name)" 
+                                            onclick="accesspage({{ $user->id }}, this.name)"
                                             {{ in_array($user->user_type, ['client', 'worker']) ? 'disabled' : '' }}/>
                                         <label for="statistics_{{ $user->id }}">Statistics</label>
                                     </div>
@@ -125,7 +128,7 @@
                                     <div class="input-container">
                                         <input type="checkbox" id="user_dashboard_{{ $user->id }}"
                                                name="user_dashboard" {{ $user->user_dashboard == 'enable' ? 'checked' : '' }}
-                                               onclick="accesspage({{ $user->id }}, this.name)" 
+                                               onclick="accesspage({{ $user->id }}, this.name)"
                                                {{ in_array($user->user_type, ['admin', 'super admin']) ? 'disabled' : '' }} />
                                         <label for="user_dashboard_{{ $user->id }}"
                                                class="border text-gray-500 border-gray-800 bg-white px-4 py-2 rounded-md md:w-auto">Dashboard</label>
@@ -163,7 +166,7 @@
                                                class="border text-gray-500 border-gray-300 bg-white px-4 py-2 rounded-md md:w-auto">Settings</label>
                                     </div>
                                 </div>
-                                
+
                             </td>
                         </tr>
 

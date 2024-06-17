@@ -83,6 +83,7 @@
                                                     <th class="border-b-2 border-black px-4 py-2">BACK SQUAT</th>
                                                     <th class="border-b-2 border-black px-4 py-2">FRONT SQUAT</th>
                                                     <th class="border-b-2 border-black px-4 py-2">C+J</th>
+                                                    <th class="border-b-2 border-black px-4 py-2">SNATCH</th>
                                                     <th class="border-b-2 border-black px-4 py-2">P. CLEAN</th>
                                                 </tr>
                                             </thead>
@@ -97,11 +98,13 @@
                                                     <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
                                                     <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
                                                     <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                    <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
                                                 </tr>
                                                 <tr>
                                                     <th class="border-b-1 border-gray-300 px-4 py-2"
                                                         style="border-right: 2px solid black;">LAITO</th>
 
+                                                    <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
                                                     <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
                                                     <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
                                                     <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
@@ -119,33 +122,13 @@
                                                     <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
                                                     <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
                                                     <td class="border-b-1  border-gray-300 px-4 py-2">230</td>
+                                                    <td class="border-b-1  border-gray-300 px-4 py-2">230</td>
                                                 </tr>
                                                 <tr>
                                                     <th class="border-b-1 border-gray-300 px-4 py-2"
                                                         style="border-right: 2px solid black;">LAITO</th>
 
                                                     <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
-                                                    <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
-                                                    <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
-                                                    <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
-                                                    <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
-                                                    <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="border-b-1 border-gray-300 px-4 py-2"
-                                                        style="border-right: 2px solid black;">LAITO</th>
-
-                                                    <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
-                                                    <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
-                                                    <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
-                                                    <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
-                                                    <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
-                                                    <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="border-b-1 border-gray-300 px-4 py-2"
-                                                        style="border-right: 2px solid black;">LAITO</th>
-
                                                     <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
                                                     <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
                                                     <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
@@ -163,11 +146,37 @@
                                                     <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
                                                     <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
                                                     <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                    <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
                                                 </tr>
                                                 <tr>
                                                     <th class="border-b-1 border-gray-300 px-4 py-2"
                                                         style="border-right: 2px solid black;">LAITO</th>
 
+                                                    <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                    <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                    <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                    <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                    <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                    <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                    <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="border-b-1 border-gray-300 px-4 py-2"
+                                                        style="border-right: 2px solid black;">LAITO</th>
+
+                                                    <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                    <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                    <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                    <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                    <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                    <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                    <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="border-b-1 border-gray-300 px-4 py-2"
+                                                        style="border-right: 2px solid black;">LAITO</th>
+
+                                                    <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
                                                     <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
                                                     <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
                                                     <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
