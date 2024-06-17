@@ -22,16 +22,21 @@
             <div><span class="text-gray-700">Home / </span>Goal (SMART)</div>
             <div class="flex flex-col gap-0 mt-4">
                 <div class="flex  flex-row justify-center w-full">
-                    <span class="text-4xl text-center w-[30%] md:w-[40%]"></span>
+                    <span class="text-4xl text-center w-[10%] md:w-[40%]"></span>
                     <span class="text-xl text-center w-[20%] md:w-[30%]"></span>
                     <span class="flex text-center w-[30%] md:w-[25%]">Add Goal</span>
                     <span class="flex text-center w-[30%] md:w-[15%]">View Goal</span>
                 </div>
-                <div class="flex flex-row space-x-4 md:space-y-0 md:space-x-4 w-full mt-8">
-                    <span class="md:text-4xl  text-md text-center w-[40%] md:w-[60%]">SMART Goal</span>
-                    <span class="md:text-xl text-md flex text-center w-[30%] md:w-[20%] ">+Goal Name</span>
-                    <span class="md:text-xl text-md flex text-center w-[30%] md:w-[10%]">Test Goal</span>
-                    <span class="md:text-xl text-md flex text-center w-[10%] md:w-[10%] flex-1">progress</span>
+                <div class="flex flex-row space-x-4 md:space-y-0 md:space-x-4 w-full mt-8 ">
+                    <span class="md:text-4xl md:h-14  text-md text-center w-[30%] md:w-[57%] ">SMART Goal</span>
+                    <div class="flex flex-row md:w-[20%] w-[25%]">
+                    <span class="text-2xl justify-center md:mt-3">+</span>
+                    <input type="text" placeholder="Goal Name" class="md:text-xl border border-black text-md flex text-center w-full md:w-full "></input type="text">
+                    </div>
+                    <div class="md:text-xl text-md flex text-center w-[40%] md:w-[20%] ">
+                    <span class="w-2/3 flex justify-center">Test Goal</span>
+                    <span class="w-1/3 flex-1">progress</span>
+                    </div>
                 </div>
 
                 <!-- Specific -->
@@ -166,7 +171,7 @@
                     </div>
                     <div class="w-16 h-20 hidden md:flex items-center justify-center rounded-br-full bg-[#D1C5D9]"></div>
                     <div class="ml-2 md:ml-5 flex items-center w-[25%]  md:w-[20%]">
-                        <input type="time" placeholder="" class="border border-black flex-1 h-14 my-2 w-full">
+                        <input type="text" placeholder="SET TIME" class="border text-center border-black flex-1 h-14 my-2 w-full">
                     </div>
                     <div class="ml-2 md:ml-5 flex text-center w-[40%] md:w-[20%] h-20 mt-2 md:mt-0">
                         <div class="border border-black flex items-center h-14 my-2 w-full md:w-2/3">
@@ -180,9 +185,39 @@
                     </div>
                 </div>
 
+                <div class="flex flex-row  w-full items-center">
+                    <div class="flex items-center md:w-[60%] flex-1">
+                        {{-- <div class="w-16 h-20 hidden md:flex items-center justify-center md:rounded-bl-full bg-[#D4DAE6]">
+                            <img src="{{ asset('img/clock.png') }}" alt="Goal Icon" class="w-6 h-6">
+                        </div>
+                        <div class="hidden md:flex w-20 h-20 text-white text-6xl px-2 items-center justify-center font-bold bg-[#481E70]"></div>
+                        <div class="w-11/12 md:w-full md:h-20 h-14 bg-[#D1C5D9] flex flex-col items-center justify-center md:justify-start md:items-start">
+                            <img src="{{ asset('img/clock.png') }}" alt="Goal Icon" class="w-8 h-8 md:w-8 md:h-8 md:ml-9 md:hidden">
+                            <span class="md:text-xl text-md md:ml-2 md:mt-3"><strong></strong></span>
+                            <div class="ml-2 hidden md:block">
+                                <span class="text-sm"></span>
+                            </div>
+                        </div> --}}
+                    </div>
+                    <div class="w-16 h-20 hidden md:flex items-center justify-center rounded-br-full"></div>
+                    <div class="ml-2 md:ml-5 flex justify-center items-center w-[25%]  md:w-[20%]">
+                        <button class="bg-black text-white p-2 px-4 rounded-md">Save</button>
+                    </div>
+                    <div class="ml-2 md:ml-5 flex text-center w-[40%] md:w-[20%] h-20 mt-2 md:mt-0">
+                        {{-- <div class="border border-black flex items-center h-14 my-2 w-full md:w-2/3">
+                            <div class="ml-2 mr-2 text-white md:text-4xl text-xs px-2 h-8 w-8 flex items-center justify-center font-bold bg-[#481E70]">T</div>
+                            <div class="text-xs"></div>
+                        </div>
+                        <div class="border border-black flex items-center h-14 my-2  w-1/3">
+                            <div class="mr-2 text-white text-center text-xl px-2 h-10 w-10 flex items-center justify-center font-bold"></div>
+                            <div class="text-xs ml-2"></div>
+                        </div> --}}
+                    </div>
+                </div>
+
                 <!-- Save Button -->
                 <div class="flex justify-end mt-10 mb-4">
-                    <button class="bg-black text-white p-2 px-4 rounded-md">Save</button>
+
                 </div>
             </div>
         </div>
