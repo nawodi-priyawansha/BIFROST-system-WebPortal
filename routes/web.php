@@ -100,8 +100,18 @@ Route::middleware(['admin'])->group(function () {
 
     // financial
     Route::get('/admin/financial', [FinancialController::class, 'viewfinancial'])->name('adminfinancial');
-    // client management
+
+    // client management page
     Route::get('/admin/clientmanagement', [ClientManagementController::class, 'viewclientmanagement'])->name('viewadminclientmanagement');
+    // store
+    Route::post('/clients', [ClientManagementController::class, 'store'])->name('clients.store');
+    // get data
+    Route::post('/class-manager', [ClientManagementController::class, 'getdata']);
+    // get workout
+    Route::post('/get-workout', [ClientManagementController::class, 'getworkout']);
+    // store
+    Route::post('/client-update', [ClientManagementController::class, 'update'])->name('clients.update');
+    
     //workout librabry
     Route::get('/admin/workoutlibrary', [WorkoutLibraryController::class, 'viewworkoutlibrary'])->name('viewworkoutlibrary');
     Route::post('/save-workout-library', [WorkoutLibraryController::class, 'listworkoutlibrary'])->name('save.workoutlibrary');
