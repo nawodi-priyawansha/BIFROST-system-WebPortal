@@ -28,207 +28,213 @@
                         </div>
                     </div>
                     <div>
-                        <h2 class="text-balck text-lg">Add New Profile</h2>
+                        <h2 class="text-black text-lg">Add New Profile</h2>
                     </div>
 
-                    <form action="#" method="POST" class="space-y-6 text-xs p-8 rounded-lg shadow-lg bg-white">
-                        <div class="flex flex-wrap md:flex-nowrap">
-                            <!-- Left Column -->
-                            <div class="w-full md:w-1/2 pr-4 space-y-6 ">
-                                <!-- Name -->
-                                <div class="form-group flex flex-wrap md:flex-nowrap items-center ">
+                    <form action="{{ route('profiles.store') }}" method="POST" enctype="multipart/form-data"
+                        class="space-y-6 text-xs  rounded-lg shadow-lg bg-white p-2">
+                        @csrf
+                        <div class="text-xs">
+                            {{-- Name and Nickname Row --}}
+                            <div class="w-full h-full p-2 grid grid-cols-1 md:grid-cols-2 md:border-b gap-4">
+                                <div class="form-group flex flex-wrap md:flex-nowrap items-center w-full">
                                     <label for="name"
-                                        class="block text-gray-700 font-bold w-full md:w-1/4 mb-1 md:mb-0 pr-4">Name <span class="text-red-500">*</span></label></label>
+                                        class="block text-gray-700 font-bold w-full md:w-[38%] mb-1 md:mb-0 pr-4">Name <span
+                                            class="text-red-500">*</span></label>
                                     <input type="text" id="name" name="name"
-                                        class="form-control w-full md:w-3/4 border rounded px-4 py-2" required>
+                                        class="form-control w-full md:w-3/4 rounded px-4 py-2 border" required>
                                 </div>
-                                <div class="sm:hidden">
-                                    {{-- PC view hidden part - this div are not showing PC --}}
-                                    <!--Mobile View Nickname -->
-                                    <div class="form-group flex flex-wrap md:flex-nowrap items-center ">
-                                        <label for="nickname"
-                                            class="block text-gray-700 font-bold w-full md:w-1/4 mb-1 md:mb-0 pr-4">Nickname</label>
-                                        <input type="text" id="nickname" name="nickname"
-                                            class="form-control w-full md:w-3/4 border rounded px-4 py-2">
-                                    </div>
-                                    <!-- Mobile View Date of Birth -->
-                                    <div class="form-group flex flex-wrap md:flex-nowrap items-center ">
-                                        <label for="dob"
-                                            class="block text-gray-700 font-bold w-full md:w-1/4 mb-1 md:mb-0 pr-4">Date of
-                                            Birth <span class="text-red-500">*</span></label>
-                                        <input type="date" id="dob" name="dob" required
-                                            class="form-control w-full md:w-3/4 border rounded px-4 py-2">
-                                    </div>
-                                    {{-- Mobile view Age --}}
-                                    <div class="form-group flex flex-wrap md:flex-nowrap items-center ">
-                                        <label for="age"
-                                            class="block text-gray-700 font-bold w-full md:w-1/4 mb-1 md:mb-0 pr-4">Age</label>
-                                        <input type="number" id="age" name="age"
-                                            class="form-control w-full md:w-3/4 border rounded px-4 py-2">
-                                    </div>
-                                    {{-- Mobile View Phone and Email --}}
-                                    <div>
-                                        <label for="phone"
-                                            class="block text-gray-700 font-bold w-full md:w-1/4 mb-1 md:mb-0 pr-4">Phone
-                                            <span class="text-red-500">*</span></label>
-                                        <input type="tel" id="phone" name="phone" required
-                                            class="md:w-2/4 w-full form-control border rounded ml-1 px-4 py-2">
-                                        <label for="email"
-                                            class="block text-gray-700 font-bold md:w-1/4 mb-1 md:mb-0 ">Email
-                                            <span class="text-red-500">*</span></label>
-                                        <input type="email" id="email" name="email" required
-                                            class="form-control w-full md:w-2/4 border rounded px-4 py-2">
-                                    </div>
-                                    {{-- Mobile view  Address --}}
-                                    <div class="form-group flex flex-wrap md:flex-nowrap items-center ">
-                                        <label for="address"
-                                            class="block text-gray-700 font-bold w-full md:w-1/4 mb-1 md:mb-0 pr-4">Address
-                                            <span class="text-red-500">*</span></label>
-                                        <input type="text" id="address" name="address" required
-                                            class="form-control w-full md:w-2/4 border rounded px-4 py-2">
-                                    </div>
-                                    {{-- Mobile view Height and Weight  --}}
-                                    <div>
-                                        <label for="height"
-                                            class="block text-gray-700 font-bold w-full md:w-1/4 mb-1 md:mb-0 pr-4">Height
-                                            <span class="text-red-500">*</span></label>
-                                        <input type="number" id="height" name="height" required
-                                            class="form-control w-full md:w-2/4 border rounded px-4 py-2 ">
-                                        <label for="weight"
-                                            class="block text-gray-700 font-bold w-full md:w-1/4 mb-1 md:mb-0 pr-4">Weight
-                                            <span class="text-red-500">*</span></label>
-                                        <input type="number" id="weight" name="weight" required
-                                            class="form-control w-full md:w-2/4 border rounded px-4 py-2">
-                                    </div>
-                                    {{-- Mobile View BMR  --}}
-                                    <div class="form-group flex flex-wrap md:flex-nowrap items-center ">
-                                        <label for="bmr"
-                                            class="block text-gray-700 font-bold w-full md:w-1/4 mb-1 md:mb-0 pr-4">BMR
-                                            <span class="text-red-500">*</span></label>
-                                        <input type="number" id="bmr" name="bmr" required
-                                            class="form-control w-full md:w-2/4 border rounded px-4 py-2">
-                                    </div>
-                                    {{-- PC View Hiddn is Closed  --}}
+                                <div class="form-group flex flex-wrap md:flex-nowrap items-center w-full">
+                                    <label for="nickname"
+                                        class="block text-gray-700 font-bold w-full md:w-1/3 mb-1 md:mb-0 pr-4 md:ml-4">Nickname</label>
+                                    <input type="text" id="nickname" name="nickname"
+                                        class="form-control w-full md:w-3/4 border rounded px-4 py-2">
                                 </div>
-                                {{-- Date of Birth  --}}
-                                <div class="form-group flex flex-wrap md:flex-nowrap items-center hidden md:flex">
+                            </div>
+                            {{-- DOB , Gender and Age  --}}
+                            <div class="w-full h-full p-2 grid grid-cols-1 md:grid-cols-6 gap-4 items-center md:border-b">
+                                <div class="form-group flex flex-wrap md:flex-nowrap items-center w-full md:col-span-1">
                                     <label for="dob"
-                                        class="block text-gray-700 font-bold w-full md:w-1/4 mb-1 md:mb-0 pr-4">Date of
-                                        Birth
-                                        <span class="text-red-500">*</span></label>
+                                        class="text-gray-700 font-bold w-full md:w-full mb-1 md:mb-0 pr-4 flex-nowrap">
+                                        Date of birth <span class="text-red-500">*</span>
+                                    </label>
+                                </div>
+                                <div class="w-full md:col-span-1">
                                     <input type="date" id="dob" name="dob" required
-                                        class="form-control w-full md:w-3/4 border rounded px-4 py-2">
+                                        class="form-control w-full border rounded px-4 py-2">
                                 </div>
-                                {{-- Phone label and input , Email Label only --}}
-                                <div class="form-group flex flex-wrap md:flex-nowrap items-center hidden md:flex">
+                                <div class="text-gray-700 font-bold w-full md:w-full mb-1 md:mb-0 md:ml-8 md:col-span-1">
+                                    Gender
+                                </div>
+                                <div class="w-full md:col-span-1 flex items-center">
+                                    <label class="mr-4">
+                                        <input type="radio" id="gender-male" name="gender" value="Male" required
+                                            class="mr-2"> Male
+                                    </label>
+                                    <label>
+                                        <input type="radio" id="gender-female" name="gender" value="Female" required
+                                            class="mr-2"> Female
+                                    </label>
+                                </div>
+                                <div class="form-group flex flex-wrap md:flex-nowrap items-center w-full md:col-span-1">
+                                    <label for="age"
+                                        class="block text-gray-700 font-bold w-full md:w-full mb-1 md:mb-0 pr-4 md:ml-8">
+                                        Age
+                                    </label>
+                                </div>
+                                <div class="w-full md:col-span-1">
+                                    <input type="number" id="age" name="age" required
+                                        class="form-control w-full border rounded px-4 py-2">
+                                </div>
+                            </div>
+                            {{-- Phone Number , Email , Address --}}
+                            <div class="w-full h-full p-2 grid grid-cols-1 md:grid-cols-6 gap-4 md:border-b">
+                                <div class="form-group flex flex-wrap md:flex-nowrap items-center w-full md:col-span-1">
                                     <label for="phone"
-                                        class="block text-gray-700 font-bold w-full md:w-1/4 mb-1 md:mb-0 pr-4">Phone <span
-                                            class="text-red-500">*</span></label>
+                                        class="text-gray-700 font-bold w-full md:w-full mb-1 md:mb-0 pr-4">
+                                        Phone <span class="text-red-500">*</span>
+                                    </label>
+                                </div>
+                                <div class="w-full md:col-span-1">
                                     <input type="tel" id="phone" name="phone" required
-                                        class="md:w-2/4  form-control border rounded px-4 py-2">
-                                    <label for="email"
-                                        class="block text-gray-700 font-bold md:w-1/4 mb-1 md:mb-0 ml-4">Email <span
-                                            class="text-red-500">*</span></label>
+                                        class="w-full form-control border rounded px-4 py-2">
                                 </div>
-                                {{-- Height label and input , Weight label only  --}}
-                                <div class="form-group flex flex-wrap md:flex-nowrap items-center hidden md:flex">
+                                <div
+                                    class="form-group flex flex-wrap md:flex-nowrap items-center w-full md:col-span-1 text-gray-700 font-bold">
+                                    <label for="email" class="w-full md:w-full mb-1 md:mb-0 pr-4 ml-0 md:ml-8">
+                                        Email <span class="text-red-500">*</span>
+                                    </label>
+                                </div>
+                                <div class="w-full md:col-span-1">
+                                    <input type="email" id="email" name="email" required
+                                        class="w-full form-control border rounded px-4 py-2">
+                                </div>
+                                <div class="form-group flex flex-wrap md:flex-nowrap items-center w-full md:col-span-1">
+                                    <label for="address"
+                                        class="text-gray-700 font-bold w-full md:w-1/4 mb-1 md:mb-0 pr-4 ml-0 md:ml-8">
+                                        Address<span class="text-red-500">*</span>
+                                    </label>
+                                </div>
+                                <div class="w-full md:col-span-1">
+                                    <input type="text" id="address" name="address" required
+                                        class="w-full form-control border rounded px-4 py-2">
+                                </div>
+                            </div>
+                            {{-- Height , Weight and BMR --}}
+                            <div class="w-full h-full p-2 grid grid-cols-1 md:grid-cols-6 gap-4 md:border-b">
+                                <div class="form-group flex flex-wrap md:flex-nowrap items-center md:col-span-1">
                                     <label for="height"
-                                        class="block text-gray-700 font-bold w-full md:w-1/4 mb-1 md:mb-0 pr-4">Height
-                                        <span class="text-red-500">*</span></label>
+                                        class="text-gray-700 font-bold w-full md:w-full mb-1 md:mb-0 pr-4">
+                                        Height (cm) <span class="text-red-500">*</span>
+                                    </label>
+                                </div>
+                                <div class="w-full md:col-span-1">
                                     <input type="number" id="height" name="height" required
-                                        class="form-control w-full md:w-2/4 border rounded px-4 py-2 ml-1">
+                                        class="form-control w-full border rounded px-4 py-2">
+                                </div>
+                                <div class="form-group flex flex-wrap md:flex-nowrap items-center md:col-span-1">
                                     <label for="weight"
-                                        class="block hidden md:flex text-gray-700 font-bold w-full md:w-1/4 mb-1 md:mb-0 pr-4 ml-4">Weight
-                                        <span class="text-red-500">*</span></label>
+                                        class="text-gray-700 font-bold w-full md:w-full mb-1 md:mb-0 pr-4 md:ml-8">
+                                        Weight (kg)<span class="text-red-500">*</span>
+                                    </label>
                                 </div>
-                                <!-- Primary Goal -->
-                                <div class="form-group flex flex-wrap items-center ">
+                                <div class="w-full md:col-span-1">
+                                    <input type="number" id="weight" name="weight" required
+                                        class="form-control w-full border rounded px-4 py-2">
+                                </div>
+                                <div class="form-group flex flex-wrap md:flex-nowrap items-center md:col-span-1">
+                                    <label for="bmr"
+                                        class="text-gray-700 font-bold w-full md:w-full mb-1 md:mb-0 pr-4 md:ml-8">
+                                        BMR <span class="text-red-500">*</span>
+                                    </label>
+                                </div>
+                                <div class="w-full md:col-span-1">
+                                    <input type="number" id="bmr" name="bmr" required
+                                        class="form-control w-full border rounded px-4 py-2" readonly>
+                                </div>
+                            </div>
+                            {{-- Primary Goal --}}
+                            <div class="w-full h-full p-2 grid grid-cols-1 md:grid-cols-2 gap-4 md:border-b">
+                                <div class="form-group flex flex-wrap md:flex-nowrap items-center w-full">
                                     <label for="primary-goal"
-                                        class="block text-gray-700 font-bold w-full md:w-1/4 mb-1 md:mb-0 pr-4">Primary
-                                        Goal
-                                        <span class="text-red-500">*</span></label>
-                                    <select id="primary-goal" name="primary-goal" required
-                                        class="form-control w-full md:w-3/4 border rounded px-4 py-2">
-                                        <option value="Weight Loss">Weight Loss</option>
-                                        <option value="Build Muscle">Build Muscle </option>
-                                        <option value="Competitive Weightlifting">Competitive Weightlifting</option>
-                                    </select>
+                                        class="block text-gray-700 font-bold w-full md:w-1/3 mb-1 md:mb-0 pr-4">
+                                        Primary Goal
+                                        <span class="text-red-500">*</span>
+                                    </label>
+                                    <div class="w-full md:w-2/3">
+                                        <select id="primary-goal" name="primary-goal"
+                                            class="form-control w-full rounded px-4 py-2 border" required>
+                                            <option value="Weight Loss">Weight Loss</option>
+                                            <option value="Build Muscle">Build Muscle</option>
+                                            <option value="Competitive Weightlifting">Competitive Weightlifting</option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <!-- Subscription Level -->
-                                <div class="form-group flex flex-wrap items-center ">
+                                <div class="form-control w-full md:w-2/3 rounded px-4 py-2">
+                                    <!-- Add any additional content or form controls here if needed -->
+                                </div>
+                            </div>
+                            {{-- Subscription Level --}}
+                            <div
+                                class="w-full h-full p-2 grid grid-cols-1 md:grid-cols-2 gap-4 whitespace-nowrap md:border-b">
+                                <div class="form-group flex flex-wrap md:flex-nowrap items-center w-full">
                                     <label for="subscription-level"
-                                        class="block text-gray-700 font-bold  w-full md:w-1/4 mb-1 md:mb-0 pr-4">Subscription
-                                        Level<span class="text-red-500">*</span></label>
-                                    <input type="text" id="subscription-level" name="subscription-level" required
-                                        class="form-control w-full md:w-3/4 border rounded px-4 py-2">
+                                        class="block text-gray-700 font-bold w-full md:w-[34%] mb-1 md:mb-0 pr-4">
+                                        Subscription Level<span class="text-red-500">*</span>
+                                    </label>
+                                    <div class="w-full md:w-[66%]">
+                                        <input type="text" id="subscription-level" name="subscription-level" required
+                                            class="form-control w-full border rounded px-4 py-2">
+                                    </div>
                                 </div>
-                                <!-- Progress Photos -->
-                                <div class="form-group flex flex-wrap cursor-pointer">
+                                <div class="form-group flex flex-wrap md:flex-nowrap items-center w-full">
+                                    <!-- Additional content can be added here -->
+                                </div>
+                            </div>
+                            {{-- Progress Photo --}}
+                            <div class="w-full h-full p-2 grid grid-cols-1 md:grid-cols-2 gap-4 md:border-b">
+                                <div class="form-group flex flex-wrap md:flex-nowrap w-full">
                                     <label for="progress-photos"
-                                        class="block text-gray-700 font-bold w-full md:w-1/4 mb-1 md:mb-0 pr-4">
+                                        class="block text-gray-700 font-bold w-full md:w-[34%] mb-1 md:mb-0 pr-4">
                                         Progress Photos <span class="text-red-500">*</span>
                                     </label>
-                                    <div class="progress-photos flex flex-col items-center justify-center min-h-40 h-auto border-2 border-dashed rounded w-full md:w-3/4 px-4 py-6"
+                                    <div class="progress-photos flex flex-col cursor-pointer items-center justify-center min-h-40 h-auto border bg-[#F8F9FA] rounded w-full md:w-[66%] px-4 py-6"
                                         id="progressPhotosDropArea">
                                         <div id="uploadedFiles" class="mt-4">
                                             <!-- Uploaded files will be shown here -->
                                         </div>
                                         <i class="fas fa-cloud-upload-alt text-3xl text-gray-600 mb-2"></i>
                                         <p class="text-gray-600">Drop files here or click to upload.</p>
-                                        <input type="file" id="fileInput" style="display:none;" multiple>
+                                        <input type="file" name="profile_image[]" id="fileInput"
+                                            style="display:none;" multiple>
                                     </div>
                                 </div>
-                                {{-- Submit button --}}
-                                <div class="form-group flex flex-wrap md:flex-nowrap items-center ">
-                                    <label for="name"
-                                        class="block text-gray-700 font-bold w-full md:w-1/4 mb-1 md:mb-0 pr-4"></label>
-                                    <button type="submit"
-                                        class="bg-black text-white py-2 px-4 rounded  hover:bg-black">Submit</button>
-                                </div>
                             </div>
-                            <!-- Right Column -->
-                            <div class="w-full md:w-1/2 pl-4 space-y-6 hidden md:block">
-                                <!-- Nickname -->
-                                <div class="form-group flex flex-wrap md:flex-nowrap items-center ">
-                                    <label for="nickname"
-                                        class="block text-gray-700 font-bold w-full md:w-1/4 mb-1 md:mb-0 pr-4">Nickname</label>
-                                    <input type="text" id="nickname" name="nickname"
-                                        class="form-control w-full md:w-3/4 border rounded px-4 py-2">
+                            {{-- Submint Button --}}
+                            <div class="w-full h-full p-1 grid grid-cols-1 md:grid-cols-2 gap-4 whitespace-nowrap md:border-b">
+                                <div class="form-group flex flex-wrap md:flex-nowrap items-center w-full ">
+                                    <label for=""
+                                        class="block text-gray-700 font-bold w-full md:w-[34%] mb-1 md:mb-0 pr-4">
+                                        <!-- Empty label left as it is -->
+                                    </label>
+                                    <div class="w-full md:w-[26%]">
+                                        <button type="submit" id="submit" required
+                                            class="form-control w-1/4 md:w-[50%] p-2 text-center border rounded px-4 py-2 bg-black text-white">
+                                            Submit
+                                        </button>
+                                    </div>
                                 </div>
-                                {{-- Age --}}
-                                <div class="form-group flex flex-wrap md:flex-nowrap items-center ">
-                                    <label for="age"
-                                        class="block text-gray-700 font-bold w-full md:w-1/4 mb-1 md:mb-0 pr-4">Age</label>
-                                    <input type="number" id="age" name="age"
-                                        class="form-control w-full md:w-3/4 border rounded px-4 py-2">
-                                </div>
-                                {{-- Address --}}
-                                <div class="form-group flex flex-wrap md:flex-nowrap items-center ">
-                                    <input type="email" id="email" name="email" required
-                                        class="form-control w-full md:w-2/4 border rounded px-4 py-2">
-                                    <label for="address"
-                                        class="block text-gray-700 font-bold w-full md:w-1/4 mb-1 md:mb-0 pr-4 ml-4">Address
-                                        <span class="text-red-500">*</span></label>
-                                    <input type="text" id="address" name="address" required
-                                        class="form-control w-full md:w-2/4 border rounded px-4 py-2">
-                                </div>
-                                {{-- BMR labal and input , weight input  --}}
-                                <div class="form-group flex flex-wrap md:flex-nowrap items-center ">
-                                    <input type="number" id="weight" name="weight" required
-                                        class="form-control w-full md:w-2/4 border rounded px-4 py-2">
-                                    <label for="bmr"
-                                        class="block text-gray-700 font-bold w-full md:w-1/4 mb-1 md:mb-0 pr-4 ml-4">BMR
-                                        <span class="text-red-500">*</span></label>
-                                    <input type="number" id="bmr" name="bmr" required
-                                        class="form-control w-full md:w-2/4 border rounded px-4 py-2">
+                                <div class="form-group flex flex-wrap md:flex-nowrap items-center w-full">
+                                    <!-- Additional content can be added here -->
                                 </div>
                             </div>
                         </div>
                     </form>
                 </div>
-
             </div>
         </div>
+
+        {{-- Upload File Script  --}}
         <script>
             document.addEventListener("DOMContentLoaded", function() {
                 const dropArea = document.getElementById('progressPhotosDropArea');
@@ -291,6 +297,44 @@
                 const fileItem = button.closest('.file-item');
                 fileItem.remove();
             }
+        </script>
+
+        {{-- BMR Calculator Script --}}
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                // Function to calculate BMR
+                function calculateBMR() {
+                    const age = parseInt(document.getElementById('age').value) || 0;
+                    const weight = parseFloat(document.getElementById('weight').value) || 0;
+                    const height = parseFloat(document.getElementById('height').value) || 0;
+                    const gender = document.querySelector('input[name="gender"]:checked');
+
+                    if (gender && gender.value) {
+                        if (gender.value === 'Male') {
+                            return 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age);
+                        } else if (gender.value === 'Female') {
+                            return 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age);
+                        }
+                    }
+                    return 0; // Default case, though gender should always be selected
+                }
+
+                // Update BMR when inputs change
+                function updateBMR() {
+                    const bmrInput = document.getElementById('bmr');
+                    if (bmrInput) {
+                        bmrInput.value = calculateBMR().toFixed(2);
+                    }
+                }
+
+                // Event listeners for inputs
+                document.getElementById('age').addEventListener('input', updateBMR);
+                document.getElementById('weight').addEventListener('input', updateBMR);
+                document.getElementById('height').addEventListener('input', updateBMR);
+                document.querySelectorAll('input[name="gender"]').forEach(item => {
+                    item.addEventListener('change', updateBMR);
+                });
+            });
         </script>
     @endsection
 </body>
