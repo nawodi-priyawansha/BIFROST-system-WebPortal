@@ -12,6 +12,9 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 </head>
 
 <body>
@@ -31,7 +34,7 @@
 
                     <form method="POST" action="{{ route('save.goal') }}">
                         @csrf
-                        
+
                         <input type="hidden" name="user_id" value="{{ $searchedUser->id }}">
 
 
@@ -41,14 +44,16 @@
                                 <span class="text-2xl justify-center md:mt-3">+</span>
                                 <input type="text" name="goal_name" placeholder="Goal Name"
                                     class="md:text-xl border border-black text-md flex text-center w-full md:w-full">
-                                   
+
                             </div>
                             <div class="md:text-xl text-md flex text-center w-[40%] md:w-[20%] ">
-                                <span class="w-2/3 flex justify-center"> <div class=" text-black" id="specificDisplay">
-                                    @if (isset($goal))
-                                        {{ $goal['goal_name'] }}
-                                    @endif
-                                </div></span>
+                                <span class="w-2/3 flex justify-center">
+                                    <div class=" text-black" id="specificDisplay">
+                                        @if (isset($goal))
+                                            {{ $goal['goal_name'] }}
+                                        @endif
+                                    </div>
+                                </span>
                                 <span class="w-1/3 flex-1">progress</span>
                             </div>
                         </div>
@@ -253,30 +258,39 @@
                             <div class="w-16 h-20 hidden md:flex items-center justify-center rounded-br-full bg-[#D1C5D9]">
                             </div>
                             <div class="ml-2 md:ml-5 flex items-center w-[25%] md:w-[20%]">
-                                <input type="text" name="time_bound" placeholder="Set Time"
+                                <input type="text" name="time_bound" id="time_bound" placeholder="Select End Date"
                                     class="border text-center border-black flex-1 h-14 my-2 w-full">
                             </div>
+
+
                             <div class="ml-2 md:ml-5 flex text-center w-[40%] md:w-[20%] h-20 mt-2 md:mt-0">
                                 <div class="border border-black flex items-center h-14 my-2 w-full md:w-2/3">
                                     <div
                                         class="ml-2 mr-2 text-white md:text-4xl text-xs px-2 h-8 w-8 flex items-center justify-center font-bold bg-[#481E70]">
                                         T</div>
                                     <!-- Display Time Bound Goal -->
-                                    <div class="text-xs text-black" id="measurableDisplay">
+                                    <div class="text-xs text-black" id="timeboundDisplay">
                                         @if (isset($goal))
-                                            {{ $goal['time_bound'] }}
+                                            {{ $goal->time_bound }}
                                         @endif
                                     </div>
                                 </div>
-                                <div class="border border-black flex items-center h-14 my-2  w-1/3">
-                                    @if (isset($goal))
-                                        <input type="text" name="time_progress"
-                                            class="text-xs mx-1 bg-transparent w-full h-full border-none focus:outline-none"
-                                            value="{{ $goal['time_progress'] }}">
-                                    @else
-                                        <input type="text"
-                                            class="text-xs mx-1 bg-transparent w-full h-full border-none focus:outline-none">
-                                    @endif
+                                <div class="border border-black flex items-center h-14 my-2 w-1/3">
+                                    <div id="remainingDaysDisplay"
+                                        class="text-xs text-black flex-1 bg-transparent h-full flex items-center px-2">
+                                        @if (isset($goal))
+                                            {{-- {{ $goal['achievable_progress'] }} --}}
+                                            <input type="text" name="time_progress" id="remainingDaysDisplay"
+                                                class="text-xs mx-1 bg-transparent w-full h-full border-none focus:outline-none"
+                                                value="{{ $goal['time_progress'] }}">
+                                        @else
+                                            <input type="text"
+                                                class="text-xs mx-1 bg-transparent w-full h-full border-none focus:outline-none">
+                                        @endif
+                                        {{-- @if (isset($goal) && isset($goal->time_bound))
+                                            {{ $goal->time_progress }}
+                                        @endif --}}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -288,7 +302,7 @@
                                 value="{{ $goal['id'] }}">
                         @endif
 
-                          
+
                         {{-- update and save button --}}
                         <div class="flex flex-row  w-full items-center">
                             <div class="flex items-center md:w-[60%] flex-1">
@@ -319,7 +333,64 @@
     @endsection
 </body>
 
+{{-- date update script --}}
+<script>
+    $(function() {
+        // Function to calculate remaining days from today to selected end date
+        function calculateRemainingDays(selectedDate) {
+            const endDate = new Date(selectedDate); // Set end date based on selected date
+            const today = new Date(); // Current date
+            
+            // Check if selected date is valid (not NaN and after or equal to today)
+            if (!isNaN(endDate.getTime()) && endDate >= today) {
+                // Calculate difference in milliseconds
+                const diffTime = endDate.getTime() - today.getTime();
 
+                // TO DO Some time we need to do save remming date to database
+                // Calculate difference in days
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
+                $('#remainingDaysDisplay').text(diffDays + ' days');
+            } else {
+                $('#remainingDaysDisplay').text(''); // Clear display if invalid date selected or in the past
+            }
+        }
+
+        // Initialize date picker on #time_bound input
+        $("#time_bound").datepicker({
+            dateFormat: "yy-mm-dd", // Date format
+            minDate: 0, // Disable previous days
+            onSelect: function(dateText) {
+                calculateRemainingDays(dateText);
+                calculateWeeks(dateText); // Also calculate weeks as per previous requirement
+            }
+        });
+
+        // Function to calculate weeks from the selected date
+        function calculateWeeks(selectedDate) {
+            const endDate = new Date(selectedDate); // Set end date based on selected date
+            const today = new Date(); // Current date
+
+            // Check if selected date is valid (not NaN and after or equal to today)
+            if (!isNaN(endDate.getTime()) && endDate >= today) {
+                // Calculate difference in milliseconds
+                const diffTime = endDate.getTime() - today.getTime();
+
+                // Calculate difference in weeks
+                const diffWeeks = Math.ceil(diffTime / (1000 * 60 * 60 * 24 * 7));
+
+                $('#timeboundDisplay').text(diffWeeks + ' weeks');
+            } else {
+                $('#timeboundDisplay').text(''); // Clear display if invalid date selected or in the past
+            }
+        }
+
+        // Initial calculation if a date is already selected
+        @if (isset($goal) && isset($goal->time_bound))
+            calculateRemainingDays("{{ $goal->time_bound }}");
+            calculateWeeks("{{ $goal->time_bound }}");
+        @endif
+    });
+</script>
 
 </html>
