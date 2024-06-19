@@ -123,7 +123,8 @@ Route::middleware(['user'])->group(function () {
     // profile
     Route::get('/user/profile', [UserProfileController::class, 'viewprofile'])->name('userprofile');
     // Add new Profile
-    Route::get('/user/new-profile', [UserDashboardController::class, 'viewnewprofile'])->name('usernewprofile');
+    Route::get('/user/new-profile', [UserProfileController::class, 'viewnewprofile'])->name('usernewprofile');
+    Route::post('/profiles', [UserProfileController::class, 'newProfileShow'])->name('profiles.store');
     //achievements
     Route::get('/user/achivements', [UserAchievementsController::class, 'viewachievement'])->name('userachievements');
     //goal
