@@ -36,7 +36,7 @@
                 <hr class="border-t border-black" />
             </li>
             <li>
-                <a href="{{ route('usergaol') }}"
+                <a href="{{ route('usergoal') }}"
                     class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300">
                     <!-- Icon -->
                     <i class="bi bi-flag w-5 h-5 m-3" onclick="toggleSidebar()"></i>

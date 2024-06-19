@@ -120,6 +120,9 @@ Route::middleware(['admin'])->group(function () {
 Route::middleware(['user'])->group(function () {
     // dashboard
     Route::get('/user/dashboard', [UserDashboardController::class, 'viewdashboard'])->name('userdashboard');
+    Route::post('/users/search', [UserDashboardController::class, 'search'])->name('users.search');
+ 
+   
     // profile
     Route::get('/user/profile', [UserProfileController::class, 'viewprofile'])->name('userprofile');
     // Add new Profile
@@ -127,7 +130,8 @@ Route::middleware(['user'])->group(function () {
     //achievements
     Route::get('/user/achivements', [UserAchievementsController::class, 'viewachievement'])->name('userachievements');
     //goal
-    Route::get('/user/goal', [UserGoalController::class, 'viewgoal'])->name('usergaol');
+    Route::get('/user/goal', [UserGoalController::class, 'viewgoal'])->name('usergoal');
+    Route::post('/user/save-goal', [UserGoalController::class, 'saveGoal'])->name('save.goal');
     //setting
     Route::get('/user/setting', [UserSettingController::class, 'viewsetting'])->name('usersetting');
 

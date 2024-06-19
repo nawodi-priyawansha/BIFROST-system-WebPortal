@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Models\Access;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 
 class UserDashboardController extends Controller
 {
@@ -25,4 +28,41 @@ class UserDashboardController extends Controller
             return view('error.useruthorized');
         }
     }
+
+    //  Dashboard Search Function
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        // Perform search
+        $user = User::where('user_type', 'client')
+            ->where('name', 'like', '%' . $query . '%')
+            ->first();
+
+        if ($user) {
+            // Store user details in session
+            Session::put('searchedUser', [
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+                // Add other user details as needed
+            ]);
+
+            return response()->json(['user' => $user]);
+        } else {
+            // Clear session if no user found
+            Session::forget('searchedUser');
+
+            return response()->json(['user' => null]);
+        }
+    }
+
+
+    // // Clear searched user details from session
+    // public function clearSearchedUser()
+    // {
+    //     Session::forget('searchedUser');
+
+    //     return redirect()->back()->with('message', 'Searched user details cleared from session.');
+    // }
 }
