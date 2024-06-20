@@ -336,6 +336,26 @@
 {{-- date update script --}}
 <script>
     $(function() {
+        // Function to format the date as 'Month Day' with ordinal suffix
+        function formatDate(date) {
+            const options = { month: 'long' };
+            const day = date.getDate();
+            const month = date.toLocaleDateString(undefined, options);
+
+            // Function to get ordinal suffix
+            function getOrdinalSuffix(day) {
+                if (day > 3 && day < 21) return 'th'; // 11th, 12th, 13th
+                switch (day % 10) {
+                    case 1: return 'st';
+                    case 2: return 'nd';
+                    case 3: return 'rd';
+                    default: return 'th';
+                }
+            }
+
+            return `${month} ${day}${getOrdinalSuffix(day)}`;
+        }
+
         // Function to calculate remaining days from today to selected end date
         function calculateRemainingDays(selectedDate) {
             const endDate = new Date(selectedDate); // Set end date based on selected date
@@ -350,7 +370,7 @@
                 // Calculate difference in days
                 const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-                $('#remainingDaysDisplay').text(diffDays + ' days');
+                $('#remainingDaysDisplay').text(diffDays + ' days left');
             } else {
                 $('#remainingDaysDisplay').text(''); // Clear display if invalid date selected or in the past
             }
@@ -379,7 +399,7 @@
                 // Calculate difference in weeks
                 const diffWeeks = Math.ceil(diffTime / (1000 * 60 * 60 * 24 * 7));
 
-                $('#timeboundDisplay').text(diffWeeks + ' weeks');
+                $('#timeboundDisplay').text(diffWeeks + ' weeks start: ' + formatDate(endDate) + '');
             } else {
                 $('#timeboundDisplay').text(''); // Clear display if invalid date selected or in the past
             }
@@ -392,5 +412,7 @@
         @endif
     });
 </script>
+
+
 
 </html>
