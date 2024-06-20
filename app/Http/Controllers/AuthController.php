@@ -64,6 +64,7 @@ class AuthController extends Controller
             // return redirect()->back();
             return redirect()->back()->with('error', 'Please enter a correct pin number.');
         }
+        
     }
 
     public function showLoginForm()
@@ -80,4 +81,5 @@ class AuthController extends Controller
             return redirect('/mobile/login');
         }
     }
+    
 }

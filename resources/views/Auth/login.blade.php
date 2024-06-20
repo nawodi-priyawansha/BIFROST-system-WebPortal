@@ -39,6 +39,23 @@
                 {{ session('error') }}
             </div>
         @endif
+
+        {{-- POP ERROR MESSAGE WITH SWEETALERT
+        @if (Session::has('error'))
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: '{{ Session::get('error') }}',
+                    footer: '<a href="#">Why do I have this issue?</a>'
+                });
+            </script>
+        @endif
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="sweetalert2.all.min.js"></script>
+        <script src="sweetalert2.min.js"></script>
+        <link rel="stylesheet" href="sweetalert2.min.css"> --}}
+        
         <div class="flex justify-center gap-4 sm:gap-4 mb-8  mt-10">
             <input type="text" maxlength="1"
                 class="w-12 h-12 sm:w-20 sm:h-20 text-black text-center bg-white rounded" name="pin_1" id="pin_1"
