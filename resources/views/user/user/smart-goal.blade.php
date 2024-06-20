@@ -15,6 +15,10 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
+    <script src="sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="sweetalert2.min.css">
 </head>
 
 <body>
@@ -32,7 +36,7 @@
                     </div>
 
 
-                    <form method="POST" action="{{ route('save.goal') }}">
+                    <form id="myForm" method="POST" action="{{ route('save.goal') }}">
                         @csrf
 
                         <input type="hidden" name="user_id" value="{{ $searchedUser->id }}">
@@ -258,7 +262,7 @@
                             <div class="w-16 h-20 hidden md:flex items-center justify-center rounded-br-full bg-[#D1C5D9]">
                             </div>
                             <div class="ml-2 md:ml-5 flex items-center w-[25%] md:w-[20%]">
-                                <input type="text" name="time_bound" id="time_bound" placeholder="Select End Date"
+                                <input type="text" name="time_bound" id="time_bound" placeholder="SET TIME"
                                     class="border text-center border-black flex-1 h-14 my-2 w-full">
                             </div>
 
@@ -313,9 +317,8 @@
                                 @if (isset($goal))
                                     <button type="submit" class="bg-black text-white p-2 px-4 rounded-md">Update</button>
                                 @else
-                                    <button type="submit" class="bg-black text-white p-2 px-4 rounded-md">Save</button>
+                                    <button id="saveButton" type="submit" class="bg-black text-white p-2 px-4 rounded-md">Save</button>
                                 @endif
-
                             </div>
                             <div class="ml-2 md:ml-5 flex text-center w-[40%] md:w-[20%] h-20 mt-2 md:mt-0">
 
@@ -338,7 +341,9 @@
     $(function() {
         // Function to format the date as 'Month Day' with ordinal suffix
         function formatDate(date) {
-            const options = { month: 'long' };
+            const options = {
+                month: 'long'
+            };
             const day = date.getDate();
             const month = date.toLocaleDateString(undefined, options);
 
@@ -346,10 +351,14 @@
             function getOrdinalSuffix(day) {
                 if (day > 3 && day < 21) return 'th'; // 11th, 12th, 13th
                 switch (day % 10) {
-                    case 1: return 'st';
-                    case 2: return 'nd';
-                    case 3: return 'rd';
-                    default: return 'th';
+                    case 1:
+                        return 'st';
+                    case 2:
+                        return 'nd';
+                    case 3:
+                        return 'rd';
+                    default:
+                        return 'th';
                 }
             }
 
@@ -360,7 +369,7 @@
         function calculateRemainingDays(selectedDate) {
             const endDate = new Date(selectedDate); // Set end date based on selected date
             const today = new Date(); // Current date
-            
+
             // Check if selected date is valid (not NaN and after or equal to today)
             if (!isNaN(endDate.getTime()) && endDate >= today) {
                 // Calculate difference in milliseconds
@@ -414,5 +423,31 @@
 </script>
 
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const saveButton = document.getElementById('saveButton');
+        const myForm = document.getElementById('myForm');
+
+        saveButton.addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            Swal.fire({
+                title: "Do you want to save the goal?",
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: "Save",
+                denyButtonText: `Don't save`
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Optionally, you can validate form fields here before submission
+                    myForm.submit(); // Submit the form
+                } else if (result.isDenied) {
+                    Swal.fire("Goal not saved", "", "info");
+                    // Optionally, handle the case where user chooses not to save
+                }
+            });
+        });
+    });
+</script>
 
 </html>
