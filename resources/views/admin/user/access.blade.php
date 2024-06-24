@@ -19,7 +19,7 @@
 </head>
 
 
-<body class="font-sans antialiased bg-gray-100">
+<body >
     @extends('layout.layout')
     @section('content')
         <!-- Main content (Dashboard) -->
