@@ -12,7 +12,7 @@
     <title>Document</title>
 </head>
 
-<body>
+<body >
     @extends('layout.layout')
     @section('content')
         <!-- Main content (Dashboard) -->
@@ -227,7 +227,7 @@
                                     // Add remove button to the new block
                                     var removeBtn = document.createElement('button');
                                     removeBtn.setAttribute('type', 'button');
-                                    removeBtn.classList.add('bg-red-500', 'text-white', 'py-2', 'px-4', 'rounded', 'mb-2', 'remove-btn', 'w-24');
+                                    removeBtn.classList.add('bg-[#FB1018]', 'text-white', 'py-2', 'px-4', 'rounded', 'mb-2', 'remove-btn', 'w-24');
                                     removeBtn.textContent = 'Remove';
                                     removeBtn.addEventListener('click', function() {
                                         uiBlock.remove();
@@ -345,7 +345,7 @@
 
                             <div class="flex mt-12">
                                 <button type="submit"
-                                    class="bg-red-600 text-white py-2 px-4 rounded mb-2 hover:bg-red-700">Save</button>
+                                    class="bg-[#FB1018] text-white py-2 px-4 rounded mb-2 hover:bg-red-700">Save</button>
                             </div>
                         </form>
                     </div>
