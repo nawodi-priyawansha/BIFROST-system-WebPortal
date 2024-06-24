@@ -340,21 +340,6 @@
                 });
             });
 
-            // // Event listener for button clicks to handle selection
-            // document.addEventListener('click', function(event) {
-            //     var button = event.target.closest('button');
-            //     if (button) {
-            //         if (button.classList.contains('fa-info-circle')) {
-            //             // Handle info button click
-            //             var category = button.getAttribute('data-category');
-            //             showInfo(category);
-            //         } else {
-            //             // Handle selection button click
-            //             var category = button.getAttribute('data-category');
-            //             selectButton(button, category);
-            //         }
-            //     }
-            // });
             // Function to handle button selection
             function selectButton(button, category) {
                 // Check if the button clicked is the info icon button
@@ -592,11 +577,6 @@
 
         <!-- Local Storage Date getting Script -->
         <script>
-            // Function to clear localStorage
-            // function clearLocalStorage() {
-            //     localStorage.removeItem('selectedDay');
-            //     localStorage.removeItem('selectedDate');
-            // }
 
             document.addEventListener('DOMContentLoaded', function() {
                 const selectedDay = localStorage.getItem('selectedDay');

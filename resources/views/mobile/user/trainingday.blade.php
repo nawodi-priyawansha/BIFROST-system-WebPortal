@@ -71,7 +71,7 @@
             </div>
         </div>
     </div>
-    {{-- Local storage Date Set Script  --}}
+    {{-- Local storage Date Set Script --}}
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];

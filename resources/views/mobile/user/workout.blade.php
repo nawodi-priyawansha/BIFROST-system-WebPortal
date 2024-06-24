@@ -49,7 +49,6 @@
                         </div>
                     </div>
                     {{-- end warmup --}}
-
                     {{-- table --}}
                     <div class=" w-full bg-black bg-opacity-50 p-4 rounded-lg mb-6">
                         <table class="w-full text-white">
