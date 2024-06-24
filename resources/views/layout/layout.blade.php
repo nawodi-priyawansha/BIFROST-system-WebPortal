@@ -28,7 +28,7 @@
     <script src="{{ asset('js/style.js') }}"></script>
     </div>
     <button id="scrollToTopBtn" title="Go to top"
-        class="hidden fixed bottom-5 right-5 z-50  w-8 h-8 items-center text-center justify-center bg-black text-white focus:outline-none">
+        class="hidden fixed bottom-5 right-5 z-50  w-8 h-8 items-center text-center justify-center font-source-sans bg-black text-white focus:outline-none">
         <i class="fa fa-long-arrow-up text-white" aria-hidden="true"></i>
     </button>
     <script src="{{ asset('js/btnscrolltotop.js') }}"></script>

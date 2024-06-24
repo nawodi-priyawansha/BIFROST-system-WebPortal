@@ -24,27 +24,27 @@
 
                     <ul class="flex flex-wrap -mb-px    items-center justify-center ">
                         <a href="#" aria-current="false"
-                            class="inline-block  bg-lightgrey rounded shadow  p-4 border-b-2 border-transparent px-5 py-2 hover:border-gray-300  text-gray-800 border-gray-200 hover:bg-black hover:text-white hover:font-bold font-bold mb-2">
+                            class="inline-block   bg-black text-white  rounded-none shadow  p-1 border-b-2 border-transparent px-5 pt-0 pb-0 hover:border-gray-200   border-gray-200 hover:bg-black hover:text-white hover:font-bold font-sans text-base leading-10 mb-4" style="font-size:14px; font-weight: 600; ">
                             DASHBOARD
                         </a>
                         <a href="#" aria-current="page"
-                            class="inline-block p-4 rounded  bg-lightgrey shadow  border-b-2 border-transparent px-5 py-2 dark:text-blue-500 dark:border-blue-500  text-gray-800 border-gray-200 hover:bg-black hover:text-white hover:font-bold font-bold mb-2">
+                            class="inline-block p-4  bg-lightgrey shadow  border-b-2 rounded-none border-transparent px-5 pt-0 pb-0 dark:text-blue-500 dark:border-blue-500  text-gray-800 border-gray-200 hover:bg-black hover:text-white hover:font-bold font-bold font-sans text-base leading-10 mb-4" style="font-size:14px; font-weight: 600;">
                             INVOICES
                         </a>
                         <a href="#" aria-current="false"
-                            class="inline-block p-4 rounded bg-lightgrey shadow  border-b-2 border-transparent px-5 py-2  text-gray-800 border-gray-200 hover:bg-black hover:text-white hover:font-bold font-bold mb-2">
+                            class="inline-block p-4  bg-lightgrey shadow  border-b-2 rounded-none border-transparent px-5 pt-0 pb-0  text-gray-800 border-gray-200 hover:bg-black hover:text-white hover:font-bold font-bold font-sans text-base leading-10 mb-4" style="font-size:14px; font-weight: 600;">
                             JOURNAL
                         </a>
                         <a href="#" aria-current="false"
-                            class="inline-block p-4 rounded shadow bg-lightgrey border-b-2 border-transparent px-5 py-2  text-gray-800 border-gray-200 hover:bg-black hover:text-white hover:font-bold font-bold mb-2">
+                            class="inline-block p-4  shadow bg-lightgrey border-b-2 rounded-none border-transparent px-5 pt-0 pb-0  text-gray-800 border-gray-200 hover:bg-black hover:text-white hover:font-bold font-bold font-sans text-base leading-10 mb-4" style="font-size:14px; font-weight: 600;">
                             LEDGER
                         </a>
                         <a href="#" aria-current="false"
-                            class="inline-block p-4 rounded shadow bg-lightgrey border-b-2 border-transparent px-5 py-2   text-gray-800 border-gray-200 hover:bg-black hover:text-white hover:font-bold font-bold mb-2">
+                            class="inline-block p-4  shadow bg-lightgrey border-b-2 rounded-none border-transparent px-5 pt-0 pb-0  text-gray-800 border-gray-200 hover:bg-black hover:text-white hover:font-bold font-bold font-sans text-base leading-10 mb-4" style="font-size:14px; font-weight: 600;">
                             ASSETS
                         </a>
                         <a href="#" aria-current="false"
-                            class="inline-block p-4 rounded shadow bg-lightgrey border-b-2 border-transparent px-5 py-2   text-gray-800 border-gray-200 hover:bg-black hover:text-white hover:font-bold font-bold mb-2">
+                            class="inline-block p-4  shadow bg-lightgrey border-b-2 rounded-none border-transparent px-5 pt-0 pb-0   text-gray-800 border-gray-200 hover:bg-black hover:text-white hover:font-bold font-bold font-sans text-base leading-10 mb-4" style="font-size:14px; font-weight: 600;">
                             END OF YEAR
                         </a>
                     </ul>
@@ -55,7 +55,7 @@
                 {{-- year data segement --}}
                 <div class="relative  flex flex-wrap -mb-px   items-center justify-center mt-28 ">
                     <div
-                        class="tooltiptext absolute left-1/2 transform -translate-x-1/2 bottom-full mb-2 bg-black text-white text-center rounded-lg px-4 py-2 text-sm opacity-100 w-48">
+                        class="tooltiptext absolute left-1/2 transform -translate-x-1/2 bottom-full mb-2 bg-black text-white text-center px-2 py-2 text-sm opacity-100 w-auto">
                         Year to Date
                         <div
                             class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-t-8 border-t-black border-x-8 border-x-transparent">
@@ -79,14 +79,14 @@
                 <div class=" w-full container whitespace-nowrap  ">
                     <div class=" w-auto flex-nowrap whitespace-nowrap mt-10 " id="conatiner">
                         <div class="flex justify-between  border-black border-b py-2">
-                            <span class="text-2xl font-bold "> June 2017</span>
+                            <span class="text-xl "> June 2017</span>
                             <span class="  text-2xl font-bold">
                                 <i class="fa fa-angle-left mr-2" aria-hidden="true" style="font-size: 1.5rem;"></i>
                                 2017-2018
                                 <i class="fa fa-angle-right ml-2" aria-hidden="true" style="font-size: 1.5rem;"></i>
                             </span>
 
-                            <span class="text-2xl font-bold">June 2018 </span>
+                            <span class="text-xl ">June 2018 </span>
                         </div>
 
                         <div
@@ -219,9 +219,9 @@
                                 <div class="bg-whit p-2 rounded shadow flex-1  ">
                                     <h2 class="text-xl font-bold mb-4 text-center">Cash Balance</h2>
                                     <p>Last Month</p>
-                                    <p class="text-green-500 text-2xl font-bold text-center mt-8">$3,051.00</p>
+                                    <p class="text-[#31c7a2] text-2xl font-bold text-center mt-8">$3,051.00</p>
                                     <p class=" mt-10">Cash Balance</p>
-                                    <p class="text-red-500 text-2xl font-bold text-center  mt-10">$3,051.00</p>
+                                    <p class="text-[#fb1018] text-2xl font-bold text-center  mt-10">$3,051.00</p>
                                 </div>
 
                                 <div class="bg-white p-4 rounded shadow flex-1 flex-grow">
@@ -239,7 +239,7 @@
                                             <div class="flex w-full h-2 bg-gray-200 rounded-full overflow-hidden dark:bg-neutral-700"
                                                 role="progressbar" aria-valuenow="25" aria-valuemin="0"
                                                 aria-valuemax="100">
-                                                <div class="flex flex-col justify-center rounded-full overflow-hidden bg-blue-600 text-xs text-white text-center whitespace-nowrap transition duration-500 dark:bg-blue-500"
+                                                <div class="flex flex-col justify-center rounded-full overflow-hidden bg-[#14befd] text-xs text-white text-center whitespace-nowrap transition duration-500 dark:bg-blue-500"
                                                     style="width: 95%"></div>
                                             </div>
                                         </div>
@@ -254,7 +254,7 @@
                                             <div class="flex w-full h-2 bg-gray-200 rounded-full overflow-hidden dark:bg-neutral-700"
                                                 role="progressbar" aria-valuenow="25" aria-valuemin="0"
                                                 aria-valuemax="100">
-                                                <div class="flex flex-col justify-center rounded-full overflow-hidden bg-blue-600 text-xs text-white text-center whitespace-nowrap transition duration-500 dark:bg-blue-500"
+                                                <div class="flex flex-col justify-center rounded-full overflow-hidden bg-[#14befd] text-xs text-white text-center whitespace-nowrap transition duration-500 dark:bg-blue-500"
                                                     style="width: 45%"></div>
                                             </div>
                                         </div>
@@ -269,7 +269,7 @@
                                             <div class="flex w-full h-2 bg-gray-200 rounded-full overflow-hidden dark:bg-neutral-700"
                                                 role="progressbar" aria-valuenow="25" aria-valuemin="0"
                                                 aria-valuemax="100">
-                                                <div class="flex flex-col justify-center rounded-full overflow-hidden bg-blue-600 text-xs text-white text-center whitespace-nowrap transition duration-500 dark:bg-blue-500"
+                                                <div class="flex flex-col justify-center rounded-full overflow-hidden bg-[#14befd] text-xs text-white text-center whitespace-nowrap transition duration-500 dark:bg-blue-500"
                                                     style="width: 25%"></div>
                                             </div>
                                         </div>
@@ -284,7 +284,7 @@
                                             <div class="flex w-full h-2 bg-gray-200 rounded-full overflow-hidden dark:bg-neutral-700"
                                                 role="progressbar" aria-valuenow="25" aria-valuemin="0"
                                                 aria-valuemax="100">
-                                                <div class="flex flex-col justify-center rounded-full overflow-hidden bg-blue-600 text-xs text-white text-center whitespace-nowrap transition duration-500 dark:bg-blue-500"
+                                                <div class="flex flex-col justify-center rounded-full overflow-hidden bg-[#14befd] text-xs text-white text-center whitespace-nowrap transition duration-500 dark:bg-blue-500"
                                                     style="width: 45%"></div>
                                             </div>
                                         </div>
@@ -298,7 +298,7 @@
                                             <div class="flex w-full h-2 bg-gray-200 rounded-full overflow-hidden dark:bg-neutral-700"
                                                 role="progressbar" aria-valuenow="25" aria-valuemin="0"
                                                 aria-valuemax="100">
-                                                <div class="flex flex-col justify-center rounded-full overflow-hidden bg-blue-600 text-xs text-white text-center whitespace-nowrap transition duration-500 dark:bg-blue-500"
+                                                <div class="flex flex-col justify-center rounded-full overflow-hidden bg-[#14befd] text-xs text-white text-center whitespace-nowrap transition duration-500 dark:bg-blue-500"
                                                     style="width: 55%"></div>
                                             </div>
                                         </div>

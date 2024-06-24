@@ -34,7 +34,7 @@
                 </div>
 
                 <!-- menu -->
-                <div class="navigation  text-white text-2xl font-bold hidden md:block">
+                <div class="navigation  text-white text-2xl font-bold hidden md:block ml-10">
                     Admin Portal
                 </div>
 
@@ -42,32 +42,34 @@
                 <div class="flex items-center h-20 justify-center ">
                     <div class="flex items-center md:gap-2">
                         <!-- Container for displaying the logged-in user information -->
-                        <div class="text-gray-800 mr-20 hidden md:block">
+                        <div class="text-gray-800 mr-5 hidden md:block">
                             <!-- Inner container for the text, setting text color to gray -->
                             <div class="text-gray-400">
-                                Logged in as
+                                Logged in as 
                                 <!-- Span to highlight the user's name in white color -->
                                 <span class="text-white">
                                     @if (Auth::check())
                                         <!-- Check if the user is authenticated -->
                                         {{ Auth::user()->name }} <!-- Display the authenticated user's name -->
                                     @else
-                                        Guest <!-- Display 'Guest' if no user is authenticated -->
+                                        Guest  <!-- Display 'Guest' if no user is authenticated -->
+                                        
                                     @endif
                                 </span>
+                                <span class="ml-5">|</span>
                             </div>
                         </div>
                         <a href="#" class=" text-gray-800">
                             <!-- component -->
-                            <div class="flex justify-center items-center mr-10 mt-2">
+                            <div class="flex justify-center items-center mr-10 mt-4">
                                 <div class="relative md:mb-4 mb-4">
                                     <div class="bottom-4 absolute left-6">
                                         <p
-                                            class="flex h-1 w-1 items-center justify-center rounded-full bg-red-500 p-3 text-xs text-white">
+                                            class="flex h-1 w-1  items-center justify-center rounded-full bg-red-500 p-2.5 text-xs text-white">
                                             0
                                         </p>
                                     </div>
-                                    <img src="{{ asset('images/bell.png') }}" class="w-8 h-8"alt="">
+                                    <img src="{{ asset('images/bell.png') }}" class="w-6 h-6 "alt="">
                                     {{-- <i class="fa fa-bell text-white text-2xl" aria-hidden="true"></i> --}}
                                 </div>
                             </div>
@@ -76,7 +78,7 @@
                         <a href="#" class="text-gray-800"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <!-- Container for centering the logout icon -->
-                            <div class="flex justify-center items-center mr-5 mt-2">
+                            <div class="flex justify-center items-center mr-5 mt-3">
                                 <!-- Inner container for the icon with margin adjustments for different screen sizes -->
                                 <div class="relative md:mb-4 mb-4">
                                     <!-- Logout icon styled with Font Awesome -->

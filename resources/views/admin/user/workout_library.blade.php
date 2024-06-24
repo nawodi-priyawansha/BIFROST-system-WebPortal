@@ -17,10 +17,10 @@
     @section('content')
         <div class="container mx-4 mt-24 flex-grow min-h-screen" id="container">
             <div class="breadcrumb text-sm mb-4">
-                <a href="#" class="text-gray-500 hover:underline ml-4">Home</a> / <span><strong> Workout
-                        Library</strong></span>
+                <a href="#" class="text-gray-500 hover:underline ml-4">Home</a> / <span><strong class="font-source-sans"> Workout
+                        Library </strong></span>
                 <div class="flex justify-between p-5">
-                    <h1 class="text-2xl font-bold mb-5"> Workout Library</h1>
+                    <h1 class="text-2xl  font-medium mb-5 font-source-sans"> Workout Library</h1>
                     <button id="openPopupBtn" class="bg-black h-10 px-6 text-white rounded-md">+ ADD</button>
 
                     {{-- pop up view start --}}
