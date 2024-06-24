@@ -12,12 +12,12 @@
 <body>
     <!-- Sidebar -->
     <aside id="sidebar"
-        class="relative bg-white h-full transition-all duration-700 flex flex-col text-md font-semibold mt-32 md:mt-20 transition-width">
+        class="relative bg-white h-full transition-all duration-700 flex flex-col text-[16px]  mt-32 md:mt-20 transition-width">
 
         <ul class="flex flex-col space-y-1 overflow-y-auto overflow-x-hidden scrollbar">
             <li>
                 <a href="{{ route('userdashboard') }}"
-                    class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300">
+                    class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300 {{ request()->routeIs('userdashboard') ? 'bg-[#F4F4F4] text-black' : 'text-black' }}">
                     <!-- Icon -->
                     <i class="bi bi-grid-3x3-gap w-5 h-5 m-3" onclick="toggleSidebar()"></i>
                     <!-- Text -->
@@ -27,7 +27,7 @@
             </li>
             <li>
                 <a href="{{ route('userprofile') }}"
-                    class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300">
+                    class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300 {{ request()->routeIs('userprofile') ? 'bg-[#F4F4F4] text-black' : 'text-black' }}">
                     <!-- Icon -->
                     <i class="bi bi-people w-5 h-5 m-3" onclick="toggleSidebar()"></i>
                     <!-- Text -->
@@ -37,7 +37,7 @@
             </li>
             <li>
                 <a href="{{ route('usergoal') }}"
-                    class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300">
+                    class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300 {{ request()->routeIs('usergoal') ? 'bg-[#F4F4F4] text-black' : 'text-black' }}">
                     <!-- Icon -->
                     <i class="bi bi-flag w-5 h-5 m-3" onclick="toggleSidebar()"></i>
                     <!-- Text -->
@@ -47,7 +47,7 @@
             </li>
             <li>
                 <a href="{{ route('userachievements') }}"
-                    class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300">
+                    class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300 {{ request()->routeIs('userachievements') ? 'bg-[#F4F4F4] text-black' : 'text-black' }}">
                     <!-- Icon -->
                     <i class="bi bi-universal-access-circle w-5 h-5 m-3" onclick="toggleSidebar()"></i>
                     <!-- Text -->
@@ -57,7 +57,7 @@
             </li>
             <li>
                 <a href="{{ route('usersetting') }}"
-                    class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300">
+                    class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300 {{ request()->routeIs('usersetting') ? 'bg-[#F4F4F4] text-black' : 'text-black' }}">
                     <!-- Icon -->
                     <i class="bi bi-gear w-5 h-5 m-3" onclick="toggleSidebar()"></i>
                     <!-- Text -->

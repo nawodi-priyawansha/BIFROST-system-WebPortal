@@ -28,7 +28,7 @@
                         </div>
                     </div>
                     <div>
-                        <h2 class="text-black text-lg">Add New Profile</h2>
+                        <h2 class="text-black text-lg"><strong>Add New Profile</strong></h2>
                     </div>
 
                     <form action="{{ route('profiles.store') }}" method="POST" enctype="multipart/form-data"
