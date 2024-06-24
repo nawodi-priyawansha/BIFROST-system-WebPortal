@@ -78,23 +78,23 @@
                             <div class="flex flex-grow">
                                 <button
                                     class="flex-1 hover:bg-transparent bg-[#F20525] text-white text-center p-2 rounded-l-lg"
-                                    onclick="selectButton(this, 'Hrs of Sleep')">&lt;5</button>
+                                    onclick="selectButton(this, 'Sleep')">&lt;5</button>
                                 <button
                                     class="flex-1 hover:bg-transparent bg-[#FF8F36] text-white text-center focus:outline-none p-2"
-                                    onclick="selectButton(this, 'Hrs of Sleep')">5-6</button>
+                                    onclick="selectButton(this, 'Sleep')">5-6</button>
                                 <button
                                     class="flex-1 hover:bg-transparent bg-[#FEE943] text-white text-center focus:outline-none p-2"
-                                    onclick="selectButton(this, 'Hrs of Sleep')">6-7</button>
+                                    onclick="selectButton(this, 'Sleep')">6-7</button>
                                 <button
                                     class="flex-1 hover:bg-transparent bg-[#89DD43] text-white text-center focus:outline-none p-2"
-                                    onclick="selectButton(this, 'Hrs of Sleep')">7-8</button>
+                                    onclick="selectButton(this, 'Sleep')">7-8</button>
                                 <button
                                     class="flex-1 hover:bg-transparent bg-[#1CBA4B] text-white text-center focus:outline-none p-2 rounded-r-lg"
-                                    onclick="selectButton(this, 'Hrs of Sleep')">8+</button>
+                                    onclick="selectButton(this, 'Sleep')">8+</button>
                             </div>
                             <div class="flex-none">
-                                <button class="hover:bg-transparent text-transparent text-center px-2"
-                                    onclick="showInfo('Alertness', this)"><i class="bi bi-info-circle"></i></button>
+                                <button class="hover:bg-transparent text-transparent text-center px-2 pointer-events-none"
+                                    onclick=""><i class="bi bi-info-circle"></i></button>
                             </div>
                         </div>
                     </div>
@@ -225,12 +225,14 @@
                     </div>
 
                     {{-- Score Div --}}
-                    <div class="mb-4 flex flex-col items-center justify-center text-center font-bold mb-4 text-white">
+                    <div class="mb-4 flex flex-col items-center justify-center text-center font-bold  text-white">
                         <div class="border border-white flex-col flex w-48 h-28 items-center justify-center rounded-lg">
                             <span>SCORE</span>
-                            <span class="text-3xl">75%</span>
-                        </div>
-                    </div>
+                            <div class="flex text-3xl text-center">
+                                <input type="text" id="score" name="score" class="text-3xl text-center bg-transparent  w-16" value="0"> %
+                            </div>
+                        </div>                        
+                    </div>                                                           
                     <button class="block mx-auto py-2 px-4 b text-white rounded mb-4 focus:outline-none">SAVE</button>
                 </div>
             </div>
@@ -338,21 +340,21 @@
                 });
             });
 
-            // Event listener for button clicks to handle selection
-            document.addEventListener('click', function(event) {
-                var button = event.target.closest('button');
-                if (button) {
-                    if (button.classList.contains('fa-info-circle')) {
-                        // Handle info button click
-                        var category = button.getAttribute('data-category');
-                        showInfo(category);
-                    } else {
-                        // Handle selection button click
-                        var category = button.getAttribute('data-category');
-                        selectButton(button, category);
-                    }
-                }
-            });
+            // // Event listener for button clicks to handle selection
+            // document.addEventListener('click', function(event) {
+            //     var button = event.target.closest('button');
+            //     if (button) {
+            //         if (button.classList.contains('fa-info-circle')) {
+            //             // Handle info button click
+            //             var category = button.getAttribute('data-category');
+            //             showInfo(category);
+            //         } else {
+            //             // Handle selection button click
+            //             var category = button.getAttribute('data-category');
+            //             selectButton(button, category);
+            //         }
+            //     }
+            // });
             // Function to handle button selection
             function selectButton(button, category) {
                 // Check if the button clicked is the info icon button
@@ -383,6 +385,7 @@
 
             // Function to update description based on selected button
             function updateDescription(value, category) {
+                scoreCal(value, category);
                 var descriptionElement = document.getElementById(category.toLowerCase() + 'Description');
                 if (descriptionElement) {
                     switch (category) {
@@ -459,6 +462,131 @@
                             break;
                     }
                 }
+            }
+            var alertness = 0;
+            var excitement = 0;
+            var stress = 0;
+            var soreness = 0;
+            var sleep = 0;
+
+            function scoreCal(value, category) {
+                console.log(category);
+                switch (category) {
+                    case 'Alertness':
+                        switch (value) {
+                            case '1':
+                                alertness = 20;
+                                break;
+                            case '2':
+                                alertness = 40;
+                                break;
+                            case '3':
+                                alertness = 60;
+                                break;
+                            case '4':
+                                alertness = 80;
+                                break;
+                            case '5':
+                                alertness = 100;
+                                break;
+                            default:
+                                alertness = 0;
+                                break;
+                        }
+                        break;
+                    case 'Excitement':
+                        switch (value) {
+                            case '1':
+                                excitement = 20;
+                                break;
+                            case '2':
+                                excitement = 40;
+                                break;
+                            case '3':
+                                excitement = 60;
+                                break;
+                            case '4':
+                                excitement = 80;
+                                break;
+                            case '5':
+                                excitement = 100;
+                                break;
+                            default:
+                                excitement = 0;
+                                break;
+                        }
+                        break;
+                    case 'Stress':
+                        switch (value) {
+                            case '1':
+                                stress = 20;
+                                break;
+                            case '2':
+                                stress = 40;
+                                break;
+                            case '3':
+                                stress = 60;
+                                break;
+                            case '4':
+                                stress = 80;
+                                break;
+                            case '5':
+                                stress = 100;
+                                break;
+                            default:
+                                stress = 0;
+                                break;
+                        }
+                        break;
+                    case 'Soreness':
+                        switch (value) {
+                            case '1':
+                                soreness = 20;
+                                break;
+                            case '2':
+                                soreness = 40;
+                                break;
+                            case '3':
+                                soreness = 60;
+                                break;
+                            case '4':
+                                soreness = 80;
+                                break;
+                            case '5':
+                                soreness = 100;
+                                break;
+                            default:
+                                soreness = 0;
+                                break;
+                        }
+                        break;
+                    case 'Sleep':
+                        switch (value) {
+                            case '<5':
+                                sleep = 20;
+                                break;
+                            case '5-6':
+                                sleep = 40;
+                                break;
+                            case '6-7':
+                                sleep = 60;
+                                break;
+                            case '7-8':
+                                sleep = 80;
+                                break;
+                            case '8+':
+                                sleep = 100;
+                                break;
+                            default:
+                                sleep = 0;
+                                break;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+
+                score.value = (alertness + excitement + stress + soreness + sleep)/5;
             }
         </script>
 
