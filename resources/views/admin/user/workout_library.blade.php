@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 </head>
 
-<body class="font-sans antialiased">
+<body>
     @extends('layout.layout')
     @section('content')
         <div class="container mx-4 mt-24 flex-grow min-h-screen" id="container">
@@ -107,33 +107,34 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($workoutLibraries as $workoutLibrary)
-                                <tr>
-                                    <td dir="ltr" class="p-3 border-s-2 border-y-2 border-gray-300 bg-gray-100">
-                                        {{ $workoutLibrary->categoryOption->category_name }}</td>
-                                    <td class="p-3 border-y-2 border-gray-300 bg-gray-100"> {{ $workoutLibrary->type }}</td>
-                                    <td class="p-3 border-y-2 border-gray-300 bg-gray-100">{{ $workoutLibrary->workout }}
+                            @foreach ($workoutLibraries as $index => $workoutLibrary)
+                                <tr class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }}">
+                                    <td dir="ltr" class="p-3 border-s-2 border-y-2 border-gray-300 text-left">
+                                        {{ $workoutLibrary->categoryOption->category_name }}
                                     </td>
-                                    <td class="p-3 border-y-2 border-gray-300 bg-gray-100">{{ $workoutLibrary->link }}</td>
-                                    <td dir="rtl"
-                                        class="p-3 border-s-2 border-y-2 border-gray-300 bg-gray-100 justify-center flex space-x-2">
-                                        <div dir="ltr" class="space-x-3">
-                                            <form
-                                                action="{{ route('workout-library.delete', ['id' => $workoutLibrary->id]) }}"
-                                                method="POST">
+                                    <td class="p-3 border-y-2 border-gray-300 text-left">
+                                        {{ $workoutLibrary->type }}
+                                    </td>
+                                    <td class="p-3 border-y-2 border-gray-300 text-left">
+                                        {{ $workoutLibrary->workout }}
+                                    </td>
+                                    <td class="p-3 border-y-2 border-gray-300 text-left">
+                                        {{ $workoutLibrary->link }}
+                                    </td>
+                                    <td dir="rtl" class="p-3 border-s-2 border-y-2 border-gray-300 ">
+                                        <div class="flex space-x-3 ">
+                                            <form action="{{ route('workout-library.delete', ['id' => $workoutLibrary->id]) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                <a href="#"
-                                                    onclick="edit({{ $workoutLibrary->id }}, '{{ $workoutLibrary->categoryOption->category_name }}', '{{ $workoutLibrary->type }}', '{{ $workoutLibrary->workout }}', '{{ $workoutLibrary->link }}')">
+                    
+                                                <a href="#" onclick="edit({{ $workoutLibrary->id }}, '{{ $workoutLibrary->categoryOption->category_name }}', '{{ $workoutLibrary->type }}', '{{ $workoutLibrary->workout }}', '{{ $workoutLibrary->link }}')" class="mr-8">
                                                     <i class="text-[#fd8300] bi bi-pencil"></i>
                                                     <span class="text-black">Edit</span>
                                                 </a>
-                                                <button type="submit" class=" gap-4"
-                                                    onclick="return confirm('Are you sure you want to delete this entry?')">
+                                                <button type="submit" class="mr-7" onclick="return confirm('Are you sure you want to delete this entry?')">
                                                     <i class="text-[#fd8300] bi bi-trash"></i> Delete
                                                 </button>
                                             </form>
-
                                         </div>
                                     </td>
                                 </tr>

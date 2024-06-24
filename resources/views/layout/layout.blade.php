@@ -10,11 +10,11 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha384-uXf6sr8AaXNpfLE4u1jL1EB5Yc5zH06smif1RtZWm1sC2C2Mi41WIebh5q1Q0ynP" crossorigin="anonymous">
-
+    <link href="https://fonts.cdnfonts.com/css/source-sans-pro" rel="stylesheet">
 
 </head>
 
-<body onload="checkScreenSize()">
+<body onload="checkScreenSize()" style="font-family: 'Source Sans Pro', sans-serif;">
     <div>
         @include('components.admin-header')
         <!-- Container for Sidebar and Main Content -->

@@ -12,8 +12,8 @@
 
 <body>
     <header class='fixed z-20 flex items-center w-full bg-white header md:mb-4 lg:h-20 md:h-20'>
-        <div class="container bg-black w-full">
-            <div class="flex items-center justify-between">
+        <div class="container bg-black w-full h-24 ">
+            <div class="flex items-center justify-between py-2">
                 <div class="flex items-center justify-between p-2 gap-x-8">
                     <!-- Logo -->
                     <div class='md:mt-2'>
@@ -44,7 +44,7 @@
                         <!-- Container for displaying the logged-in user information -->
                         <div class="text-gray-800 mr-20 hidden md:block">
                             <!-- Inner container for the text, setting text color to gray -->
-                            <div class="text-gray-400">
+                            <div class="text-[#9C9C9C]">
                                 Logged in as
                                 <!-- Span to highlight the user's name in white color -->
                                 <span class="text-white">
@@ -63,7 +63,7 @@
                                 <div class="relative md:mb-4 mb-4">
                                     <div class="bottom-4 absolute left-6">
                                         <p
-                                            class="flex h-1 w-1 items-center justify-center rounded-full bg-red-500 p-3 text-xs text-white">
+                                            class="flex h-1 w-1 items-center justify-center rounded-full bg-[#FB1018] p-3 text-xs text-white">
                                             0
                                         </p>
                                     </div>
@@ -80,7 +80,7 @@
                                 <!-- Inner container for the icon with margin adjustments for different screen sizes -->
                                 <div class="relative md:mb-4 mb-4">
                                     <!-- Logout icon styled with Font Awesome -->
-                                    <i class="fa fa-power-off text-red-500 text-2xl" aria-hidden="true"></i>
+                                    <i class="fa fa-power-off text-[#FB1018] text-2xl" aria-hidden="true"></i>
                                 </div>
                             </div>
                         </a>

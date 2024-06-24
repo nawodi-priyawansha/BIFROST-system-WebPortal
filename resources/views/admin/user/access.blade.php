@@ -19,7 +19,7 @@
 </head>
 
 
-<body class="font-sans antialiased bg-gray-100">
+<body >
     @extends('layout.layout')
     @section('content')
         <!-- Main content (Dashboard) -->
@@ -121,8 +121,8 @@
                                 </div>
 
                                 <div class="access-buttons flex flex-wrap gap-2 mt-2">
-                                    <label
-                                        class="ml-2 text-sm border rounded-lg px-2 py-1 bg-yellow-300 border-yellow-400"><strong>User</strong></label>
+                                    <label 
+                                        class="ml-2 text-xs border rounded-full w-16 text-center bg-[#FFC107] border-[#FFC107]"><strong>User</strong></label>
                                 </div>
                                 <div class="access-buttons text-xs flex flex-wrap gap-1 sm:gap-2 mt-2">
                                     <div class="input-container">
