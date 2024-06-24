@@ -11,7 +11,7 @@
     @extends('mobile.layout.mobile-layout')
 
     @section('content')
-        <div class="w-full  flex flex-col justify-between h-screen h-100%">
+        <div class="w-full  flex flex-col justify-between h-screen overflow-y-auto h-100%">
             <div class="flex-grow items-center justify-center m-0 p-4 bg-cover bg-center bg-no-repeat" style="background-image: url('{{ asset('img/valhalla-bg.jpg') }}');">
                 <div class="justify-center items-center text-white text-center h-full pt-20">
                         <div class="text-xl mb-5">Conditioning (Cardio)</div>
@@ -34,32 +34,32 @@
                             <div class="flex w-full">
                                 <button id="startButton" class="w-1/2 h-16 bg-green-600 text-white cursor-pointer ">START</button>
                                 <button id="stopButton" class="w-1/2 h-16 bg-red-600 text-white cursor-pointer">STOP</button>
-                            </div>  
+                            </div>
                         </div>
                 </div>
             </div>
         </div>
-       
+
         <script>
-            class Timer 
+            class Timer
                 {
-                    constructor(displayElement) 
+                    constructor(displayElement)
                     {
                         this.displayElement = displayElement;
                         this.seconds = 0;
                         this.timer = null;
                     }
-                        
-                    updateDisplay() 
+
+                    updateDisplay()
                     {
                         const hrs = Math.floor(this.seconds / 3600);
                         const mins = Math.floor((this.seconds % 3600) / 60);
                         const secs = this.seconds % 60;
-                        this.displayElement.textContent = 
+                        this.displayElement.textContent =
                         `${hrs.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
                     }
-                        
-                    start() 
+
+                    start()
                     {
                         clearInterval(this.timer);
                             this.timer = setInterval(() => {
@@ -67,28 +67,28 @@
                             this.updateDisplay();
                                     }, 1000);
                     }
-                        
-                    stop() 
+
+                    stop()
                     {
                         clearInterval(this.timer);
                      }
                 }
-                        
+
                     const timerDisplay = document.getElementById('timer');
                     const timer = new Timer(timerDisplay);
-                        
+
                     document.getElementById('startButton').addEventListener('click', () => timer.start());
                     document.getElementById('stopButton').addEventListener('click', () => timer.stop());
-                        
+
                     const increaseRoundsButton = document.getElementById('increaseRounds');
                     const decreaseRoundsButton = document.getElementById('decreaseRounds');
                     const roundsInput = document.getElementById('roundsInput');
-                        
+
                     increaseRoundsButton.addEventListener('click', () => {
                         roundsInput.value = parseInt(roundsInput.value) + 1;
                     });
-                        
-                    decreaseRoundsButton.addEventListener('click', () => 
+
+                    decreaseRoundsButton.addEventListener('click', () =>
                     {
                         if (roundsInput.value > 1)
                             {
