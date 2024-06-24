@@ -12,7 +12,7 @@
 <body>
     <!-- Sidebar -->
     <aside id="sidebar"
-        class="relative  bg-white h-full transition-all duration-700 flex flex-col text-md font-semibold mt-20 transition-width">
+        class="relative  bg-white h-full transition-all duration-700 flex flex-col text-lg mt-20 transition-width">
 
         <ul class="flex flex-col space-y-1 overflow-y-auto overflow-x-hidden scrollbar">
             <li>

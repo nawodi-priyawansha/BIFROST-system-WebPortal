@@ -47,5 +47,8 @@ class User extends Authenticatable
         return $this->hasMany(Access::class);
     }
 
-    
+    public function goals()
+    {
+        return $this->hasMany(Goal::class);
+    }
 }

@@ -6,251 +6,91 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UI Design</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <style>
-        /* Popup animation styles */
-        .popup {
-            display: none;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .popup-content {
-            animation-duration: 0.4s;
-        }
-
-        .popup-content.show {
-            animation-name: slideIn;
-        }
-
-        .popup-content.hide {
-            animation-name: slideOut;
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateY(-50%);
-                opacity: 0;
-            }
-
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        @keyframes slideOut {
-            from {
-                transform: translateY(0);
-                opacity: 1;
-            }
-
-            to {
-                transform: translateY(-50%);
-                opacity: 0;
-            }
-        }
-    </style>
 </head>
 
-<body class="overflow-y-auto">
+<body class=" overflow-y-auto">
     @extends('mobile.layout.mobile-layout')
     @section('content')
-        <div class="w-full flex flex-col justify-between h-screen overflow-y-auto">
-            <div class="flex-grow items-center justify-center m-0 p-4 bg-cover bg-center bg-no-repeat"
+        <div class="w-full  flex flex-col justify-between h-screen  overflow-y-auto">
+            <div class="flex-grow items-center justify-center m-0 p-4 bg-cover bg-center  bg-no-repeat"
                 style="background-image: url('{{ asset('img/valhalla-bg.jpg') }}');">
                 <div class="bg-transparent p-6 rounded-lg shadow-md pt-24">
-
-                    <!-- Display selected day and date -->
-                    <div class="mb-4 flex flex-col text-center">
-                        <div class="w-full mb-2 text-white text-center items-center justify-center flex">Training Day</div>
-                        <div class="flex items-center justify-center h-8 rounded overflow">
-                            <div id="selectedDay" class="text-white text-lg font-bold"></div>
-                            <div id="selectedDate" class="text-white text-sm ml-2"></div>
-                        </div>
-                    </div>
-
-                    {{-- Hrs of Sleep Div --}}
-                    <div class="mb-4 flex flex-col text-center">
+                    <div class="mb-4 flex flex-col text-center"> <!-- Change flex direction to column -->
+                         <!-- Sleep -->
                         <div class="w-full mb-2 text-white text-center items-center justify-center flex">Hrs of Sleep</div>
-                        <div class="flex items-center h-8 rounded overflow">
-                            <div class="flex flex-grow">
-                                <button
-                                    class="flex-1 hover:bg-transparent bg-[#F20525] text-white text-center p-2 rounded-l-lg"
-                                    onclick="selectButton(this, 'Sleep')">&lt;5</button>
-                                <button
-                                    class="flex-1 hover:bg-transparent bg-[#FF8F36] text-white text-center focus:outline-none p-2"
-                                    onclick="selectButton(this, 'Sleep')">5-6</button>
-                                <button
-                                    class="flex-1 hover:bg-transparent bg-[#FEE943] text-white text-center focus:outline-none p-2"
-                                    onclick="selectButton(this, 'Sleep')">6-7</button>
-                                <button
-                                    class="flex-1 hover:bg-transparent bg-[#89DD43] text-white text-center focus:outline-none p-2"
-                                    onclick="selectButton(this, 'Sleep')">7-8</button>
-                                <button
-                                    class="flex-1 hover:bg-transparent bg-[#1CBA4B] text-white text-center focus:outline-none p-2 rounded-r-lg"
-                                    onclick="selectButton(this, 'Sleep')">8+</button>
-                            </div>
-                            <div class="flex-none">
-                                <button class="hover:bg-transparent text-transparent text-center px-2 pointer-events-none"
-                                    onclick=""><i class="bi bi-info-circle"></i></button>
-                            </div>
+                        <!-- Move this div here -->
+                        <div class="flex flex-grow h-8 rounded overflow-hidden">
+                            <button class="flex-1 bg-red-500 text-white text-center focus:outline-none">&lt;5</button>
+                            <button class="flex-1 bg-orange-500 text-white text-center focus:outline-none">5-6</button>
+                            <button class="flex-1 bg-yellow-500 text-white text-center focus:outline-none">6-7</button>
+                            <button class="flex-1 bg-green-500 text-white text-center focus:outline-none">7-8</button>
+                            <button class="flex-1 bg-green-700 text-white text-center focus:outline-none">8+</button>
                         </div>
                     </div>
-
-                    {{-- Alertness Div --}}
-                    <div class="mb-4 flex flex-col">
+                       <!-- Alertness -->
+                    <div class="mb-4 flex flex-col"> <!-- Change flex direction to column -->
                         <div class="w-full mb-2 text-white text-center items-center justify-center">Alertness</div>
-                        <div class="flex items-center rounded overflow-hidden">
-                            <div class="flex flex-grow ">
-                                <button
-                                    class="flex-1 hover:bg-transparent bg-[#F20525] text-white text-center p-2 rounded-l-lg"
-                                    onclick="selectButton(this, 'Alertness')">1</button>
-                                <button
-                                    class="flex-1 hover:bg-transparent bg-[#FF8F36] text-white text-center focus:outline-none p-2"
-                                    onclick="selectButton(this, 'Alertness')">2</button>
-                                <button
-                                    class="flex-1 hover:bg-transparent bg-[#FEE943] text-white text-center focus:outline-none p-2"
-                                    onclick="selectButton(this, 'Alertness')">3</button>
-                                <button
-                                    class="flex-1 hover:bg-transparent bg-[#89DD43] text-white text-center focus:outline-none p-2"
-                                    onclick="selectButton(this, 'Alertness')">4</button>
-                                <button
-                                    class="flex-1 hover:bg-transparent bg-[#1CBA4B] text-white text-center focus:outline-none p-2 rounded-r-lg"
-                                    onclick="selectButton(this, 'Alertness')">5</button>
-                            </div>
-                            <div class="flex-none">
-                                <button class="hover:bg-transparent text-white text-center px-2 border-none"
-                                    onclick="showInfo('Alertness')"><i class="bi bi-info-circle"></i></i></button>
-                            </div>
+                        <!-- Move this div here -->
+                        <div class="flex flex-grow h-8 rounded overflow-hidden">
+                            <button class="flex-1 bg-red-500 text-white text-center focus:outline-none">&lt;5</button>
+                            <button class="flex-1 bg-orange-500 text-white text-center focus:outline-none">5-6</button>
+                            <button class="flex-1 bg-yellow-500 text-white text-center focus:outline-none">6-7</button>
+                            <button class="flex-1 bg-green-500 text-white text-center focus:outline-none">7-8</button>
+                            <button class="flex-1 bg-green-700 text-white text-center focus:outline-none">8+</button>
                         </div>
-                        <div id="alertnessDescription"
-                            class="w-full mb-2 text-white text-xs text-center items-center justify-center">1= lights are
-                            on but no one is home.</div>
+                        <div class="w-full mb-2 text-white text-xs text-center items-center justify-center">1= lights are on
+                            but no one is home.</div> <!-- Move this div here -->
                     </div>
-
-                    {{-- Excitement Div --}}
-                    <div class="mb-4 flex flex-col">
-                        <div class="w-full mb-2 text-white text-center items-center justify-center">Excitement</div>
-                        <div class="flex items-center rounded overflow-hidden">
-                            <div class="flex flex-grow ">
-                                <button
-                                    class="flex-1 hover:bg-transparent bg-[#F20525] text-white text-center p-2 rounded-l-md"
-                                    onclick="selectButton(this, 'Excitement')">1</button>
-                                <button
-                                    class="flex-1 hover:bg-transparent bg-[#FF8F36] text-white text-center focus:outline-none p-2"
-                                    onclick="selectButton(this, 'Excitement')">2</button>
-                                <button
-                                    class="flex-1 hover:bg-transparent bg-[#FEE943] text-white text-center focus:outline-none p-2"
-                                    onclick="selectButton(this, 'Excitement')">3</button>
-                                <button
-                                    class="flex-1 hover:bg-transparent bg-[#89DD43] text-white text-center focus:outline-none p-2"
-                                    onclick="selectButton(this, 'Excitement')">4</button>
-                                <button
-                                    class="flex-1 hover:bg-transparent bg-[#1CBA4B] text-white text-center focus:outline-none p-2 rounded-r-lg"
-                                    onclick="selectButton(this, 'Excitement')">5</button>
-                            </div>
-                            <div class="flex-none">
-                                <button class="hover:bg-transparent text-white text-center px-2 border-none"
-                                    onclick="showInfo('Excitement')"><i class="bi bi-info-circle"></i></i></button>
-                            </div>
+                     <!-- Excitement -->
+                    <div class="mb-4 flex flex-col"> <!-- Change flex direction to column -->
+                        <div class="w-full text-center items-center justify-center mb-2 text-white">Excitement</div>
+                        <!-- Move this div here -->
+                        <div class="flex flex-grow h-8 rounded overflow-hidden">
+                            <button class="flex-1 bg-red-500 text-white text-center focus:outline-none">&lt;5</button>
+                            <button class="flex-1 bg-orange-500 text-white text-center focus:outline-none">5-6</button>
+                            <button class="flex-1 bg-yellow-500 text-white text-center focus:outline-none">6-7</button>
+                            <button class="flex-1 bg-green-500 text-white text-center focus:outline-none">7-8</button>
+                            <button class="flex-1 bg-green-700 text-white text-center focus:outline-none">8+</button>
                         </div>
-                        <div id="excitementDescription"
-                            class="w-full mb-2 text-white text-xs text-center items-center justify-center">1= Pulling my
-                            hair out.</div>
+                        <div class="w-full text-center items-center justify-center mb-2 text-white text-xs">1= Not
+                            interested in weights today.</div> <!-- Move this div here -->
                     </div>
-
-                    {{-- Stress Div --}}
-                    <div class="mb-4 flex flex-col">
-                        <div class="w-full mb-2 text-white text-center items-center justify-center">Stress</div>
-                        <div class="flex items-center rounded overflow-hidden">
-                            <div class="flex flex-grow">
-                                <button
-                                    class="flex-1 hover:bg-transparent bg-[#F20525] text-white text-center p-2 rounded-l-md"
-                                    onclick="selectButton(this, 'Stress')">1</button>
-                                <button
-                                    class="flex-1 hover:bg-transparent bg-[#FF8F36] text-white text-center focus:outline-none p-2"
-                                    onclick="selectButton(this, 'Stress')">2</button>
-                                <button
-                                    class="flex-1 hover:bg-transparent bg-[#FEE943] text-white text-center focus:outline-none p-2"
-                                    onclick="selectButton(this, 'Stress')">3</button>
-                                <button
-                                    class="flex-1 hover:bg-transparent bg-[#89DD43] text-white text-center focus:outline-none p-2"
-                                    onclick="selectButton(this, 'Stress')">4</button>
-                                <button
-                                    class="flex-1 hover:bg-transparent bg-[#1CBA4B] text-white text-center focus:outline-none p-2 rounded-r-lg"
-                                    onclick="selectButton(this, 'Stress')">5</button>
-                            </div>
-                            <div class="flex-none">
-                                <button class="hover:bg-transparent text-white text-center px-2 border-none"
-                                    onclick="showInfo('Stress')"><i class="bi bi-info-circle"></i></button>
-                            </div>
+                    <!-- Stress -->
+                    <div class="mb-4 flex flex-col"> <!-- Change flex direction to column -->
+                        <div class="w-full text-center items-center justify-center mb-2 text-white">Stress</div>
+                        <!-- Move this div here -->
+                        <div class="flex flex-grow h-8 rounded overflow-hidden">
+                            <button class="flex-1 bg-red-500 text-white text-center focus:outline-none">&lt;5</button>
+                            <button class="flex-1 bg-orange-500 text-white text-center focus:outline-none">5-6</button>
+                            <button class="flex-1 bg-yellow-500 text-white text-center focus:outline-none">6-7</button>
+                            <button class="flex-1 bg-green-500 text-white text-center focus:outline-none">7-8</button>
+                            <button class="flex-1 bg-green-700 text-white text-center focus:outline-none">8+</button>
                         </div>
-                        <div id="stressDescription"
-                            class="w-full mb-2 text-white text-xs text-center items-center justify-center">1= Pulling my
-                            hair out.</div>
+                        <div class="w-full text-center items-center justify-center mb-2 text-white text-xs">1= Pulling my
+                            hair out.</div> <!-- Move this div here -->
                     </div>
-
-                    {{-- Soreness Div --}}
-                    <div class="mb-4 flex flex-col">
-                        <div class="w-full mb-2 text-white text-center items-center justify-center">Soreness</div>
-                        <div class="flex items-center rounded overflow-hidden ">
-                            <div class="flex flex-grow">
-                                <button
-                                    class="flex-1 hover:bg-transparent bg-[#F20525] text-white text-center p-2 rounded-l-lg"
-                                    onclick="selectButton(this, 'Soreness')">1</button>
-                                <button
-                                    class="flex-1 hover:bg-transparent bg-[#FF8F36] text-white text-center focus:outline-none p-2"
-                                    onclick="selectButton(this, 'Soreness')">2</button>
-                                <button
-                                    class="flex-1 hover:bg-transparent bg-[#FEE943] text-white text-center focus:outline-none p-2"
-                                    onclick="selectButton(this, 'Soreness')">3</button>
-                                <button
-                                    class="flex-1 hover:bg-transparent bg-[#89DD43] text-white text-center focus:outline-none p-2"
-                                    onclick="selectButton(this, 'Soreness')">4</button>
-                                <button
-                                    class="flex-1 hover:bg-transparent bg-[#1CBA4B] text-white text-center focus:outline-none p-2 rounded-r-lg"
-                                    onclick="selectButton(this, 'Soreness')">5</button>
-                            </div>
-                            <div class="flex-none">
-                                <button id="Sorenesspopup"
-                                    class="hover:bg-transparent border-none text-white text-center px-2"
-                                    onclick="showInfo('Soreness')"><i class="bi bi-info-circle"></i></i></button>
-                            </div>
+                    <div class="mb-4 flex flex-col"> <!-- Change flex direction to column -->
+                        <div class="w-full text-center items-center justify-center mb-2 text-white">Soreness</div>
+                        <!-- Move this div here -->
+                        <div class="flex flex-grow h-8 rounded overflow-hidden">
+                            <button class="flex-1 bg-red-500 text-white text-center focus:outline-none">&lt;5</button>
+                            <button class="flex-1 bg-orange-500 text-white text-center focus:outline-none">5-6</button>
+                            <button class="flex-1 bg-yellow-500 text-white text-center focus:outline-none">6-7</button>
+                            <button class="flex-1 bg-green-500 text-white text-center focus:outline-none">7-8</button>
+                            <button class="flex-1 bg-green-700 text-white text-center focus:outline-none">8+</button>
                         </div>
-                        <div id="sorenessDescription"
-                            class="w-full mb-2 text-white text-xs text-center items-center justify-center">1= Crippled.
+                        <div class="w-full text-center items-center justify-center mb-2 text-white text-xs">1= Crippled..
+                        </div>
+                    </div>
+                    <div
+                        class="flex w-full md:items-center md:justify-center flex-col items-center justify-center text-center font-bold mb-4 text-white ">
+                        <div class="border border-white flex-col flex w-48 h-28  items-center justify-center rounded-lg "><span>SCORE</span>
+                            <span class="text-3xl">75%</span>
                         </div>
                     </div>
 
-                    {{-- Score Div --}}
-                    <div class="mb-4 flex flex-col items-center justify-center text-center font-bold  text-white">
-                        <div class="border border-white flex-col flex w-48 h-28 items-center justify-center rounded-lg">
-                            <span>SCORE</span>
-                            <div class="flex text-3xl text-center">
-                                <input type="text" id="score" name="score" class="text-3xl text-center bg-transparent  w-16" value="0"> %
-                            </div>
-                        </div>                        
-                    </div>                                                           
-                    <button class="block mx-auto py-2 px-4 b text-white rounded mb-4 focus:outline-none">SAVE</button>
-                </div>
-            </div>
-        </div>
 
-        {{-- Modal --}}
-        <div id="popup" class="hidden fixed inset-0 bg-gray-800 bg-opacity-50 flex mt-24 h-fit justify-center">
-            <div class="modal bg-white w-[90%] rounded-lg shadow-md popup-content">
-                <div class="modal-header bg-black text-white py-2 px-4 flex justify-between items-center">
-                    <h2 id="modalTitle" class="text-lg font-bold">Modal Title</h2>
-                    <button class="close-btn text-white border-none" onclick="closeModal()">×</button>
-                </div>
-                <div id="modalBody" class="modal-body px-4 py-2">
-                    <!-- Modal content will be dynamically inserted here -->
-                </div>
-                <div class="modal-footer bg-[#EEEEEE] py-2 px-4 text-center">
-                    <button class="close-btn bg-[#6C757D] hover:bg-gray-600 text-white px-4 py-2 rounded-lg"
-                        onclick="closeModal()">Close</button>
+                    <button class="block mx-auto py-2 px-4 b text-white rounded mb-4  focus:outline-none">SAVE</button>
                 </div>
             </div>
         </div>

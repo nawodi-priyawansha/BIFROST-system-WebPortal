@@ -100,8 +100,18 @@ Route::middleware(['admin'])->group(function () {
 
     // financial
     Route::get('/admin/financial', [FinancialController::class, 'viewfinancial'])->name('adminfinancial');
-    // client management
+
+    // client management page
     Route::get('/admin/clientmanagement', [ClientManagementController::class, 'viewclientmanagement'])->name('viewadminclientmanagement');
+    // store
+    Route::post('/clients', [ClientManagementController::class, 'store'])->name('clients.store');
+    // get data
+    Route::post('/class-manager', [ClientManagementController::class, 'getdata']);
+    // get workout
+    Route::post('/get-workout', [ClientManagementController::class, 'getworkout']);
+    // store
+    Route::post('/client-update', [ClientManagementController::class, 'update'])->name('clients.update');
+    
     //workout librabry
     Route::get('/admin/workoutlibrary', [WorkoutLibraryController::class, 'viewworkoutlibrary'])->name('viewworkoutlibrary');
     Route::post('/save-workout-library', [WorkoutLibraryController::class, 'listworkoutlibrary'])->name('save.workoutlibrary');
@@ -120,14 +130,19 @@ Route::middleware(['admin'])->group(function () {
 Route::middleware(['user'])->group(function () {
     // dashboard
     Route::get('/user/dashboard', [UserDashboardController::class, 'viewdashboard'])->name('userdashboard');
+    Route::post('/users/search', [UserDashboardController::class, 'search'])->name('users.search');
+ 
+   
     // profile
     Route::get('/user/profile', [UserProfileController::class, 'viewprofile'])->name('userprofile');
     // Add new Profile
-    Route::get('/user/new-profile', [UserDashboardController::class, 'viewnewprofile'])->name('usernewprofile');
+    Route::get('/user/new-profile', [UserProfileController::class, 'viewnewprofile'])->name('usernewprofile');
+    Route::post('/profiles', [UserProfileController::class, 'newProfileShow'])->name('profiles.store');
     //achievements
     Route::get('/user/achivements', [UserAchievementsController::class, 'viewachievement'])->name('userachievements');
     //goal
-    Route::get('/user/goal', [UserGoalController::class, 'viewgoal'])->name('usergaol');
+    Route::get('/user/goal', [UserGoalController::class, 'viewgoal'])->name('usergoal');
+    Route::post('/user/save-goal', [UserGoalController::class, 'saveGoal'])->name('save.goal');
     //setting
     Route::get('/user/setting', [UserSettingController::class, 'viewsetting'])->name('usersetting');
 
