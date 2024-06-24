@@ -19,7 +19,7 @@
                         <button class=" px-4 py-2 border rounded">ALT</button>
                     </div>
                      {{-- warmup  --}}
-
+                     
                      <div class="relative w-full max-w-sm  px-10 bg-black bg-opacity-50 p-4 rounded-lg text-white">
                         <h3 class="text-md mb-4">Set</h3>
                         <div class="absolute -rotate-90 transform -translate-y-1/2 top-1/2 text-lg left-[-1rem] font-bold">Warmup</div>
@@ -180,7 +180,7 @@
 
                     <button class=" px-4 py-2 rounded w-full mb-6">RESET TIMER</button>
 
-                    <div class="timer text-center w-full bg-[#FD8300] p-4 rounded-lg text-2xl mb-10">
+                    <div class="timer text-center w-full bg-orange-600 p-4 rounded-lg text-2xl mb-10">
                         00:00:00
                     </div>
                 </div>
