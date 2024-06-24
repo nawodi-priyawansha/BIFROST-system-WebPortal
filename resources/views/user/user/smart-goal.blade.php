@@ -39,7 +39,14 @@
                     <form id="myForm" method="POST" action="{{ route('save.goal') }}">
                         @csrf
 
-                        <input type="hidden" name="user_id" value="{{ $searchedUser->id }}">
+                        @if (isset($errorMessage))
+                            <div class="alert alert-danger">
+                                {{ $errorMessage }}
+                            </div>
+                        @else
+                            <input type="hidden" name="user_id" value="{{ $searchedUser->id }}">
+                            <!-- rest of your form or content -->
+                        @endif
 
 
                         <div class="flex flex-row space-x-4 md:space-y-0 md:space-x-4 w-full mt-8 ">
@@ -317,7 +324,8 @@
                                 @if (isset($goal))
                                     <button type="submit" class="bg-black text-white p-2 px-4 rounded-md">Update</button>
                                 @else
-                                    <button id="saveButton" type="submit" class="bg-black text-white p-2 px-4 rounded-md">Save</button>
+                                    <button id="saveButton" type="submit"
+                                        class="bg-black text-white p-2 px-4 rounded-md">Save</button>
                                 @endif
                             </div>
                             <div class="ml-2 md:ml-5 flex text-center w-[40%] md:w-[20%] h-20 mt-2 md:mt-0">

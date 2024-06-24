@@ -28,23 +28,20 @@ class UserGoalController extends Controller
 
             // Retrieve searched user details from session
             $searchedUser = Session::get('searchedUser');
-            // dd($searchedUser);
-            $goal = Goal::where('user_id', $searchedUser['id'])->first();
-            // dd($goal);
+            //  dd($searchedUser);
             // Check if $searchedUser is an array and convert it to an object if needed
             if (is_array($searchedUser)) {
                 $searchedUser = (object) $searchedUser;
             }
-
+            
             if ($searchedUser && isset($searchedUser->id)) {
-                // dd("hii");
+                $goal = Goal::where('user_id', $searchedUser->id)->first();
                 return view('user.user.smart-goal', compact('accessType', 'searchedUser', 'goal'));
             } else {
-                return view('user.user.smart-goal');
+                // Pass an error message to the view
+                $errorMessage = "User not found or unauthorized access.";
+                return view('user.user.smart-goal', compact('errorMessage'));
             }
-        } else {
-            // Redirect to an unauthorized access view
-            return view('error.useruthorized');
         }
     }
 
