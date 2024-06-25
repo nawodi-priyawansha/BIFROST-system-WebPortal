@@ -38,6 +38,7 @@ class UserProfileController extends Controller
     // Handle form submission for creating a new profile
     public function newProfileShow(Request $request)
     {
+        // dd($request);
         // Validate incoming request data
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',

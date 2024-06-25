@@ -150,7 +150,7 @@
                                 </div>
                                 <div class="w-full md:col-span-1">
                                     <input type="number" id="bmr" name="bmr" required
-                                        class="form-control w-full border rounded px-4 py-2" readonly>
+                                        class="form-control w-full border rounded px-4 py-2 outline-none" readonly>
                                 </div>
                             </div>
                             {{-- Primary Goal --}}
@@ -194,8 +194,7 @@
                             {{-- Progress Photo --}}
                             <div class="w-full h-full p-2 grid grid-cols-1 md:grid-cols-2 gap-4 md:border-b">
                                 <div class="form-group flex flex-wrap md:flex-nowrap w-full">
-                                    <label for="progress-photos"
-                                        class="block text-gray-700 font-bold w-full md:w-[34%] mb-1 md:mb-0 pr-4">
+                                    <label for="progress-photos" class="block text-gray-700 font-bold w-full md:w-[34%] mb-1 md:mb-0 pr-4">
                                         Progress Photos <span class="text-red-500">*</span>
                                     </label>
                                     <div class="progress-photos flex flex-col cursor-pointer items-center justify-center min-h-40 h-auto border bg-[#F8F9FA] rounded w-full md:w-[66%] px-4 py-6"
@@ -205,8 +204,7 @@
                                         </div>
                                         <i class="fas fa-cloud-upload-alt text-3xl text-gray-600 mb-2"></i>
                                         <p class="text-gray-600">Drop files here or click to upload.</p>
-                                        <input type="file" name="profile_image[]" id="fileInput"
-                                            style="display:none;" multiple>
+                                        <input type="file" name="profile_image[]" id="fileInput" style="display:none;" multiple>
                                     </div>
                                 </div>
                             </div>
@@ -240,46 +238,49 @@
                 const dropArea = document.getElementById('progressPhotosDropArea');
                 const fileInput = document.getElementById('fileInput');
                 const uploadedFilesContainer = document.getElementById('uploadedFiles');
-                let imageCounter = 1; // Initialize counter for image names
-
+                let selectedFiles = []; // Array to hold selected files
+        
                 dropArea.addEventListener('dragover', function(e) {
                     e.preventDefault();
                     dropArea.classList.add('border-blue-500'); // Add border highlight when dragging over
                 });
-
+        
                 dropArea.addEventListener('dragleave', function() {
                     dropArea.classList.remove('border-blue-500'); // Remove border highlight when leaving
                 });
-
+        
                 dropArea.addEventListener('drop', function(e) {
                     e.preventDefault();
                     dropArea.classList.remove('border-blue-500'); // Remove border highlight when dropping
                     const files = e.dataTransfer.files;
                     handleFiles(files);
                 });
-
+        
                 fileInput.addEventListener('change', function(e) {
                     const files = e.target.files;
                     handleFiles(files);
                 });
-
+        
                 dropArea.addEventListener('click', function() {
                     fileInput.click();
                 });
-
+        
                 function handleFiles(files) {
                     files = Array.from(files); // Convert FileList to Array
-                    files.forEach(displayFile);
+                    files.forEach(file => {
+                        displayFile(file);
+                        selectedFiles.push(file); // Store file in selectedFiles array
+                    });
+                    updateFileInput(); // Update the hidden file input with selected files
                 }
-
+        
                 function displayFile(file) {
                     const fileReader = new FileReader();
                     fileReader.onload = function(e) {
                         const fileUrl = e.target.result;
                         const fileElement = document.createElement('div');
-                        fileElement.classList.add('file-item', 'mt-2', 'flex', 'items-center', 'justify-between',
-                            'w-full');
-                        const imageName = `img_${imageCounter++}`; // Generate custom name for the image
+                        fileElement.classList.add('file-item', 'mt-2', 'flex', 'items-center', 'justify-between', 'w-full');
+                        const imageName = `img_${selectedFiles.length}`; // Generate custom name for the image
                         fileElement.innerHTML = `
                             <div class="flex items-center">
                                 <img src="${fileUrl}" alt="${file.name}" class="w-16 h-16 object-cover rounded mr-4" name="${imageName}">
@@ -291,14 +292,29 @@
                     };
                     fileReader.readAsDataURL(file);
                 }
+        
+                function removeFile(button) {
+                    const fileItem = button.closest('.file-item');
+                    const fileName = fileItem.querySelector('img').getAttribute('name');
+                    const index = selectedFiles.findIndex(file => file.name === fileName);
+                    if (index !== -1) {
+                        selectedFiles.splice(index, 1); // Remove file from selectedFiles array
+                        updateFileInput(); // Update the hidden file input with remaining selected files
+                    }
+                    fileItem.remove();
+                }
+        
+                function updateFileInput() {
+                    const fileList = new DataTransfer();
+                    selectedFiles.forEach(file => {
+                        fileList.items.add(file);
+                    });
+                    fileInput.files = fileList.files;
+                }
             });
-
-            function removeFile(button) {
-                const fileItem = button.closest('.file-item');
-                fileItem.remove();
-            }
         </script>
-
+        
+        
         {{-- BMR Calculator Script --}}
         <script>
             document.addEventListener("DOMContentLoaded", function() {
