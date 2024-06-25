@@ -40,7 +40,7 @@ class AuthController extends Controller
                 Auth::login($user);
                 if ($request->type == "mobile") {
                     if ($user->user_type == "client") {
-                        return view('mobile.user.trainingday');
+                        return redirect()->route('mobile.trainingday');
                     } else {
                         return redirect()->back()->with('error', 'Please enter a correct pin number.');
                     }
@@ -64,7 +64,6 @@ class AuthController extends Controller
             // return redirect()->back();
             return redirect()->back()->with('error', 'Please enter a correct pin number.');
         }
-        
     }
 
     public function showLoginForm()
@@ -75,11 +74,14 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
+
+        // Clear all session data
+        session()->flush();
+
         if ($request->type == "web") {
             return redirect('/'); // Redirect to the homepage or any other page
         } elseif ($request->type == "mobile") {
             return redirect('/mobile/login');
         }
     }
-    
 }
