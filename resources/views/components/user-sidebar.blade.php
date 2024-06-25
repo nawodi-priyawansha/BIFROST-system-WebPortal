@@ -41,7 +41,7 @@
                     <!-- Icon -->
                     <i class="bi bi-flag w-5 h-5 m-3" onclick="toggleSidebar()"></i>
                     <!-- Text -->
-                    <span class="sidebar-item-text">Goals (SMART)</span>
+                    <span class="sidebar-item-text whitespace-nowrap">Goals (SMART)</span>
                 </a>
                 <hr class="border-t border-black" />
             </li>

@@ -24,7 +24,7 @@
 <body>
     @extends('layout.user-layout')
     @section('user-content')
-        <div class="container  bg-slate-50" id="container">
+        <div class="container  bg-[#fafafa] w-full" id="container">
             <div class="mt-24 mx-4">
                 <div><span class="text-gray-700">Home / </span>Goal (SMART)</div>
                 <div class="flex flex-col gap-0 mt-4">
@@ -96,14 +96,14 @@
 
                             <div class="ml-2 md:ml-5 flex items-center w-[25%] md:w-[20%]">
                                 <input type="text" name="specific" placeholder=""
-                                    class="border border-black flex-1 h-14 my-2 w-full">
+                                    class="border border-black px-3 flex-1 h-14 my-2 w-full">
                             </div>
                             <div class="ml-2 md:ml-5 flex text-center w-[40%] md:w-[20%] h-20 mt-2 md:mt-0">
                                 <div class="border border-black flex items-center h-14 my-2 w-full md:w-2/3">
                                     <div
                                         class="ml-2 mr-2 text-white md:text-4xl text-xs px-2 h-8 w-8 flex items-center justify-center font-bold bg-[#04AE88]">
                                         S</div>
-                                    <div class="text-xs text-black" id="specificDisplay">
+                                    <div class="text-xs text-black ga" id="specificDisplay">
                                         @if (isset($goal))
                                             {{ $goal['specific'] }}
                                         @endif
@@ -135,7 +135,7 @@
                             </div>
                             <div class="w-16 h-20 hidden md:flex items-center justify-center  bg-[#F7D895]"></div>
                             <div class="ml-2 md:ml-5 flex items-center w-[25%] md:w-[20%]">
-                                <input type="text" name="measurable" class="border border-black flex-1 h-14 my-2 w-full">
+                                <input type="text" name="measurable" class="border px-3  border-black flex-1 h-14 my-2 w-full">
                             </div>
                             <div class="ml-2 md:ml-5 flex text-center w-[40%] md:w-[20%] h-20 mt-2 md:mt-0">
                                 <div class="border border-black flex items-center h-14 my-2 w-full md:w-2/3">
@@ -174,7 +174,7 @@
                             <div class="w-16 h-20 hidden md:flex items-center justify-center  bg-[#ABD9F3]"></div>
                             <div class="ml-2 md:ml-5 flex items-center w-[25%] md:w-[20%]">
                                 <input type="text" name="achievable"
-                                    class="border border-black flex-1 h-14 my-2 w-full">
+                                    class="border border-black px-3  flex-1 h-14 my-2 w-full">
                             </div>
                             <div class="ml-2 md:ml-5 flex text-center w-[40%] md:w-[20%] h-20 mt-2 md:mt-0">
                                 <div class="border border-black flex items-center h-14 my-2 w-full md:w-2/3">
@@ -226,7 +226,7 @@
                             <div class="w-16 h-20 hidden md:flex items-center justify-center bg-[#FCBCA1]"></div>
                             <div class="ml-2 md:ml-5 flex items-center w-[25%] md:w-[20%]">
                                 <input type="text" name="relevant"
-                                    class="border border-black flex-1 h-14 my-2 w-full">
+                                    class="border border-black flex-1 px-3   h-14 my-2 w-full">
                             </div>
                             <div class="ml-2 md:ml-5 flex text-center w-[40%] md:w-[20%] h-20 mt-2 md:mt-0">
                                 <div class="border border-black flex items-center h-14 my-2 w-full md:w-2/3">
@@ -396,7 +396,7 @@
         // Initialize date picker on #time_bound input
         $("#time_bound").datepicker({
             dateFormat: "yy-mm-dd", // Date format
-            minDate: 0, // Disable previous days
+            minDate: +1, // Disable today and previous days
             onSelect: function(dateText) {
                 calculateRemainingDays(dateText);
                 calculateWeeks(dateText); // Also calculate weeks as per previous requirement
