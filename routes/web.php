@@ -153,8 +153,13 @@ Route::middleware(['user'])->group(function () {
 //mobile route
 Route::get('/mobile/login', [MobileController::class, 'login'])->name('mobile.login');
 Route::get('/mobile/forgetpin', [MobileController::class, 'forgetpin'])->name('mobile.pin');
+
 Route::get('/mobile/trainingday', [MobileController::class, 'trainingday'])->name('mobile.trainingday');
+Route::post('/select-day',  [MobileController::class, 'selectday']);
+
 Route::get('/mobile/readinessscore', [MobileController::class, 'readinessscore'])->name('mobile.readinessscore');
+Route::post('/mobile/store-readiness', [MobileController::class, 'storescore']);
+
 Route::get('/mobile/workout', [MobileController::class, 'workout'])->name('mobile.workout');
 Route::get('/mobile/workouttimer', [MobileController::class, 'workouttimer'])->name('mobile.workouttimer');
 Route::get('/mobile/histroyview', [MobileController::class, 'histroyview'])->name('mobile.histroyview');
