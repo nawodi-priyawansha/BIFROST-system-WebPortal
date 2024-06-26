@@ -53,74 +53,87 @@ function setData(name, email, id) {
 
 
 // user delete function
-function deleteAction(id) {
-    if (confirm("Are you sure you want to delete this item?")) {
+function deleteAction(id, access) {
+    if (access === 'write') {
+        if (confirm("Are you sure you want to delete this item?")) {
+            $.ajax({
+                url: "/deletedata",
+                type: "POST",
+                data: {
+                    id: id,
+                    _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
+                },
+                success: function (response) {
+                    console.log(response);
+                    location.reload(); // Reload the page
+                },
+                error: function (xhr, status, error) {
+                    console.error(error); // Handle error
+                },
+            });
+        } else {
+            console.log("Deletion canceled");
+        }
+    } else {
+        alert("Error: Access type could not reset pin.");
+        // Optional: Handle access denied scenario as needed
+    }
+}
+
+// reset pin
+function resetAction(id, access) {
+    if (access === 'write') {
         $.ajax({
-            url: "/deletedata",
+            url: "/resetpin",
             type: "POST",
             data: {
                 id: id,
+                _token: $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (response) {
+                console.log(response);
+                location.reload(); // Reload the page after successful reset
+            },
+            error: function (xhr, status, error) {
+                console.error(error); // Handle error
+            }
+        });
+    } else {
+        alert("Error: Access type could not reset pin.");
+        // Optional: Handle access denied scenario as needed
+    }
+}
+
+// chane access type
+function updateAccessType(checkbox, accessId, access) {
+    if (access === 'write') { // Check if access type is 'write'
+        const accessType = checkbox.checked ? 'read' : 'write';
+        console.log(accessType);
+        $.ajax({
+            url: "/updateaccesstype",
+            type: "POST",
+            data: {
+                id: accessId,
+                access_type: accessType,
                 _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
             },
             success: function (response) {
                 console.log(response);
-                location.reload(); // Reload the page
+                if (response.message === 'Access type updated successfully') {
+                    alert("Access type updated to: " + accessType);
+                    location.reload(); // Reload the page
+                }
             },
             error: function (xhr, status, error) {
                 console.error(error); // Handle error
             },
         });
     } else {
-        console.log("Deletion canceled");
+        alert("Error: Access type could not be updated");
+        location.reload();
     }
 }
 
-// reset pin
-function resetAction(id) {
-    // const pin = document.getElementById('pin_' + id).value;
-    // console.log(pin);
-    $.ajax({
-        url: "/resetpin",
-        type: "POST",
-        data: {
-            id: id,
-            _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
-        },
-        success: function (response) {
-            console.log(response);
-            location.reload(); // Reload the page
-        },
-        error: function (xhr, status, error) {
-            console.error(error); // Handle error
-        },
-    });
-}
-
-// chane access type
-function updateAccessType(checkbox, accessId) {
-    const accessType = checkbox.checked ? 'read' : 'write';
-    console.log(accessType);
-
-    $.ajax({
-        url: "/updateaccesstype",
-        type: "POST",
-        data: {
-            id: accessId,
-            access_type: accessType,
-            _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
-        },
-        success: function (response) {
-            console.log(response);
-            if (response.message === 'Access type updated successfully') {
-                alert("Access type updated to: " + accessType);
-                location.reload(); // Reload the page
-            }
-        },
-        error: function (xhr, status, error) {
-            console.error(error); // Handle error
-        },
-    });
-}
 
 // change access page in users
 function accesspage(id, name) {

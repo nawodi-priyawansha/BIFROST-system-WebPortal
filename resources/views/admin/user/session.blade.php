@@ -12,7 +12,7 @@
     <title>Document</title>
 </head>
 
-<body >
+<body>
     @extends('layout.layout')
     @section('content')
         <!-- Main content (Dashboard) -->
@@ -89,8 +89,7 @@
                         <form action="{{ route('clients.store') }}" method="POST">
                             @csrf
                             <div id="block-container" class="flex flex-col text-lg p-4  mr-8 rounded-md gap-4">
-                                <div
-                                    class="ui-block flex flex-col text-lg p-4 bg-gray-50 mr-8 rounded-md gap-4 mb-4 ">
+                                <div class="ui-block flex flex-col text-lg p-4 bg-gray-50 mr-8 rounded-md gap-4 mb-4 ">
                                     <!-- Your UI block content here -->
                                     <div class="flex items-center border-b">
                                         <label for="category" class="w-60 block mb-1">Category <span
@@ -104,7 +103,7 @@
                                         <div class="some-other-class"></div>
                                         <div class="flex-grow"></div>
                                         <!-- This element will push the button to the right -->
-                                       
+
                                     </div>
                                     <div class="flex items-center border-b">
                                         <label for="workout" class="w-60 block mb-1">Workout <span
@@ -189,10 +188,17 @@
                             </div>
                             <div class="flex items-center border-b">
                                 <label for="intensity" class="w-60 block mb-1"></label>
+
                                 <div class="flex items-center justify-between">
-                                    <button type="button" id="add-another"
-                                        class="bg-black text-white py-2 px-4 rounded mb-2 mx-8 text-base">+
-                                        Another</button>
+                                    @if ($accessType == 'write')
+                                        <button type="button" id="add-another"
+                                            class="bg-black text-white py-2 px-4 rounded mb-2 mx-8 text-base">+
+                                            Another</button>
+                                    @else
+                                        <button type="button" id="add-another"
+                                            class="bg-black text-white py-2 px-4 rounded mb-2 mx-8 text-base"disabled>+
+                                            Another</button>
+                                    @endif
                                 </div>
                             </div>
                             {{-- hidden input field --}}
@@ -344,8 +350,14 @@
                             </script>
 
                             <div class="flex mt-12">
-                                <button type="submit"
-                                    class="bg-[#FB1018] text-white py-2 px-4 rounded mb-2 hover:bg-red-700">Save</button>
+                                @if ($accessType == 'write')
+                                    <button type="submit"
+                                        class="bg-[#FB1018] text-white py-2 px-4 rounded mb-2 hover:bg-red-700">Save</button>
+                                @else
+                                    <button type="submit"
+                                        class="bg-[#FB1018] text-white py-2 px-4 rounded mb-2 hover:bg-red-700"
+                                        disabled>Save</button>
+                                @endif
                             </div>
                         </form>
                     </div>
@@ -523,6 +535,10 @@
         //  populateWorkouts (already uploard data view) finction-> pass values (Selected Tab & Selected Date)
         function getdata(tab, date) {
             // Your code to process tab and date
+
+            // clear workout value
+            document.getElementById('workout').value = '';
+
             console.log("Selected Tab:", tab);
             console.log("Selected Date:", date);
             $.ajax({
@@ -632,7 +648,11 @@
                             ${workouts.map(workout => `<option value="${workout.category_option.id}">${workout.category_option.category_name}</option>`).join('')}
                         </select>
                         <div class="flex-grow"></div>
-                        <button type="submit" class="bg-black text-white py-2 px-4 rounded mb-2">Edit</button>
+                        @if ($accessType == 'write')
+                            <button type="submit" class="bg-black text-white py-2 px-4 rounded mb-2">Edit</button>
+                        @else
+                            <button type="submit" class="bg-black text-white py-2 px-4 rounded mb-2"disabled>Edit</button>
+                        @endif
                     </div>
                         <div class="flex items-center border-b">
                             <label for="workout_${detail.id}" class="w-60 block mb-1">Workout <span class="text-red-500">*</span></label>
