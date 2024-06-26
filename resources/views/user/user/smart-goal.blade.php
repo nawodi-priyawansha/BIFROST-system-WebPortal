@@ -177,30 +177,31 @@
                                     class="border border-black px-3  flex-1 h-14 my-2 w-full">
                             </div>
                             <div class="ml-2 md:ml-5 flex text-center w-[40%] md:w-[20%] h-20 mt-2 md:mt-0">
+                                <!-- Display Achievable Goal -->
                                 <div class="border border-black flex items-center h-14 my-2 w-full md:w-2/3">
-                                    <div
-                                        class="ml-2 mr-2 text-white md:text-4xl text-xs px-2 h-8 w-8 flex items-center justify-center font-bold bg-[#36B4E6]">
-                                        A</div>
-                                    <!-- Display Achievable Goal -->
+                                    <div class="ml-2 mr-2 text-white md:text-4xl text-xs px-2 h-8 w-8 flex items-center justify-center font-bold bg-[#36B4E6]">
+                                        A
+                                    </div>
                                     <div class="text-xs text-black" id="measurableDisplay">
                                         @if (isset($goal))
                                             {{ $goal['achievable'] }}
                                         @endif
                                     </div>
                                 </div>
+                            
+                                <!-- Input field to display or disable -->
                                 <div class="border border-black flex text-center items-center h-14 my-2  w-1/3">
-
                                     @if (isset($goal))
-                                        {{-- {{ $goal['achievable_progress'] }} --}}
                                         <input type="text" name="achievable_progress"
                                             class="text-xs mx-1 bg-transparent w-full h-full border-none focus:outline-none"
                                             value="{{ $goal['achievable_progress'] }}">
                                     @else
                                         <input type="text"
-                                            class="text-xs mx-1 bg-transparent w-full h-full border-none focus:outline-none">
+                                            class="text-xs mx-1 bg-transparent w-full h-full border-none focus:outline-none" disabled>
                                     @endif
                                 </div>
                             </div>
+                            
                         </div>
 
                         <!-- Relevant -->
@@ -296,11 +297,8 @@
                                                 value="{{ $goal['time_progress'] }}">
                                         @else
                                             <input type="text"
-                                                class="text-xs mx-1 bg-transparent w-full h-full border-none focus:outline-none">
+                                                class="text-xs mx-1 bg-transparent w-full h-full border-none focus:outline-none" disabled>
                                         @endif
-                                        {{-- @if (isset($goal) && isset($goal->time_bound))
-                                            {{ $goal->time_progress }}
-                                        @endif --}}
                                     </div>
                                 </div>
                             </div>
@@ -429,7 +427,6 @@
         @endif
     });
 </script>
-
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
