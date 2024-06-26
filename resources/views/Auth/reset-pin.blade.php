@@ -77,6 +77,15 @@
                     inputs[index + 1].focus();
                 }
             });
+            // add back space
+            input.addEventListener('keydown', function(event) {
+                if (event.key === 'Backspace') {
+                    this.value = ''; // Clear current input field
+                    if (index > 0) {
+                        inputs[index - 1].focus(); // Focus on previous input field
+                    }
+                }
+            });
         });
     </script>
 </body>

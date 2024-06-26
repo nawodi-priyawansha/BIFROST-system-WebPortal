@@ -75,9 +75,6 @@
 
 
 
-        // Enable pin fields if a portal is already selected on page load
-        enablePinFields();
-
         const inputs = document.querySelectorAll('input[name^="pin"]');
         inputs.forEach((input, index) => {
             input.addEventListener('input', function() {
@@ -104,6 +101,16 @@
             input.addEventListener('blur', function() {
                 if (this.value.match(/^[0-9]$/)) {
                     this.type = 'password'; // Hide digit by switching to password
+                }
+            });
+
+            // add back space
+            input.addEventListener('keydown', function(event) {
+                if (event.key === 'Backspace') {
+                    this.value = ''; // Clear current input field
+                    if (index > 0) {
+                        inputs[index - 1].focus(); // Focus on previous input field
+                    }
                 }
             });
         });

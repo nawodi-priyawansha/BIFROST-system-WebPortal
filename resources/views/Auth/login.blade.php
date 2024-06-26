@@ -55,7 +55,7 @@
         <script src="sweetalert2.all.min.js"></script>
         <script src="sweetalert2.min.js"></script>
         <link rel="stylesheet" href="sweetalert2.min.css"> --}}
-        
+
         <div class="flex justify-center gap-4 sm:gap-4 mb-8  mt-10">
             <input type="text" maxlength="1"
                 class="w-12 h-12 sm:w-20 sm:h-20 text-black text-center bg-white rounded" name="pin_1" id="pin_1"
@@ -137,6 +137,16 @@
             input.addEventListener('blur', function() {
                 if (this.value.match(/^[0-9]$/)) {
                     this.type = 'password'; // Hide digit by switching to password
+                }
+            });
+
+            // add back space
+            input.addEventListener('keydown', function(event) {
+                if (event.key === 'Backspace') {
+                    this.value = ''; // Clear current input field
+                    if (index > 0) {
+                        inputs[index - 1].focus(); // Focus on previous input field
+                    }
                 }
             });
         });

@@ -17,11 +17,16 @@
     @section('content')
         <div class="container mx-4 mt-24 flex-grow min-h-screen" id="container">
             <div class="breadcrumb text-sm mb-4">
-                <a href="#" class="text-gray-500 hover:underline ml-4">Home</a> / <span><strong class="font-source-sans"> Workout
+                <a href="#" class="text-gray-500 hover:underline ml-4">Home</a> / <span><strong
+                        class="font-source-sans"> Workout
                         Library </strong></span>
                 <div class="flex justify-between p-5">
                     <h1 class="text-2xl  font-medium mb-5 font-source-sans"> Workout Library</h1>
-                    <button id="openPopupBtn" class="bg-black h-10 px-6 text-white rounded-md">+ ADD</button>
+                    @if ($accessType == 'write')
+                        <button id="openPopupBtn" class="bg-black h-10 px-6 text-white rounded-md">+ ADD</button>
+                    @else
+                        <button id="openPopupBtn" class="bg-black h-10 px-6 text-white rounded-md"disabled>+ ADD</button>
+                    @endif
 
                     {{-- pop up view start --}}
                     <div id="popupForm"
@@ -78,10 +83,10 @@
                                     </div>
 
                                     <div class="p-4 bg-gray-100 text-center rounded-b-lg">
-                                        <button class="bg-black text-white px-8 py-2 rounded mr-2"
-                                            type="submit" id="addButton">Add</button>
-                                        <button class="bg-black text-white px-8 py-2 rounded mr-2"
-                                            type="submit" id="updateButton" hidden>Update</button>
+                                        <button class="bg-black text-white px-8 py-2 rounded mr-2" type="submit"
+                                            id="addButton">Add</button>
+                                        <button class="bg-black text-white px-8 py-2 rounded mr-2" type="submit"
+                                            id="updateButton" hidden>Update</button>
                                         <button type="button"
                                             class="bg-gray-300 text-black px-8 py-2 rounded hover:bg-gray-400"
                                             onclick="closePopup()">Cancel</button>
@@ -123,17 +128,33 @@
                                     </td>
                                     <td dir="rtl" class="p-3 border-s-2 border-y-2 border-gray-300 ">
                                         <div class="flex space-x-3 ">
-                                            <form action="{{ route('workout-library.delete', ['id' => $workoutLibrary->id]) }}" method="POST">
+                                            <form
+                                                action="{{ route('workout-library.delete', ['id' => $workoutLibrary->id]) }}"
+                                                method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                    
-                                                <a href="#" onclick="edit({{ $workoutLibrary->id }}, '{{ $workoutLibrary->categoryOption->category_name }}', '{{ $workoutLibrary->type }}', '{{ $workoutLibrary->workout }}', '{{ $workoutLibrary->link }}')" class="mr-8">
-                                                    <i class="text-[#fd8300] bi bi-pencil"></i>
-                                                    <span class="text-black">Edit</span>
-                                                </a>
-                                                <button type="submit" class="mr-7" onclick="return confirm('Are you sure you want to delete this entry?')">
-                                                    <i class="text-[#fd8300] bi bi-trash"></i> Delete
-                                                </button>
+
+                                                @if ($accessType == 'write')
+                                                    <a href="#"
+                                                        onclick="edit({{ $workoutLibrary->id }}, '{{ $workoutLibrary->categoryOption->category_name }}', '{{ $workoutLibrary->type }}', '{{ $workoutLibrary->workout }}', '{{ $workoutLibrary->link }}')"
+                                                        class="mr-8">
+                                                        <i class="text-[#fd8300] bi bi-pencil"></i>
+                                                        <span class="text-black">Edit</span>
+                                                    </a>
+                                                    <button type="submit" class="mr-7"
+                                                        onclick="return confirm('Are you sure you want to delete this entry?')">
+                                                        <i class="text-[#fd8300] bi bi-trash"></i> Delete
+                                                    </button>
+                                                @else
+                                                    <p href="#"
+                                                        class="mr-8 pointer-events-none">
+                                                        <i class="text-[#fd8300] bi bi-pencil"></i>
+                                                        <span class="text-black">Edit</span>
+                                                    </a>
+                                                    <button type="submit" class="mr-7" disabled>
+                                                        <i class="text-[#fd8300] bi bi-trash"></i> Delete
+                                                    </button>
+                                                @endif
                                             </form>
                                         </div>
                                     </td>

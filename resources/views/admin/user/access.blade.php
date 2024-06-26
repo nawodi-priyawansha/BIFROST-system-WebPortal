@@ -19,7 +19,7 @@
 </head>
 
 
-<body >
+<body>
     @extends('layout.layout')
     @section('content')
         <!-- Main content (Dashboard) -->
@@ -187,7 +187,8 @@
                             <td class="access-type flex items-center py-2  sm:pl-0 sm:w-3/4">
                                 <input type="checkbox" id="readOnly" class="mr-2"
                                     {{ $user->access_type == 'read' ? 'checked' : '' }}
-                                    onclick="updateAccessType(this, {{ $user->id }})">
+                                    onclick="updateAccessType(this, {{ $user->id }}, '{{ $user->access_type }}')">
+
                                 <label for="readOnly">Read Only</label>
                             </td>
                         </tr>
@@ -208,15 +209,15 @@
                                     </button>
 
                                     <button id="deleteAction_{{ $user->id }}" class=" text-black flex items-center"
-                                        onclick="deleteAction({{ $user->id }})">
+                                        onclick="deleteAction({{ $user->id }}, '{{ $user->access_type }}')">
                                         <i class="fa-solid fa-trash mr-1"></i>
                                         <i>Delete</i>
                                     </button>
 
-                                    <button id="resetPinAction_{{ $user->id }}"
-                                        class=" text-black flex items-center"onclick="resetAction({{ $user->id }})">
+                                    <button id="resetPinAction_{{ $user->id }}" class="text-black flex items-center"
+                                        onclick="resetAction({{ $user->id }}, '{{ $user->access_type }}')">
                                         <i class="fa-solid fa-rotate-right mr-1"></i>
-                                        <i>Reset Pin</i>
+                                        <span>Reset Pin</span>
                                     </button>
                                 </div>
                             </td>
