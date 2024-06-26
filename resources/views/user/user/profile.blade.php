@@ -20,8 +20,8 @@
                 <div class="mx-4 ">
                     <!-- Header with breadcrumb and add new profile button -->
                     <div>
-                        <div class="justify-between flex mx-4">
-                            <div><span class="text-gray-700">Home / </span>Profile</div>
+                        <div class="justify-between flex mx-4 text-sm">
+                            <div><span class="text-gray-700">Home / </span><strong>Profile</strong></div>
                             <div>
                                 <a href="{{ route('usernewprofile') }}">
                                     <button class="bg-black text-white p-2 px-4 rounded-md">Add New Profile</button>
@@ -66,15 +66,15 @@
                         <div class="mb-5 lg:w-[70%] mt-4 lg:mt-0">
 
                             <div class=" bg-white shadow rounded-lg p-6 mx-4 px-4">
-                                <div class="mb-5">
+                                <div class="mb-5 text-xl">
                                     <label for=""
-                                        class="text-white p-2 px-4 rounded-md bg-[#fb1018] whitespace-nowrap">Session
+                                        class="text-white p-2 px-4 rounded-md bg-[#fb1018] whitespace-nowrap font-semibold">Session
                                         Dashboard</label>
                                 </div>
                                 <!-- Table with session details -->
                                 <div class="">
                                     <div class="overflow-y-auto md:overflow-y-visible max-h-screen md:max-h-full">
-                                        <table class="table-auto w-full border-collapse text-xl">
+                                        <table class="table-auto w-full border-collapse text-base">
                                             <thead class="">
                                                 <tr>
                                                     <th class="border-b-2 border-black px-4 py-2"></th>

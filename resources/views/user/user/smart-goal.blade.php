@@ -26,7 +26,7 @@
     @section('user-content')
         <div class="container  bg-[#fafafa] w-full" id="container">
             <div class="mt-24 mx-4">
-                <div><span class="text-gray-700">Home / </span>Goal (SMART)</div>
+                <div><span class="text-gray-700 text-sm">Home / </span><strong class="text-sm">Goal (SMART)</strong></div>
                 <div class="flex flex-col gap-0 mt-4">
                     <div class="flex  flex-row justify-center w-full">
                         <span class="text-4xl text-center w-[10%] md:w-[40%]"></span>

@@ -26,9 +26,9 @@
                 <!-- Content section with gray background -->
                 <div class="mx-4 ">
                     <!-- Header with breadcrumb and add new profile button -->
-                    <div>
+                    <div class="text-sm">
                         <div class="justify-between flex mx-4">
-                            <div><span class="text-gray-700">Home / </span>Dashboard</div>
+                            <div><span class="text-gray-700">Home / </span><strong>Dashboard</strong></div>
                             <div>
                             </div>
                         </div>
@@ -103,13 +103,13 @@
                         <div class=" bg-white shadow rounded-lg p-6 mx-4 px-4">
                             <div class="mb-5">
                                 <label for=""
-                                    class="text-white p-2 px-4 rounded-md bg-[#fb1018] whitespace-nowrap">Workout-
+                                    class="text-white p-1 px-4 rounded-md bg-[#fb1018] whitespace-nowrap text-xl">Workout-
                                     Deadlift</label>
                             </div>
                             <!-- Table with session details -->
                             <div class="">
                                 <div class="overflow-y-auto md:overflow-y-visible max-h-screen md:max-h-full">
-                                    <table class="table-auto w-full border-collapse text-xl">
+                                    <table class="table-auto w-full border-collapse text-md">
                                         <thead>
                                             <tr></tr>
                                         </thead>
