@@ -34,20 +34,88 @@
                     </div>
                 </div>
                 @if (Request::is('user/dashboard'))
-                    <!-- menu -->
+                    <!-- Date navigation container -->
+                    <!-- Date navigation container with fixed size for the date view -->
                     <div class="flex items-center justify-center bg-black p-2 rounded-lg space-x-4 sm:space-x-1">
-                        <div class="text-white text-2xl cursor-pointer  md:block"><i class="bi bi-chevron-left"></i>
+                        <!-- Previous day button -->
+                        <div class="text-white text-2xl cursor-pointer md:block" id="prev-day">
+                            <i class="bi bi-chevron-left"></i>
                         </div>
-                        <div class="flex items-center  flex-grow">
-                            <div>
-                                <div class="text-red-500 text-xs sm:text-xs">Day 2, WEEK 6</div>
-                                {{-- <div class="text-white text-xs hidden">Today</div> --}}
-                                <div class="text-white text-xs   sm:text-sm">Today 7th June, 2023</div>
-                                {{-- <div class="text-white text-xs hidden">7th June, 2023</div> --}}
+                        <!-- Date display section -->
+                        <div class="flex items-center flex-grow justify-center">
+                            <div class="text-center">
+                                <div class="text-red-500 text-xs sm:text-xs" id="day-week">Day X, WEEK Y</div>
+                                <div class="text-white text-xs sm:text-sm w-48 mx-auto" id="full-date">Today Xth Month,
+                                    Year</div>
                             </div>
                         </div>
-                        <div class="text-white text-2xl cursor-pointer w-2"><i class="bi bi-chevron-right"></i></div>
+                        <!-- Next day button -->
+                        <div class="text-white text-2xl cursor-pointer w-2" id="next-day">
+                            <i class="bi bi-chevron-right"></i>
+                        </div>
                     </div>
+
+                    <script>
+                        document.addEventListener('DOMContentLoaded', () => {
+                            // Get references to HTML elements
+                            const dayWeekElement = document.getElementById('day-week');
+                            const fullDateElement = document.getElementById('full-date');
+                            const prevDayButton = document.getElementById('prev-day');
+                            const nextDayButton = document.getElementById('next-day');
+
+                            // Initialize the current date and today's date
+                            let currentDate = new Date();
+                            const today = new Date();
+
+                            // Function to update the date display based on the current date
+                            function updateDateDisplay(date) {
+                                const options = {
+                                    weekday: 'long',
+                                    year: 'numeric',
+                                    month: 'long',
+                                    day: 'numeric'
+                                };
+                                const formattedDate = date.toLocaleDateString('en-US', options);
+
+                                // Display "Today" for the current date, otherwise show the formatted date
+                                if (isSameDay(date, today)) {
+                                    fullDateElement.textContent =
+                                        `Today ${date.getDate()}th ${date.toLocaleString('en-US', { month: 'long' })}, ${date.getFullYear()}`;
+                                } else {
+                                    fullDateElement.textContent = formattedDate;
+                                }
+
+                                // Calculate the week number and display it
+                                const startOfYear = new Date(date.getFullYear(), 0, 1);
+                                const dayOfYear = Math.floor((date - startOfYear + (startOfYear.getTimezoneOffset() - date
+                                    .getTimezoneOffset()) * 60000) / 86400000) + 1;
+                                const weekNumber = Math.ceil(dayOfYear / 7);
+
+                                // Update the day-week element
+                                dayWeekElement.textContent = `Day ${date.getDay() + 1}, WEEK ${weekNumber}`;
+                            }
+
+                            // Function to change the date by a specified number of days
+                            function changeDate(days) {
+                                currentDate.setDate(currentDate.getDate() + days);
+                                updateDateDisplay(currentDate);
+                            }
+
+                            // Helper function to check if two dates are the same
+                            function isSameDay(date1, date2) {
+                                return date1.getDate() === date2.getDate() &&
+                                    date1.getMonth() === date2.getMonth() &&
+                                    date1.getFullYear() === date2.getFullYear();
+                            }
+
+                            // Event listeners for previous and next day buttons
+                            prevDayButton.addEventListener('click', () => changeDate(-1));
+                            nextDayButton.addEventListener('click', () => changeDate(1));
+
+                            // Initial display of the current date
+                            updateDateDisplay(currentDate);
+                        });
+                    </script>
                 @else
                     <div class="navigation  text-white text-2xl font-bold hidden md:block">
                         User Portal
