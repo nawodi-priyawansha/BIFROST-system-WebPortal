@@ -414,7 +414,7 @@
                 // Calculate difference in weeks
                 const diffWeeks = Math.ceil(diffTime / (1000 * 60 * 60 * 24 * 7));
 
-                $('#timeboundDisplay').text(diffWeeks + ' weeks start: ' + formatDate(endDate) + '');
+                $('#timeboundDisplay').text(diffWeeks + ' weeks start: ' + formatDate(today) + '');
             } else {
                 $('#timeboundDisplay').text(''); // Clear display if invalid date selected or in the past
             }
