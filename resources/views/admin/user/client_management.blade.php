@@ -12,14 +12,13 @@
     <title>Document</title>
 </head>
 
-<body >
+<body>
     @extends('layout.layout')
     @section('content')
         <!-- Main content (Dashboard) -->
         <div class="container transition-width mt-24 flex-grow mx-4" id="container">
             <div class="breadcrumb text-sm mb-4">
-                <div><a href="#" class="text-gray-500 no-underline hover:underline">Home</a> / <span><strong> Client
-                        </strong></span></div>
+                <div><a href="#" class="text-gray-500 no-underline hover:underline">Home</a> / <span><strong> Client Management</strong></span></div>
                 <div class="text-3xl mt-3">Class Manager</div>
             </div>
             <div class="border rounded-b-lg bg-white shadow-md mt-10 text-sm">
@@ -48,7 +47,7 @@
                     </div>
 
                     {{-- Top Week and year display --}}
-                    <div class="flex justify-center text-2xl font-semibold gap-4 mb-6">
+                    <div class="flex justify-center text-2xl  gap-4 mb-6">
                         <p class="cursor-pointer" id="prevWeek">&larr;</p>
                         <h2 id="weekDisplay"></h2>
                         <p class="cursor-pointer" id="nextWeek">&rarr;</p>
@@ -57,7 +56,7 @@
                 <div class="w-full flex mx-4">
                     {{-- side week calender --}}
                     <div class="w-1/4">
-                        <div class="flex flex-col text-lg weekday">
+                        <div class="flex flex-col text-sm weekday">
                             <button
                                 class="border-l border-t border-b border-r border-black w-2/3 px-2 py-3 rounded-t-md text-start hover:bg-black hover:text-white day"
                                 id="1day" onclick="test(this)">Day 1</button>
@@ -88,9 +87,8 @@
                         {{-- new add form view --}}
                         <form action="{{ route('clients.store') }}" method="POST">
                             @csrf
-                            <div id="block-container" class="flex flex-col text-lg p-4  mr-8 rounded-md gap-4">
-                                <div
-                                    class="ui-block flex flex-col text-lg p-4 bg-gray-50 mr-8 rounded-md gap-4 mb-4 ">
+                            <div id="block-container" class="flex flex-col text-sm p-4  mr-8 rounded-md gap-4">
+                                <div class="ui-block flex flex-col text-sm p-4 bg-gray-50 mr-8 rounded-md gap-4 mb-4 ">
                                     <!-- Your UI block content here -->
                                     <div class="flex items-center border-b">
                                         <label for="category" class="w-60 block mb-1">Category <span
@@ -104,7 +102,7 @@
                                         <div class="some-other-class"></div>
                                         <div class="flex-grow"></div>
                                         <!-- This element will push the button to the right -->
-                                       
+
                                     </div>
                                     <div class="flex items-center border-b">
                                         <label for="workout" class="w-60 block mb-1">Workout <span
@@ -119,19 +117,19 @@
                                                 class="text-red-500">*</span></label>
                                         <div class="relative flex items-center max-w-[8rem]">
                                             <button type="button"
-                                                class="decrement-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
-                                                <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true"
+                                                class="decrement-reps bg-gray-100  hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100  focus:ring-2 focus:outline-none">
+                                                <svg class="w-3 h-3 text-gray-900" aria-hidden="true"
                                                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
                                                     <path stroke="currentColor" stroke-linecap="round"
                                                         stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
                                                 </svg>
                                             </button>
                                             <input type="text" id="reps-input" name="custom" data-input-counter
-                                                class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5  "
                                                 placeholder="0" value="0" required />
                                             <button type="button"
-                                                class="increment-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
-                                                <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true"
+                                                class="increment-reps bg-gray-100  hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100  focus:ring-2 focus:outline-none">
+                                                <svg class="w-3 h-3 text-gray-900 " aria-hidden="true"
                                                     xmlns="http://www.w3.org/2000/svg" fill="none"
                                                     viewBox="0 0 18 18">
                                                     <path stroke="currentColor" stroke-linecap="round"
@@ -145,19 +143,19 @@
                                                 class="text-red-500">*</span></label>
                                         <div class="relative flex items-center max-w-[8rem]">
                                             <button type="button"
-                                                class="decrement-custom bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
-                                                <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true"
+                                                class="decrement-custom bg-gray-100  hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100  focus:ring-2 focus:outline-none">
+                                                <svg class="w-3 h-3 text-gray-900 " aria-hidden="true"
                                                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
                                                     <path stroke="currentColor" stroke-linecap="round"
                                                         stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
                                                 </svg>
                                             </button>
                                             <input type="text" id="custom-input" name="reps" data-input-counter
-                                                class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5"
                                                 placeholder="0" value="0" required />
                                             <button type="button"
-                                                class="increment-custom bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
-                                                <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true"
+                                                class="increment-custom bg-gray-100  hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 focus:ring-2 focus:outline-none">
+                                                <svg class="w-3 h-3 text-gray-900 " aria-hidden="true"
                                                     xmlns="http://www.w3.org/2000/svg" fill="none"
                                                     viewBox="0 0 18 18">
                                                     <path stroke="currentColor" stroke-linecap="round"
@@ -359,7 +357,7 @@
     <script>
         // Initialize variables
         let currentDate = new Date();
-        let selectedDate = "1day"; // Set default date to "1day"
+        let selectedDate = `${currentDate.getDay()}day`; // Set default date to current day
         let selectedTab = null;
 
         // When the document content is loaded
@@ -409,8 +407,8 @@
                 });
             });
 
-            // Default select first day
-            document.getElementById("1day").click();
+            // Default select the current day
+            document.getElementById(selectedDate).click();
         });
 
         // Function to change the week
@@ -483,7 +481,7 @@
             const selecttab = document.getElementById('selecttab');
             selecttab.value = tabName;
 
-            // call ajax 
+            // call ajax
             getdata(tabName, dayName)
         }
 
@@ -621,10 +619,10 @@
                     divDetail.innerHTML = `
                     <form action="{{ route('clients.update') }}" method="POST">
                         @csrf
-                <div class="flex flex-col text-lg p-4 mr-8 rounded-md gap-4">
-                    <div class="flex flex-col text-lg p-4 bg-gray-50 mr-8 rounded-md gap-4 mb-4">
+                <div class="flex flex-col text-sm p-4 mr-8 rounded-md gap-4">
+                    <div class="flex flex-col text-sm p-4 bg-gray-50 mr-8 rounded-md gap-4 mb-4">
                         <input type="hidden" name="detail_id_${detail.id}" id="detail_id_${detail.id}" value="${detail.id}">
-                        
+
                       <div class="flex items-center border-b">
                         <label for="category_${detail.id}" class="w-60 block mb-1">Category <span class="text-red-500">*</span></label>
                         <select id="category_${detail.id}" name="category_${detail.id}" onchange="handleCategoryChange(this)" class="w-1/3 px-3 py-2 border flex rounded mb-2" required>
@@ -644,14 +642,14 @@
                         <div class="flex items-center border-b">
                             <label for="reps_per_set_${detail.id}" class="w-60 block mb-1">Reps per Set <span class="text-red-500">*</span></label>
                             <div class="relative flex items-center max-w-[8rem]">
-                                <button type="button" class="decrement-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none" onclick="decrement('reps_per_set_input_${detail.id}')">
-                                    <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                                <button type="button" class="decrement-reps bg-gray-100  hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100  focus:ring-2 focus:outline-none" onclick="decrement('reps_per_set_input_${detail.id}')">
+                                    <svg class="w-3 h-3 text-gray-900 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16"/>
                                     </svg>
                                 </button>
-                                <input type="text" id="reps_per_set_input_${detail.id}" name="reps_per_set_${detail.id}" data-input-counter class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="0" value="${detail.reps_per_set}" required />
-                                <button type="button" class="increment-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none" onclick="increment('reps_per_set_input_${detail.id}')">
-                                    <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                                <input type="text" id="reps_per_set_input_${detail.id}" name="reps_per_set_${detail.id}" data-input-counter class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5" placeholder="0" value="${detail.reps_per_set}" required />
+                                <button type="button" class="increment-reps bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100  focus:ring-2 focus:outline-none" onclick="increment('reps_per_set_input_${detail.id}')">
+                                    <svg class="w-3 h-3 text-gray-900 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
                                     </svg>
                                 </button>
@@ -661,14 +659,14 @@
                         <div class="flex items-center border-b">
                             <label for="reps_${detail.id}" class="w-60 block mb-1">REPES <span class="text-red-500">*</span></label>
                             <div class="relative flex items-center max-w-[8rem]">
-                                <button type="button" class="decrement-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none" onclick="decrement('reps_input_${detail.id}')">
-                                    <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                                <button type="button" class="decrement-reps bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 focus:ring-2 focus:outline-none" onclick="decrement('reps_input_${detail.id}')">
+                                    <svg class="w-3 h-3 text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16"/>
                                     </svg>
                                 </button>
-                                <input type="text" id="reps_input_${detail.id}" name="reps_${detail.id}" data-input-counter class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="0" value="${detail.reps}" required />
-                                <button type="button" class="increment-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none" onclick="increment('reps_input_${detail.id}')">
-                                    <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                                <input type="text" id="reps_input_${detail.id}" name="reps_${detail.id}" data-input-counter class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5" placeholder="0" value="${detail.reps}" required />
+                                <button type="button" class="increment-reps bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 focus:ring-2 focus:outline-none" onclick="increment('reps_input_${detail.id}')">
+                                    <svg class="w-3 h-3 text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
                                     </svg>
                                 </button>

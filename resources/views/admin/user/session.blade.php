@@ -13,10 +13,10 @@
          <!-- Main content (Dashboard) -->
          <div class="container transition-width mt-24 flex-grow" id="container">
           <div class="breadcrumb text-sm mb-4">
-              <a href="#" class="text-gray-500 no-underline hover:underline">Home</a> / <span><strong> Session/ Class Module
+              <a href="#" class="text-gray-500 no-underline hover:underline">Home</a> / <span><strong>Class Manager
                   </strong></span>
           </div>
-          
+
       </div>
     @endsection
 </body>

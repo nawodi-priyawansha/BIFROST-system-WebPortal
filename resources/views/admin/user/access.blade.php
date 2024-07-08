@@ -29,7 +29,7 @@
                     </strong></span>
             </div>
             <div>
-                <h1 class="text-2xl font-bold mb-5"> Access</h1>
+                <h1 class="text-2xl font-semibold mb-5"> Access</h1>
             </div>
             @foreach ($users as $user)
                 <div class="card bg-white p-4 rounded-lg shadow-md border mb-4">
@@ -182,7 +182,7 @@
                             </td>
                         </tr>
 
-                        <tr class="border-b flex flex-col sm:table-row">
+                        <tr class="border-b flex flex-col sm:table-row text-sm">
                             <td class="py-2 pr-6  text-gray-700 sm:w-1/4">Access Type</td>
                             <td class="access-type flex items-center py-2  sm:pl-0 sm:w-3/4">
                                 <input type="checkbox" id="readOnly" class="mr-2"
@@ -191,31 +191,31 @@
                                 <label for="readOnly">Read Only</label>
                             </td>
                         </tr>
-                        <tr class="border-b flex flex-col sm:table-row">
+                        <tr class="border-b flex flex-col sm:table-row text-sm">
                             <td class="py-2 pr-6  text-gray-700 sm:w-1/4"></td>
                             <td class="access-type flex items-center py-2  sm:pl-0 sm:w-3/4">
                                 <div class="flex gap-6">
 
                                     <button id="editAction_{{ $user->id }}" class="text-black flex items-center"
                                         onclick="editAction({{ $user->id }})">
-                                        <i class="fas fa-edit mr-1"></i>
+                                        <i class="bi bi-pencil mr-1"></i>
                                         <span>Edit</span>
                                     </button>
                                     <button id="saveAction_{{ $user->id }}" class="text-black items-center hidden"
                                         onclick="saveAction({{ $user->id }})">
-                                        <i class="fas fa-save mr-1"></i>
+                                        <i class="bi bi-floppy mr-1"></i>
                                         <span>Save</span>
                                     </button>
 
                                     <button id="deleteAction_{{ $user->id }}" class=" text-black flex items-center"
                                         onclick="deleteAction({{ $user->id }})">
-                                        <i class="fa-solid fa-trash mr-1"></i>
+                                        <i class="bi bi-trash mr-1"></i>
                                         <i>Delete</i>
                                     </button>
 
                                     <button id="resetPinAction_{{ $user->id }}"
                                         class=" text-black flex items-center"onclick="resetAction({{ $user->id }})">
-                                        <i class="fa-solid fa-rotate-right mr-1"></i>
+                                        <i class="bi bi-arrow-clockwise mr-1"></i>
                                         <i>Reset Pin</i>
                                     </button>
                                 </div>
@@ -234,7 +234,7 @@
             <div class="flex justify-center mt-4">
                 <!-- Previous Button -->
                 <a href="{{ route('previous.show', $minId) }}"
-                    class="flex items-center justify-center px-3 h-8 me-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                    class="flex items-center justify-center px-3 h-8 me-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700">
                     <svg class="w-3.5 h-3.5 me-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                         fill="none" viewBox="0 0 14 10">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -243,7 +243,7 @@
                     Previous
                 </a>
                 <a href="{{ route('user.show', ['user' => $nextId]) }}"
-                    class="flex items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                    class="flex items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 ">
                     Next
                     <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                         fill="none" viewBox="0 0 14 10">

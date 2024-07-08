@@ -20,7 +20,7 @@
                 <a href="#" class="text-gray-500 hover:underline ml-4">Home</a> / <span><strong class="font-source-sans"> Workout
                         Library </strong></span>
                 <div class="flex justify-between p-5">
-                    <h1 class="text-2xl  font-medium mb-5 font-source-sans"> Workout Library</h1>
+                    <h1 class="text-2xl  font-medium mb-5 font-semibold font-source-sans"> Workout Library</h1>
                     <button id="openPopupBtn" class="bg-black h-10 px-6 text-white rounded-md">+ ADD</button>
 
                     {{-- pop up view start --}}
@@ -40,7 +40,7 @@
                                     @csrf
                                     <input type="hidden" id="workoutId" name="id">
                                     <div class="flex items-center space-x-4">
-                                        <label for="category" class="w-32 font-semibold">Category <span
+                                        <label for="category" class="w-32">Category <span
                                                 class="text-red-500">*</span></label>
                                         <select id="category" name="category"
                                             class="p-2 border border-gray-300 rounded flex-1">
@@ -52,7 +52,7 @@
                                     </div>
 
                                     <div class="flex items-center space-x-4">
-                                        <label for="type" class="w-32 font-semibold">Type <span
+                                        <label for="type" class="w-32">Type <span
                                                 class="text-red-500">*</span></label>
                                         <select id="type" name="type"
                                             class="p-2 border border-gray-300 rounded flex-1">
@@ -64,14 +64,14 @@
                                     </div>
 
                                     <div class="flex items-center space-x-4">
-                                        <label for="workout" class="w-32 font-semibold">Workout <span
+                                        <label for="workout" class="w-32">Workout <span
                                                 class="text-red-500">*</span></label>
                                         <input type="text" id="workout" name="workout"
                                             class="p-2 border border-gray-300 rounded flex-1">
                                     </div>
 
                                     <div class="flex items-center space-x-4">
-                                        <label for="link" class="w-32 font-semibold">Link <span
+                                        <label for="link" class="w-32">Link <span
                                                 class="text-red-500">*</span></label>
                                         <input type="url" id="link" name="link"
                                             class="p-2 border border-gray-300 rounded flex-1">
@@ -92,7 +92,7 @@
                     </div>
                     {{-- pop up view end --}}
                 </div>
-
+.
                 <div class="bg-white p-5 rounded-lg shadow-md">
                     <table class="w-full border-collapse mb-5 text-sm">
                         <thead>
@@ -123,15 +123,15 @@
                                     </td>
                                     <td dir="rtl" class="p-3 border-s-2 border-y-2 border-gray-300 ">
                                         <div class="flex space-x-3 ">
-                                            <form action="{{ route('workout-library.delete', ['id' => $workoutLibrary->id]) }}" method="POST">
+                                            <form action="{{ route('workout-library.delete', ['id' => $workoutLibrary->id]) }}" method="POST" dir="ltr">
                                                 @csrf
                                                 @method('DELETE')
-                    
-                                                <a href="#" onclick="edit({{ $workoutLibrary->id }}, '{{ $workoutLibrary->categoryOption->category_name }}', '{{ $workoutLibrary->type }}', '{{ $workoutLibrary->workout }}', '{{ $workoutLibrary->link }}')" class="mr-8">
+
+                                                <a dir="ltr" href="#" onclick="edit({{ $workoutLibrary->id }}, '{{ $workoutLibrary->categoryOption->category_name }}', '{{ $workoutLibrary->type }}', '{{ $workoutLibrary->workout }}', '{{ $workoutLibrary->link }}')" class="mr-8">
                                                     <i class="text-[#fd8300] bi bi-pencil"></i>
                                                     <span class="text-black">Edit</span>
                                                 </a>
-                                                <button type="submit" class="mr-7" onclick="return confirm('Are you sure you want to delete this entry?')">
+                                                <button dir="ltr" type="submit" class="mr-7" onclick="return confirm('Are you sure you want to delete this entry?')">
                                                     <i class="text-[#fd8300] bi bi-trash"></i> Delete
                                                 </button>
                                             </form>

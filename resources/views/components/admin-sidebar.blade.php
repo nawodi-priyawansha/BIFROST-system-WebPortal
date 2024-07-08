@@ -12,12 +12,12 @@
 <body>
     <!-- Sidebar -->
     <aside id="sidebar"
-        class="relative  bg-white h-full transition-all duration-700 flex flex-col text-lg mt-20 transition-width">
+        class="relative  bg-white h-full transition-all duration-700 flex flex-col text-base mt-20 transition-width">
 
         <ul class="flex flex-col space-y-1 overflow-y-auto overflow-x-hidden scrollbar">
             <li>
                 <a href="{{ route('admindashboard') }}"
-                    class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300">
+                    class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300 {{ request()->routeIs('admindashboard') ? 'bg-[#F4F4F4] text-black' : 'text-black' }}">
                     <!-- Icon -->
                     <i class="bi bi-grid-3x3-gap w-5 h-5 m-3" onclick="toggleSidebar()"></i>
                     <!-- Text -->
@@ -27,7 +27,7 @@
             </li>
             <li>
                 <a href="{{ route('admindaaccess') }}"
-                    class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300">
+                    class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300 {{ request()->routeIs('admindaaccess') ? 'bg-[#F4F4F4] text-black' : 'text-black' }}">
                     <!-- Icon -->
                     <i class="bi bi-key w-5 h-5 m-3" onclick="toggleSidebar()"></i>
                     <!-- Text -->
@@ -37,7 +37,7 @@
             </li>
             <li>
                 <a href="{{ route('viewadminclientmanagement') }}"
-                    class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300">
+                    class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300 {{ request()->routeIs('viewadminclientmanagement') ? 'bg-[#F4F4F4] text-black' : 'text-black' }}">
                     <!-- Icon -->
                     <i class="bi bi-people w-5 h-5 m-3" onclick="toggleSidebar()"></i>
                     <!-- Text -->
@@ -47,7 +47,7 @@
             </li>
             <li>
                 <a href="{{ route('viewworkoutlibrary') }}"
-                    class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300">
+                    class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300 {{ request()->routeIs('viewworkoutlibrary') ? 'bg-[#F4F4F4] text-black' : 'text-black' }}">
                     <!-- Icon -->
                     <i class="bi bi-person-gear w-5 h-5 m-3" onclick="toggleSidebar()"></i>
                     <!-- Text -->
@@ -57,7 +57,7 @@
             </li>
             <li>
                 <a href="{{ route('viewsession') }}"
-                    class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300">
+                    class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300 {{ request()->routeIs('viewsession') ? 'bg-[#F4F4F4] text-black' : 'text-black' }}">
                     <!-- Icon -->
                     <i class="bi bi-list-check w-5 h-5 m-3" onclick="toggleSidebar()"></i>
                     <!-- Text -->
@@ -67,7 +67,7 @@
             </li>
             <li>
                 <a href="{{ route('adminfinancial') }}"
-                    class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300">
+                    class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300 {{ request()->routeIs('adminfinancial') ? 'bg-[#F4F4F4] text-black' : 'text-black' }}">
                     <!-- Icon -->
                     <i class="bi bi-coin w-5 h-5 m-3" onclick="toggleSidebar()"></i>
                     <!-- Text -->
@@ -77,7 +77,7 @@
             </li>
             <li>
                 <a href="{{ route('viewviewcommunication') }}"
-                    class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300">
+                    class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300 {{ request()->routeIs('viewviewcommunication') ? 'bg-[#F4F4F4] text-black' : 'text-black' }}">
                     <!-- Icon -->
                     <i class="bi bi-broadcast-pin w-5 h-5 m-3" onclick="toggleSidebar()"></i>
                     <!-- Text -->
@@ -87,7 +87,7 @@
             </li>
             <li>
                 <a href="{{ route('viewviewstatistics') }}"
-                    class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300">
+                    class="flex items-center space-x-2 py-2 px-4 rounded-md text-black transition-colors duration-300 {{ request()->routeIs('viewviewstatistics') ? 'bg-[#F4F4F4] text-black' : 'text-black' }}">
                     <!-- Icon -->
                     <i class="bi bi-bar-chart w-5 h-5 m-3" onclick="toggleSidebar()"></i>
                     <!-- Text -->

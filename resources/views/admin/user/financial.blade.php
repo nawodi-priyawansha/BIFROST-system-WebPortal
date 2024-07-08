@@ -23,7 +23,7 @@
     @section('content')
         <div class="container overflow-y-auto overflow-x-auto w-full" id="container">
 
-            <div class="flex flex-col md:mt-24 md:flex-row text-start mt-24">
+            <div class="flex flex-col md:mt-24 md:flex-row text-start mt-24 text-sm">
                 <span class=" text-gray-500"> Home <span> /</span> <span
                         class="text-black font-bold">Financial</span></span>
             </div>
@@ -36,7 +36,7 @@
                             DASHBOARD
                         </a>
                         <a href="#" aria-current="page"
-                            class="inline-block p-4  bg-lightgrey shadow  border-b-2 rounded-none border-transparent px-5 pt-0 pb-0 dark:text-blue-500 dark:border-blue-500  text-gray-800 border-gray-200 hover:bg-black hover:text-white hover:font-bold font-bold font-sans text-base leading-10 mb-4" style="font-size:14px; font-weight: 600;">
+                            class="inline-block p-4  bg-lightgrey shadow  border-b-2 rounded-none border-transparent px-5 pt-0 pb-0    text-gray-800 border-gray-200 hover:bg-black hover:text-white hover:font-bold font-bold font-sans text-base leading-10 mb-4" style="font-size:14px; font-weight: 600;">
                             INVOICES
                         </a>
                         <a href="#" aria-current="false"
@@ -71,30 +71,30 @@
                     </div>
 
                 <div
-                    class="relative w-96 h-20 font-bold text-center pt-4 text-white text-3xl bg-littlegreen lg:mr-16 md:mr-16">
+                    class="relative w-96 h-20 font-bold text-center pt-4 text-white text-4xl bg-littlegreen lg:mr-16 md:mr-16">
                     $1,500.00</div>
-                <div class="relative w-96 h-20 font-bold text-center pt-4 text-black text-3xl shadow-md bg-white">
+                <div class="relative w-96 h-20 font-bold text-center pt-4 text-black text-4xl shadow-md bg-white">
                     $500.00
                     <div class="absolute top-0 left-0 ml-2 mt-2 text-sm font-normal text-black">GST</div>
                     <div class="absolute bottom-0 right-0 mr-2 mb-2 text-sm font-normal text-black">PAYABLE</div>
                 </div>
             </div>
             <div class="flex flex-wrap items-center justify-center"><a href=""
-                    class=" text-black  mt-10 underline ">View to Date</a></div>
+                    class=" text-black  mt-10 underline text-sm">View to Date</a></div>
             {{-- end year date segement --}}
 
                 {{-- year naviagate --}}
                 <div class=" w-full container whitespace-nowrap  ">
                     <div class=" w-auto flex-nowrap whitespace-nowrap mt-10 " id="conatiner">
                         <div class="flex justify-between  border-black border-b py-2">
-                            <span class="text-xl "> June 2017</span>
-                            <span class="  text-2xl font-bold">
+                            <span class="text-2xl "> June 2017</span>
+                            <span class="  text-3xl font-bold">
                                 <i class="fa fa-angle-left mr-2" aria-hidden="true" style="font-size: 1.5rem;"></i>
                                 2017-2018
                                 <i class="fa fa-angle-right ml-2" aria-hidden="true" style="font-size: 1.5rem;"></i>
                             </span>
 
-                            <span class="text-xl ">June 2018 </span>
+                            <span class="text-2xl ">June 2018 </span>
                         </div>
 
                     <div
@@ -169,7 +169,7 @@
                             <div class="text-xs">May</div>
                             <div class="text-xs">$10,000</div>
                         </div>
-                        <div class="w-auto flex-1 text-center p-2 border flex-nowrap border-black ">
+                        <div class="w-auto flex-1 text-center p-2 border flex-nowrap border-black hover:bg-black hover:text-white hover:font-bold">
                             <div class="text-xs">June</div>
                             <div class="text-xs">$0,000,000</div>
                         </div>
@@ -189,121 +189,121 @@
                 <div class=" w-auto md:flex gap-4">
                     <div class="w-4/12 md:flex gap-4 bg-white rounded-lg shadow-lg ">
                         <!-- Content for the first part (4/12 width) -->
-                        <div class="w-1/2 grid md:flex flex-col gap-4 flex-1">
-                            <div class="bg-white p-4 rounded shadow flex-1">
-                                <h2 class="text-xl font-bold mb-4 text-center">Profit and Loss</h2>
+                        <div class="w-1/2 grid md:flex flex-col flex-1">
+                            <div class="bg-white p-2 rounded shadow flex-1 ">
+                                <h2 class="text-[28px] font-bold  mb-4 text-center ">Profit and Loss</h2>
                                 <div>
-                                    <div class="flex justify-between w-full border-black border-b py-2 ">
+                                    <div class="flex justify-between text-[12px] w-full border-black border-b py-2 ">
                                         <span>Name</span><span>Amount</span>
                                     </div>
-                                    <div class="flex justify-between w-full border-black border-b py-2"><span>Total
+                                    <div class="flex justify-between w-full text-[12px] border-black border-b py-2"><span>Total
                                             Income</span><span>$2500.00</span></div>
-                                    <div class="flex justify-between w-full border-black border-b py-2">
+                                    <div class="flex justify-between w-full text-[12px] border-black border-b py-2">
                                         <span>Wages</span><span>$1500.00</span>
                                     </div>
-                                    <div class="flex justify-between w-full  border-black border-b py-2"><span>Gross
+                                    <div class="flex justify-between w-full text-[12px]  border-black border-b py-2"><span>Gross
                                             Profit</span><span>$1000.00</span></div>
-                                    <div class="flex justify-between w-full border-black border-b py-2">
+                                    <div class="flex justify-between w-full text-[12px] border-black border-b py-2">
                                         <span>Expenses</span><span>$500.00</span>
                                     </div>
-                                    <div class="flex justify-between w-full  border-black border-b py-2 font-bold">
+                                    <div class="flex justify-between w-full text-[12px]  border-black border-b py-2 font-bold">
                                         <span>Net
                                             Profit</span><span>$1000.00</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="bg-white p-4 rounded shadow flex-1 flex-grow">
-                                <h2 class="text-xl font-bold mb-4">Invoices</h2>
+                            <div class="bg-white text-center rounded shadow flex-1 flex-grow mt-9">
+                                <h2 class="text-[28px] text-center  font-bold mb-4">Invoices</h2>
                                 <div class="">
                                     <canvas id="donut-chart"></canvas>
                                 </div>
                             </div>
                         </div>
 
-                            <div class="w-1/2 grid md:flex flex-col gap-4 flex-1 h-[675px] ">
+                            <div class="w-1/2 grid md:flex flex-col gap-4 flex-1 h-[425px] ">
                                 <div class="bg-whit p-2 rounded shadow flex-1  ">
-                                    <h2 class="text-xl font-bold mb-4 text-center">Cash Balance</h2>
-                                    <p>Last Month</p>
-                                    <p class="text-[#31c7a2] text-2xl font-bold text-center mt-8">$3,051.00</p>
-                                    <p class=" mt-10">Cash Balance</p>
-                                    <p class="text-[#fb1018] text-2xl font-bold text-center  mt-10">$3,051.00</p>
+                                    <h2 class="text-[28px] font-bold mb-4 text-center">Cash Balance</h2>
+                                    <p class="text-[17px]">Last Month</p>
+                                    <p class="text-[#31c7a2] text-3xl font-bold text-center mt-5">$3,051.00</p>
+                                    <p class="text-[17px] mt-10">Cash Balance</p>
+                                    <p class="text-[#fb1018] text-3xl font-bold text-center  mt-10">$3,051.00</p>
                                 </div>
 
-                                <div class="bg-white p-4 rounded shadow flex-1 flex-grow">
+                                <div class="bg-white p-2 rounded shadow flex-1 flex-grow">
                                     <div class="space-y-5">
                                         <!-- Progress -->
                                         <div>
-                                            <h2 class="text-xl font-bold mb-4 text-center">Owed</h2>
+                                            <h2 class="text-[28px] font-bold mb-4 text-center">Owed</h2>
                                             <div class="mb-2 flex justify-between items-center">
-                                                <h3 class="text-xs font-semibold text-gray-800 dark:text-white">Owed 0 - 14
+                                                <h3 class="text-xs font-semibold text-gray-800 ">Owed 0 - 14
                                                     days
                                                 </h3>
-                                                <span class="text-xs text-gray-800 dark:text-white">
+                                                <span class="text-xs text-gray-800 ">
                                                     $26,4523.25</span>
                                             </div>
-                                            <div class="flex w-full h-2 bg-gray-200 rounded-full overflow-hidden dark:bg-neutral-700"
+                                            <div class="flex w-full h-2 bg-gray-200 rounded-full overflow-hidden "
                                                 role="progressbar" aria-valuenow="25" aria-valuemin="0"
                                                 aria-valuemax="100">
-                                                <div class="flex flex-col justify-center rounded-full overflow-hidden bg-[#14befd] text-xs text-white text-center whitespace-nowrap transition duration-500 dark:bg-blue-500"
+                                                <div class="flex flex-col justify-center rounded-full overflow-hidden bg-[#14befd] text-xs text-white text-center whitespace-nowrap transition duration-500 "
                                                     style="width: 95%"></div>
                                             </div>
                                         </div>
                                         <div>
                                             <div class="mb-2 flex justify-between items-center">
-                                                <h3 class="text-xs font-semibold text-gray-800 dark:text-white">Owed 14 -
+                                                <h3 class="text-xs font-semibold text-gray-800 e">Owed 14 -
                                                     30
                                                     days
                                                 </h3>
                                                 <span class="text-xs text-gray-800 dark:text-white">$26,4523.25</span>
                                             </div>
-                                            <div class="flex w-full h-2 bg-gray-200 rounded-full overflow-hidden dark:bg-neutral-700"
+                                            <div class="flex w-full h-2 bg-gray-200 rounded-full overflow-hidden "
                                                 role="progressbar" aria-valuenow="25" aria-valuemin="0"
                                                 aria-valuemax="100">
-                                                <div class="flex flex-col justify-center rounded-full overflow-hidden bg-[#14befd] text-xs text-white text-center whitespace-nowrap transition duration-500 dark:bg-blue-500"
+                                                <div class="flex flex-col justify-center rounded-full overflow-hidden bg-[#14befd] text-xs text-white text-center whitespace-nowrap transition duration-500 "
                                                     style="width: 45%"></div>
                                             </div>
                                         </div>
                                         <div>
                                             <div class="mb-2 flex justify-between items-center">
-                                                <h3 class="text-xs font-semibold text-gray-800 dark:text-white">Owed 30 -
+                                                <h3 class="text-xs font-semibold text-gray-800 ">Owed 30 -
                                                     60
                                                     days
                                                 </h3>
-                                                <span class="text-xs text-gray-800 dark:text-white">$2,4523.25</span>
+                                                <span class="text-xs text-gray-800 ">$2,4523.25</span>
                                             </div>
-                                            <div class="flex w-full h-2 bg-gray-200 rounded-full overflow-hidden dark:bg-neutral-700"
+                                            <div class="flex w-full h-2 bg-gray-200 rounded-full overflow-hidden "
                                                 role="progressbar" aria-valuenow="25" aria-valuemin="0"
                                                 aria-valuemax="100">
-                                                <div class="flex flex-col justify-center rounded-full overflow-hidden bg-[#14befd] text-xs text-white text-center whitespace-nowrap transition duration-500 dark:bg-blue-500"
+                                                <div class="flex flex-col justify-center rounded-full overflow-hidden bg-[#14befd] text-xs text-white text-center whitespace-nowrap transition duration-500 "
                                                     style="width: 25%"></div>
                                             </div>
                                         </div>
                                         <div>
                                             <div class="mb-2 flex justify-between items-center">
-                                                <h3 class="text-xs font-semibold text-gray-800 dark:text-white">Owed 60 -
+                                                <h3 class="text-xs font-semibold text-gray-800 ">Owed 60 -
                                                     90
                                                     days
                                                 </h3>
-                                                <span class="text-xs text-gray-800 dark:text-white">$2,4523.25</span>
+                                                <span class="text-xs text-gray-800 ">$2,4523.25</span>
                                             </div>
-                                            <div class="flex w-full h-2 bg-gray-200 rounded-full overflow-hidden dark:bg-neutral-700"
+                                            <div class="flex w-full h-2 bg-gray-200 rounded-full overflow-hidden "
                                                 role="progressbar" aria-valuenow="25" aria-valuemin="0"
                                                 aria-valuemax="100">
-                                                <div class="flex flex-col justify-center rounded-full overflow-hidden bg-[#14befd] text-xs text-white text-center whitespace-nowrap transition duration-500 dark:bg-blue-500"
+                                                <div class="flex flex-col justify-center rounded-full overflow-hidden bg-[#14befd] text-xs text-white text-center whitespace-nowrap transition duration-500 "
                                                     style="width: 45%"></div>
                                             </div>
                                         </div>
                                         <div>
                                             <div class="mb-2 flex justify-between items-center">
-                                                <h3 class="text-xs font-semibold text-gray-800 dark:text-white">Owed 90+
+                                                <h3 class="text-xs font-semibold text-gray-800 ">Owed 90+
                                                     days
                                                 </h3>
-                                                <span class="text-xs text-gray-800 dark:text-white">$2,4523.25</span>
+                                                <span class="text-xs text-gray-800 ">$2,4523.25</span>
                                             </div>
-                                            <div class="flex w-full h-2 bg-gray-200 rounded-full overflow-hidden dark:bg-neutral-700"
+                                            <div class="flex w-full h-2 bg-gray-200 rounded-full overflow-hidden "
                                                 role="progressbar" aria-valuenow="25" aria-valuemin="0"
                                                 aria-valuemax="100">
-                                                <div class="flex flex-col justify-center rounded-full overflow-hidden bg-[#14befd] text-xs text-white text-center whitespace-nowrap transition duration-500 dark:bg-blue-500"
+                                                <div class="flex flex-col justify-center rounded-full overflow-hidden bg-[#14befd] text-xs text-white text-center whitespace-nowrap transition duration-500 "
                                                     style="width: 55%"></div>
                                             </div>
                                         </div>
@@ -320,9 +320,9 @@
                     </div>
 
 
-                    <div class="md:w-4/12 bg-white rounded-lg shadow-lg  ">
+                    <div class="md:w-4/12 bg-white p-2 rounded-lg shadow-lg  ">
 
-                        <h2 class="text-xl font-bold mb-4 text-center">Graph Heading</h2>
+                        <h2 class="text-[28px] font-bold mb-4 text-center">Graph Heading</h2>
                         <div class=" items-center justify-center flex"> <select
                                 class="mb-4 p-2 border rounded justify-center flex items-center">
                                 <option>View by Month</option>
@@ -405,27 +405,27 @@
                         <!-- Content for the first part (4/12 width) -->
                         <div class="w-1/2  flex flex-col  gap-4">
                             <div class=" bg-lightyellow p-4 rounded text-center shadow flex-1">
-                                <h2 class="text-xl font-bold mb-4 text-center">Accounts Receivable</h2>
-                                <p class="text-3xl font-bold text-center mt-20">$2,356.12</p>
-                                <button class="text-black text-center mt-4">Manage</button>
+                                <h2 class="text-[17px] font-bold mb-4 text-center">Accounts Receivable</h2>
+                                <p class="text-3xl font-bold text-center mt-14">$2,356.12</p>
+                                <button class="text-black text-sm text-center mt-4">Manage</button>
                             </div>
                             <div class="bg-lightyellow p-4 text-center rounded shadow flex-1">
-                                <h2 class="text-xl font-bold mb-4 text-center">Receivable Overdue</h2>
-                                <p class="text-3xl font-bold text-center mt-20">$2,356.12</p>
-                                <button class="text-black  mt-4">Debtors List</button>
+                                <h2 class="text-[17px] font-bold mb-4 text-center">Receivable Overdue</h2>
+                                <p class="text-3xl font-bold text-center mt-14">$2,356.12</p>
+                                <button class="text-black text-sm  mt-4">Debtors List</button>
                             </div>
                         </div>
                         <div class="w-1/2 flex flex-col gap-4">
                             <!-- Accounts Payable -->
                             <div class=" bg-lightyellow p-4 rounded text-center shadow flex-1">
-                                <h2 class="text-xl font-bold mb-4 text-center">Accounts Payable</h2>
+                                <h2 class="text-[17px] font-bold mb-4 text-center">Accounts Payable</h2>
                                 <p class="text-3xl font-bold text-center mt-20">$2,356.12</p>
-                                <button class="text-black text-center mt-4">Manage</button>
+                                <button class="text-black text-sm text-center mt-4">Manage</button>
                             </div>
                             <div class="bg-lightyellow p-4 rounded text-center shadow flex-1">
-                                <h2 class="text-xl font-bold mb-4 text-center">Payable Overdue</h2>
+                                <h2 class="text-[17px] font-bold mb-4 text-center">Payable Overdue</h2>
                                 <p class="text-3xl font-bold text-center mt-20">$2,356.12</p>
-                                <button class="text-black   text-center mt-4">Creditors List</button>
+                                <button class="text-black text-sm text-center mt-4">Creditors List</button>
                             </div>
                         </div>
                     </div>
@@ -440,7 +440,7 @@
                     {{-- Revenue div  --}}
                     <div class="w-4/12 md:flex">
                         <div class="bg-white rounded-lg shadow-lg p-5 w-full">
-                            <h2 class="text-center text-2xl font-bold mb-5">Revenue</h2>
+                            <h2 class="text-center text-[28px] font-bold mb-5">Revenue</h2>
                             <div class="space-y-4">
                                 <div class="flex items-center">
 
@@ -525,28 +525,27 @@
                                 </div>
                             </div>
                             <div class="mb-4 flex space-x-2 mt-16">
-                                <button class="tab-button active bg-blue-500 text-white py-2 px-4 rounded">Invoices
-                                    Paid</button>
-                                <button class="tab-button bg-gray-200 text-black py-2 px-4 rounded">Invoices
-                                    Unpaid</button>
+                                <button class="tab-button active bg-blue-500 text-white py-2 px-4 text-sm rounded hover:underline">Invoices Paid</button>
+                                <button class="tab-button text-blue-500 py-2 px-4 text-sm rounded hover:underline">Invoices Unpaid</button>
                             </div>
+
                             <div>
                                 <table class="min-w-full border-collapse border border-gray-200">
                                     <thead>
                                         <tr>
                                             <th
-                                                class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-sm leading-4 font-medium text-gray-500">
+                                                class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-[13px] leading-4 font-medium text-gray-500">
                                                 Date</th>
                                             <th
-                                                class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-sm leading-4 font-medium text-gray-500">
+                                                class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-[13px] leading-4 font-medium text-gray-500">
                                                 Client</th>
                                             <th
-                                                class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-sm leading-4 font-medium text-gray-500">
+                                                class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-[13px] leading-4 font-medium text-gray-500">
                                                 Total</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                        <tr class="text-[13px]">
                                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                                 20/05/2019
                                             </td>
@@ -556,7 +555,7 @@
                                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">$150.00
                                             </td>
                                         </tr>
-                                        <tr>
+                                        <tr class="text-[13px]">
                                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                                 04/03/2019
                                             </td>
@@ -565,7 +564,7 @@
                                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">$2,500.00
                                             </td>
                                         </tr>
-                                        <tr>
+                                        <tr class="text-[13px]">
                                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                                 04/03/2019
                                             </td>
@@ -574,7 +573,7 @@
                                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">$2,500.00
                                             </td>
                                         </tr>
-                                        <tr>
+                                        <tr class="text-[13px]">
                                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                                 20/05/2019
                                             </td>
@@ -589,7 +588,7 @@
                             </div>
 
 
-                            <div class="bg-yellow-400 text-center text-white font-bold py-2 mt-5 rounded-md">
+                            <div class="bg-yellow-400 text-center text-sm text-white  py-2 mt-5 rounded-md">
                                 No Data Found
                             </div>
                         </div>
@@ -599,7 +598,7 @@
                     {{-- start Expenses div --}}
                     <div class="w-4/12  md:flex">
                         <div class="bg-white rounded-lg shadow-lg p-5 w-full">
-                            <h2 class="text-center text-2xl font-bold mb-5">Expenses</h2>
+                            <h2 class="text-center text-[28px] font-bold mb-5">Expenses</h2>
 
                             <div class="space-y-4">
                                 <div class="flex items-center">
@@ -861,15 +860,8 @@
                                     <span class="ml-1">$90</span>
                                 </div>
 
-
-
-
-
-
-
-
                             </div>
-                            <div class="bg-yellow-400 text-center text-white font-bold py-2 mt-5 rounded-md">
+                            <div class="bg-yellow-400 text-center text-white text-sm py-2 mt-5 rounded-md">
                                 No Data Found
                             </div>
                         </div>
@@ -879,7 +871,7 @@
                     {{-- start summary   --}}
                     <div class="w-4/12  md:flex">
                         <div class="bg-white rounded-lg shadow-lg p-5 w-full">
-                            <h2 class="text-center text-2xl font-bold mb-5">Summary</h2>
+                            <h2 class="text-center text-[28px] font-bold mb-5">Summary</h2>
 
                             <div class="space-y-4">
 
@@ -1027,7 +1019,7 @@
                                 </div>
                             </div>
 
-                            <div class="bg-yellow-400 text-center text-white font-bold py-2 mt-6 rounded-md">
+                            <div class="bg-yellow-400 text-center text-white text-sm py-2 mt-6 rounded-md">
                                 No Data Found
                             </div>
                             <div class="border border-1 mt-10"></div>
