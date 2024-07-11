@@ -11,16 +11,11 @@ jobs:
     - name: Get latest code
       uses: actions/checkout@v2
 
-    - name: Set up PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: '8.2'
-
     - name: Use production env
       run: cp .env.staging .env
 
     - name: Update .env
-      run: 
+      run: |
         sed -i "s%ACTIONS_KEY%${{ secrets.key }}%g" .env
         sed -i "s%ACTIONS_URL%${{ secrets.url }}%g" .env
         sed -i "s%ACTIONS_DB_HOST%${{ secrets.db_host }}%g" .env
