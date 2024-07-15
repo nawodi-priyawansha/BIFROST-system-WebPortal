@@ -31,14 +31,14 @@
             </div>
         @endif
         <div class="flex justify-center w-full gap-4 mt-20 sm:gap-4 p-1 sm:p-1">
-            <input type="tel" maxlength="1" class="w-20 h-20 text-black text-center bg-white rounded"
-                name="pin_1" id="pin_1">
-            <input type="tel" maxlength="1" class="w-20 h-20 text-black text-center bg-white rounded"
-                name="pin_2" id="pin_2">
-            <input type="tel" maxlength="1" class="w-20 h-20 text-black text-center bg-white rounded"
-                name="pin_3" id="pin_3">
-            <input type="tel" maxlength="1" class="w-20 h-20 text-black text-center bg-white rounded"
-                name="pin_4" id="pin_4">
+            <input type="number" pattern="[0-9]*" inputmode="numeric" maxlength="1"
+                class="w-20 h-20 text-black text-center bg-white rounded" name="pin_1" id="pin_1">
+            <input type="number" pattern="[0-9]*" inputmode="numeric" maxlength="1"
+                class="w-20 h-20 text-black text-center bg-white rounded" name="pin_2" id="pin_2">
+            <input type="number" pattern="[0-9]*" inputmode="numeric" maxlength="1"
+                class="w-20 h-20 text-black text-center bg-white rounded" name="pin_3" id="pin_3">
+            <input type="number" pattern="[0-9]*" inputmode="numeric" maxlength="1"
+                class="w-20 h-20 text-black text-center bg-white rounded" name="pin_4" id="pin_4">
         </div>
 
 
@@ -122,21 +122,23 @@
         $(document).ready(function() {
             var inputs = $("#pin_1, #pin_2, #pin_3, #pin_4");
 
-            inputs.keyup(function(event) {
+            inputs.on('input', function(event) {
                 var inputId = $(this).attr('id');
                 var inputVal = $(this).val();
 
                 // Move to the next input if a digit is entered
-                if (inputVal.length == 1 && event.which >= 48 && event.which <= 57) {
+                if (inputVal.length == 1) {
                     $(this).next('input').focus();
                 }
 
-                // Move to the previous input if backspace is pressed
-                if (event.which == 8) {
+                console.log("Input changed: ", inputId, inputVal);
+            });
+
+            inputs.on('keydown', function(event) {
+                // Move to the previous input if backspace is pressed and the current input is empty
+                if (event.which == 8 && $(this).val() === '') {
                     $(this).prev('input').focus();
                 }
-
-                console.log("Input changed: ", inputId, inputVal);
             });
 
             inputs.focus(function() {
