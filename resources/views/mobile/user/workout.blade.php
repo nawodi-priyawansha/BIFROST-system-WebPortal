@@ -10,17 +10,17 @@
 <body>
     @extends('mobile.layout.mobile-layout')
     @section('content')
-        <div class="w-full flex flex-col justify-between min-h-screen h-full">
+        <div class="flex flex-col justify-between h-screen w-screen overflow-y-auto  ">
             <div class="flex-grow w-full flex items-center justify-center m-0 p-4 bg-cover bg-center bg-no-repeat"
                 style="background-image: url('{{ asset('img/valhalla-bg.jpg') }}');">
                 <div class="flex w-full flex-col justify-center items-center gap-2.5 pt-20 text-white">
-                    <div class=" flex justify-between items-center mb-6">
+                    <div class=" flex justify-between items-center text-xs">
                         <button class=" px-4 py-2 rounded">DEADLIFT</button>
                         <button class=" px-4 py-2 border rounded">ALT</button>
                     </div>
                      {{-- warmup  --}}
                      
-                     <div class="relative w-full max-w-sm  px-10 bg-black bg-opacity-50 p-4 rounded-lg text-white">
+                     <div class="relative w-full max-w-sm text-xs px-10 bg-black bg-opacity-50 p-4 rounded-lg text-white">
                         <h3 class="text-md mb-4">Set</h3>
                         <div class="absolute -rotate-90 transform -translate-y-1/2 top-1/2 text-lg left-[-1rem] font-bold">Warmup</div>
                         <div class="set-item flex items-center mb-1 justify-between">
@@ -48,9 +48,10 @@
                             </label>
                         </div>
                     </div>
+                    
                     {{-- end warmup --}}
                     {{-- table --}}
-                    <div class=" w-full bg-black bg-opacity-50 p-4 rounded-lg mb-6">
+                    <div class=" w-full bg-black text-xs bg-opacity-50 p-4 rounded-lg mb-6">
                         <table class="w-full text-white">
                             <thead class=" justify-between ">
                                 <tr>
@@ -173,8 +174,8 @@
                     </div>
                     {{-- end table --}}
 
-                    <div class="notes mb-6 w-full">
-                        <textarea placeholder="Notes" class="w-full h-20 bg-white rounded-lg p-2 border-none"></textarea>
+                    <div class="notes text-xs mb-6 w-full">
+                        <textarea placeholder="Notes" class="w-full h-20 text-black bg-white rounded-lg p-2 border-none"></textarea>
                     </div>
 
                     <button class=" px-4 py-2 rounded w-full mb-6">RESET TIMER</button>
