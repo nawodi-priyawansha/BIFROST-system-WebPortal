@@ -11,7 +11,7 @@
     @extends('mobile.layout.mobile-layout')
 
     @section('content')
-        <div class="w-full  flex flex-col justify-between h-screen h-100%">
+        <div class="flex flex-col justify-between h-screen w-screen ">
             <div class="flex-grow items-center justify-center m-0 p-4 bg-cover bg-center bg-no-repeat" style="background-image: url('{{ asset('img/valhalla-bg.jpg') }}');">
                 <div class="justify-center items-center text-white text-center h-full pt-20">
                         <div class="text-xl mb-5">Conditioning (Cardio)</div>
