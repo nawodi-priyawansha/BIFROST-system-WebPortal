@@ -114,33 +114,7 @@
                                         </select>
                                     </div>
                                     <div class="flex items-center border-b">
-                                        <label for="reps" class="w-60 block mb-1">Reps per set <span
-                                                class="text-red-500">*</span></label>
-                                        <div class="relative flex items-center max-w-[8rem]">
-                                            <button type="button"
-                                                class="decrement-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
-                                                <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true"
-                                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
-                                                    <path stroke="currentColor" stroke-linecap="round"
-                                                        stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
-                                                </svg>
-                                            </button>
-                                            <input type="text" id="reps-input" name="custom" data-input-counter
-                                                class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                placeholder="0" value="0" required />
-                                            <button type="button"
-                                                class="increment-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
-                                                <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true"
-                                                    xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                    viewBox="0 0 18 18">
-                                                    <path stroke="currentColor" stroke-linecap="round"
-                                                        stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center border-b">
-                                        <label for="custom-number" class="w-60 block mb-1">REPES <span
+                                        <label for="custom-number" class="w-60 block mb-1">SETS <span
                                                 class="text-red-500">*</span></label>
                                         <div class="relative flex items-center max-w-[8rem]">
                                             <button type="button"
@@ -152,8 +126,8 @@
                                                 </svg>
                                             </button>
                                             <input type="text" id="custom-input" name="reps" data-input-counter
-                                                class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                placeholder="0" value="0" required />
+                                                class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none"
+                                                placeholder="0" required readonly />
                                             <button type="button"
                                                 class="increment-custom bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
                                                 <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true"
@@ -166,10 +140,56 @@
                                         </div>
                                     </div>
                                     <div class="flex items-center border-b">
+                                        <label for="reps" class="w-60 block mb-1">REPS <span
+                                                class="text-red-500">*</span></label>
+                                        <div class="relative flex items-center max-w-[8rem]">
+                                            <button type="button"
+                                                class="decrement-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                                <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true"
+                                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                                                    <path stroke="currentColor" stroke-linecap="round"
+                                                        stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
+                                                </svg>
+                                            </button>
+                                            <input type="text" id="reps-input" name="custom" data-input-counter
+                                                class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none"
+                                                placeholder="0" required readonly />
+                                            <button type="button"
+                                                class="increment-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                                <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true"
+                                                    xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    viewBox="0 0 18 18">
+                                                    <path stroke="currentColor" stroke-linecap="round"
+                                                        stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center border-b">
                                         <label for="rest" class="w-60 block mb-1">Rest <span
                                                 class="text-red-500">*</span></label>
-                                        <input type="time" id="rest" name="rest"
-                                            class="w-1/3 px-3 py-2 border rounded mb-2" required>
+                                        <div class="relative flex items-center max-w-[8rem]">
+                                            <button type="button"
+                                                class="decrement-rest bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                                <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true"
+                                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                                                    <path stroke="currentColor" stroke-linecap="round"
+                                                        stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
+                                                </svg>
+                                            </button>
+                                            <input type="text" id="rest" name="rest" placeholder="00:00"
+                                                class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none"
+                                                required readonly>
+                                            <button type="button"
+                                                class="increment-rest bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                                <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true"
+                                                    xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    viewBox="0 0 18 18">
+                                                    <path stroke="currentColor" stroke-linecap="round"
+                                                        stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
+                                                </svg>
+                                            </button>
+                                        </div>
                                     </div>
                                     <div class="flex items-center border-b">
                                         <label for="intensity" class="w-60 block mb-1">Intensity <span
@@ -264,6 +284,16 @@
                                             updateCustomCounter(this, 'increment');
                                         });
                                     });
+                                    uiBlock.querySelectorAll('.decrement-rest').forEach(button => {
+                                        button.addEventListener('click', function() {
+                                            updaterestCounter(this, 'decrement');
+                                        });
+                                    });
+                                    uiBlock.querySelectorAll('.increment-rest').forEach(button => {
+                                        button.addEventListener('click', function() {
+                                            updaterestCounter(this, 'increment');
+                                        });
+                                    });
                                 }
 
                                 function updateCounter(button, action) {
@@ -292,6 +322,33 @@
                                     }
                                 }
 
+                                function updaterestCounter(button, action) {
+                                    const input = button.parentElement.querySelector('input');
+                                    let currentValue = parseInt(input.value.replace(':', ''), 10);
+                                    if (isNaN(currentValue)) {
+                                        currentValue = 0;
+                                    }
+
+                                    // Convert current value to minutes
+                                    let totalMinutes = Math.floor(currentValue / 100) * 60 + (currentValue % 100);
+
+                                    if (action === 'increment') {
+                                        totalMinutes += 15;
+                                    } else if (action === 'decrement') {
+                                        totalMinutes = Math.max(0, totalMinutes - 15); // Ensure the value does not go below 0
+                                    }
+
+                                    // Convert total minutes back to hours and minutes
+                                    const hours = Math.floor(totalMinutes / 60);
+                                    const minutes = totalMinutes % 60;
+
+                                    // Format the time as hh:mm
+                                    const formattedTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+
+                                    input.value = formattedTime;
+                                }
+
+
                                 // Attach event listeners to the initial increment and decrement buttons
                                 document.querySelectorAll('.decrement-reps').forEach(button => {
                                     button.addEventListener('click', function() {
@@ -311,6 +368,16 @@
                                 document.querySelectorAll('.increment-custom').forEach(button => {
                                     button.addEventListener('click', function() {
                                         updateCustomCounter(this, 'increment');
+                                    });
+                                });
+                                document.querySelectorAll('.decrement-rest').forEach(button => {
+                                    button.addEventListener('click', function() {
+                                        updaterestCounter(this, 'decrement');
+                                    });
+                                });
+                                document.querySelectorAll('.increment-rest').forEach(button => {
+                                    button.addEventListener('click', function() {
+                                        updaterestCounter(this, 'increment');
                                     });
                                 });
 
@@ -371,8 +438,36 @@
     <script>
         // Initialize variables
         let currentDate = new Date();
-        let selectedDate = "1day"; // Set default date to "1day"
+        let dayOfWeek = currentDate.getDay(); // Get the current day of the week (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
+        // let selectedDate = "1day"; // Set default date to "1day"
+        let selectedDate;
         let selectedTab = null;
+        // Map the dayOfWeek to the corresponding selectedDate value
+        switch (dayOfWeek) {
+            case 0:
+                selectedDate = "7day"; // Sunday
+                break;
+            case 1:
+                selectedDate = "1day"; // Monday
+                break;
+            case 2:
+                selectedDate = "2day"; // Tuesday
+                break;
+            case 3:
+                selectedDate = "3day"; // Wednesday
+                break;
+            case 4:
+                selectedDate = "4day"; // Thursday
+                break;
+            case 5:
+                selectedDate = "5day"; // Friday
+                break;
+            case 6:
+                selectedDate = "6day"; // Saturday
+                break;
+            default:
+                selectedDate = "1day"; // Default to Monday if something goes wrong
+        }
 
         // When the document content is loaded
         document.addEventListener('DOMContentLoaded', function() {
@@ -421,8 +516,8 @@
                 });
             });
 
-            // Default select first day
-            document.getElementById("1day").click();
+            // Default select Current day
+            document.getElementById(selectedDate).click();
         });
 
         // Function to change the week
@@ -563,18 +658,73 @@
         }
 
         // Define the increment and decrement functions globally
+        // function increment(inputId) {
+        //     const inputElement = document.getElementById(inputId);
+        //     let currentValue = parseInt(inputElement.value) || 0;
+        //     inputElement.value = currentValue + 1;
+        // }
+
+        // function decrement(inputId) {
+        //     const inputElement = document.getElementById(inputId);
+        //     let currentValue = parseInt(inputElement.value) || 0;
+        //     if (currentValue > 0) {
+        //         inputElement.value = currentValue - 1;
+        //     }
+        // }
         function increment(inputId) {
+            console.log(inputId);
             const inputElement = document.getElementById(inputId);
-            let currentValue = parseInt(inputElement.value) || 0;
-            inputElement.value = currentValue + 1;
+
+            if (inputId.startsWith('rest_')) {
+                updateTime(inputId, 'increment');
+            } else {
+                let currentValue = parseInt(inputElement.value) || 0;
+                inputElement.value = currentValue + 1;
+            }
         }
 
         function decrement(inputId) {
+            console.log(inputId);
             const inputElement = document.getElementById(inputId);
-            let currentValue = parseInt(inputElement.value) || 0;
-            if (currentValue > 0) {
-                inputElement.value = currentValue - 1;
+
+            if (inputId.startsWith('rest_')) {
+                updateTime(inputId, 'decrement');
+            } else {
+                let currentValue = parseInt(inputElement.value) || 0;
+                if (currentValue > 0) {
+                    inputElement.value = currentValue - 1;
+                }
             }
+        }
+
+        function updateTime(inputId, action) {
+            const inputElement = document.getElementById(inputId);
+            let currentValue = inputElement.value || '00:00';
+
+            // Extract hours and minutes from the current value
+            let [hours, minutes] = currentValue.split(':').map(num => parseInt(num, 10));
+            if (isNaN(hours)) hours = 0;
+            if (isNaN(minutes)) minutes = 0;
+
+            // Convert current value to minutes
+            let totalMinutes = hours * 60 + minutes;
+
+            // Adjust minutes based on action
+            if (action === 'increment') {
+                totalMinutes += 15;
+            } else if (action === 'decrement') {
+                totalMinutes = Math.max(0, totalMinutes - 15); // Ensure the value does not go below 0
+            }
+
+            // Convert total minutes back to hours and minutes
+            const newHours = Math.floor(totalMinutes / 60);
+            const newMinutes = totalMinutes % 60;
+
+            // Format the time as hh:mm
+            const formattedTime = `${String(newHours).padStart(2, '0')}:${String(newMinutes).padStart(2, '0')}`;
+
+            // Update the input value
+            inputElement.value = formattedTime;
         }
 
         // get workout in select category for edit
@@ -662,14 +812,30 @@
                         </div>
 
                         <div class="flex items-center border-b">
-                            <label for="reps_per_set_${detail.id}" class="w-60 block mb-1">Reps per Set <span class="text-red-500">*</span></label>
+                            <label for="reps_${detail.id}" class="w-60 block mb-1">SETS <span class="text-red-500">*</span></label>
+                            <div class="relative flex items-center max-w-[8rem]">
+                                <button type="button" class="decrement-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none" onclick="decrement('reps_input_${detail.id}')">
+                                    <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16"/>
+                                    </svg>
+                                </button>
+                                <input type="text" id="reps_input_${detail.id}" name="reps_${detail.id}" data-input-counter class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" placeholder="0" value="${detail.reps}" required readonly/>
+                                <button type="button" class="increment-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none" onclick="increment('reps_input_${detail.id}')">
+                                    <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex items-center border-b">
+                            <label for="reps_per_set_${detail.id}" class="w-60 block mb-1">REPS <span class="text-red-500">*</span></label>
                             <div class="relative flex items-center max-w-[8rem]">
                                 <button type="button" class="decrement-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none" onclick="decrement('reps_per_set_input_${detail.id}')">
                                     <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16"/>
                                     </svg>
                                 </button>
-                                <input type="text" id="reps_per_set_input_${detail.id}" name="reps_per_set_${detail.id}" data-input-counter class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="0" value="${detail.reps_per_set}" required />
+                                <input type="text" id="reps_per_set_input_${detail.id}" name="reps_per_set_${detail.id}" data-input-counter class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" placeholder="0" value="${detail.reps_per_set}" required readonly/>
                                 <button type="button" class="increment-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none" onclick="increment('reps_per_set_input_${detail.id}')">
                                     <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
@@ -678,26 +844,29 @@
                             </div>
                         </div>
 
-                        <div class="flex items-center border-b">
-                            <label for="reps_${detail.id}" class="w-60 block mb-1">REPES <span class="text-red-500">*</span></label>
-                            <div class="relative flex items-center max-w-[8rem]">
-                                <button type="button" class="decrement-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none" onclick="decrement('reps_input_${detail.id}')">
-                                    <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16"/>
-                                    </svg>
-                                </button>
-                                <input type="text" id="reps_input_${detail.id}" name="reps_${detail.id}" data-input-counter class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="0" value="${detail.reps}" required />
-                                <button type="button" class="increment-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none" onclick="increment('reps_input_${detail.id}')">
-                                    <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
 
                         <div class="flex items-center border-b">
                             <label for="rest_${detail.id}" class="w-60 block mb-1">Rest <span class="text-red-500">*</span></label>
-                            <input type="time" id="rest_${detail.id}" name="rest_${detail.id}" value="${detail.rest}" class="px-3 py-2 border flex rounded mb-2" required>
+                            <div class="relative flex items-center max-w-[8rem]">
+                                <button type="button" onclick="decrement('rest_${detail.id}')"
+                                    class="decrement-rest bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                        <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                                            <path stroke="currentColor" stroke-linecap="round"
+                                                stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
+                                        </svg>
+                                </button>
+                                <input type="text" id="rest_${detail.id}" name="rest_${detail.id}" value="${detail.rest}" class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" required readonly>
+                                <button type="button" onclick="increment('rest_${detail.id}')"
+                                    class="increment-rest bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                        <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg" fill="none"
+                                            viewBox="0 0 18 18">
+                                            <path stroke="currentColor" stroke-linecap="round"
+                                                stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
+                                        </svg>
+                                </button>
+                            </div>
                         </div>
 
                         <div class="flex items-center border-b">

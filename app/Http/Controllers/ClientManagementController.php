@@ -57,8 +57,7 @@ class ClientManagementController extends Controller
             $clientManagement->reps = $data['reps'] ?? null;
             $clientManagement->reps_per_set = $data['custom'] ?? null;
             // Format the time here
-            $restTime = DateTime::createFromFormat('H:i', $data['rest']);
-            $clientManagement->rest = $restTime ? $restTime->format('h:i') : null;
+            $clientManagement->rest = $data['rest'] ?? null;
             $clientManagement->intensity = $data['intensity'] ?? null;
             $clientManagement->date = $date;
             $clientManagement->tab = $tab;
