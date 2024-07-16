@@ -20,8 +20,10 @@
                 <a href="#" class="text-gray-500 hover:underline ml-4">Home</a> / <span><strong
                         class="font-source-sans"> Workout
                         Library </strong></span>
+
                 <div class="flex justify-between p-5">
                     <h1 class="text-2xl  font-medium mb-5 font-source-sans"> Workout Library</h1>
+
                     @if ($accessType == 'write')
                         <button id="openPopupBtn" class="bg-black h-10 px-6 text-white rounded-md">+ ADD</button>
                     @else
@@ -49,6 +51,7 @@
                                                 class="text-red-500">*</span></label>
                                         <select id="category" name="category"
                                             class="p-2 border border-gray-300 rounded flex-1">
+                                            <option value="Select" selected>--Select--</option>
                                             @foreach ($categoryOptions as $categoryOption)
                                                 <option value="{{ $categoryOption->id }}">
                                                     {{ $categoryOption->category_name }}</option>
@@ -61,6 +64,7 @@
                                                 class="text-red-500">*</span></label>
                                         <select id="type" name="type"
                                             class="p-2 border border-gray-300 rounded flex-1">
+                                            <option value="Select" selected>--Select--</option>
                                             <option value="warmup">Warmup</option>
                                             <option value="strength">Strength</option>
                                             <option value="conditioning">Conditioning</option>
@@ -97,6 +101,28 @@
                     </div>
                     {{-- pop up view end --}}
                 </div>
+                {{-- filtering --}}
+                <form class="flex flex-col md:flex-row gap-3 px-4 w-1/2" method="GET"
+                    action="{{ route('viewworkoutlibrary') }}">
+                    <select id="categoryOption" name="categoryOption"
+                        class="w-full h-10 border-2 border-black focus:outline-none focus:border-border-black text-black rounded px-2 md:px-3 py-0 md:py-1 tracking-wider">
+                        <option value="" selected>--Select--</option>
+                        @foreach ($categoryOptions as $categoryOption)
+                            <option value="{{ $categoryOption->id }}">{{ $categoryOption->category_name }}</option>
+                        @endforeach
+                    </select>
+                    <select id="type" name="type"
+                        class="w-full h-10 border-2 border-black focus:outline-none focus:border-border-black text-black rounded px-2 md:px-3 py-0 md:py-1 tracking-wider">
+                        <option value="" selected>--Select--</option>
+                        <option value="warmup">Warmup</option>
+                        <option value="strength">Strength</option>
+                        <option value="conditioning">Conditioning</option>
+                        <option value="weightlifting">Weightlifting</option>
+                    </select>
+                    <button type="submit" class="bg-black h-10 px-6 text-white rounded-md">Search</button>
+                </form>
+                {{-- filtering --}}
+
 
                 <div class="bg-white p-5 rounded-lg shadow-md">
                     <table class="w-full border-collapse mb-5 text-sm">
@@ -146,14 +172,13 @@
                                                         <i class="text-[#fd8300] bi bi-trash"></i> Delete
                                                     </button>
                                                 @else
-                                                    <p href="#"
-                                                        class="mr-8 pointer-events-none">
+                                                    <p href="#" class="mr-8 pointer-events-none">
                                                         <i class="text-[#fd8300] bi bi-pencil"></i>
                                                         <span class="text-black">Edit</span>
-                                                    </a>
-                                                    <button type="submit" class="mr-7" disabled>
-                                                        <i class="text-[#fd8300] bi bi-trash"></i> Delete
-                                                    </button>
+                                                        </a>
+                                                        <button type="submit" class="mr-7" disabled>
+                                                            <i class="text-[#fd8300] bi bi-trash"></i> Delete
+                                                        </button>
                                                 @endif
                                             </form>
                                         </div>

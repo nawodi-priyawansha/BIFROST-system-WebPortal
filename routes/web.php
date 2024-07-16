@@ -116,6 +116,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/workoutlibrary', [WorkoutLibraryController::class, 'viewworkoutlibrary'])->name('viewworkoutlibrary');
     Route::post('/save-workout-library', [WorkoutLibraryController::class, 'listworkoutlibrary'])->name('save.workoutlibrary');
     Route::delete('/workout-library/{id}',[WorkoutLibraryController::class, 'delete'])->name('workout-library.delete');
+    
     // session
     Route::get('/admin/session', [SessionController::class, 'viewsession'])->name('viewsession');
     // communication

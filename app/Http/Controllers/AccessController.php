@@ -14,9 +14,11 @@ class AccessController extends Controller
         // Fetch the first 5 users with their access types
         $users = User::join('accesses', 'users.id', '=', 'accesses.user_id')
             ->select('users.*', 'accesses.*')
+            ->whereIn('users.user_type', ['admin', 'super admin'])
             ->orderBy('accesses.id', 'asc')
             ->take(5)
             ->get();
+
         // dd($users);
         return view('admin.user.access', compact('users'));
     }
