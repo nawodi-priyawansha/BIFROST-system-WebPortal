@@ -7,10 +7,10 @@
     <title>Document</title>
 </head>
 
-<body>
+<body class=" overflow-y-auto">
     @extends('mobile.layout.mobile-layout')
     @section('content')
-        <div class="flex flex-col justify-between h-screen w-screen overflow-y-auto  ">
+        <div class="w-full flex flex-col justify-between min-h-screen h-full ">
             <div class="flex-grow w-full flex items-center justify-center m-0 p-4 bg-cover bg-center bg-no-repeat"
                 style="background-image: url('{{ asset('img/valhalla-bg.jpg') }}');">
                 <div class="flex w-full flex-col justify-center items-center gap-2.5 pt-20 text-white">
@@ -18,17 +18,20 @@
                         <button class=" px-4 py-2 rounded">DEADLIFT</button>
                         <button class=" px-4 py-2 border rounded">ALT</button>
                     </div>
-                     {{-- warmup  --}}
-                     
-                     <div class="relative w-full max-w-sm text-xs px-10 bg-black bg-opacity-50 p-4 rounded-lg text-white">
+                    {{-- warmup  --}}
+
+                    <div class="relative w-full max-w-sm text-xs px-10 bg-black bg-opacity-50 p-4 rounded-lg text-white">
                         <h3 class="text-md mb-4">Set</h3>
-                        <div class="absolute -rotate-90 transform -translate-y-1/2 top-1/2 text-lg left-[-1rem] font-bold">Warmup</div>
+                        <div class="absolute -rotate-90 transform -translate-y-1/2 top-1/2 text-lg left-[-1rem] font-bold">
+                            Warmup</div>
                         <div class="set-item flex items-center mb-1 justify-between">
                             <span>1.</span>
                             <span>Bar Only 10 Reps</span>
                             <label class="inline-flex items-center cursor-pointer">
                                 <input type="checkbox" class="sr-only peer" checked>
-                                <div class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600"></div>
+                                <div
+                                    class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
+                                </div>
                             </label>
                         </div>
                         <div class="set-item flex  items-center mb-1 justify-between">
@@ -36,7 +39,9 @@
                             <span>80kg 3 Reps</span>
                             <label class="inline-flex items-center cursor-pointer">
                                 <input type="checkbox" class="sr-only peer" checked>
-                                <div class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600"></div>
+                                <div
+                                    class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
+                                </div>
                             </label>
                         </div>
                         <div class="set-item flex  items-center justify-between">
@@ -44,53 +49,31 @@
                             <span>100kg 3 Reps</span>
                             <label class="inline-flex items-center cursor-pointer">
                                 <input type="checkbox" class="sr-only peer" checked>
-                                <div class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600"></div>
+                                <div
+                                    class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
+                                </div>
                             </label>
                         </div>
                     </div>
-                    
+
                     {{-- end warmup --}}
-                    {{-- table --}}
-                    <div class=" w-full bg-black text-xs bg-opacity-50 p-4 rounded-lg mb-6">
+                    {{-- table 1 strengrh --}}
+                    <div class="w-full bg-black text-xs bg-opacity-50 p-4 rounded-lg mb-6">
                         <table class="w-full text-white">
-                            <thead class=" justify-between ">
+                            <thead class="justify-between">
                                 <tr>
                                     <th class="py-2">Set</th>
-
-                                    <th class="px-2 ">Reps</th>
-
+                                    <th class="px-2">Reps</th>
+                                    <th class="px-2">Strength</th>
+                                    <th><i class="fa fa-caret-down toggle-icon" aria-hidden="true"></i></th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="hidden table-body"> <!-- Initially hidden table body -->
                                 <tr class="border-b border-gray-300">
                                     <td class="py-4">1.</td>
                                     <td class="py-4">150kg</td>
                                     <td class="py-4">
                                         <div class="flex items-center justify-center space-x-4">
-                                            <!-- Increased space-x to 4 -->
-                                            <button class="px-2 py-1 text-white" onclick="decrementValue(this)">-</button>
-                                            <span
-                                                class="w-16 bg-white text-black text-center rounded border-none p-1">5</span>
-                                            <button class="px-2 py-1 text-white" onclick="incrementValue(this)">+</button>
-                                        </div>
-                                    </td>
-                                    <td class="py-4">
-                                        <label class="inline-flex items-center me-5 cursor-pointer">
-                                            <input type="checkbox" value="" class="sr-only peer" checked>
-                                            <div
-                                                class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
-                                            </div>
-                                        </label>
-                                    </td>
-                                </tr>
-
-
-                                <tr class="border-b border-gray-300">
-                                    <td class="py-4">1.</td>
-                                    <td class="py-4">150kg</td>
-                                    <td class="py-4">
-                                        <div class="flex items-center justify-center space-x-4">
-                                            <!-- Increased space-x to 4 -->
                                             <button class="px-2 py-1 text-white" onclick="decrementValue(this)">-</button>
                                             <span
                                                 class="w-16 bg-white text-black text-center rounded border-none p-1">5</span>
@@ -111,7 +94,6 @@
                                     <td class="py-4">150kg</td>
                                     <td class="py-4">
                                         <div class="flex items-center justify-center space-x-4">
-                                            <!-- Increased space-x to 4 -->
                                             <button class="px-2 py-1 text-white" onclick="decrementValue(this)">-</button>
                                             <span
                                                 class="w-16 bg-white text-black text-center rounded border-none p-1">5</span>
@@ -132,7 +114,6 @@
                                     <td class="py-4">150kg</td>
                                     <td class="py-4">
                                         <div class="flex items-center justify-center space-x-4">
-                                            <!-- Increased space-x to 4 -->
                                             <button class="px-2 py-1 text-white" onclick="decrementValue(this)">-</button>
                                             <span
                                                 class="w-16 bg-white text-black text-center rounded border-none p-1">5</span>
@@ -153,7 +134,6 @@
                                     <td class="py-4">150kg</td>
                                     <td class="py-4">
                                         <div class="flex items-center justify-center space-x-4">
-                                            <!-- Increased space-x to 4 -->
                                             <button class="px-2 py-1 text-white" onclick="decrementValue(this)">-</button>
                                             <span
                                                 class="w-16 bg-white text-black text-center rounded border-none p-1">5</span>
@@ -169,10 +149,249 @@
                                         </label>
                                     </td>
                                 </tr>
+                                <!-- Add more rows as needed -->
                             </tbody>
                         </table>
                     </div>
-                    {{-- end table --}}
+
+
+
+
+
+                    {{-- end table 1 --}}
+
+
+
+
+                    {{-- table 2 conditioning --}}
+                    <div class="w-full bg-black text-xs bg-opacity-50 p-4 rounded-lg mb-6">
+                        <table class="w-full text-white">
+                            <thead class="justify-between">
+                                <tr>
+                                    <th class="py-2">Set</th>
+                                    <th class="px-2">Reps</th>
+                                    <th class="px-2">Conditioning</th>
+                                    <th><i class="fa fa-caret-down toggle-icon cursor-pointer" aria-hidden="true"></i>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="hidden table-body"> <!-- Initially hidden table body -->
+                                <tr class="border-b border-gray-300">
+                                    <td class="py-4">1.</td>
+                                    <td class="py-4">150kg</td>
+                                    <td class="py-4">
+                                        <div class="flex items-center justify-center space-x-4">
+                                            <button class="px-2 py-1 text-white" onclick="decrementValue(this)">-</button>
+                                            <span
+                                                class="w-16 bg-white text-black text-center rounded border-none p-1">5</span>
+                                            <button class="px-2 py-1 text-white" onclick="incrementValue(this)">+</button>
+                                        </div>
+                                    </td>
+                                    <td class="py-4">
+                                        <label class="inline-flex items-center me-5 cursor-pointer">
+                                            <input type="checkbox" value="" class="sr-only peer" checked>
+                                            <div
+                                                class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
+                                            </div>
+                                        </label>
+                                    </td>
+                                </tr>
+
+                                <tr class="border-b border-gray-300">
+                                    <td class="py-4">1.</td>
+                                    <td class="py-4">150kg</td>
+                                    <td class="py-4">
+                                        <div class="flex items-center justify-center space-x-4">
+                                            <button class="px-2 py-1 text-white" onclick="decrementValue(this)">-</button>
+                                            <span
+                                                class="w-16 bg-white text-black text-center rounded border-none p-1">5</span>
+                                            <button class="px-2 py-1 text-white" onclick="incrementValue(this)">+</button>
+                                        </div>
+                                    </td>
+                                    <td class="py-4">
+                                        <label class="inline-flex items-center me-5 cursor-pointer">
+                                            <input type="checkbox" value="" class="sr-only peer" checked>
+                                            <div
+                                                class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
+                                            </div>
+                                        </label>
+                                    </td>
+                                </tr>
+
+                                <tr class="border-b border-gray-300">
+                                    <td class="py-4">1.</td>
+                                    <td class="py-4">150kg</td>
+                                    <td class="py-4">
+                                        <div class="flex items-center justify-center space-x-4">
+                                            <button class="px-2 py-1 text-white" onclick="decrementValue(this)">-</button>
+                                            <span
+                                                class="w-16 bg-white text-black text-center rounded border-none p-1">5</span>
+                                            <button class="px-2 py-1 text-white" onclick="incrementValue(this)">+</button>
+                                        </div>
+                                    </td>
+                                    <td class="py-4">
+                                        <label class="inline-flex items-center me-5 cursor-pointer">
+                                            <input type="checkbox" value="" class="sr-only peer" checked>
+                                            <div
+                                                class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
+                                            </div>
+                                        </label>
+                                    </td>
+                                </tr>
+
+                                <tr class="border-b border-gray-300">
+                                    <td class="py-4">1.</td>
+                                    <td class="py-4">150kg</td>
+                                    <td class="py-4">
+                                        <div class="flex items-center justify-center space-x-4">
+                                            <button class="px-2 py-1 text-white" onclick="decrementValue(this)">-</button>
+                                            <span
+                                                class="w-16 bg-white text-black text-center rounded border-none p-1">5</span>
+                                            <button class="px-2 py-1 text-white" onclick="incrementValue(this)">+</button>
+                                        </div>
+                                    </td>
+                                    <td class="py-4">
+                                        <label class="inline-flex items-center me-5 cursor-pointer">
+                                            <input type="checkbox" value="" class="sr-only peer" checked>
+                                            <div
+                                                class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
+                                            </div>
+                                        </label>
+                                    </td>
+                                </tr>
+                                <!-- Add more rows as needed -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    {{-- end table 2 --}}
+
+
+                    {{-- table 3 weightlifting --}}
+                    <div class="w-full bg-black text-xs bg-opacity-50 p-4 rounded-lg mb-6">
+                        <table class="w-full text-white">
+                            <thead class="justify-between">
+                                <tr>
+                                    <th class="py-2">Set</th>
+                                    <th class="px-2">Reps</th>
+                                    <th class="px-2">Weightlifting</th>
+                                    <th><i class="fa fa-caret-down toggle-icon cursor-pointer" aria-hidden="true"></i>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="hidden table-body"> <!-- Initially hidden table body -->
+                                <tr class="border-b border-gray-300">
+                                    <td class="py-4">1.</td>
+                                    <td class="py-4">150kg</td>
+                                    <td class="py-4">
+                                        <div class="flex items-center justify-center space-x-4">
+                                            <button class="px-2 py-1 text-white" onclick="decrementValue(this)">-</button>
+                                            <span
+                                                class="w-16 bg-white text-black text-center rounded border-none p-1">5</span>
+                                            <button class="px-2 py-1 text-white" onclick="incrementValue(this)">+</button>
+                                        </div>
+                                    </td>
+                                    <td class="py-4">
+                                        <label class="inline-flex items-center me-5 cursor-pointer">
+                                            <input type="checkbox" value="" class="sr-only peer" checked>
+                                            <div
+                                                class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
+                                            </div>
+                                        </label>
+                                    </td>
+                                </tr>
+                                <!-- Additional rows for weightlifting -->
+                                <tr class="border-b border-gray-300">
+                                    <td class="py-4">2.</td>
+                                    <td class="py-4">180kg</td>
+                                    <td class="py-4">
+                                        <div class="flex items-center justify-center space-x-4">
+                                            <button class="px-2 py-1 text-white" onclick="decrementValue(this)">-</button>
+                                            <span
+                                                class="w-16 bg-white text-black text-center rounded border-none p-1">6</span>
+                                            <button class="px-2 py-1 text-white" onclick="incrementValue(this)">+</button>
+                                        </div>
+                                    </td>
+                                    <td class="py-4">
+                                        <label class="inline-flex items-center me-5 cursor-pointer">
+                                            <input type="checkbox" value="" class="sr-only peer" checked>
+                                            <div
+                                                class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
+                                            </div>
+                                        </label>
+                                    </td>
+                                </tr>
+
+                                <tr class="border-b border-gray-300">
+                                    <td class="py-4">2.</td>
+                                    <td class="py-4">180kg</td>
+                                    <td class="py-4">
+                                        <div class="flex items-center justify-center space-x-4">
+                                            <button class="px-2 py-1 text-white" onclick="decrementValue(this)">-</button>
+                                            <span
+                                                class="w-16 bg-white text-black text-center rounded border-none p-1">6</span>
+                                            <button class="px-2 py-1 text-white" onclick="incrementValue(this)">+</button>
+                                        </div>
+                                    </td>
+                                    <td class="py-4">
+                                        <label class="inline-flex items-center me-5 cursor-pointer">
+                                            <input type="checkbox" value="" class="sr-only peer" checked>
+                                            <div
+                                                class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
+                                            </div>
+                                        </label>
+                                    </td>
+                                </tr>
+
+                                <tr class="border-b border-gray-300">
+                                    <td class="py-4">2.</td>
+                                    <td class="py-4">180kg</td>
+                                    <td class="py-4">
+                                        <div class="flex items-center justify-center space-x-4">
+                                            <button class="px-2 py-1 text-white" onclick="decrementValue(this)">-</button>
+                                            <span
+                                                class="w-16 bg-white text-black text-center rounded border-none p-1">6</span>
+                                            <button class="px-2 py-1 text-white" onclick="incrementValue(this)">+</button>
+                                        </div>
+                                    </td>
+                                    <td class="py-4">
+                                        <label class="inline-flex items-center me-5 cursor-pointer">
+                                            <input type="checkbox" value="" class="sr-only peer" checked>
+                                            <div
+                                                class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
+                                            </div>
+                                        </label>
+                                    </td>
+                                </tr>
+
+                                <tr class="border-b border-gray-300">
+                                    <td class="py-4">2.</td>
+                                    <td class="py-4">180kg</td>
+                                    <td class="py-4">
+                                        <div class="flex items-center justify-center space-x-4">
+                                            <button class="px-2 py-1 text-white" onclick="decrementValue(this)">-</button>
+                                            <span
+                                                class="w-16 bg-white text-black text-center rounded border-none p-1">6</span>
+                                            <button class="px-2 py-1 text-white" onclick="incrementValue(this)">+</button>
+                                        </div>
+                                    </td>
+                                    <td class="py-4">
+                                        <label class="inline-flex items-center me-5 cursor-pointer">
+                                            <input type="checkbox" value="" class="sr-only peer" checked>
+                                            <div
+                                                class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
+                                            </div>
+                                        </label>
+                                    </td>
+                                </tr>
+                                <!-- Repeat similar rows as needed -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    {{-- end table 3 --}}
+
+
 
                     <div class="notes text-xs mb-6 w-full">
                         <textarea placeholder="Notes" class="w-full h-20 text-black bg-white rounded-lg p-2 border-none"></textarea>
@@ -231,6 +450,19 @@
                 span.textContent = value;
             }
         </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const toggleIcons = document.querySelectorAll('.toggle-icon');
+                toggleIcons.forEach(icon => {
+                    icon.addEventListener('click', function() {
+                        const tableBody = this.closest('table').querySelector('.table-body');
+                        tableBody.classList.toggle(
+                        'hidden'); // Toggle hidden class to show/hide table body
+                    });
+                });
+            });
+        </script>
+        
     @endsection
 </body>
 

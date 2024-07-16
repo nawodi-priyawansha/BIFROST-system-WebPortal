@@ -108,6 +108,7 @@ class MobileController extends Controller
 
     public function workout()
     {
+        
         return view("mobile.user.workout");
     }
 

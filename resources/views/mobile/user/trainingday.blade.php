@@ -20,7 +20,7 @@
 
     <!-- Define content section -->
     @section('content')
-        <div class="flex flex-col justify-between h-screen w-screen ">
+        <div class="w-full flex flex-col justify-between min-h-screen h-full ">
             <!-- Background image container -->
             <div class="flex-grow items-center justify-center m-0 p-4 bg-cover bg-center bg-no-repeat"
                 style="background-image: url('{{ asset('img/valhalla-bg.jpg') }}');">
