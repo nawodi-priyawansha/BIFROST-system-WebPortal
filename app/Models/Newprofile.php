@@ -22,7 +22,7 @@ class Newprofile extends Model
         'weight',
         'bmr',
         'primary-goal',
-        'subscription-level',
+        'subscription_level',
         'profile_image',
         'user_id'
     ];

@@ -35,8 +35,7 @@
                     </div>
                     {{-- Search bar --}}
                     <div class="relative w-full mr-6">
-                        <form id="searchForm"
-                            class="flex items-end justify-end">
+                        <form id="searchForm" class="flex items-end justify-end">
                             @csrf
                             <input placeholder="e.g. Umindu Chethiya"
                                 class="rounded-full h-16 bg-transparent py-2 pl-8 pr-32 outline-none border-2 border-gray-100 shadow-md hover:outline-none"
@@ -77,7 +76,8 @@
                             </div>
                             <div class="flex flex-col">
                                 {{-- here name dispaly below ajex trough --}}
-                                <h5 id="nameDisplay" class="text-lg font-semibold overflow-hidden text-ellipsis lg:text-2xl">
+                                <h5 id="nameDisplay"
+                                    class="text-lg font-semibold overflow-hidden text-ellipsis lg:text-2xl">
                                     <!-- User's name will be displayed here -->
                                 </h5>
                                 <h6 class="text-gray-500 text-sm lg:text-lg">Male, 28 years</h6>
@@ -95,16 +95,157 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Session dashboard section -->
+                    <div class="mb-5 mt-4 lg:mt-0  text-xs">
+
+                        <div class=" bg-white shadow rounded-lg p-6 mx-4 px-4">
+                            <div class="mb-5 ">
+                                <label for=""
+                                    class="text-white p-2 px-4 rounded-md bg-[#fb1018] whitespace-nowrap font-semibold">Session
+                                    Dashboard</label>
+                            </div>
+                            <!-- Table with session details -->
+                            <div class="">
+                                <div class=" max-h-screen md:max-h-full overflow-y-hidden">
+                                    <table class="table-auto   text-xs w-full border-collapse ">
+                                        <thead class="">
+                                            <tr>
+                                                <th class="border-b-2 border-black px-4 py-2"></th>
+                                                <th class="border-b-2 border-black px-4 py-2">BENCH</th>
+                                                <th class="border-b-2 border-black px-4 py-2">DEAD LIFT</th>
+                                                <th class="border-b-2 border-black px-4 py-2">BACK SQUAT</th>
+                                                <th class="border-b-2 border-black px-4 py-2">FRONT SQUAT</th>
+                                                <th class="border-b-2 border-black px-4 py-2">C+J</th>
+                                                <th class="border-b-2 border-black px-4 py-2">SNATCH</th>
+                                                <th class="border-b-2 border-black px-4 py-2">P. CLEAN</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class=" divide-y divide-gray-100 text-center ">
+                                            <tr>
+                                                <th class="border-b-1 border-gray-300 px-4 py-2"
+                                                    style="border-right: 2px solid black;">LAITO</th>
+
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="border-b-1 border-gray-300 px-4 py-2"
+                                                    style="border-right: 2px solid black;">LAITO</th>
+
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="border-b-1 border-gray-300 px-4 py-2"
+                                                    style="border-right: 2px solid black;">LAITO</th>
+
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1  border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1  border-gray-300 px-4 py-2">230</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="border-b-1 border-gray-300 px-4 py-2"
+                                                    style="border-right: 2px solid black;">LAITO</th>
+
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="border-b-1 border-gray-300 px-4 py-2"
+                                                    style="border-right: 2px solid black;">LAITO</th>
+
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="border-b-1 border-gray-300 px-4 py-2"
+                                                    style="border-right: 2px solid black;">LAITO</th>
+
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="border-b-1 border-gray-300 px-4 py-2"
+                                                    style="border-right: 2px solid black;">LAITO</th>
+
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="border-b-1 border-gray-300 px-4 py-2"
+                                                    style="border-right: 2px solid black;">LAITO</th>
+
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                                <td class="border-b-1 border-gray-300 px-4 py-2">230</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
                 <!-- Session dashboard section -->
                 <div class="mb-5 lg:w-[70%] mt-4 lg:mt-0">
                     <div>
+                        <div>
+                            <div class=" flex bg-white shadow rounded-lg p-6 mx-4 px-4">
+                                <div class="mb-5 justify-between w-1/2">
+                                    <label for=""
+                                        class="text-white p-1 px-4 rounded-md bg-[#fb1018] whitespace-nowrap text-sm">Workout-
+                                        Deadlift</label>
+                                    <label for=""
+                                        class="text-white p-1 px-4 rounded-md bg-black whitespace-nowrap text-sm">12 july
+                                        2024</label>
 
-                        <div class=" bg-white shadow rounded-lg p-6 mx-4 px-4">
-                            <div class="mb-5">
-                                <label for=""
-                                    class="text-white p-1 px-4 rounded-md bg-[#fb1018] whitespace-nowrap text-xl">Workout-
-                                    Deadlift</label>
+
+                                </div>
+                                <div class="w-1/2 flex items-center justify-end">
+                                    <label for=""
+                                        class="text-white p-1 px-4 rounded-md bg-black whitespace-nowrap text-sm">Training App</label>
+                                </div>
                             </div>
                             <!-- Table with session details -->
                             <div class="">
@@ -300,14 +441,16 @@
             console.log('Query:', query); // Log the query being sent
 
             $.ajax({
-                url: '{{ route("users.search") }}',
+                url: '{{ route('users.search') }}',
                 type: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': $('input[name="_token"]').val(),
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                data: JSON.stringify({ query: query }),
+                data: JSON.stringify({
+                    query: query
+                }),
                 success: function(data) {
                     console.log('Success Response:', data); // Log the successful response
                     displayResults(data.user);
@@ -337,4 +480,5 @@
         }
     });
 </script>
+
 </html>

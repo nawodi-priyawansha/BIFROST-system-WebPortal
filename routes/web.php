@@ -103,6 +103,18 @@ Route::middleware(['admin'])->group(function () {
 
     // client management page
     Route::get('/admin/clientmanagement', [ClientManagementController::class, 'viewclientmanagement'])->name('viewadminclientmanagement');
+    //fetch data
+    Route::get('/save/newclient/{action?}/{id?}', [ClientManagementController::class, 'newProfileclientShow'])->name('addnewclientview');
+    //add new client
+    Route::post('/save/newclient/add', [ClientManagementController::class, 'addnewclient'])->name('newProfileclientsave');
+    //editclient
+    Route::post('/save/newclient/edit/{id}', [ClientManagementController::class, 'updatenewclient'])->name('updatenewclient');
+
+    Route::post('/clients/update',[ClientManagementController::class, 'updatenewclient'])->name(('updatenewclient'));
+    Route::delete('/profile/{id}', [ClientManagementController::class, 'deleteProfile'])->name('deleteProfile');
+    Route::get('/edit/{id}', [ClientManagementController::class, 'editclient'])->name('editclient');
+
+
     // store
     Route::post('/clients', [ClientManagementController::class, 'store'])->name('clients.store');
     // get data
