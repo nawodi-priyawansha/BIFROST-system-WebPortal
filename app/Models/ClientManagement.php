@@ -20,7 +20,7 @@ class ClientManagement extends Model
         'date',
         'tab',
     ];
-    public function workout()
+    public function workouts()
     {
         return $this->belongsTo(WorkoutLibrary::class, 'workout');
     }

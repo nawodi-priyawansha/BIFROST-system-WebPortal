@@ -19,4 +19,10 @@ class WorkoutLibrary extends Model
     {
         return $this->belongsTo(CategoryOption::class, 'category_options_id');
     }
+    // WorkoutLibrary.php (Model)
+    public function clientManagements()
+    {
+        return $this->hasMany(ClientManagement::class, 'workout'); // Assuming 'workout_id' is the foreign key
+    }
+
 }

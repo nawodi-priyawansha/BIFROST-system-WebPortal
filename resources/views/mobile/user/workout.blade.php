@@ -20,63 +20,73 @@
                     </div>
                     {{-- warmup  --}}
 
-                    <div class="relative w-full max-w-sm text-xs px-10 bg-black bg-opacity-50 p-4 rounded-lg text-white">
-                        <h3 class="text-md mb-4">Set</h3>
-                        <div class="absolute -rotate-90 transform -translate-y-1/2 top-1/2 text-lg left-[-1rem] font-bold">
-                            Warmup</div>
-                        <div class="set-item flex items-center mb-1 justify-between">
-                            <span>1.</span>
-                            <span>Bar Only 10 Reps</span>
-                            <label class="inline-flex items-center cursor-pointer">
-                                <input type="checkbox" class="sr-only peer" checked>
-                                <div
-                                    class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
-                                </div>
-                            </label>
+                    <div class="w-full bg-black text-xs bg-opacity-50 p-4 rounded-lg mb-6">
+                        <div class="w-full flex justify-between items-center text-white text-lg">
+                            <h1 class="font-bold mx-auto">Warmup</h1>
+                            <i class="fa fa-chevron-down toggle-icon" aria-hidden="true"></i>
                         </div>
-                        <div class="set-item flex  items-center mb-1 justify-between">
-                            <span>2.</span>
-                            <span>80kg 3 Reps</span>
-                            <label class="inline-flex items-center cursor-pointer">
-                                <input type="checkbox" class="sr-only peer" checked>
-                                <div
-                                    class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
-                                </div>
-                            </label>
-                        </div>
-                        <div class="set-item flex  items-center justify-between">
-                            <span>3.</span>
-                            <span>100kg 3 Reps</span>
-                            <label class="inline-flex items-center cursor-pointer">
-                                <input type="checkbox" class="sr-only peer" checked>
-                                <div
-                                    class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
-                                </div>
-                            </label>
-                        </div>
+
+                        <table class="w-full text-white hidden tablee">
+                            <thead class="justify-between">
+                                <tr>
+                                    <th class="py-2">Set</th>
+                                    <th class="px-2">Reps</th>
+                                    <th class="col-span-2"></th>
+
+                                </tr>
+                            </thead>
+                            <tbody class="table-body">
+                                @foreach ($detailswarmup as $warmupdetail)
+                                <tr class="border-b border-gray-300">
+                                    <td class="py-4">{{ $warmupdetail->reps }}</td>
+                                    <td class="py-4 workouts">{{ $warmupdetail->workouts->workout}}</td>
+                                    <td class="py-4">
+                                        <div class="flex items-center justify-center space-x-4">
+                                            <button class="px-2 py-1 text-white" onclick="decrementValue(this)">-</button>
+                                            <span
+                                                class="w-16 bg-white text-black text-center rounded border-none p-1">{{ $warmupdetail->reps_per_set }}</span>
+                                            <button class="px-2 py-1 text-white" onclick="incrementValue(this)">+</button>
+                                        </div>
+                                    </td>
+                                    <td class="py-4">
+                                        <label class="inline-flex items-center me-5 cursor-pointer">
+                                            <input type="checkbox" value="" class="sr-only peer" checked>
+                                            <div
+                                                class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
+                                            </div>
+                                        </label>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
 
                     {{-- end warmup --}}
                     {{-- table 1 strengrh --}}
                     <div class="w-full bg-black text-xs bg-opacity-50 p-4 rounded-lg mb-6">
-                        <table class="w-full text-white">
+                        <div class="w-full flex justify-between items-center text-white text-lg">
+                            <h1 class="font-bold mx-auto">Strength</h1>
+                            <i class="fa fa-chevron-down toggle-icon" aria-hidden="true"></i>
+                        </div>
+                        <table class="w-full text-white hidden tablee">
                             <thead class="justify-between">
                                 <tr>
                                     <th class="py-2">Set</th>
                                     <th class="px-2">Reps</th>
-                                    <th class="px-2">Strength</th>
-                                    <th><i class="fa fa-caret-down toggle-icon" aria-hidden="true"></i></th>
+                                    <th class="col-span-2"></th>
                                 </tr>
                             </thead>
-                            <tbody class="hidden table-body"> <!-- Initially hidden table body -->
+                            <tbody class="table-body"> <!-- Initially hidden table body -->
+                                @foreach ($detailsstrength as $strengthdetail)
                                 <tr class="border-b border-gray-300">
-                                    <td class="py-4">1.</td>
-                                    <td class="py-4">150kg</td>
+                                    <td class="py-4">{{ $strengthdetail->reps }}</td>
+                                    <td class="py-4 workouts">{{ $strengthdetail->workouts->workout}}</td>
                                     <td class="py-4">
                                         <div class="flex items-center justify-center space-x-4">
                                             <button class="px-2 py-1 text-white" onclick="decrementValue(this)">-</button>
                                             <span
-                                                class="w-16 bg-white text-black text-center rounded border-none p-1">5</span>
+                                                class="w-16 bg-white text-black text-center rounded border-none p-1">{{ $warmupdetail->reps_per_set }}</span>
                                             <button class="px-2 py-1 text-white" onclick="incrementValue(this)">+</button>
                                         </div>
                                     </td>
@@ -89,66 +99,8 @@
                                         </label>
                                     </td>
                                 </tr>
-                                <tr class="border-b border-gray-300">
-                                    <td class="py-4">1.</td>
-                                    <td class="py-4">150kg</td>
-                                    <td class="py-4">
-                                        <div class="flex items-center justify-center space-x-4">
-                                            <button class="px-2 py-1 text-white" onclick="decrementValue(this)">-</button>
-                                            <span
-                                                class="w-16 bg-white text-black text-center rounded border-none p-1">5</span>
-                                            <button class="px-2 py-1 text-white" onclick="incrementValue(this)">+</button>
-                                        </div>
-                                    </td>
-                                    <td class="py-4">
-                                        <label class="inline-flex items-center me-5 cursor-pointer">
-                                            <input type="checkbox" value="" class="sr-only peer" checked>
-                                            <div
-                                                class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
-                                            </div>
-                                        </label>
-                                    </td>
-                                </tr>
-                                <tr class="border-b border-gray-300">
-                                    <td class="py-4">1.</td>
-                                    <td class="py-4">150kg</td>
-                                    <td class="py-4">
-                                        <div class="flex items-center justify-center space-x-4">
-                                            <button class="px-2 py-1 text-white" onclick="decrementValue(this)">-</button>
-                                            <span
-                                                class="w-16 bg-white text-black text-center rounded border-none p-1">5</span>
-                                            <button class="px-2 py-1 text-white" onclick="incrementValue(this)">+</button>
-                                        </div>
-                                    </td>
-                                    <td class="py-4">
-                                        <label class="inline-flex items-center me-5 cursor-pointer">
-                                            <input type="checkbox" value="" class="sr-only peer" checked>
-                                            <div
-                                                class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
-                                            </div>
-                                        </label>
-                                    </td>
-                                </tr>
-                                <tr class="border-b border-gray-300">
-                                    <td class="py-4">1.</td>
-                                    <td class="py-4">150kg</td>
-                                    <td class="py-4">
-                                        <div class="flex items-center justify-center space-x-4">
-                                            <button class="px-2 py-1 text-white" onclick="decrementValue(this)">-</button>
-                                            <span
-                                                class="w-16 bg-white text-black text-center rounded border-none p-1">5</span>
-                                            <button class="px-2 py-1 text-white" onclick="incrementValue(this)">+</button>
-                                        </div>
-                                    </td>
-                                    <td class="py-4">
-                                        <label class="inline-flex items-center me-5 cursor-pointer">
-                                            <input type="checkbox" value="" class="sr-only peer" checked>
-                                            <div
-                                                class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
-                                            </div>
-                                        </label>
-                                    </td>
-                                </tr>
+                                @endforeach
+
                                 <!-- Add more rows as needed -->
                             </tbody>
                         </table>
@@ -165,25 +117,29 @@
 
                     {{-- table 2 conditioning --}}
                     <div class="w-full bg-black text-xs bg-opacity-50 p-4 rounded-lg mb-6">
-                        <table class="w-full text-white">
+                        <div class="w-full flex justify-between items-center text-white text-lg">
+                            <h1 class="font-bold mx-auto">Conditioning</h1>
+                            <i class="fa fa-chevron-down toggle-icon" aria-hidden="true"></i>
+                        </div>
+                        <table class="w-full text-white hidden tablee">
                             <thead class="justify-between">
                                 <tr>
                                     <th class="py-2">Set</th>
                                     <th class="px-2">Reps</th>
-                                    <th class="px-2">Conditioning</th>
-                                    <th><i class="fa fa-caret-down toggle-icon cursor-pointer" aria-hidden="true"></i>
+                                    <th class="col-span-2"></th>
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody class="hidden table-body"> <!-- Initially hidden table body -->
+                            <tbody class="table-body"> <!-- Initially hidden table body -->
+                                @foreach ($detailsconditioning as $conditioningdetail)
                                 <tr class="border-b border-gray-300">
-                                    <td class="py-4">1.</td>
-                                    <td class="py-4">150kg</td>
+                                    <td class="py-4">{{ $conditioningdetail->reps }}</td>
+                                    <td class="py-4 workouts">{{ $conditioningdetail->workouts->workout}}</td>
                                     <td class="py-4">
                                         <div class="flex items-center justify-center space-x-4">
                                             <button class="px-2 py-1 text-white" onclick="decrementValue(this)">-</button>
                                             <span
-                                                class="w-16 bg-white text-black text-center rounded border-none p-1">5</span>
+                                                class="w-16 bg-white text-black text-center rounded border-none p-1">{{ $conditioningdetail->reps_per_set }}</span>
                                             <button class="px-2 py-1 text-white" onclick="incrementValue(this)">+</button>
                                         </div>
                                     </td>
@@ -196,69 +152,7 @@
                                         </label>
                                     </td>
                                 </tr>
-
-                                <tr class="border-b border-gray-300">
-                                    <td class="py-4">1.</td>
-                                    <td class="py-4">150kg</td>
-                                    <td class="py-4">
-                                        <div class="flex items-center justify-center space-x-4">
-                                            <button class="px-2 py-1 text-white" onclick="decrementValue(this)">-</button>
-                                            <span
-                                                class="w-16 bg-white text-black text-center rounded border-none p-1">5</span>
-                                            <button class="px-2 py-1 text-white" onclick="incrementValue(this)">+</button>
-                                        </div>
-                                    </td>
-                                    <td class="py-4">
-                                        <label class="inline-flex items-center me-5 cursor-pointer">
-                                            <input type="checkbox" value="" class="sr-only peer" checked>
-                                            <div
-                                                class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
-                                            </div>
-                                        </label>
-                                    </td>
-                                </tr>
-
-                                <tr class="border-b border-gray-300">
-                                    <td class="py-4">1.</td>
-                                    <td class="py-4">150kg</td>
-                                    <td class="py-4">
-                                        <div class="flex items-center justify-center space-x-4">
-                                            <button class="px-2 py-1 text-white" onclick="decrementValue(this)">-</button>
-                                            <span
-                                                class="w-16 bg-white text-black text-center rounded border-none p-1">5</span>
-                                            <button class="px-2 py-1 text-white" onclick="incrementValue(this)">+</button>
-                                        </div>
-                                    </td>
-                                    <td class="py-4">
-                                        <label class="inline-flex items-center me-5 cursor-pointer">
-                                            <input type="checkbox" value="" class="sr-only peer" checked>
-                                            <div
-                                                class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
-                                            </div>
-                                        </label>
-                                    </td>
-                                </tr>
-
-                                <tr class="border-b border-gray-300">
-                                    <td class="py-4">1.</td>
-                                    <td class="py-4">150kg</td>
-                                    <td class="py-4">
-                                        <div class="flex items-center justify-center space-x-4">
-                                            <button class="px-2 py-1 text-white" onclick="decrementValue(this)">-</button>
-                                            <span
-                                                class="w-16 bg-white text-black text-center rounded border-none p-1">5</span>
-                                            <button class="px-2 py-1 text-white" onclick="incrementValue(this)">+</button>
-                                        </div>
-                                    </td>
-                                    <td class="py-4">
-                                        <label class="inline-flex items-center me-5 cursor-pointer">
-                                            <input type="checkbox" value="" class="sr-only peer" checked>
-                                            <div
-                                                class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
-                                            </div>
-                                        </label>
-                                    </td>
-                                </tr>
+                                @endforeach
                                 <!-- Add more rows as needed -->
                             </tbody>
                         </table>
@@ -269,25 +163,28 @@
 
                     {{-- table 3 weightlifting --}}
                     <div class="w-full bg-black text-xs bg-opacity-50 p-4 rounded-lg mb-6">
-                        <table class="w-full text-white">
+                        <div class="w-full flex justify-between items-center text-white text-lg">
+                            <h1 class="font-bold mx-auto">Weightlifting</h1>
+                            <i class="fa fa-chevron-down toggle-icon" aria-hidden="true"></i>
+                        </div>
+                        <table class="w-full text-white hidden tablee">
                             <thead class="justify-between">
                                 <tr>
                                     <th class="py-2">Set</th>
                                     <th class="px-2">Reps</th>
-                                    <th class="px-2">Weightlifting</th>
-                                    <th><i class="fa fa-caret-down toggle-icon cursor-pointer" aria-hidden="true"></i>
-                                    </th>
+                                    <th class="col-span-2"></th>
                                 </tr>
                             </thead>
-                            <tbody class="hidden table-body"> <!-- Initially hidden table body -->
+                            <tbody class="table-body"> <!-- Initially hidden table body -->
+                                @foreach ($detailsweight as $weightdetail)
                                 <tr class="border-b border-gray-300">
-                                    <td class="py-4">1.</td>
-                                    <td class="py-4">150kg</td>
+                                    <td class="py-4">{{ $weightdetail->reps }}</td>
+                                    <td class="py-4 workouts">{{ $weightdetail->workouts->workout}}</td>
                                     <td class="py-4">
                                         <div class="flex items-center justify-center space-x-4">
                                             <button class="px-2 py-1 text-white" onclick="decrementValue(this)">-</button>
                                             <span
-                                                class="w-16 bg-white text-black text-center rounded border-none p-1">5</span>
+                                                class="w-16 bg-white text-black text-center rounded border-none p-1">{{ $weightdetail->reps_per_set }}</span>
                                             <button class="px-2 py-1 text-white" onclick="incrementValue(this)">+</button>
                                         </div>
                                     </td>
@@ -300,90 +197,9 @@
                                         </label>
                                     </td>
                                 </tr>
+                                @endforeach
                                 <!-- Additional rows for weightlifting -->
-                                <tr class="border-b border-gray-300">
-                                    <td class="py-4">2.</td>
-                                    <td class="py-4">180kg</td>
-                                    <td class="py-4">
-                                        <div class="flex items-center justify-center space-x-4">
-                                            <button class="px-2 py-1 text-white" onclick="decrementValue(this)">-</button>
-                                            <span
-                                                class="w-16 bg-white text-black text-center rounded border-none p-1">6</span>
-                                            <button class="px-2 py-1 text-white" onclick="incrementValue(this)">+</button>
-                                        </div>
-                                    </td>
-                                    <td class="py-4">
-                                        <label class="inline-flex items-center me-5 cursor-pointer">
-                                            <input type="checkbox" value="" class="sr-only peer" checked>
-                                            <div
-                                                class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
-                                            </div>
-                                        </label>
-                                    </td>
-                                </tr>
 
-                                <tr class="border-b border-gray-300">
-                                    <td class="py-4">2.</td>
-                                    <td class="py-4">180kg</td>
-                                    <td class="py-4">
-                                        <div class="flex items-center justify-center space-x-4">
-                                            <button class="px-2 py-1 text-white" onclick="decrementValue(this)">-</button>
-                                            <span
-                                                class="w-16 bg-white text-black text-center rounded border-none p-1">6</span>
-                                            <button class="px-2 py-1 text-white" onclick="incrementValue(this)">+</button>
-                                        </div>
-                                    </td>
-                                    <td class="py-4">
-                                        <label class="inline-flex items-center me-5 cursor-pointer">
-                                            <input type="checkbox" value="" class="sr-only peer" checked>
-                                            <div
-                                                class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
-                                            </div>
-                                        </label>
-                                    </td>
-                                </tr>
-
-                                <tr class="border-b border-gray-300">
-                                    <td class="py-4">2.</td>
-                                    <td class="py-4">180kg</td>
-                                    <td class="py-4">
-                                        <div class="flex items-center justify-center space-x-4">
-                                            <button class="px-2 py-1 text-white" onclick="decrementValue(this)">-</button>
-                                            <span
-                                                class="w-16 bg-white text-black text-center rounded border-none p-1">6</span>
-                                            <button class="px-2 py-1 text-white" onclick="incrementValue(this)">+</button>
-                                        </div>
-                                    </td>
-                                    <td class="py-4">
-                                        <label class="inline-flex items-center me-5 cursor-pointer">
-                                            <input type="checkbox" value="" class="sr-only peer" checked>
-                                            <div
-                                                class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
-                                            </div>
-                                        </label>
-                                    </td>
-                                </tr>
-
-                                <tr class="border-b border-gray-300">
-                                    <td class="py-4">2.</td>
-                                    <td class="py-4">180kg</td>
-                                    <td class="py-4">
-                                        <div class="flex items-center justify-center space-x-4">
-                                            <button class="px-2 py-1 text-white" onclick="decrementValue(this)">-</button>
-                                            <span
-                                                class="w-16 bg-white text-black text-center rounded border-none p-1">6</span>
-                                            <button class="px-2 py-1 text-white" onclick="incrementValue(this)">+</button>
-                                        </div>
-                                    </td>
-                                    <td class="py-4">
-                                        <label class="inline-flex items-center me-5 cursor-pointer">
-                                            <input type="checkbox" value="" class="sr-only peer" checked>
-                                            <div
-                                                class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
-                                            </div>
-                                        </label>
-                                    </td>
-                                </tr>
                                 <!-- Repeat similar rows as needed -->
                             </tbody>
                         </table>
@@ -451,18 +267,22 @@
             }
         </script>
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const toggleIcons = document.querySelectorAll('.toggle-icon');
-                toggleIcons.forEach(icon => {
-                    icon.addEventListener('click', function() {
-                        const tableBody = this.closest('table').querySelector('.table-body');
-                        tableBody.classList.toggle(
-                        'hidden'); // Toggle hidden class to show/hide table body
-                    });
-                });
-            });
+            document.querySelectorAll('.toggle-icon').forEach(icon => {
+        icon.addEventListener('click', function() {
+            const table = this.parentElement.nextElementSibling;
+            if (table.classList.contains('hidden')) {
+                table.classList.remove('hidden');
+                this.classList.remove('fa-chevron-down');
+                this.classList.add('fa-minus');
+            } else {
+                table.classList.add('hidden');
+                this.classList.remove('fa-minus');
+                this.classList.add('fa-chevron-down');
+            }
+        });
+    });
         </script>
-        
+
     @endsection
 </body>
 
