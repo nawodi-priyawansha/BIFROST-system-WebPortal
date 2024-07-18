@@ -125,12 +125,12 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/get-workout', [ClientManagementController::class, 'getworkout']);
     // store
     Route::post('/client-update', [ClientManagementController::class, 'update'])->name('clients.update');
-    
+
     //workout librabry
     Route::get('/admin/workoutlibrary', [WorkoutLibraryController::class, 'viewworkoutlibrary'])->name('viewworkoutlibrary');
     Route::post('/save-workout-library', [WorkoutLibraryController::class, 'listworkoutlibrary'])->name('save.workoutlibrary');
     Route::delete('/workout-library/{id}',[WorkoutLibraryController::class, 'delete'])->name('workout-library.delete');
-    
+
     // session
     Route::get('/admin/session', [SessionController::class, 'viewsession'])->name('viewsession');
     // communication
@@ -146,8 +146,8 @@ Route::middleware(['user'])->group(function () {
     // dashboard
     Route::get('/user/dashboard', [UserDashboardController::class, 'viewdashboard'])->name('userdashboard');
     Route::post('/users/search', [UserDashboardController::class, 'search'])->name('users.search');
- 
-   
+
+
     // profile
     Route::get('/user/profile', [UserProfileController::class, 'viewprofile'])->name('userprofile');
     // Add new Profile
@@ -175,6 +175,8 @@ Route::post('/select-day',  [MobileController::class, 'selectday']);
 Route::get('/mobile/readinessscore', [MobileController::class, 'readinessscore'])->name('mobile.readinessscore');
 Route::post('/mobile/store-readiness', [MobileController::class, 'storescore']);
 
+// get workout data
+Route::post('/mobile/class-manager', [ClientManagementController::class, 'getdata'])->name('mobile.class-manager');
 Route::get('/mobile/workout', [MobileController::class, 'workout'])->name('mobile.workout');
 Route::get('/mobile/workouttimer', [MobileController::class, 'workouttimer'])->name('mobile.workouttimer');
 Route::get('/mobile/histroyview', [MobileController::class, 'histroyview'])->name('mobile.histroyview');
