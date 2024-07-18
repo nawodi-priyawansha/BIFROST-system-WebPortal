@@ -113,6 +113,8 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/clients/update',[ClientManagementController::class, 'updatenewclient'])->name(('updatenewclient'));
     Route::delete('/profile/{id}', [ClientManagementController::class, 'deleteProfile'])->name('deleteProfile');
     Route::get('/edit/{id}', [ClientManagementController::class, 'editclient'])->name('editclient');
+    Route::delete('/remove-image/{id}',[ClientManagementController::class, 'removeImage'])->name('removeImage');
+
 
 
     // store

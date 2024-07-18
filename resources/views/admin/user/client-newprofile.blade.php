@@ -21,11 +21,11 @@
                     <div>
                         <div class="justify-between flex">
                             <div><span class="text-gray-700">Home / </span>
-                                @if (request()->get('action') == 'edit')
-                                    Edit Profile
-                                @else
-                                    Add New Profile
-                                @endif
+                                @if ($action == 'edit')
+                                Edit Profile
+                            @else
+                                Add New Profile
+                            @endif
                             </div>
                             <div>
                                 <a href="{{ route('viewadminclientmanagement') }}">
@@ -38,11 +38,11 @@
                     <div>
                         <h2 class="text-black text-lg">
                             <strong>
-                                @if (request()->get('action') == 'edit')
-                                    Edit Profile
-                                @else
-                                    Add New Profile
-                                @endif
+                                @if ($action == 'edit')
+                                Edit Profile
+                            @else
+                                Add New Profile
+                            @endif
                             </strong>
                         </h2>
                     </div>
@@ -243,35 +243,35 @@
                             </div>
                             {{-- Progress Photo --}}
                             <div class=" flex">
-                                <div class="w-1/2 h-full p-2 grid grid-cols-1 md:grid-cols-2 gap-4 md:border-b">
-                                    <div class="form-group flex flex-wrap md:flex-nowrap w-full">
-                                        <label for="progress-photos"
-                                            class="block text-gray-700 font-bold w-full md:w-[34%] mb-1 md:mb-0 pr-4 whitespace-nowrap">
-                                            Progress Photos <span class="text-red-500">*</span>
+                                <div class="w-1/2 h-full p-2 grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="form-group block text-gray-700 font-bold w-full md:w-[34%] mb-1 md:mb-0 pr-4">
+                                        <label for="progress-photos" class="block text-gray-700 font-bold mb-1 md:mb-0 pr-4 whitespace-nowrap">
+                                            Profile Photos <span class="text-red-500">*</span>
                                         </label>
-                                        <div class="w-full ml-20 progress-photos flex flex-col cursor-not-allowed items-center justify-center min-h-40 h-auto border bg-[#F8F9FA] rounded  px-40 py-6"
-                                            id="progressPhotosDropArea" style="pointer-events: none;">
+                                    </div>
+                                    <div class="items-center -ml-28 flex justify-start">
+                                        <div class="progress-photos flex flex-col cursor-pointer items-center justify-center min-h-40 h-auto border bg-[#F8F9FA] rounded w-full px-4 py-6"
+                                            id="progressPhotosDropArea">
                                             <div id="uploadedFiles" class="mt-4">
                                                 <!-- Uploaded files will be shown here -->
                                                 @if (isset($member) && $member->image_paths)
                                                     @foreach (json_decode($member->image_paths) as $image)
-                                                        <div
-                                                            class="file-item mt-2 flex items-center justify-between w-full">
-                                                            <img src="{{ asset('storage/' . $image) }}"
-                                                                alt="Progress Photo"
+                                                        <div class="file-item mt-2 flex items-center justify-between w-full">
+                                                            <img src="{{ asset('storage/' . $image) }}" alt="Progress Photo"
                                                                 class="w-16 h-16 object-cover rounded mr-4">
-                                                            <button class="text-red-500 hover:text-red-700"
-                                                                disabled>Remove</button>
+                                                            <button class="text-red-500 hover:text-red-700" disabled>Remove</button>
                                                         </div>
                                                     @endforeach
                                                 @endif
                                             </div>
                                             <i class="fas fa-cloud-upload-alt text-3xl text-gray-600 mb-2"></i>
-                                            <p class="text-gray-600">File upload disabled.</p>
+                                            <p class="text-gray-600">Drop files here or click to upload.</p>
+                                            <input type="file" name="profile_image[]" id="fileInput" style="display:none;" >
                                         </div>
-
                                     </div>
+                                    
                                 </div>
+
                                 <div class="w-1/2 ">
                                     <label for="primary-goal"
                                         class=" text-gray-700 font-bold w-full border  mb-1 md:mb-0 pr-4">
@@ -426,26 +426,44 @@
                     const fileReader = new FileReader();
                     fileReader.onload = function(e) {
                         const fileUrl = e.target.result;
-                        const fileElement = document.createElement('div');
-                        fileElement.classList.add('file-item', 'mt-2', 'flex', 'items-center', 'justify-between',
+
+                        // Create elements for file display
+                        const fileItem = document.createElement('div');
+                        fileItem.classList.add('file-item', 'mt-2', 'flex', 'items-center', 'justify-between',
                             'w-full');
-                        const imageName = `img_${selectedFiles.length}`; // Generate custom name for the image
-                        fileElement.innerHTML = `
-                            <div class="flex items-center">
-                                <img src="${fileUrl}" alt="${file.name}" class="w-16 h-16 object-cover rounded mr-4" name="${imageName}">
-                                <p class="text-gray-700">${file.name}</p>
-                            </div>
-                            <button class="text-red-500 hover:text-red-700" onclick="removeFile(this)">Remove</button>
-                        `;
-                        uploadedFilesContainer.appendChild(fileElement);
+
+                        const fileContent = document.createElement('div');
+                        fileContent.classList.add('flex', 'items-center');
+
+                        const imgElement = document.createElement('img');
+                        imgElement.src = fileUrl;
+                        imgElement.alt = file.name;
+                        imgElement.classList.add('w-16', 'h-16', 'object-cover', 'rounded', 'mr-4');
+
+                        const fileNameElement = document.createElement('p');
+                        fileNameElement.textContent = file.name;
+                        fileNameElement.classList.add('text-gray-700');
+
+                        fileContent.appendChild(imgElement);
+                        fileContent.appendChild(fileNameElement);
+
+                        const removeButton = document.createElement('button');
+                        removeButton.textContent = 'Remove';
+                        removeButton.classList.add('text-red-500', 'hover:text-red-700', 'ml-2');
+                        removeButton.addEventListener('click', function() {
+                            removeFile(fileItem, file);
+                        });
+
+                        fileItem.appendChild(fileContent);
+                        fileItem.appendChild(removeButton);
+
+                        uploadedFilesContainer.appendChild(fileItem);
                     };
                     fileReader.readAsDataURL(file);
                 }
 
-                function removeFile(button) {
-                    const fileItem = button.closest('.file-item');
-                    const fileName = fileItem.querySelector('img').getAttribute('name');
-                    const index = selectedFiles.findIndex(file => file.name === fileName);
+                function removeFile(fileItem, file) {
+                    const index = selectedFiles.indexOf(file);
                     if (index !== -1) {
                         selectedFiles.splice(index, 1); // Remove file from selectedFiles array
                         updateFileInput(); // Update the hidden file input with remaining selected files
@@ -501,89 +519,6 @@
                 });
             });
         </script>
-
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                const dropArea = document.getElementById('progressPhotosDropArea');
-                const fileInput = document.getElementById('fileInput');
-                const uploadedFilesContainer = document.getElementById('uploadedFiles');
-                let selectedFiles = []; // Array to hold selected files
-
-                dropArea.addEventListener('dragover', function(e) {
-                    e.preventDefault();
-                    dropArea.classList.add('border-blue-500'); // Add border highlight when dragging over
-                });
-
-                dropArea.addEventListener('dragleave', function() {
-                    dropArea.classList.remove('border-blue-500'); // Remove border highlight when leaving
-                });
-
-                dropArea.addEventListener('drop', function(e) {
-                    e.preventDefault();
-                    dropArea.classList.remove('border-blue-500'); // Remove border highlight when dropping
-                    const files = e.dataTransfer.files;
-                    handleFiles(files);
-                });
-
-                fileInput.addEventListener('change', function(e) {
-                    const files = e.target.files;
-                    handleFiles(files);
-                });
-
-                dropArea.addEventListener('click', function() {
-                    fileInput.click();
-                });
-
-                function handleFiles(files) {
-                    files = Array.from(files); // Convert FileList to Array
-                    files.forEach(file => {
-                        displayFile(file);
-                        selectedFiles.push(file); // Store file in selectedFiles array
-                    });
-                    updateFileInput(); // Update the hidden file input with selected files
-                }
-
-                function displayFile(file) {
-                    const fileReader = new FileReader();
-                    fileReader.onload = function(e) {
-                        const fileUrl = e.target.result;
-                        const fileElement = document.createElement('div');
-                        fileElement.classList.add('file-item', 'mt-2', 'flex', 'items-center', 'justify-between',
-                            'w-full');
-                        const imageName = `img_${selectedFiles.length}`; // Generate custom name for the image
-                        fileElement.innerHTML = `
-                    <div class="flex items-center">
-                        <img src="${fileUrl}" alt="${file.name}" class="w-16 h-16 object-cover rounded mr-4" name="${imageName}">
-                        <p class="text-gray-700">${file.name}</p>
-                    </div>
-                    <button class="text-red-500 hover:text-red-700" onclick="removeFile(this)">Remove</button>
-                `;
-                        uploadedFilesContainer.appendChild(fileElement);
-                    };
-                    fileReader.readAsDataURL(file);
-                }
-
-                function removeFile(button) {
-                    const fileItem = button.closest('.file-item');
-                    const fileName = fileItem.querySelector('img').getAttribute('name');
-                    const index = selectedFiles.findIndex(file => file.name === fileName);
-                    if (index !== -1) {
-                        selectedFiles.splice(index, 1); // Remove file from selectedFiles array
-                        updateFileInput(); // Update the hidden file input with remaining selected files
-                    }
-                    fileItem.remove();
-                }
-
-                function updateFileInput() {
-                    const fileList = new DataTransfer();
-                    selectedFiles.forEach(file => {
-                        fileList.items.add(file);
-                    });
-                    fileInput.files = fileList.files;
-                }
-            });
-        </script>
-
     @endsection
 </body>
 

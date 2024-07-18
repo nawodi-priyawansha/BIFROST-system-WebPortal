@@ -12,6 +12,7 @@ use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use PhpParser\Node\Expr\FuncCall;
 
 class ClientManagementController extends Controller
@@ -303,93 +304,24 @@ class ClientManagementController extends Controller
         }
     }
 
-    // public function editclient($id)
+    public function removeImage(Request $request, $id)
+    {
+        $member = Newprofile::findOrFail($id);
+        $images = json_decode($member->image_paths, true);
+        $imageToRemove = $request->image;
 
-    // {
-    //    dd($id);
-    //     // Fetch the member from the database
-    //     $member = Newprofile::findOrFail($id);
+        // Remove the image from the storage
+        Storage::delete('public/' . $imageToRemove);
 
-    //     // Return view with member data
-    //     return view('members.edit', compact('member'));
-    // }
+        // Remove the image from the array
+        $images = array_filter($images, function ($image) use ($imageToRemove) {
+            return $image !== $imageToRemove;
+        });
 
-    // public function editClient($id)
-    // {
-    //     dd($id);
-    //     try {
-    //         // Fetch the user and associated profile
-    //         $profile = Newprofile::all();
+        // Update the member's image_paths
+        $member->image_paths = json_encode(array_values($images));
+        $member->save();
 
-    //         // Optionally, you might want to pass additional data or modify as needed
-
-    //         return view('admin.user.client-newprofile', compact('profile'));
-    //     } catch (\Exception $e) {
-    //         return redirect()->back()->withErrors(['error' => 'Error fetching client details: ' . $e->getMessage()]);
-    //     }
-    // }
-
-    // public function updateClient(Request $request, $id)
-    // {
-    //     try {
-    //         // Validate incoming request data
-    //         $validatedData = $request->validate([
-    //             'name' => 'required|string|max:255',
-    //             'nickname' => 'nullable|string|max:255',
-    //             'dob' => 'required|date',
-    //             'gender' => 'required|in:Male,Female',
-    //             'age' => 'required|integer|min:0',
-    //             'phone' => 'required|string|max:20',
-    //             'email' => 'required|email|max:255',
-    //             'address' => 'required|string|max:255',
-    //             'height' => 'required|integer|min:0',
-    //             'weight' => 'required|integer|min:0',
-    //             'bmr' => 'required|numeric|min:0',
-    //             'primary-goal' => 'required|string|max:255',
-    //             'subscription-level' => 'required|string|max:255',
-    //             'profile_image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Max 2MB per file
-    //         ]);
-
-    //         // Find the user and associated profile
-    //         $user = User::findOrFail($id);
-    //         $profile = Newprofile::where('user_id', $id)->firstOrFail();
-
-    //         // Update user data
-    //         $user->name = $validatedData['name'];
-    //         $user->email = $validatedData['email'];
-    //         $user->save();
-
-    //         // Update profile data
-    //         $profile->name = $validatedData['name'];
-    //         $profile->nickname = $validatedData['nickname'];
-    //         $profile->dob = $validatedData['dob'];
-    //         $profile->gender = $validatedData['gender'];
-    //         $profile->age = $validatedData['age'];
-    //         $profile->phone = $validatedData['phone'];
-    //         $profile->email = $validatedData['email'];
-    //         $profile->address = $validatedData['address'];
-    //         $profile->height = $validatedData['height'];
-    //         $profile->weight = $validatedData['weight'];
-    //         $profile->bmr = $validatedData['bmr'];
-    //         $profile->primary_goal = $validatedData['primary-goal'];
-    //         $profile->subscription_level = $validatedData['subscription-level'];
-
-    //         // Handle image uploads if new images are provided
-    //         if ($request->hasFile('profile_image')) {
-    //             $imagePaths = [];
-    //             foreach ($request->file('profile_image') as $file) {
-    //                 $imageName = time() . '-' . $file->getClientOriginalName();
-    //                 $filePath = $file->storeAs('profile_images', $imageName, 'public');
-    //                 $imagePaths[] = $filePath;
-    //             }
-    //             $profile->image_paths = json_encode($imagePaths); // Update image paths
-    //         }
-
-    //         $profile->save();
-
-    //         return redirect()->route('viewadminclientmanagement')->with('success', 'Profile updated successfully!');
-    //     } catch (\Exception $e) {
-    //         return redirect()->back()->withErrors(['error' => 'An error occurred: ' . $e->getMessage()])->withInput();
-    //     }
-    // }
+        return response()->json(['success' => 'Image removed successfully']);
+    }
 }
