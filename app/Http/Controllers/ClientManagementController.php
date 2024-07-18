@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use DateTime;
 use App\Models\Access;
-use Illuminate\Http\Request;
-use App\Models\WorkoutLibrary;
 use App\Models\ClientManagement;
-use PhpParser\Node\Expr\FuncCall;
+use App\Models\Newprofile;
+use App\Models\User;
+use App\Models\WorkoutLibrary;
+use Carbon\Carbon;
+use DateTime;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use PhpParser\Node\Expr\FuncCall;
 
 class ClientManagementController extends Controller
 {
@@ -19,11 +23,12 @@ class ClientManagementController extends Controller
 
         // Fetch the access record for the user
         $access = Access::where('user_id', $userId)->first();
+        $members = Newprofile::all();
 
         if ($access && $access->client_management === 'enable') {
             // Pass the access type to the view using compact
             $accessType = $access->access_type;
-            return view('admin.user.client_management', compact('accessType'));
+            return view('admin.user.client_management', compact('accessType', 'members'));
         } else {
             // Redirect to an unauthorized access view
             return view('error.unauthorized');

@@ -54,18 +54,18 @@
     </style>
 </head>
 
-<body class="overflow-y-auto">
+<body>
     @extends('mobile.layout.mobile-layout')
     @section('content')
-        <div class="w-full flex flex-col justify-between h-screen overflow-y-auto">
-            <div class="flex-grow items-center justify-center m-0 p-4 bg-cover bg-center bg-no-repeat"
+        <div class=" w-full  flex flex-col justify-between h-screen  overflow-y-auto ">
+            <div class="   flex-grow items-center justify-center m-0 p-4 bg-cover bg-center bg-no-repeat"
                 style="background-image: url('{{ asset('img/valhalla-bg.jpg') }}');">
-                <div class="bg-transparent p-6 rounded-lg shadow-md pt-24">
+                <div class="bg-transparent p-6 rounded-lg shadow-md pt-20">
 
-                    <form action="store-readiness" method="POST">
+                    <form  method="POST">
                         @csrf
                         <!-- Display selected day and date -->
-                        <div class="mb-4 flex flex-col text-center">
+                        <div class=" flex flex-col text-center">
                             <div class="w-full mb-2 text-white text-center items-center justify-center flex">Training Day
                             </div>
                             <div class="flex items-center justify-center h-8 rounded overflow">

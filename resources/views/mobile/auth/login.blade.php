@@ -30,16 +30,18 @@
                 {{ session('error') }}
             </div>
         @endif
-        <div class="flex justify-center  w-full  gap-4 mt-20 sm:gap-4 p-1  sm:p-1">
-            <input type="text" madivxlength="1" class=" w-20 h-20  text-black text-center bg-white rounded"
-                name="pin_1" id="pin_1">
-            <input type="text" maxlength="1" class="w-20 h-20   text-black text-center bg-white rounded"
-                name="pin_2" id="pin_2">
-            <input type="text" maxlength="1" class="w-20 h-20  text-black text-center bg-white rounded"
-                name="pin_3" id="pin_3">
-            <input type="text" maxlength="1" class="w-20 h-20   text-black text-center bg-white rounded"
-                name="pin_4" id="pin_4">
+        <div class="flex justify-center w-full gap-4 mt-20 sm:gap-4 p-1 sm:p-1">
+            <input type="number" pattern="[0-9]*" inputmode="numeric" maxlength="1"
+                class="w-20 h-20 text-black text-center bg-white rounded" name="pin_1" id="pin_1">
+            <input type="number" pattern="[0-9]*" inputmode="numeric" maxlength="1"
+                class="w-20 h-20 text-black text-center bg-white rounded" name="pin_2" id="pin_2">
+            <input type="number" pattern="[0-9]*" inputmode="numeric" maxlength="1"
+                class="w-20 h-20 text-black text-center bg-white rounded" name="pin_3" id="pin_3">
+            <input type="number" pattern="[0-9]*" inputmode="numeric" maxlength="1"
+                class="w-20 h-20 text-black text-center bg-white rounded" name="pin_4" id="pin_4">
         </div>
+
+
         <a href="{{ route('mobileforget.password') }}" class="text-white underline mt-10 block">Forget Pin?</a>
 
     </form>
@@ -112,6 +114,35 @@
                         inputs[index - 1].focus(); // Focus on previous input field
                     }
                 }
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            var inputs = $("#pin_1, #pin_2, #pin_3, #pin_4");
+
+            inputs.on('input', function(event) {
+                var inputId = $(this).attr('id');
+                var inputVal = $(this).val();
+
+                // Move to the next input if a digit is entered
+                if (inputVal.length == 1) {
+                    $(this).next('input').focus();
+                }
+
+                console.log("Input changed: ", inputId, inputVal);
+            });
+
+            inputs.on('keydown', function(event) {
+                // Move to the previous input if backspace is pressed and the current input is empty
+                if (event.which == 8 && $(this).val() === '') {
+                    $(this).prev('input').focus();
+                }
+            });
+
+            inputs.focus(function() {
+                console.log("Input focused: ", $(this).attr('id'));
             });
         });
     </script>

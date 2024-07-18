@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('client_managements', function (Blueprint $table) {
             $table->id();
             $table->string('category')->nullable();
-            $table->string('workout')->nullable();
+            $table->foreignId('workout')->nullable()->constrained('workout_libraries');
             $table->string('sets')->nullable();
             $table->string('reps')->nullable();
             $table->string('rest')->nullable();

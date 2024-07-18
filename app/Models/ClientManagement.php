@@ -21,7 +21,7 @@ class ClientManagement extends Model
         'tab',
         'type',
     ];
-    public function workout()
+    public function workouts()
     {
         return $this->belongsTo(WorkoutLibrary::class, 'workout');
     }
