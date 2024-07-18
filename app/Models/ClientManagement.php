@@ -13,12 +13,13 @@ class ClientManagement extends Model
     protected $fillable = [
         'category',
         'workout',
+        'sets',
         'reps',
-        'reps_per_set',
         'rest',
         'intensity',
         'date',
         'tab',
+        'type',
     ];
     public function workouts()
     {

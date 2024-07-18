@@ -15,12 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('category')->nullable();
             $table->foreignId('workout')->nullable()->constrained('workout_libraries');
+            $table->string('sets')->nullable();
             $table->string('reps')->nullable();
-            $table->string('reps_per_set')->nullable();
             $table->string('rest')->nullable();
             $table->string('intensity')->nullable();
             $table->string('date');
             $table->string('tab');
+            $table->string('type')->nullable();
             $table->timestamps();
         });
     }

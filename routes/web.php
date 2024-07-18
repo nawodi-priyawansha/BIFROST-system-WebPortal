@@ -119,13 +119,16 @@ Route::middleware(['admin'])->group(function () {
 
     // store
     Route::post('/clients', [ClientManagementController::class, 'store'])->name('clients.store');
+    // Get Category
+    Route::post('/getCategory', [ClientManagementController::class, 'getCategory'])->name('getCategory');
+
     // get data
     Route::post('/class-manager', [ClientManagementController::class, 'getdata']);
-    // get workout
+    // // get workout
     Route::post('/get-workout', [ClientManagementController::class, 'getworkout']);
-    // store
-    Route::post('/client-update', [ClientManagementController::class, 'update'])->name('clients.update');
-
+    // // store
+    // Route::post('/client-update', [ClientManagementController::class, 'update'])->name('clients.update');
+    
     //workout librabry
     Route::get('/admin/workoutlibrary', [WorkoutLibraryController::class, 'viewworkoutlibrary'])->name('viewworkoutlibrary');
     Route::post('/save-workout-library', [WorkoutLibraryController::class, 'listworkoutlibrary'])->name('save.workoutlibrary');
