@@ -20,10 +20,12 @@
                     </div>
                     {{-- warmup  --}}
 
-                    <div class="w-full bg-black text-xs bg-opacity-50 p-4 rounded-lg mb-6">
+
+        <div class="w-full bg-black text-xs bg-opacity-50 p-4 rounded-lg mb-6">
                         <div class="w-full flex justify-between items-center text-white text-lg">
                             <h1 class="font-bold mx-auto">Warmup</h1>
                             <i class="fa fa-chevron-down toggle-icon" aria-hidden="true"></i>
+
                         </div>
 
                         <table class="w-full text-white hidden tablee">
@@ -50,13 +52,14 @@
                                     </td>
                                     <td class="py-4">
                                         <label class="inline-flex items-center me-5 cursor-pointer">
-                                            <input type="checkbox" value="" class="sr-only peer" checked>
+                                            <input type="checkbox" value="" class="sr-only peer" >
                                             <div
                                                 class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
                                             </div>
                                         </label>
                                     </td>
                                 </tr>
+
                                 @endforeach
                             </tbody>
                         </table>
@@ -75,6 +78,7 @@
                                     <th class="py-2">Set</th>
                                     <th class="px-2">Reps</th>
                                     <th class="col-span-2"></th>
+
                                 </tr>
                             </thead>
                             <tbody class="table-body"> <!-- Initially hidden table body -->
@@ -92,7 +96,7 @@
                                     </td>
                                     <td class="py-4">
                                         <label class="inline-flex items-center me-5 cursor-pointer">
-                                            <input type="checkbox" value="" class="sr-only peer" checked>
+                                            <input type="checkbox" value="" class="sr-only peer" >
                                             <div
                                                 class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
                                             </div>
@@ -139,13 +143,14 @@
                                         <div class="flex items-center justify-center space-x-4">
                                             <button class="px-2 py-1 text-white" onclick="decrementValue(this)">-</button>
                                             <span
+
                                                 class="w-16 bg-white text-black text-center rounded border-none p-1">{{ $conditioningdetail->reps_per_set }}</span>
                                             <button class="px-2 py-1 text-white" onclick="incrementValue(this)">+</button>
                                         </div>
                                     </td>
                                     <td class="py-4">
                                         <label class="inline-flex items-center me-5 cursor-pointer">
-                                            <input type="checkbox" value="" class="sr-only peer" checked>
+                                            <input type="checkbox" value="" class="sr-only peer" >
                                             <div
                                                 class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
                                             </div>
@@ -190,7 +195,7 @@
                                     </td>
                                     <td class="py-4">
                                         <label class="inline-flex items-center me-5 cursor-pointer">
-                                            <input type="checkbox" value="" class="sr-only peer" checked>
+                                            <input type="checkbox" value="" class="sr-only peer" >
                                             <div
                                                 class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
                                             </div>
@@ -199,6 +204,7 @@
                                 </tr>
                                 @endforeach
                                 <!-- Additional rows for weightlifting -->
+
 
                                 <!-- Repeat similar rows as needed -->
                             </tbody>
