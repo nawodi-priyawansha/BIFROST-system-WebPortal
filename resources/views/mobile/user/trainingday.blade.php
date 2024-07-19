@@ -20,7 +20,7 @@
 
     <!-- Define content section -->
     @section('content')
-        <div class="flex flex-col justify-between h-screen w-screen ">
+        <div class="w-full flex flex-col justify-between min-h-screen h-full ">
             <!-- Background image container -->
             <div class="flex-grow items-center justify-center m-0 p-4 bg-cover bg-center bg-no-repeat"
                 style="background-image: url('{{ asset('img/valhalla-bg.jpg') }}');">
@@ -76,6 +76,9 @@
                     // Add border-white class to the selected button
                     button.querySelector('.day').classList.remove('border-black');
                     button.querySelector('.day').classList.add('border-white');
+
+                    // Redirect to readinessscore page
+                    window.location.href = '/mobile/readinessscore';
                 },
                 error: function(xhr, status, error) {
                     console.error(error); // Handle error

@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Access;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Models\Newprofile;
 use App\Models\User;
+use App\Models\Access;
+use App\Models\Newprofile;
+use App\Models\MonthlyImage;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Exception;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Carbon\Carbon;
 
 class UserProfileController extends Controller
 {
@@ -22,6 +26,56 @@ class UserProfileController extends Controller
         if ($access && $access->profile === 'enable') {
             // Pass the access type to the view using compact
             $accessType = $access->access_type;
+
+            // Retrieve searched user details from session
+            $searchedUser = Session::get('searchedUser');
+
+            // Check if $searchedUser is an array and convert it to an object if needed
+            if (is_array($searchedUser)) {
+                $searchedUser = (object) $searchedUser;
+            }
+
+            if ($searchedUser && isset($searchedUser->id)) {
+                $user = User::find($searchedUser->id);
+
+                if (!$user) {
+                    return redirect()->back()->withErrors('User not found.');
+                }
+
+                // Get the current month and two previous months
+                $months = collect();
+                for ($i = 0; $i < 3; $i++) {
+                    $date = Carbon::now()->subMonths($i);
+                    $months->push([
+                        'month' => $date->format('m'),
+                        'year' => $date->format('Y')
+                    ]);
+                }
+
+                // Fetch images for the current and previous two months
+                $images = MonthlyImage::where('user_id', $user->id)
+                    ->where(function ($query) use ($months) {
+                        foreach ($months as $month) {
+                            $query->orWhere(function ($query) use ($month) {
+                                $query->whereMonth('month', $month['month'])
+                                    ->whereYear('month', $month['year']);
+                            });
+                        }
+                    })
+                    ->get()
+                    ->groupBy(function ($item) {
+                        return Carbon::parse($item->month)->format('Y-m'); // Group by year-month
+                    });
+
+                // Pass the data to the view
+                return view('user.user.profile', [
+                    'accessType' => $accessType,
+                    'user' => $user,
+                    'images' => $images,
+                    'months' => $months
+                ]);
+            }
+
             return view('user.user.profile', compact('accessType'));
         } else {
             // Redirect to an unauthorized access view
@@ -29,6 +83,83 @@ class UserProfileController extends Controller
         }
     }
 
+    public function store(Request $request)
+    {
+        $request->validate([
+            'month' => 'required|date',
+            'front_image' => 'required|image|mimes:png,jpg,jpeg,gif,img',
+            'side_image' => 'required|image|mimes:png,jpg,jpeg,gif,img',
+            'back_image' => 'required|image|mimes:png,jpg,jpeg,gif,img',
+            'user_id' => 'required|exists:users,id',
+        ]);
+
+        try {
+            $frontImagePath = $request->file('front_image')->store('images', 'public');
+            $sideImagePath = $request->file('side_image')->store('images', 'public');
+            $backImagePath = $request->file('back_image')->store('images', 'public');
+
+            // dd($frontImagePath);
+            MonthlyImage::create([
+                'month' => $request->month,
+                'front_image' => $frontImagePath,
+                'side_image' => $sideImagePath,
+                'back_image' => $backImagePath,
+                'user_id' => $request->user_id,
+            ]);
+
+            return redirect()->back()->with('success', 'Images uploaded successfully!');
+        } catch (Exception $e) {
+            dd($e);
+        }
+    }
+
+    public function handlePrevData(Request $request)
+    {
+        // Validate the request data
+        $request->validate([
+            'date' => 'required|date_format:Y-m-d',
+            'id'   => 'required|integer|exists:users,id'
+        ]);
+
+        // Retrieve the date and user ID from the request
+        $date = $request->input('date');
+        $userId = $request->input('id');
+
+        // Convert the date to a Carbon instance
+        $currentDate = Carbon::parse($date);
+
+        // Get the current month and two previous months
+        $months = [];
+        for ($i = 0; $i < 3; $i++) {
+            $months[] = [
+                'year' => $currentDate->copy()->subMonths($i)->format('Y'),
+                'month' => $currentDate->copy()->subMonths($i)->format('m')
+            ];
+        }
+
+        // Fetch images for the current and previous two months
+        $images = MonthlyImage::where('user_id', $userId)
+            ->where(function ($query) use ($months) {
+                foreach ($months as $month) {
+                    $query->orWhere(function ($query) use ($month) {
+                        $query->whereMonth('month', $month['month'])
+                              ->whereYear('month', $month['year']);
+                    });
+                }
+            })
+            ->get()
+            ->map(function ($item) {
+                return [
+                    'month' => Carbon::parse($item->month)->format('Y-m'),
+                    'front_image' => $item->front_image,
+                    'side_image' => $item->side_image,
+                    'back_image' => $item->back_image,
+                ];
+            });
+
+        // Return the images as a JSON response
+        return response()->json($images);
+    }
     // Display new profile creation form
     public function viewnewprofile()
     {

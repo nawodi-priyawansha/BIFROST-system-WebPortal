@@ -13,14 +13,15 @@ class ClientManagement extends Model
     protected $fillable = [
         'category',
         'workout',
+        'sets',
         'reps',
-        'reps_per_set',
         'rest',
         'intensity',
         'date',
         'tab',
+        'type',
     ];
-    public function workout()
+    public function workouts()
     {
         return $this->belongsTo(WorkoutLibrary::class, 'workout');
     }

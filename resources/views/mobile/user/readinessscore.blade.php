@@ -57,12 +57,12 @@
 <body>
     @extends('mobile.layout.mobile-layout')
     @section('content')
-        <div class=" flex flex-col justify-between h-screen w-screen ">
+        <div class=" w-full  flex flex-col justify-between h-screen  overflow-y-auto ">
             <div class="   flex-grow items-center justify-center m-0 p-4 bg-cover bg-center bg-no-repeat"
                 style="background-image: url('{{ asset('img/valhalla-bg.jpg') }}');">
                 <div class="bg-transparent p-6 rounded-lg shadow-md pt-20">
 
-                    <form  method="POST">
+                    <form  method="POST" action="{{ route('mobile.storescore')}}">
                         @csrf
                         <!-- Display selected day and date -->
                         <div class=" flex flex-col text-center">
@@ -702,7 +702,7 @@
 
 
 
-            // data view 
+            // data view
             document.addEventListener("DOMContentLoaded", function() {
                 const sleepInputValue = document.getElementById('sleepInput').value;
                 const alertnessInputValue = document.getElementById('alertnessInput').value;

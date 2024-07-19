@@ -103,19 +103,37 @@ Route::middleware(['admin'])->group(function () {
 
     // client management page
     Route::get('/admin/clientmanagement', [ClientManagementController::class, 'viewclientmanagement'])->name('viewadminclientmanagement');
+    //fetch data
+    Route::get('/save/newclient/{action?}/{id?}', [ClientManagementController::class, 'newProfileclientShow'])->name('addnewclientview');
+    //add new client
+    Route::post('/save/newclient/add', [ClientManagementController::class, 'addnewclient'])->name('newProfileclientsave');
+    //editclient
+    Route::post('/save/newclient/edit/{id}', [ClientManagementController::class, 'updatenewclient'])->name('updatenewclient');
+
+    Route::post('/clients/update',[ClientManagementController::class, 'updatenewclient'])->name(('updatenewclient'));
+    Route::delete('/profile/{id}', [ClientManagementController::class, 'deleteProfile'])->name('deleteProfile');
+    Route::get('/edit/{id}', [ClientManagementController::class, 'editclient'])->name('editclient');
+    Route::delete('/remove-image/{id}',[ClientManagementController::class, 'removeImage'])->name('removeImage');
+
+
+
     // store
     Route::post('/clients', [ClientManagementController::class, 'store'])->name('clients.store');
+    // Get Category
+    Route::post('/getCategory', [ClientManagementController::class, 'getCategory'])->name('getCategory');
+
     // get data
     Route::post('/class-manager', [ClientManagementController::class, 'getdata']);
-    // get workout
+    // // get workout
     Route::post('/get-workout', [ClientManagementController::class, 'getworkout']);
     // store
     Route::post('/client-update', [ClientManagementController::class, 'update'])->name('clients.update');
-    
+
     //workout librabry
     Route::get('/admin/workoutlibrary', [WorkoutLibraryController::class, 'viewworkoutlibrary'])->name('viewworkoutlibrary');
     Route::post('/save-workout-library', [WorkoutLibraryController::class, 'listworkoutlibrary'])->name('save.workoutlibrary');
     Route::delete('/workout-library/{id}',[WorkoutLibraryController::class, 'delete'])->name('workout-library.delete');
+
     // session
     Route::get('/admin/session', [SessionController::class, 'viewsession'])->name('viewsession');
     // communication
@@ -131,10 +149,14 @@ Route::middleware(['user'])->group(function () {
     // dashboard
     Route::get('/user/dashboard', [UserDashboardController::class, 'viewdashboard'])->name('userdashboard');
     Route::post('/users/search', [UserDashboardController::class, 'search'])->name('users.search');
- 
-   
+
+
     // profile
     Route::get('/user/profile', [UserProfileController::class, 'viewprofile'])->name('userprofile');
+    // monthly image Store
+    Route::post('/monthly-images', [UserProfileController::class, 'store'])->name('monthly_images.store');
+    // get Prev Image and Next Image
+    Route::post('/prevdata', [UserProfileController::class, 'handlePrevData'])->name('prevdata');
     // Add new Profile
     Route::get('/user/new-profile', [UserProfileController::class, 'viewnewprofile'])->name('usernewprofile');
     Route::post('/profiles', [UserProfileController::class, 'newProfileShow'])->name('profiles.store');
@@ -158,8 +180,10 @@ Route::get('/mobile/trainingday', [MobileController::class, 'trainingday'])->nam
 Route::post('/select-day',  [MobileController::class, 'selectday']);
 
 Route::get('/mobile/readinessscore', [MobileController::class, 'readinessscore'])->name('mobile.readinessscore');
-Route::post('/mobile/store-readiness', [MobileController::class, 'storescore']);
+Route::post('/mobile/store-readiness', [MobileController::class, 'storescore'])->name('mobile.storescore');
 
+// get workout data
+Route::post('/mobile/class-manager', [ClientManagementController::class, 'getdata'])->name('mobile.class-manager');
 Route::get('/mobile/workout', [MobileController::class, 'workout'])->name('mobile.workout');
 Route::get('/mobile/workouttimer', [MobileController::class, 'workouttimer'])->name('mobile.workouttimer');
 Route::get('/mobile/histroyview', [MobileController::class, 'histroyview'])->name('mobile.histroyview');
