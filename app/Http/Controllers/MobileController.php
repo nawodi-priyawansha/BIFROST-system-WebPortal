@@ -103,7 +103,7 @@ class MobileController extends Controller
             $validatedData
         );
 
-        return redirect()->back()->with('success', 'Score saved successfully.');
+        return redirect()->route('mobile.workout')->with('success', 'Score saved successfully.');
     }
 
 

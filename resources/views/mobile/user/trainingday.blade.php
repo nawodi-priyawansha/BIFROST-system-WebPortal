@@ -76,6 +76,9 @@
                     // Add border-white class to the selected button
                     button.querySelector('.day').classList.remove('border-black');
                     button.querySelector('.day').classList.add('border-white');
+
+                    // Redirect to readinessscore page
+                    window.location.href = '/mobile/readinessscore';
                 },
                 error: function(xhr, status, error) {
                     console.error(error); // Handle error

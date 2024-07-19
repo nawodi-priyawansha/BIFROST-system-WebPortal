@@ -128,7 +128,7 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/get-workout', [ClientManagementController::class, 'getworkout']);
     // store
     Route::post('/client-update', [ClientManagementController::class, 'update'])->name('clients.update');
-    
+
     //workout librabry
     Route::get('/admin/workoutlibrary', [WorkoutLibraryController::class, 'viewworkoutlibrary'])->name('viewworkoutlibrary');
     Route::post('/save-workout-library', [WorkoutLibraryController::class, 'listworkoutlibrary'])->name('save.workoutlibrary');
@@ -176,7 +176,7 @@ Route::get('/mobile/trainingday', [MobileController::class, 'trainingday'])->nam
 Route::post('/select-day',  [MobileController::class, 'selectday']);
 
 Route::get('/mobile/readinessscore', [MobileController::class, 'readinessscore'])->name('mobile.readinessscore');
-Route::post('/mobile/store-readiness', [MobileController::class, 'storescore']);
+Route::post('/mobile/store-readiness', [MobileController::class, 'storescore'])->name('mobile.storescore');
 
 // get workout data
 Route::post('/mobile/class-manager', [ClientManagementController::class, 'getdata'])->name('mobile.class-manager');
