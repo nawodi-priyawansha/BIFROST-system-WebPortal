@@ -153,6 +153,10 @@ Route::middleware(['user'])->group(function () {
 
     // profile
     Route::get('/user/profile', [UserProfileController::class, 'viewprofile'])->name('userprofile');
+    // monthly image Store
+    Route::post('/monthly-images', [UserProfileController::class, 'store'])->name('monthly_images.store');
+    // get Prev Image and Next Image
+    Route::post('/prevdata', [UserProfileController::class, 'handlePrevData'])->name('prevdata');
     // Add new Profile
     Route::get('/user/new-profile', [UserProfileController::class, 'viewnewprofile'])->name('usernewprofile');
     Route::post('/profiles', [UserProfileController::class, 'newProfileShow'])->name('profiles.store');
