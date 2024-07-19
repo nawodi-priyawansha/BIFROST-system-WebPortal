@@ -91,13 +91,16 @@
                         </div>
 
                     </div>
-                    <div class="w-3/4 ">
+                    <div class="w-3/4">
                         {{-- edit ui views display --}}
-                        <div class="" style="width: full; display: flex">
-                            <div id="forearch"> s</div>
+                        <div class="grid grid-cols-2 gap-2 bg-gray-50 mx-4 mr-20">
                             <div>
-                                <div id="forearchs"> m</div>
-
+                                <h2 class="text-center mt-5 text-2xl">Primary Workout</h2>
+                                <div id="primary"></div>
+                            </div>
+                            <div>
+                                <h2 class="text-center mt-5 text-2xl">Alternate Workout</h2>
+                                <div id="alternate"></div>
                             </div>
                         </div>
 
@@ -111,7 +114,6 @@
 
                                         <div class="flex gap-5 justify-between">
                                             <div class="flex-col w-full ">
-                                                <h2 class="text-center mb-5">Primary Workout</h2>
                                                 <div class="flex items-center border-b">
                                                     <label for="category" class="w-60 block mb-1">Category <span
                                                             class="text-red-500">*</span></label>
@@ -237,7 +239,6 @@
                                                 </div>
                                             </div>
                                             <div class="flex-col w-full">
-                                                <h2 class="text-center mb-5">Alternate Workout</h2>
                                                 <div class="flex items-center border-b">
                                                     <label for="alt-category" class="w-60 block mb-1">Category <span
                                                             class="text-red-500">*</span></label>
@@ -385,8 +386,8 @@
                             </div>
                             <div id="test" style="display:none;">Test</div>
                             {{-- hidden input field --}}
-                            <input type="text" name="selectdate" id="selectdate">
-                            <input type="text" name="selecttab" id="selecttab">
+                            <input type="text" name="selectdate" id="selectdate" hidden>
+                            <input type="text" name="selecttab" id="selecttab" hidden>
 
 
                             {{-- UI duplicate function --}}
@@ -1054,224 +1055,214 @@
             });
 
             if (details.length === 0) {
-                var div = document.getElementById("forearch");
+                var div = document.getElementById("primary");
+                div.innerHTML = ''; // Clear existing content
+                var div = document.getElementById("alternate");
                 div.innerHTML = ''; // Clear existing content
             } else {
-                var div = document.getElementById("forearch");
+                var div = document.getElementById("primary");
+                div.innerHTML = ''; // Clear existing content
+                var div = document.getElementById("alternate");
                 div.innerHTML = ''; // Clear existing content
 
                 details.forEach(function(detail) {
-                    var divDetail = document.createElement("div");
-                    divDetail.innerHTML = `
-                    <form action="" method="POST">
-                        @csrf
-                        <div class="flex flex-col text-lg p-4 mr-8 rounded-md gap-4">
-                            <div class="flex flex-col text-lg p-4 bg-gray-50 mr-8 rounded-md gap-4 mb-4">
-                                <input type="hidden" name="detail_id_${detail.id}" id="detail_id_${detail.id}" value="${detail.id}">
-                            </div>
-                            <div class="flex items-center border-b">
-                                <label for="category_${detail.id}" class="w-60 block mb-1">Category <span class="text-red-500">*</span></label>
-                                <select id="category_${detail.id}" name="category_${detail.id}" onchange="handleCategoryChange(this)" class="w-1/3 px-3 py-2 border flex rounded mb-2" required>
-                                    <option value="${detail.workouts.category_option.id}" selected hidden>${detail.workouts.category_option.category_name}</option>
-                                    ${workouts.map(workouts => `<option value="${workouts.category_option.id}">${workouts.category_option.category_name}</option>`).join('')}
-                                </select>
-                                <div class="flex-grow"></div>
-                                @if ($accessType == 'write')
-                                    <button type="submit" class="bg-black text-white py-2 px-4 rounded mb-2">Edit</button>
-                                @else
-                                    <button type="submit" class="bg-black text-white py-2 px-4 rounded mb-2"disabled>Edit</button>
-                                @endif
-                            </div>
-                                <div class="flex items-center border-b">
-                                    <label for="workout_${detail.id}" class="w-60 block mb-1">Workout <span class="text-red-500">*</span></label>
-                                    <select id="workout_${detail.id}" name="workout_${detail.id}" class="w-1/3 px-3 py-2 border flex rounded mb-2" required>
-                                        <option value="${detail.workouts.id}" selected>${detail.workouts.workout}</option>
-                                    </select>
-                                </div>
+                    var primaryDetail = document.createElement("div");
+                    var alternateDetail = document.createElement("div");
+                    var pcontent = '';
+                    var acontent = '';
 
-                                <div class="flex items-center border-b">
-                                    <label for="reps_${detail.id}" class="w-60 block mb-1">SETS <span class="text-red-500">*</span></label>
-                                    <div class="relative flex items-center max-w-[8rem]">
-                                        <button type="button" class="decrement-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none" onclick="decrement('reps_input_${detail.id}')">
-                                            <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16"/>
-                                            </svg>
-                                        </button>
-                                        <input type="text" id="reps_input_${detail.id}" name="reps_${detail.id}" data-input-counter class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" placeholder="0" value="${detail.sets}" required readonly/>
-                                        <button type="button" class="increment-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none" onclick="increment('reps_input_${detail.id}')">
-                                            <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                                            </svg>
-                                        </button>
+                    if (detail.type === "primary") {
+                        pcontent = `
+                            <div class="">
+                                <form action="{{ route('clients.update') }}" method="POST">
+                                    @csrf
+                                    <div class="flex flex-col text-lg p-4 mr-8 rounded-md gap-4">
+                                        <div class="flex flex-col text-lg bg-gray-50 mr-8 rounded-md gap-4 mb-4">
+                                            <input type="hidden" name="detail_id_${detail.id}" id="detail_id_${detail.id}" value="${detail.id}">
+                                        </div>
+                                        <div class="flex items-center border-b">
+                                            <label for="category_${detail.id}" class="w-60 block mb-1">Category <span class="text-red-500">*</span></label>
+                                            <select id="category_${detail.id}" name="category_${detail.id}" onchange="getworkout(this)" class="w-1/3 px-3 py-2 border flex rounded mb-2" required>
+                                                <option value="${detail.workouts.category_option.id}" selected hidden>${detail.workouts.category_option.category_name}</option>
+                                                ${workouts.map(workout => `<option value="${workout.category_option.id}">${workout.category_option.category_name}</option>`).join('')}
+                                            </select>
+                                            <div class="flex-grow"></div>
+                                            @if ($accessType == 'write')
+                                                <button type="submit" class="bg-black text-white py-2 px-4 rounded mb-2">Edit</button>
+                                            @else
+                                                <button type="submit" class="bg-black text-white py-2 px-4 rounded mb-2"disabled>Edit</button>
+                                            @endif
+                                        </div>
+                                        <div class="flex items-center border-b">
+                                            <label for="workout_${detail.id}" class="w-60 block mb-1">Workout <span class="text-red-500">*</span></label>
+                                            <select id="workout_${detail.id}" name="workout_${detail.id}" class="w-1/3 px-3 py-2 border flex rounded mb-2" required>
+                                                <option value="${detail.workouts.id}" selected>${detail.workouts.workout}</option>
+                                            </select>
+                                        </div>
+                                        <div class="flex items-center border-b">
+                                            <label for="sets_${detail.id}" class="w-60 block mb-1">SETS <span class="text-red-500">*</span></label>
+                                            <div class="relative flex items-center max-w-[8rem]">
+                                                <button type="button" class="decrement-sets bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none" onclick="decrement('sets_input_${detail.id}')">
+                                                    <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16"/>
+                                                    </svg>
+                                                </button>
+                                                <input type="text" id="sets_input_${detail.id}" name="sets_${detail.id}" class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" placeholder="0" value="${detail.sets}" required readonly/>
+                                                <button type="button" class="increment-sets bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none" onclick="increment('sets_input_${detail.id}')">
+                                                    <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center border-b">
+                                            <label for="reps_${detail.id}" class="w-60 block mb-1">REPS <span class="text-red-500">*</span></label>
+                                            <div class="relative flex items-center max-w-[8rem]">
+                                                <button type="button" class="decrement-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none" onclick="decrement('reps_input_${detail.id}')">
+                                                    <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16"/>
+                                                    </svg>
+                                                </button>
+                                                <input type="text" id="reps_input_${detail.id}" name="reps_${detail.id}" class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" placeholder="0" value="${detail.reps}" required readonly/>
+                                                <button type="button" class="increment-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none" onclick="increment('reps_input_${detail.id}')">
+                                                    <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center border-b">
+                                            <label for="rest_${detail.id}" class="w-60 block mb-1">Rest <span class="text-red-500">*</span></label>
+                                            <div class="relative flex items-center max-w-[8rem]">
+                                                <button type="button" onclick="decrement('rest_${detail.id}')" class="decrement-rest bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                                    <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16"/>
+                                                    </svg>
+                                                </button>
+                                                <input type="text" id="rest_${detail.id}" name="rest_${detail.id}" value="${detail.rest}" class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" required readonly>
+                                                <button type="button" onclick="increment('rest_${detail.id}')" class="increment-rest bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                                    <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center border-b">
+                                            <label for="intensity_${detail.id}" class="w-60 block mb-1">Intensity <span class="text-red-500">*</span></label>
+                                            <select id="intensity_${detail.id}" name="intensity_${detail.id}" class="w-1/3 px-3 py-2 border flex rounded mb-2" required>
+                                                <option value="low" ${detail.intensity === 'low' ? 'selected' : ''}>low</option>
+                                                <option value="moderate" ${detail.intensity === 'medium' ? 'selected' : ''}>medium</option>
+                                                <option value="high" ${detail.intensity === 'high' ? 'selected' : ''}>High</option>
+                                                <option value="high" ${detail.intensity === 'extreme' ? 'selected' : ''}>extreme</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="flex items-center border-b">
-                                    <label for="reps_per_set_${detail.id}" class="w-60 block mb-1">REPS <span class="text-red-500">*</span></label>
-                                    <div class="relative flex items-center max-w-[8rem]">
-                                        <button type="button" class="decrement-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none" onclick="decrement('reps_per_set_input_${detail.id}')">
-                                            <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16"/>
-                                            </svg>
-                                        </button>
-                                        <input type="text" id="reps_per_set_input_${detail.id}" name="reps_per_set_${detail.id}" data-input-counter class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" placeholder="0" value="${detail.reps}" required readonly/>
-                                        <button type="button" class="increment-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none" onclick="increment('reps_per_set_input_${detail.id}')">
-                                            <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                                            </svg>
-                                        </button>
+                                </form>
+                            </div>`;
+                    } else if (detail.type === "alternate") {
+                        acontent = `
+                            <div class="">
+                                <form action="{{ route('clients.update') }}" method="POST">
+                                    @csrf
+                                    <div class="flex flex-col text-lg p-4 mr-8 rounded-md gap-4">
+                                        <div class="flex flex-col text-lg bg-gray-50 mr-8 rounded-md gap-4 mb-4">
+                                            <input type="hidden" name="detail_id_${detail.id}" id="detail_id_${detail.id}" value="${detail.id}">
+                                        </div>
+                                        <div class="flex items-center border-b">
+                                            <label for="category_${detail.id}" class="w-60 block mb-1">Category <span class="text-red-500">*</span></label>
+                                            <select id="category_${detail.id}" name="category_${detail.id}" onchange="getworkout(this)" class="w-1/3 px-3 py-2 border flex rounded mb-2" required>
+                                                <option value="${detail.workouts.category_option.id}" selected hidden>${detail.workouts.category_option.category_name}</option>
+                                                ${workouts.map(workout => `<option value="${workout.category_option.id}">${workout.category_option.category_name}</option>`).join('')}
+                                            </select>
+                                            <div class="flex-grow"></div>
+                                            @if ($accessType == 'write')
+                                                <button type="submit" class="bg-black text-white py-2 px-4 rounded mb-2">Edit</button>
+                                            @else
+                                                <button type="submit" class="bg-black text-white py-2 px-4 rounded mb-2"disabled>Edit</button>
+                                            @endif
+                                        </div>
+                                        <div class="flex items-center border-b">
+                                            <label for="workout_${detail.id}" class="w-60 block mb-1">Workout <span class="text-red-500">*</span></label>
+                                            <select id="workout_${detail.id}" name="workout_${detail.id}" class="w-1/3 px-3 py-2 border flex rounded mb-2" required>
+                                                <option value="${detail.workouts.id}" selected>${detail.workouts.workout}</option>
+                                            </select>
+                                        </div>
+                                        <div class="flex items-center border-b">
+                                            <label for="sets_${detail.id}" class="w-60 block mb-1">SETS <span class="text-red-500">*</span></label>
+                                            <div class="relative flex items-center max-w-[8rem]">
+                                                <button type="button" class="decrement-sets bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none" onclick="decrement('sets_input_${detail.id}')">
+                                                    <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16"/>
+                                                    </svg>
+                                                </button>
+                                                <input type="text" id="sets_input_${detail.id}" name="sets_${detail.id}" class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" placeholder="0" value="${detail.sets}" required readonly/>
+                                                <button type="button" class="increment-sets bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none" onclick="increment('sets_input_${detail.id}')">
+                                                    <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center border-b">
+                                            <label for="reps_${detail.id}" class="w-60 block mb-1">REPS <span class="text-red-500">*</span></label>
+                                            <div class="relative flex items-center max-w-[8rem]">
+                                                <button type="button" class="decrement-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none" onclick="decrement('reps_input_${detail.id}')">
+                                                    <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16"/>
+                                                    </svg>
+                                                </button>
+                                                <input type="text" id="reps_input_${detail.id}" name="reps_${detail.id}" class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" placeholder="0" value="${detail.reps}" required readonly/>
+                                                <button type="button" class="increment-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none" onclick="increment('reps_input_${detail.id}')">
+                                                    <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center border-b">
+                                            <label for="rest_${detail.id}" class="w-60 block mb-1">Rest <span class="text-red-500">*</span></label>
+                                            <div class="relative flex items-center max-w-[8rem]">
+                                                <button type="button" onclick="decrement('rest_${detail.id}')" class="decrement-rest bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                                    <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16"/>
+                                                    </svg>
+                                                </button>
+                                                <input type="text" id="rest_${detail.id}" name="rest_${detail.id}" value="${detail.rest}" class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" required readonly>
+                                                <button type="button" onclick="increment('rest_${detail.id}')" class="increment-rest bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                                    <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center border-b">
+                                            <label for="intensity_${detail.id}" class="w-60 block mb-1">Intensity <span class="text-red-500">*</span></label>
+                                            <select id="intensity_${detail.id}" name="intensity_${detail.id}" class="w-1/3 px-3 py-2 border flex rounded mb-2" required>
+                                                <option value="low" ${detail.intensity === 'low' ? 'selected' : ''}>low</option>
+                                                <option value="moderate" ${detail.intensity === 'medium' ? 'selected' : ''}>medium</option>
+                                                <option value="high" ${detail.intensity === 'high' ? 'selected' : ''}>High</option>
+                                                <option value="high" ${detail.intensity === 'extreme' ? 'selected' : ''}>extreme</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
+                                </form>
+                            </div>`;
+                    }
 
-
-                                <div class="flex items-center border-b">
-                                    <label for="rest_${detail.id}" class="w-60 block mb-1">Rest <span class="text-red-500">*</span></label>
-                                    <div class="relative flex items-center max-w-[8rem]">
-                                        <button type="button" onclick="decrement('rest_${detail.id}')"
-                                            class="decrement-rest bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
-                                                <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true"
-                                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
-                                                    <path stroke="currentColor" stroke-linecap="round"
-                                                        stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
-                                                </svg>
-                                        </button>
-                                        <input type="text" id="rest_${detail.id}" name="rest_${detail.id}" value="${detail.rest}" class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" required readonly>
-                                        <button type="button" onclick="increment('rest_${detail.id}')"
-                                            class="increment-rest bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
-                                                <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true"
-                                                    xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                    viewBox="0 0 18 18">
-                                                    <path stroke="currentColor" stroke-linecap="round"
-                                                        stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
-                                                </svg>
-                                        </button>
-                                    </div>
-                                </div>
-
-                                <div class="flex items-center border-b">
-                                    <label for="intensity_${detail.id}" class="w-60 block mb-1">Intensity <span class="text-red-500">*</span></label>
-                                    <select id="intensity_${detail.id}" name="intensity_${detail.id}" class="w-1/3 px-3 py-2 border flex rounded mb-2" required>
-                                        <option value="low" ${detail.intensity === 'low' ? 'selected' : ''}>Low</option>
-                                        <option value="moderate" ${detail.intensity === 'moderate' ? 'selected' : ''}>Moderate</option>
-                                        <option value="high" ${detail.intensity === 'high' ? 'selected' : ''}>High</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                `;
-                    div.appendChild(divDetail);
+                    primaryDetail.innerHTML = pcontent;
+                    document.getElementById('primary').appendChild(primaryDetail);
+                    alternateDetail.innerHTML = acontent;
+                    document.getElementById('alternate').appendChild(alternateDetail);
                 });
 
-                var divs = document.getElementById("forearchs");
-                divs.innerHTML = ''; // Clear existing content
 
-                details.forEach(function(detail) {
-                    var divDetails = document.createElement("divs");
-                    divDetails.innerHTML = `
-                    <form action="" method="POST">
-                        @csrf
-                        <div class="flex flex-col text-lg p-4 mr-8 rounded-md gap-4">
-                            <div class="flex flex-col text-lg p-4 bg-gray-50 mr-8 rounded-md gap-4 mb-4">
-                                <input type="hidden" name="detail_id_${detail.id}" id="detail_id_${detail.id}" value="${detail.id}">
-                            </div>
-                            <div class="flex items-center border-b">
-                                <label for="category_${detail.id}" class="w-60 block mb-1">Category <span class="text-red-500">*</span></label>
-                                <select id="category_${detail.id}" name="category_${detail.id}" onchange="handleCategoryChange(this)" class="w-1/3 px-3 py-2 border flex rounded mb-2" required>
-                                    <option value="${detail.workouts.category_option.id}" selected hidden>${detail.workouts.category_option.category_name}</option>
-                                    ${workouts.map(workouts => `<option value="${workouts.category_option.id}">${workouts.category_option.category_name}</option>`).join('')}
-                                </select>
-                                <div class="flex-grow"></div>
-                                @if ($accessType == 'write')
-                                    <button type="submit" class="bg-black text-white py-2 px-4 rounded mb-2">Edit</button>
-                                @else
-                                    <button type="submit" class="bg-black text-white py-2 px-4 rounded mb-2"disabled>Edit</button>
-                                @endif
-                            </div>
-                                <div class="flex items-center border-b">
-                                    <label for="workout_${detail.id}" class="w-60 block mb-1">Workout <span class="text-red-500">*</span></label>
-                                    <select id="workout_${detail.id}" name="workout_${detail.id}" class="w-1/3 px-3 py-2 border flex rounded mb-2" required>
-                                        <option value="${detail.workouts.id}" selected>${detail.workouts.workout}</option>
-                                    </select>
-                                </div>
-
-                                <div class="flex items-center border-b">
-                                    <label for="reps_${detail.id}" class="w-60 block mb-1">SETS <span class="text-red-500">*</span></label>
-                                    <div class="relative flex items-center max-w-[8rem]">
-                                        <button type="button" class="decrement-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none" onclick="decrement('reps_input_${detail.id}')">
-                                            <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16"/>
-                                            </svg>
-                                        </button>
-                                        <input type="text" id="reps_input_${detail.id}" name="reps_${detail.id}" data-input-counter class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" placeholder="0" value="${detail.sets}" required readonly/>
-                                        <button type="button" class="increment-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none" onclick="increment('reps_input_${detail.id}')">
-                                            <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="flex items-center border-b">
-                                    <label for="reps_per_set_${detail.id}" class="w-60 block mb-1">REPS <span class="text-red-500">*</span></label>
-                                    <div class="relative flex items-center max-w-[8rem]">
-                                        <button type="button" class="decrement-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none" onclick="decrement('reps_per_set_input_${detail.id}')">
-                                            <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16"/>
-                                            </svg>
-                                        </button>
-                                        <input type="text" id="reps_per_set_input_${detail.id}" name="reps_per_set_${detail.id}" data-input-counter class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" placeholder="0" value="${detail.reps}" required readonly/>
-                                        <button type="button" class="increment-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none" onclick="increment('reps_per_set_input_${detail.id}')">
-                                            <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-
-
-                                <div class="flex items-center border-b">
-                                    <label for="rest_${detail.id}" class="w-60 block mb-1">Rest <span class="text-red-500">*</span></label>
-                                    <div class="relative flex items-center max-w-[8rem]">
-                                        <button type="button" onclick="decrement('rest_${detail.id}')"
-                                            class="decrement-rest bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
-                                                <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true"
-                                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
-                                                    <path stroke="currentColor" stroke-linecap="round"
-                                                        stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
-                                                </svg>
-                                        </button>
-                                        <input type="text" id="rest_${detail.id}" name="rest_${detail.id}" value="${detail.rest}" class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" required readonly>
-                                        <button type="button" onclick="increment('rest_${detail.id}')"
-                                            class="increment-rest bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
-                                                <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true"
-                                                    xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                    viewBox="0 0 18 18">
-                                                    <path stroke="currentColor" stroke-linecap="round"
-                                                        stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
-                                                </svg>
-                                        </button>
-                                    </div>
-                                </div>
-
-                                <div class="flex items-center border-b">
-                                    <label for="intensity_${detail.id}" class="w-60 block mb-1">Intensity <span class="text-red-500">*</span></label>
-                                    <select id="intensity_${detail.id}" name="intensity_${detail.id}" class="w-1/3 px-3 py-2 border flex rounded mb-2" required>
-                                        <option value="low" ${detail.intensity === 'low' ? 'selected' : ''}>Low</option>
-                                        <option value="moderate" ${detail.intensity === 'moderate' ? 'selected' : ''}>Moderate</option>
-                                        <option value="high" ${detail.intensity === 'high' ? 'selected' : ''}>High</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                `;
-                    div.appendChild(divDetails);
-                });
             }
         }
 
         // Call this function to initially populate the workouts and details
         populateWorkouts(workouts, details);
     </script>
+
 </body>
 
 </html>
