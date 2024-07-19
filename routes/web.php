@@ -126,8 +126,8 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/class-manager', [ClientManagementController::class, 'getdata']);
     // // get workout
     Route::post('/get-workout', [ClientManagementController::class, 'getworkout']);
-    // store
-    Route::post('/client-update', [ClientManagementController::class, 'update'])->name('clients.update');
+    // // store
+    // Route::post('/client-update', [ClientManagementController::class, 'update'])->name('clients.update');
     
     //workout librabry
     Route::get('/admin/workoutlibrary', [WorkoutLibraryController::class, 'viewworkoutlibrary'])->name('viewworkoutlibrary');

@@ -159,37 +159,37 @@ class ClientManagementController extends Controller
         ])->get();
         return response()->json(['workouts' => $workouts]);
     }
-    public function update(Request $request)
-    {
-        // Extracting data from the request
-        $data = $request->all();
+    // public function update(Request $request)
+    // {
+    //     // Extracting data from the request
+    //     $data = $request->all();
 
-        // Loop through the data to find detail ids and update the corresponding records
-        foreach ($data as $key => $value) {
-            if (preg_match('/^detail_id_(\d+)$/', $key, $matches)) {
-                $id = $matches[1];
+    //     // Loop through the data to find detail ids and update the corresponding records
+    //     foreach ($data as $key => $value) {
+    //         if (preg_match('/^detail_id_(\d+)$/', $key, $matches)) {
+    //             $id = $matches[1];
 
-                // Find the ClientManagement record by id
-                $clientManagement = ClientManagement::find($value);
+    //             // Find the ClientManagement record by id
+    //             $clientManagement = ClientManagement::find($value);
 
-                if ($clientManagement) {
-                    // Update the fields
-                    $clientManagement->category = $data["category_$id"] ?? null;
-                    $clientManagement->workout = $data["workout_$id"] ?? null;
-                    $clientManagement->sets = $data["sets_$id"] ?? null;
-                    $clientManagement->reps = $data["reps_$id"] ?? null;
+    //             if ($clientManagement) {
+    //                 // Update the fields
+    //                 $clientManagement->category = $data["category_$id"] ?? null;
+    //                 $clientManagement->workout = $data["workout_$id"] ?? null;
+    //                 $clientManagement->reps = $data["reps_$id"] ?? null;
+    //                 $clientManagement->reps_per_set = $data["reps_per_set_$id"] ?? null;
 
-                    // Format the time here
-                    $restTime = DateTime::createFromFormat('H:i', $data["rest_$id"]);
-                    $clientManagement->rest = $restTime ? $restTime->format('h:i') : null;
+    //                 // Format the time here
+    //                 $restTime = DateTime::createFromFormat('H:i', $data["rest_$id"]);
+    //                 $clientManagement->rest = $restTime ? $restTime->format('h:i') : null;
 
-                    $clientManagement->intensity = $data["intensity_$id"] ?? null;
+    //                 $clientManagement->intensity = $data["intensity_$id"] ?? null;
 
-                    // Save the updated record
-                    $clientManagement->save();
-                }
-            }
-        }
-        return redirect()->back();
-    }
+    //                 // Save the updated record
+    //                 $clientManagement->save();
+    //             }
+    //         }
+    //     }
+    //     return redirect()->back();
+    // }
 }
