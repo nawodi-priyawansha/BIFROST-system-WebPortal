@@ -38,7 +38,7 @@
                                     First Name</th>
                                 <th class="p-3 border-y-2 border-gray-300 bg-white text-left">Last Name</th>
                                 <th class="p-3 border-y-2 border-gray-300 bg-white text-left">Contact Number</th>
-                                <th class="p-3 border-y-2 border-gray-300 bg-white text-left">Sunscription Level</th>
+                                <th class="p-3 border-y-2 border-gray-300 bg-white text-left">Subscription Level</th>
                                 <th class="p-3  border-y-2 border-gray-300 bg-white text-left" dir="rtl">
                                     Member Since</th>
                                 <th class="p-3  border-y-2 px justify-end  border-gray-300 bg-white text-left"
