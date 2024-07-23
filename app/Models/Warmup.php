@@ -16,4 +16,16 @@ class Warmup extends Model
         'weight',
         'date'
     ];
+
+
+    public function category()
+    {
+        return $this->belongsTo(CategoryOption::class, 'category_id');
+    }
+
+    // Define the relationship to the WorkoutLibrary model
+    public function workout()
+    {
+        return $this->belongsTo(WorkoutLibrary::class, 'workout_id');
+    }
 }

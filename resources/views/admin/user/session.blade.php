@@ -120,7 +120,7 @@
                                 input.id = baseId + '_' + index;
                             });
                         }
-                    
+
                         // Function to add a Remove button
                         function addRemoveButton(element) {
                             var removeButton = document.createElement("button");
@@ -133,48 +133,47 @@
                             });
                             element.appendChild(removeButton);
                         }
-                    
+
                         // Function to duplicate the UI
                         function duplicateUI(event) {
                             var duplicateButton = event.target;
                             var duplicateUi = duplicateButton.previousElementSibling;
-                    
+
                             // Check if dataset.index is null or undefined, and set it to 1 if true
                             var index = parseInt(duplicateUi.dataset.index) || 1;
-                            console.log(index);
-                    
+
                             // Increment the index
                             index += 1;
-                    
+
                             // Update the dataset.index
                             duplicateUi.dataset.index = index;
-                    
+
                             var clone = duplicateUi.cloneNode(true);
-                    
+
                             // Reset the values of the inputs in the cloned element
                             clone.querySelectorAll("input").forEach(function(input) {
                                 input.value = '';
                             });
-                    
+
                             // Update names and ids in the cloned inputs
                             updateInputNamesAndIds(clone, index);
-                    
+
                             // Remove old buttons and add new Remove button
                             clone.querySelectorAll(".duplicateBtn, .removeBtn").forEach(function(button) {
                                 button.remove();
                             });
                             addRemoveButton(clone);
-                    
+
                             // Insert the cloned element before the duplicate button
                             duplicateUi.parentElement.insertBefore(clone, duplicateButton);
                         }
-                    
+
                         // Add event listeners to all duplicate buttons
                         document.querySelectorAll(".duplicateBtn").forEach(function(button) {
                             button.addEventListener("click", duplicateUI);
                         });
                     </script>
-                    
+
                 </div>
             </div>
 
@@ -355,7 +354,6 @@
         }
 
         function changeTab(tabName, selectedDate) {
-            console.log(tabName, selectedDate);
 
             // Get all tabs
             var tabs = document.querySelectorAll(".tabs > div");
@@ -369,46 +367,45 @@
             var tab = document.getElementById(tabName);
             tab.removeAttribute("hidden");
 
-            console.log(tab, selectedDate);
         }
 
 
         function logSelection(tabId, dayId) {
-            // let tabName = document.querySelector(`#tabs a[href="${tabId}"]`).innerText;
+            console.log("selected tab is: " + tabId);
             let dayName = document.getElementById(dayId).innerText;
 
-            // // hidden input field set value Warmup
-            const selectdatew = document.getElementById('selectdatew');
-            selectdatew.value = dayName;
-            const selecttabw = document.getElementById('selecttabw');
-            selecttabw.value = tabId;
+            switch (tabId) {
+                case "warmup":
+                    document.getElementById('selectdatew').value = dayName;
+                    document.getElementById('selectdatewd').value = dayName;
+                    document.getElementById('selecttabw').value = tabId;
+                    getwarmup(dayName);
+                    break;
+                case "strength":
+                    document.getElementById('selectdates').value = dayName;
+                    document.getElementById('selecttabs').value = tabId;
+                    break;
+                case "conditioning":
+                    document.getElementById('selectdatec').value = dayName;
+                    document.getElementById('selecttabc').value = tabId;
+                    break;
+                case "weightlifting":
+                    document.getElementById('selectdatewe').value = dayName;
+                    document.getElementById('selecttabwe').value = tabId;
+                    break;
+                case "test":
+                    document.getElementById('selectdatet').value = dayName;
+                    document.getElementById('selecttabt').value = tabId;
+                    break;
+                default:
+                    console.log("Unknown tabId: " + tabId);
+                    break;
+            }
 
-            // // hidden input field set value Strength
-            const selectdates = document.getElementById('selectdates');
-            selectdates.value = dayName;
-            const selecttabs = document.getElementById('selecttabs');
-            selecttabs.value = tabId;
-
-            // // hidden input field set value Conditioning
-            const selectdatec = document.getElementById('selectdatec');
-            selectdatec.value = dayName;
-            const selecttabc = document.getElementById('selecttabc');
-            selecttabc.value = tabId;
-
-            // // hidden input field set value Weightlifting
-            const selectdatewe = document.getElementById('selectdatewe');
-            selectdatewe.value = dayName;
-            const selecttabwe = document.getElementById('selecttabwe');
-            selecttabwe.value = tabId;
-
-            // // hidden input field set value Test
-            const selectdatet = document.getElementById('selectdatet');
-            selectdatet.value = dayName;
-            const selecttabt = document.getElementById('selecttabt');
-            selecttabt.value = tabId;
-            // call ajax 
-            // getdata(tabName, dayName)
+            // Call AJAX function here if needed
+            // getdata(tabName, dayName);
         }
+
 
         function setCategory(id, categoryName) {
             const categorySelectW = document.getElementById('categoryw');
