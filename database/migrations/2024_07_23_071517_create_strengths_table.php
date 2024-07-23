@@ -11,19 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('weightlifting', function (Blueprint $table) {
+        Schema::create('strengths', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id')->nullable()
-                ->constrained('category_options')
-                ->onDelete('cascade');
-            $table->foreignId('workout_id')->nullable()
-                ->constrained('workout_libraries')
-                ->onDelete('cascade');
+            $table->foreignId('category_id')->nullable()->constrained('category_options')->onDelete('cascade');
+            $table->foreignId('workout_id')->nullable()->constrained('workout_libraries')->onDelete('cascade');
             $table->float('weight');
             $table->integer('sets');
             $table->integer('rest'); // Assuming rest is in seconds
             $table->string('intensity'); // Adjust if you have a specific enum or validation
             $table->enum('type', ['alternate', 'primary']); // Using ENUM for predefined types
+            $table->string('date');
             $table->timestamps();
         });
     }
@@ -33,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('weightlifting');
+        Schema::dropIfExists('strengths');
     }
 };

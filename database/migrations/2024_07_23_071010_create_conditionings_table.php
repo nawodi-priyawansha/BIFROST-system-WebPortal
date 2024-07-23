@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('conditioning', function (Blueprint $table) {
+        Schema::create('conditionings', function (Blueprint $table) {
             $table->id();
             $table->integer('rounds'); // Number of rounds
             $table->foreignId('category_id')->nullable()
@@ -22,7 +22,8 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->integer('reps'); // Number of repetitions
             $table->float('complete_time'); // Time in minutes or seconds
-            $table->float('weight')->nullable(); // Weight for the exercise, nullable if not applicable
+            $table->float('weight')->nullable();
+            $table->string('date');
             $table->timestamps();
         });
     }
@@ -32,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('conditioning');
+        Schema::dropIfExists('conditionings');
     }
 };
