@@ -109,11 +109,12 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/save/newclient/add', [ClientManagementController::class, 'addnewclient'])->name('newProfileclientsave');
     //editclient
     Route::post('/save/newclient/edit/{id}', [ClientManagementController::class, 'updatenewclient'])->name('updatenewclient');
-
-    Route::post('/clients/update',[ClientManagementController::class, 'updatenewclient'])->name(('updatenewclient'));
+    // update profile
+    Route::post('/clients/update', [ClientManagementController::class, 'updatenewclient'])->name(('updatenewclient'));
+    //delete profile
     Route::delete('/profile/{id}', [ClientManagementController::class, 'deleteProfile'])->name('deleteProfile');
+    //edit
     Route::get('/edit/{id}', [ClientManagementController::class, 'editclient'])->name('editclient');
-    Route::delete('/remove-image/{id}',[ClientManagementController::class, 'removeImage'])->name('removeImage');
 
 
 
@@ -132,7 +133,7 @@ Route::middleware(['admin'])->group(function () {
     //workout librabry
     Route::get('/admin/workoutlibrary', [WorkoutLibraryController::class, 'viewworkoutlibrary'])->name('viewworkoutlibrary');
     Route::post('/save-workout-library', [WorkoutLibraryController::class, 'listworkoutlibrary'])->name('save.workoutlibrary');
-    Route::delete('/workout-library/{id}',[WorkoutLibraryController::class, 'delete'])->name('workout-library.delete');
+    Route::delete('/workout-library/{id}', [WorkoutLibraryController::class, 'delete'])->name('workout-library.delete');
 
     // session
     Route::get('/admin/session', [SessionController::class, 'viewsession'])->name('viewsession');
@@ -140,8 +141,6 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/communication', [CommunicationController::class, 'viewcommunication'])->name('viewviewcommunication');
     //statistic
     Route::get('/admin/statistics', [StatisticsController::class, 'viewstatistics'])->name('viewviewstatistics');
-
-
 });
 
 //user dashboard route
@@ -167,8 +166,6 @@ Route::middleware(['user'])->group(function () {
     Route::post('/user/save-goal', [UserGoalController::class, 'saveGoal'])->name('save.goal');
     //setting
     Route::get('/user/setting', [UserSettingController::class, 'viewsetting'])->name('usersetting');
-
-
 });
 
 
@@ -196,4 +193,3 @@ Route::get('forgot/password', function () {
 Route::post('send-forgot-password-email', [MailController::class, 'sendForgotPasswordEmail']);
 Route::get('/resetpassword/{token}', [MailController::class, 'resetpassword_index'])->name('resetpassword');
 Route::post('frogot-password/new-pin', [MailController::class, 'insert_new_pin'])->name('frogot-password');
-
