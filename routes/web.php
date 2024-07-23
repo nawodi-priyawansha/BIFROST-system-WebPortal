@@ -129,11 +129,17 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/get-workout', [ClientManagementController::class, 'getworkout']);
 
     // store warmup
-    Route::Post('/store-warmup',[ClientManagementController::class,'storewarmup']);
+    Route::Post('/store-warmup', [ClientManagementController::class, 'storewarmup']);
+    // update warmup
+    Route::Post('/update-warmup', [ClientManagementController::class, 'updatewarmup']);
+    // delete
+    Route::delete('/delete-warmups', [ClientManagementController::class, 'deleteAllBySelectDate'])->name('warmups.deleteAllBySelectDate');
+    // get warmup
+    Route::Post('/get-wormup', [ClientManagementController::class, 'getwarmup']);
 
 
     // store
-    Route::post('/client-update', [ClientManagementController::class, 'update'])->name('clients.update');  
+    Route::post('/client-update', [ClientManagementController::class, 'update'])->name('clients.update');
 
     //workout librabry
     Route::get('/admin/workoutlibrary', [WorkoutLibraryController::class, 'viewworkoutlibrary'])->name('viewworkoutlibrary');
