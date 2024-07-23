@@ -193,6 +193,13 @@ class ClientManagementController extends Controller
         return redirect()->back();
     }
 
+    public function storewarmup(Request $request)
+    {
+        dd($request);
+    }
+
+
+
     public function newProfileclientShow($action = 'add', $id = null)
     {
         // Debug to see what's being passed
