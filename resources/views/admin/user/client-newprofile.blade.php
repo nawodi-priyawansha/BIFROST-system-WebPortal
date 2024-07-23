@@ -22,10 +22,10 @@
                         <div class="justify-between flex">
                             <div><span class="text-gray-700">Home / </span>
                                 @if ($action == 'edit')
-                                Edit Profile
-                            @else
-                                Add New Profile
-                            @endif
+                                    Edit Profile
+                                @else
+                                    Add New Profile
+                                @endif
                             </div>
                             <div>
                                 <a href="{{ route('viewadminclientmanagement') }}">
@@ -39,10 +39,10 @@
                         <h2 class="text-black text-lg">
                             <strong>
                                 @if ($action == 'edit')
-                                Edit Profile
-                            @else
-                                Add New Profile
-                            @endif
+                                    Edit Profile
+                                @else
+                                    Add New Profile
+                                @endif
                             </strong>
                         </h2>
                     </div>
@@ -244,8 +244,10 @@
                             {{-- Progress Photo --}}
                             <div class=" flex">
                                 <div class="w-1/2 h-full p-2 grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div class="form-group block text-gray-700 font-bold w-full md:w-[34%] mb-1 md:mb-0 pr-4">
-                                        <label for="progress-photos" class="block text-gray-700 font-bold mb-1 md:mb-0 pr-4 whitespace-nowrap">
+                                    <div
+                                        class="form-group block text-gray-700 font-bold w-full md:w-[34%] mb-1 md:mb-0 pr-4">
+                                        <label for="progress-photos"
+                                            class="block text-gray-700 font-bold mb-1 md:mb-0 pr-4 whitespace-nowrap">
                                             Profile Photos <span class="text-red-500">*</span>
                                         </label>
                                     </div>
@@ -256,20 +258,24 @@
                                                 <!-- Uploaded files will be shown here -->
                                                 @if (isset($member) && $member->image_paths)
                                                     @foreach (json_decode($member->image_paths) as $image)
-                                                        <div class="file-item mt-2 flex items-center justify-between w-full">
-                                                            <img src="{{ asset('storage/' . $image) }}" alt="Progress Photo"
+                                                        <div
+                                                            class="file-item mt-2 flex items-center justify-between w-full">
+                                                            <img src="{{ asset('storage/' . $image) }}"
+                                                                alt="Progress Photo"
                                                                 class="w-16 h-16 object-cover rounded mr-4">
-                                                            <button class="text-red-500 hover:text-red-700" disabled>Remove</button>
+                                                            <button class="text-red-500 hover:text-red-700"
+                                                                disabled>Remove</button>
                                                         </div>
                                                     @endforeach
                                                 @endif
                                             </div>
                                             <i class="fas fa-cloud-upload-alt text-3xl text-gray-600 mb-2"></i>
                                             <p class="text-gray-600">Drop files here or click to upload.</p>
-                                            <input type="file" name="profile_image[]" id="fileInput" style="display:none;" >
+                                            <input type="file" name="profile_image[]" id="fileInput"
+                                                style="display:none;">
                                         </div>
                                     </div>
-                                    
+
                                 </div>
 
                                 <div class="w-1/2 ">
@@ -414,6 +420,10 @@
                 });
 
                 function handleFiles(files) {
+                    // Clear previous images and selected files
+                    uploadedFilesContainer.innerHTML = '';
+                    selectedFiles = [];
+
                     files = Array.from(files); // Convert FileList to Array
                     files.forEach(file => {
                         displayFile(file);
@@ -519,6 +529,8 @@
                 });
             });
         </script>
+
+        
     @endsection
 </body>
 
