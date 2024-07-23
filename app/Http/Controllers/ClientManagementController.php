@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Access;
-use App\Models\ClientManagement;
-use App\Models\Newprofile;
-use App\Models\User;
-use App\Models\WorkoutLibrary;
-use Carbon\Carbon;
 use DateTime;
+use Carbon\Carbon;
+use App\Models\User;
+use App\Models\Access;
+use App\Models\Warmup;
+use App\Models\Newprofile;
 use Illuminate\Http\Request;
+use App\Models\WorkoutLibrary;
+use App\Models\ClientManagement;
+use PhpParser\Node\Expr\FuncCall;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use PhpParser\Node\Expr\FuncCall;
 
 class ClientManagementController extends Controller
 {
@@ -195,7 +196,44 @@ class ClientManagementController extends Controller
 
     public function storewarmup(Request $request)
     {
-        dd($request);
+        // dd($request);
+        // Validate the incoming request data
+        $request->validate([
+            'categoryw_*' => 'required|exists:category_options,id',
+            'workoutw_*' => 'required|exists:workout_libraries,id',
+            'repsw_*' => 'required|integer',
+            'weigthw_*' => 'required|numeric',
+            'selectdatew' => 'required',  // Validate the date
+        ]);
+
+        // Extract the data from the request
+        $warmups = [];
+        $date = $request->input('selectdatew');  // Get the date
+
+        foreach ($request->all() as $key => $value) {
+            if (preg_match('/^categoryw_(\d+)$/', $key, $matches)) {
+                $index = $matches[1];
+                $warmups[$index]['category_id'] = $value;
+            } elseif (preg_match('/^workoutw_(\d+)$/', $key, $matches)) {
+                $index = $matches[1];
+                $warmups[$index]['workout_id'] = $value;
+            } elseif (preg_match('/^repsw_(\d+)$/', $key, $matches)) {
+                $index = $matches[1];
+                $warmups[$index]['reps'] = $value;
+            } elseif (preg_match('/^weigthw_(\d+)$/', $key, $matches)) {
+                $index = $matches[1];
+                $warmups[$index]['weight'] = $value;
+            }
+        }
+
+        // Store each warmup set with the date
+        foreach ($warmups as $warmupData) {
+            $warmupData['date'] = $date;  // Add the date to each record
+            Warmup::create($warmupData);
+        }
+
+        // Redirect or respond with a success message
+        return redirect()->back()->with('success', 'Warmup data stored successfully!');
     }
 
 

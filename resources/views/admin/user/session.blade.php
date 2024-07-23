@@ -113,6 +113,12 @@
                                 input.name = baseName + '_' + index;
                                 input.id = baseId + '_' + index;
                             });
+                            element.querySelectorAll("button").forEach(function(input) {
+                                var baseName = input.name.split('_')[0];
+                                var baseId = input.id.split('_')[0];
+                                input.name = baseName + '_' + index;
+                                input.id = baseId + '_' + index;
+                            });
                         }
                     
                         // Function to add a Remove button

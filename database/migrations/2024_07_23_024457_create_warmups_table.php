@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('warmup', function (Blueprint $table) {
+        Schema::create('warmups', function (Blueprint $table) {
             $table->id();
             $table->foreignId('category_id')->nullable()
                 ->constrained('category_options')
@@ -20,6 +20,7 @@ return new class extends Migration
                 ->constrained('workout_libraries')
                 ->onDelete('cascade');
             $table->integer('reps');
+            $table->string('date');
             $table->float('weight');
             $table->timestamps();
         });
