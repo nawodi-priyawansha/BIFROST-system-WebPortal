@@ -13,8 +13,8 @@ use App\Models\WorkoutLibrary;
 use App\Models\ClientManagement;
 use PhpParser\Node\Expr\FuncCall;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class ClientManagementController extends Controller
@@ -198,7 +198,6 @@ class ClientManagementController extends Controller
 
     public function storewarmup(Request $request)
     {
-        // dd($request);
         // Validate the incoming request data
         $request->validate([
             'categoryw_*' => 'required|exists:category_options,id',
@@ -238,6 +237,92 @@ class ClientManagementController extends Controller
         return redirect()->back()->with('success', 'Warmup data stored successfully!');
     }
 
+    public function updateWarmup(Request $request)
+    {
+        // Validate the common ID
+        $validatedData = $request->validate([
+            'id' => 'required|integer|exists:warmups,id',
+        ]);
+    
+        // Find the warmup record by ID
+        $warmup = Warmup::findOrFail($validatedData['id']);
+    
+        // Loop through the request data to update corresponding fields
+        foreach ($request->all() as $key => $value) {
+            if (preg_match('/^categorywe_(\d+)$/', $key, $matches)) {
+                $index = $matches[1];
+    
+                $validatedFormData = $request->validate([
+                    "categorywe_$index" => 'required|integer|exists:category_options,id',
+                    "workoutwe_$index" => 'required|integer|exists:workout_libraries,id',
+                    "repswe_$index" => 'required|integer|min:1',
+                    "weightwe_$index" => 'required|numeric|min:0',
+                ]);
+    
+                // Update the warmup record with the validated data
+                $warmup->category_id = $validatedFormData["categorywe_$index"];
+                $warmup->workout_id = $validatedFormData["workoutwe_$index"];
+                $warmup->reps = $validatedFormData["repswe_$index"];
+                $warmup->weight = $validatedFormData["weightwe_$index"];
+                $warmup->save();
+            }
+        }
+    
+        // Return a response
+        return redirect()->back()->with('message', 'Warmup updated successfully');
+    }
+    // delete warmup
+    public function deleteAllBySelectDate(Request $request)
+    {
+        $selectDate = $request->input('selectdatewd');
+        
+        // Validate the input
+        $request->validate([
+            'selectdatewd' => 'required',  // Assuming selectdatew is a date
+        ]);
+
+        // Delete all warmups with the given selectdatew
+        Warmup::where('date', $selectDate)->delete();
+
+        return redirect()->back()->with('message', 'All warmups for the selected date have been deleted successfully');
+    }
+    // get Warmup
+    public function getwarmup(Request $request)
+    {
+        $date = $request->input('date');
+    
+        // Fetch warmup data with related category and workout details
+        $warmup = Warmup::with(['category', 'workout'])
+                        ->where('date', $date)
+                        ->get();
+    
+        // ctecory list
+// Fetch workouts based on the type
+$workouts = WorkoutLibrary::where('type','warmup')
+->with('categoryOption') // Load the category options
+->get();
+
+// Get unique category options based on the fetched workouts
+$categoryOptions = $workouts->pluck('categoryOption')->unique('id');
+
+
+        // Transform the result to include the desired fields
+        $result = $warmup->map(function ($item) {
+            return [
+                'id' => $item->id,
+                'date' => $item->date,
+                'category_id' => $item->category_id,
+                'weight' => $item->weight,
+                'category_name' => $item->category ? $item->category->category_name : null,
+                'workout_id' => $item->workout_id,
+                'workout_type' => $item->workout ? $item->workout->type : null,
+                'reps' => $item->reps,
+            ];
+        });
+    
+        return response()->json(['result'=>$result,'categoryOptions'=>$categoryOptions]);
+    }
+    
 
 
     public function newProfileclientShow($action = 'add', $id = null)
