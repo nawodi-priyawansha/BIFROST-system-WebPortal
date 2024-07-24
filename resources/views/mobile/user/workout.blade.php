@@ -31,34 +31,33 @@
                         <table class="w-full text-white hidden tablee">
                             <thead class="justify-between">
                                 <tr>
-                                    <th class="py-2">Set</th>
-                                    <th class="px-2">Reps</th>
+                                    <th class="py-2"></th>
+                                    <th class="px-2">Weight</th>
+                                    <th class="px-2">Rep</th>
                                     <th class="col-span-2"></th>
 
                                 </tr>
                             </thead>
                             <tbody class="table-body">
                                 @foreach ($detailswarmup as $warmupdetail)
-                                    <tr class="border-b border-gray-300">
-                                        <td class="py-4">{{ $warmupdetail->sets }}</td>
-                                        <td class="py-4 workouts">{{ $warmupdetail->workouts->workout }}</td>
+                                   <tr class="border-b border-gray-300">
+                                        {{-- Category --}}
+                                        <td class="py-4">{{ $warmupdetail->workouts->categoryOption->category_name }} - {{ $warmupdetail->workouts->workout }}</td>
+
+                                        {{-- Workout --}}
+                                        {{-- <td class="py-4 workouts">{{ $warmupdetail->workouts->workout }}</td> --}}
+                                        {{-- Weight --}}
+                                        <td class="py-4 text-center">{{ $warmupdetail->weight }}</td>
+                                        {{-- Reps --}}
                                         <td class="py-4">
                                             <div class="flex items-center justify-center space-x-4">
                                                 <button class="px-2 py-1 text-white"
                                                     onclick="decrementValue(this)">-</button>
                                                 <span
-                                                    class="w-16 bg-white text-black text-center rounded border-none p-1">{{ $warmupdetail->reps }}</span>
+                                                     class="w-16 bg-white text-black text-center rounded border-none p-1">{{ $warmupdetail->reps }}</span>
                                                 <button class="px-2 py-1 text-white"
                                                     onclick="incrementValue(this)">+</button>
                                             </div>
-                                        </td>
-                                        <td class="py-4">
-                                            <label class="inline-flex items-center me-5 cursor-pointer">
-                                                <input type="checkbox" value="" class="sr-only peer timer-checkbox" data-rest-time="{{ $warmupdetail->rest }}">
-                                                <div
-                                                    class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
-                                                </div>
-                                            </label>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -73,44 +72,83 @@
                             <h1 class="font-bold mx-auto">Strength</h1>
                             <i class="fa fa-chevron-down toggle-icon" aria-hidden="true"></i>
                         </div>
-                        <table class="w-full text-white hidden tablee">
-                            <thead class="justify-between">
-                                <tr>
-                                    <th class="py-2">Set</th>
-                                    <th class="px-2">Reps</th>
-                                    <th class="col-span-2"></th>
+                        @foreach ($detailsstrength as $strengthdetail)
+                        <div>
+                            <div class="flex w-full flex-col justify-center items-center gap-2.5 pt-5 text-white">
+                                <div class=" flex justify-between items-center text-base font-bold">
+                                    <button class=" px-4 py-2 rounded primary-btn" data-target="#primary-{{ $loop->index }}">{{ $strengthdetail->workouts->categoryOption->category_name }} - {{ $strengthdetail->workouts->workout }}</button>
+                                    <button class=" px-4 py-2 border rounded alt-btn" data-target="#alt-{{ $loop->index }}">ALT</button>
+                                </div>
+                            </div>
+                            <table class="w-full text-white tablee">
+                                <thead class="justify-between">
+                                    <tr>
+                                        <th class="py-2">Set</th>
+                                        <th class="py-2">Weight</th>
+                                        <th class="px-2">Rep</th>
+                                        <th class="col-span-2"></th>
 
-                                </tr>
-                            </thead>
-                            <tbody class="table-body"> <!-- Initially hidden table body -->
-                                @foreach ($detailsstrength as $strengthdetail)
-                                    <tr class="border-b border-gray-300">
-                                        <td class="py-4">{{ $strengthdetail->sets }}</td>
-                                        <td class="py-4 workouts">{{ $strengthdetail->workouts->workout }}</td>
-                                        <td class="py-4">
-                                            <div class="flex items-center justify-center space-x-4">
-                                                <button class="px-2 py-1 text-white"
-                                                    onclick="decrementValue(this)">-</button>
-                                                <span
-                                                    class="w-16 bg-white text-black text-center rounded border-none p-1">{{ $strengthdetail->reps }}</span>
-                                                <button class="px-2 py-1 text-white"
-                                                    onclick="incrementValue(this)">+</button>
-                                            </div>
-                                        </td>
-                                        <td class="py-4">
-                                            <label class="inline-flex items-center me-5 cursor-pointer">
-                                                <input type="checkbox" value="" class="sr-only peer timer-checkbox" data-rest-time="{{ $strengthdetail->rest }}">
-                                                <div
-                                                    class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
-                                                </div>
-                                            </label>
-                                        </td>
                                     </tr>
-                                @endforeach
-
-                                <!-- Add more rows as needed -->
-                            </tbody>
-                        </table>
+                                </thead>
+                                <div>
+                                {{-- Primary --}}
+                                <tbody id="primary-{{ $loop->index }}" class="table-body primary-body"> <!-- Initially hidden table body -->
+                                    @for ($setNumber = 1; $setNumber <= $strengthdetail->sets; $setNumber++)
+                                        <tr class="border-b border-gray-300">
+                                            <td class="py-4">{{ $setNumber }}</td>
+                                            <td class="py-4 workouts text-center">{{ $strengthdetail->weight }}</td>
+                                            <td class="py-4">
+                                                <div class="flex items-center justify-center space-x-4">
+                                                    <button class="px-2 py-1 text-white"
+                                                        onclick="decrementValue(this)">-</button>
+                                                    <span
+                                                        class="w-16 h-7 bg-white text-black text-center rounded border-none p-1">{{ $strengthdetail->reps }}</span>
+                                                    <button class="px-2 py-1 text-white"
+                                                        onclick="incrementValue(this)">+</button>
+                                                </div>
+                                            </td>
+                                            <td class="py-4">
+                                                <label class="inline-flex items-center me-5 cursor-pointer">
+                                                    <input type="checkbox" value="" class="sr-only peer timer-checkbox" data-rest-time="{{ $strengthdetail->rest }}">
+                                                    <div
+                                                        class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
+                                                    </div>
+                                                </label>
+                                            </td>
+                                        </tr>
+                                        @endfor
+                                </tbody>
+                                {{-- Alternative --}}
+                                <tbody id="alt-{{ $loop->index }}" class="table-body alt-body hidden"> <!-- Initially hidden table body -->
+                                    @for ($setNumber = 1; $setNumber <= $strengthdetail->altsets; $setNumber++)
+                                        <tr class="border-b border-gray-300">
+                                            <td class="py-4">{{ $setNumber }}</td>
+                                            <td class="py-4 workouts text-center">{{ $strengthdetail->altweight }}</td>
+                                            <td class="py-4">
+                                                <div class="flex items-center justify-center space-x-4">
+                                                    <button class="px-2 py-1 text-white"
+                                                        onclick="decrementValue(this)">-</button>
+                                                    <span
+                                                        class="w-16 h-7 bg-white text-black text-center rounded border-none p-1">{{ $strengthdetail->altreps }}</span>
+                                                    <button class="px-2 py-1 text-white"
+                                                        onclick="incrementValue(this)">+</button>
+                                                </div>
+                                            </td>
+                                            <td class="py-4">
+                                                <label class="inline-flex items-center me-5 cursor-pointer">
+                                                    <input type="checkbox" value="" class="sr-only peer timer-checkbox" data-rest-time="{{ $strengthdetail->altrest }}">
+                                                    <div
+                                                        class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
+                                                    </div>
+                                                </label>
+                                            </td>
+                                        </tr>
+                                        @endfor
+                                </tbody>
+                            </div>
+                            </table>
+                        </div>
+                        @endforeach
                     </div>
 
 
@@ -123,7 +161,7 @@
 
 
                     {{-- table 2 conditioning --}}
-                    <div class="w-full bg-black text-xs bg-opacity-50 p-4 rounded-lg mb-6">
+                    {{-- <div class="w-full bg-black text-xs bg-opacity-50 p-4 rounded-lg mb-6">
                         <div class="w-full flex justify-between items-center text-white text-lg">
                             <h1 class="font-bold mx-auto">Conditioning</h1>
                             <i class="fa fa-chevron-down toggle-icon" aria-hidden="true"></i>
@@ -165,13 +203,13 @@
                                 <!-- Add more rows as needed -->
                             </tbody>
                         </table>
-                    </div>
+                    </div> --}}
 
                     {{-- end table 2 --}}
 
 
                     {{-- table 3 weightlifting --}}
-                    <div class="w-full bg-black text-xs bg-opacity-50 p-4 rounded-lg mb-6">
+                    {{-- <div class="w-full bg-black text-xs bg-opacity-50 p-4 rounded-lg mb-6">
                         <div class="w-full flex justify-between items-center text-white text-lg">
                             <h1 class="font-bold mx-auto">Weightlifting</h1>
                             <i class="fa fa-chevron-down toggle-icon" aria-hidden="true"></i>
@@ -215,7 +253,7 @@
                                 <!-- Repeat similar rows as needed -->
                             </tbody>
                         </table>
-                    </div>
+                    </div> --}}
 
                     {{-- end table 3 --}}
 
@@ -338,6 +376,32 @@
                 });
             });
         </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.primary-btn').forEach(function (button) {
+            button.addEventListener('click', function () {
+                const targetId = button.getAttribute('data-target');
+                const primaryBody = document.querySelector(targetId);
+                const altBody = primaryBody.parentElement.querySelector('.alt-body');
+                primaryBody.classList.remove('hidden');
+                altBody.classList.add('hidden');
+            });
+        });
+
+        document.querySelectorAll('.alt-btn').forEach(function (button) {
+            button.addEventListener('click', function () {
+                const targetId = button.getAttribute('data-target');
+                console.log(button);
+                const altBody = document.querySelector(targetId);
+                const primaryBody = altBody.parentElement.querySelector('.primary-body');
+                altBody.classList.remove('hidden');
+                primaryBody.classList.add('hidden');
+            });
+        });
+    });
+</script>
+
     @endsection
 </body>
 
