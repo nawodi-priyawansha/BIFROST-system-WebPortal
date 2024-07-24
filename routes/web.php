@@ -115,31 +115,31 @@ Route::middleware(['admin'])->group(function () {
     Route::delete('/profile/{id}', [ClientManagementController::class, 'deleteProfile'])->name('deleteProfile');
     //edit
     Route::get('/edit/{id}', [ClientManagementController::class, 'editclient'])->name('editclient');
-
+// Route::get('/edit/{id}', [ClientManagementController::class, 'editclient'])->name('editclient'); function missing
 
 
     // store
-    Route::post('/clients', [ClientManagementController::class, 'store'])->name('clients.store');
+    Route::post('/clients', [SessionController::class, 'store'])->name('clients.store');
     // Get Category
-    Route::post('/getCategory', [ClientManagementController::class, 'getCategory'])->name('getCategory');
+    Route::post('/getCategory', [SessionController::class, 'getCategory'])->name('getCategory');
 
     // get data
-    Route::post('/class-manager', [ClientManagementController::class, 'getdata']);
+    Route::post('/class-manager', [SessionController::class, 'getdata']);
     // // get workout
-    Route::post('/get-workout', [ClientManagementController::class, 'getworkout']);
+    Route::post('/get-workout', [SessionController::class, 'getworkout']);
 
     // store warmup
-    Route::Post('/store-warmup', [ClientManagementController::class, 'storewarmup']);
+    Route::Post('/store-warmup', [SessionController::class, 'storewarmup']);
     // update warmup
-    Route::Post('/update-warmup', [ClientManagementController::class, 'updatewarmup']);
+    Route::Post('/update-warmup', [SessionController::class, 'updatewarmup']);
     // delete
-    Route::delete('/delete-warmups', [ClientManagementController::class, 'deleteAllBySelectDate'])->name('warmups.deleteAllBySelectDate');
+    Route::delete('/delete-warmups', [SessionController::class, 'deleteAllBySelectDate'])->name('warmups.deleteAllBySelectDate');
     // get warmup
-    Route::Post('/get-wormup', [ClientManagementController::class, 'getwarmup']);
+    Route::Post('/get-wormup', [SessionController::class, 'getwarmup']);
 
 
     // store
-    Route::post('/client-update', [ClientManagementController::class, 'update'])->name('clients.update');
+    Route::post('/client-update', [SessionController::class, 'update'])->name('clients.update');
 
     //workout librabry
     Route::get('/admin/workoutlibrary', [WorkoutLibraryController::class, 'viewworkoutlibrary'])->name('viewworkoutlibrary');
