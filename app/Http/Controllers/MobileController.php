@@ -9,6 +9,7 @@ use App\Models\Score;
 use App\Models\Strength;
 use App\Models\UserScore;
 use App\Models\Warmup;
+use App\Models\Weightlifting;
 use Illuminate\Http\Request;
 use PhpParser\Node\Expr\FuncCall;
 use Illuminate\Support\Facades\Auth;
@@ -136,7 +137,7 @@ class MobileController extends Controller
             ->with('workouts')
             ->with('workouts.categoryOption')
             ->get();
-        //dd($detailswarmup);
+
         //  //get warup details for specific date
         //  $tabconditioning = 'conditioning';
         //  $date = $dayWithDate;
@@ -145,16 +146,17 @@ class MobileController extends Controller
         //      ->with('workouts')
         //      ->get();
 
-        //  //get warup details for specific date
-        //  $tabweightweight = 'weightlifting';
-        //  $date = $dayWithDate;
-        //  $detailsweight = ClientManagement::where('tab', $tabweightweight)
-        //      ->where('date', $date)
-        //      ->with('workouts')
-        //      ->get();
 
+        //  //get warup details for specific date
+         $tabweightweight = 'weightlifting';
+         $date = $dayWithDate;
+         $detailsweight = Weightlifting::where('date', $date)
+             ->with('workouts')
+             ->with('workouts.categoryOption')
+             ->get();
+        //dd($detailswarmup);
         //return view('mobile.user.workout', compact('dayWithDate','detailswarmup','detailsstrength','detailsconditioning','detailsweight'));
-        return view('mobile.user.workout', compact('dayWithDate','detailswarmup','detailsstrength'));
+        return view('mobile.user.workout', compact('dayWithDate','detailswarmup','detailsstrength','detailsweight'));
     }
 
     public function workouttimer()

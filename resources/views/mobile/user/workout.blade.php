@@ -40,9 +40,10 @@
                             </thead>
                             <tbody class="table-body">
                                 @foreach ($detailswarmup as $warmupdetail)
-                                   <tr class="border-b border-gray-300">
+                                    <tr class="border-b border-gray-300">
                                         {{-- Category --}}
-                                        <td class="py-4">{{ $warmupdetail->workouts->categoryOption->category_name }} - {{ $warmupdetail->workouts->workout }}</td>
+                                        <td class="py-4">{{ $warmupdetail->workouts->categoryOption->category_name }} -
+                                            {{ $warmupdetail->workouts->workout }}</td>
 
                                         {{-- Workout --}}
                                         {{-- <td class="py-4 workouts">{{ $warmupdetail->workouts->workout }}</td> --}}
@@ -54,7 +55,7 @@
                                                 <button class="px-2 py-1 text-white"
                                                     onclick="decrementValue(this)">-</button>
                                                 <span
-                                                     class="w-16 bg-white text-black text-center rounded border-none p-1">{{ $warmupdetail->reps }}</span>
+                                                    class="w-16 bg-white text-black text-center rounded border-none p-1">{{ $warmupdetail->reps }}</span>
                                                 <button class="px-2 py-1 text-white"
                                                     onclick="incrementValue(this)">+</button>
                                             </div>
@@ -66,97 +67,265 @@
                     </div>
 
                     {{-- end warmup --}}
-                    {{-- table 1 strengrh --}}
+
+                    {{-- strengrh --}}
                     <div class="w-full bg-black text-xs bg-opacity-50 p-4 rounded-lg mb-6">
                         <div class="w-full flex justify-between items-center text-white text-lg">
                             <h1 class="font-bold mx-auto">Strength</h1>
                             <i class="fa fa-chevron-down toggle-icon" aria-hidden="true"></i>
                         </div>
-                        @foreach ($detailsstrength as $strengthdetail)
-                        <div>
-                            <div class="flex w-full flex-col justify-center items-center gap-2.5 pt-5 text-white">
-                                <div class=" flex justify-between items-center text-base font-bold">
-                                    <button class=" px-4 py-2 rounded primary-btn" data-target="#primary-{{ $loop->index }}">{{ $strengthdetail->workouts->categoryOption->category_name }} - {{ $strengthdetail->workouts->workout }}</button>
-                                    <button class=" px-4 py-2 border rounded alt-btn" data-target="#alt-{{ $loop->index }}">ALT</button>
+                        <div class="content hidden">
+                            @foreach ($detailsstrength as $strengthdetail)
+                                <div class="flex w-full flex-col justify-center items-center gap-2.5 pt-5 text-white">
+                                    <div class=" flex justify-between items-center text-base font-bold">
+                                        <button class=" px-4 py-2 rounded primary-btn"
+                                            data-target="#primary-strength-{{ $loop->index }}">{{ $strengthdetail->workouts->categoryOption->category_name }}
+                                            - {{ $strengthdetail->workouts->workout }}</button>
+                                        <button class=" px-4 py-2 border rounded alt-btn"
+                                            data-target="#alt-strength-{{ $loop->index }}">ALT</button>
+                                    </div>
                                 </div>
-                            </div>
-                            <table class="w-full text-white tablee">
-                                <thead class="justify-between">
-                                    <tr>
-                                        <th class="py-2">Set</th>
-                                        <th class="py-2">Weight</th>
-                                        <th class="px-2">Rep</th>
-                                        <th class="col-span-2"></th>
+                                <table class="w-full text-white tablee">
+                                    <thead class="justify-between">
+                                        <tr>
+                                            <th class="py-2">Set</th>
+                                            <th class="py-2">Weight</th>
+                                            <th class="px-2">Rep</th>
+                                            <th class="col-span-2"></th>
 
-                                    </tr>
-                                </thead>
-                                <div>
-                                {{-- Primary --}}
-                                <tbody id="primary-{{ $loop->index }}" class="table-body primary-body"> <!-- Initially hidden table body -->
-                                    @for ($setNumber = 1; $setNumber <= $strengthdetail->sets; $setNumber++)
-                                        <tr class="border-b border-gray-300">
-                                            <td class="py-4">{{ $setNumber }}</td>
-                                            <td class="py-4 workouts text-center">{{ $strengthdetail->weight }}</td>
-                                            <td class="py-4">
-                                                <div class="flex items-center justify-center space-x-4">
-                                                    <button class="px-2 py-1 text-white"
-                                                        onclick="decrementValue(this)">-</button>
-                                                    <span
-                                                        class="w-16 h-7 bg-white text-black text-center rounded border-none p-1">{{ $strengthdetail->reps }}</span>
-                                                    <button class="px-2 py-1 text-white"
-                                                        onclick="incrementValue(this)">+</button>
-                                                </div>
-                                            </td>
-                                            <td class="py-4">
-                                                <label class="inline-flex items-center me-5 cursor-pointer">
-                                                    <input type="checkbox" value="" class="sr-only peer timer-checkbox" data-rest-time="{{ $strengthdetail->rest }}">
-                                                    <div
-                                                        class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
-                                                    </div>
-                                                </label>
-                                            </td>
                                         </tr>
-                                        @endfor
-                                </tbody>
-                                {{-- Alternative --}}
-                                <tbody id="alt-{{ $loop->index }}" class="table-body alt-body hidden"> <!-- Initially hidden table body -->
-                                    @for ($setNumber = 1; $setNumber <= $strengthdetail->altsets; $setNumber++)
-                                        <tr class="border-b border-gray-300">
-                                            <td class="py-4">{{ $setNumber }}</td>
-                                            <td class="py-4 workouts text-center">{{ $strengthdetail->altweight }}</td>
-                                            <td class="py-4">
-                                                <div class="flex items-center justify-center space-x-4">
-                                                    <button class="px-2 py-1 text-white"
-                                                        onclick="decrementValue(this)">-</button>
-                                                    <span
-                                                        class="w-16 h-7 bg-white text-black text-center rounded border-none p-1">{{ $strengthdetail->altreps }}</span>
-                                                    <button class="px-2 py-1 text-white"
-                                                        onclick="incrementValue(this)">+</button>
-                                                </div>
-                                            </td>
-                                            <td class="py-4">
-                                                <label class="inline-flex items-center me-5 cursor-pointer">
-                                                    <input type="checkbox" value="" class="sr-only peer timer-checkbox" data-rest-time="{{ $strengthdetail->altrest }}">
-                                                    <div
-                                                        class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
-                                                    </div>
-                                                </label>
-                                            </td>
-                                        </tr>
-                                        @endfor
-                                </tbody>
-                            </div>
-                            </table>
+                                    </thead>
+                                    <div>
+                                        {{-- Primary --}}
+                                        <tbody id="primary-strength-{{ $loop->index }}" class="table-body primary-body">
+                                            <!-- Initially hidden table body -->
+                                            @php
+                                                $baseWeight = $strengthdetail->weight; // 80% of 1RM
+                                                $totalPercentageIncrease = 0.7; // 70%
+                                                $numberOfSets = $strengthdetail->sets;
+                                                $percentageIncreasePerSet =
+                                                    $totalPercentageIncrease / ($numberOfSets - 1);
+
+                                                $percentages = [];
+                                                for ($i = 0; $i < $numberOfSets; $i++) {
+                                                    $percentages[] = 0.3 + $percentageIncreasePerSet * $i;
+                                                }
+                                            @endphp
+                                            @for ($setNumber = 1; $setNumber <= $strengthdetail->sets; $setNumber++)
+                                                @php
+                                                    $setPercentage = $percentages[$setNumber - 1];
+                                                    $calculatedWeight = $baseWeight * $setPercentage;
+                                                @endphp
+                                                <tr class="border-b border-gray-300">
+                                                    <td class="py-4">{{ $setNumber }}</td>
+                                                    <td class="py-4 workouts text-center">
+                                                        {{ number_format($calculatedWeight, 2) }}</td>
+                                                    <td class="py-4">
+                                                        <div class="flex items-center justify-center space-x-4">
+                                                            <button class="px-2 py-1 text-white"
+                                                                onclick="decrementValue(this)">-</button>
+                                                            <span
+                                                                class="w-16 h-7 bg-white text-black text-center rounded border-none p-1">{{ $strengthdetail->reps }}</span>
+                                                            <button class="px-2 py-1 text-white"
+                                                                onclick="incrementValue(this)">+</button>
+                                                        </div>
+                                                    </td>
+                                                    <td class="py-4">
+                                                        <label class="inline-flex items-center me-5 cursor-pointer">
+                                                            <input type="checkbox" value=""
+                                                                class="sr-only peer timer-checkbox"
+                                                                data-rest-time="{{ $strengthdetail->rest }}">
+                                                            <div
+                                                                class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
+                                                            </div>
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                            @endfor
+                                        </tbody>
+                                        {{-- Alternative --}}
+                                        <tbody id="alt-strength-{{ $loop->index }}" class="table-body alt-body hidden">
+                                            <!-- Initially hidden table body -->
+                                            @php
+                                                $altBaseWeight = $strengthdetail->altweight; // Alternative weight base
+                                                $totalPercentageIncreasealt = 0.7; // 70%
+                                                $numberOfAltSets = $strengthdetail->altsets;
+                                                $percentageIncreasePerSetalt =
+                                                    $totalPercentageIncreasealt / ($numberOfAltSets - 1);
+
+                                                $altPercentages = [];
+                                                for ($i = 0; $i < $numberOfAltSets; $i++) {
+                                                    $altPercentages[] = 0.3 + $percentageIncreasePerSetalt * $i;
+                                                }
+                                            @endphp
+                                            @for ($setNumberalt = 1; $setNumberalt <= $strengthdetail->altsets; $setNumberalt++)
+                                                @php
+                                                    $setPercentagealt = $altPercentages[$setNumberalt - 1];
+                                                    $calculatedAltWeight = $altBaseWeight * $setPercentagealt;
+                                                @endphp
+                                                <tr class="border-b border-gray-300">
+                                                    <td class="py-4">{{ $setNumber }}</td>
+                                                    <td class="py-4 workouts text-center">
+                                                        {{ number_format($calculatedAltWeight, 2) }}</td>
+                                                    <td class="py-4">
+                                                        <div class="flex items-center justify-center space-x-4">
+                                                            <button class="px-2 py-1 text-white"
+                                                                onclick="decrementValue(this)">-</button>
+                                                            <span
+                                                                class="w-16 h-7 bg-white text-black text-center rounded border-none p-1">{{ $strengthdetail->altreps }}</span>
+                                                            <button class="px-2 py-1 text-white"
+                                                                onclick="incrementValue(this)">+</button>
+                                                        </div>
+                                                    </td>
+                                                    <td class="py-4">
+                                                        <label class="inline-flex items-center me-5 cursor-pointer">
+                                                            <input type="checkbox" value=""
+                                                                class="sr-only peer timer-checkbox"
+                                                                data-rest-time="{{ $strengthdetail->altrest }}">
+                                                            <div
+                                                                class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
+                                                            </div>
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                            @endfor
+                                        </tbody>
+                                    </div>
+                                </table>
+                            @endforeach
                         </div>
-                        @endforeach
                     </div>
 
+                    {{-- end strengrh--}}
 
+                    {{-- weight --}}
+                    <div class="w-full bg-black text-xs bg-opacity-50 p-4 rounded-lg mb-6">
+                        <div class="w-full flex justify-between items-center text-white text-lg">
+                            <h1 class="font-bold mx-auto">Weightlifting</h1>
+                            <i class="fa fa-chevron-down toggle-icon" aria-hidden="true"></i>
+                        </div>
+                        <div class="content hidden">
+                            @foreach ($detailsweight as $weightdetail)
+                                <div class="flex w-full flex-col justify-center items-center gap-2.5 pt-5 text-white">
+                                    <div class=" flex justify-between items-center text-base font-bold">
+                                        <button class=" px-4 py-2 rounded primary-btn"
+                                            data-target="#primary-weight-{{ $loop->index }}">{{ $weightdetail->workouts->categoryOption->category_name }} - {{ $weightdetail->workouts->workout }}</button>
+                                        <button class=" px-4 py-2 border rounded alt-btn"
+                                            data-target="#alt-weight-{{ $loop->index }}">ALT</button>
+                                    </div>
+                                </div>
+                                <table class="w-full text-white tablee">
+                                    <thead class="justify-between">
+                                        <tr>
+                                            <th class="py-2">Set</th>
+                                            <th class="py-2">Weight</th>
+                                            <th class="px-2">Rep</th>
+                                            <th class="col-span-2"></th>
 
+                                        </tr>
+                                    </thead>
+                                    <div>
+                                        {{-- Primary --}}
+                                        <tbody id="primary-weight-{{ $loop->index }}" class="table-body primary-body">
+                                            <!-- Initially hidden table body -->
+                                            @php
+                                                $baseWeight = $weightdetail->weight; // 80% of 1RM
+                                                $totalPercentageIncrease = 0.7; // 70%
+                                                $numberOfSets = $weightdetail->sets;
+                                                $percentageIncreasePerSet =
+                                                    $totalPercentageIncrease / ($numberOfSets - 1);
 
+                                                $percentages = [];
+                                                for ($i = 0; $i < $numberOfSets; $i++) {
+                                                    $percentages[] = 0.3 + $percentageIncreasePerSet * $i;
+                                                }
+                                            @endphp
+                                            @for ($setNumber = 1; $setNumber <= $weightdetail->sets; $setNumber++)
+                                                @php
+                                                    $setPercentage = $percentages[$setNumber - 1];
+                                                    $calculatedWeight = $baseWeight * $setPercentage;
+                                                @endphp
+                                                <tr class="border-b border-gray-300">
+                                                    <td class="py-4">{{ $setNumber }}</td>
+                                                    <td class="py-4 workouts text-center">
+                                                        {{ number_format($calculatedWeight, 2) }}</td>
+                                                    <td class="py-4">
+                                                        <div class="flex items-center justify-center space-x-4">
+                                                            <button class="px-2 py-1 text-white"
+                                                                onclick="decrementValue(this)">-</button>
+                                                            <span
+                                                                class="w-16 h-7 bg-white text-black text-center rounded border-none p-1">{{ $weightdetail->reps }}</span>
+                                                            <button class="px-2 py-1 text-white"
+                                                                onclick="incrementValue(this)">+</button>
+                                                        </div>
+                                                    </td>
+                                                    <td class="py-4">
+                                                        <label class="inline-flex items-center me-5 cursor-pointer">
+                                                            <input type="checkbox" value=""
+                                                                class="sr-only peer timer-checkbox"
+                                                                data-rest-time="{{ $weightdetail->rest }}">
+                                                            <div
+                                                                class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
+                                                            </div>
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                            @endfor
+                                        </tbody>
+                                        {{-- Alternative --}}
+                                        <tbody id="alt-weight-{{ $loop->index }}" class="table-body alt-body hidden">
+                                            <!-- Initially hidden table body -->
+                                            @php
+                                                $altBaseWeight = $weightdetail->altweight; // Alternative weight base
+                                                $totalPercentageIncreasealt = 0.7; // 70%
+                                                $numberOfAltSets = $weightdetail->altsets;
+                                                $percentageIncreasePerSetalt =
+                                                    $totalPercentageIncreasealt / ($numberOfAltSets - 1);
 
-                    {{-- end table 1 --}}
+                                                $altPercentages = [];
+                                                for ($i = 0; $i < $numberOfAltSets; $i++) {
+                                                    $altPercentages[] = 0.3 + $percentageIncreasePerSetalt * $i;
+                                                }
+                                            @endphp
+                                            @for ($setNumberalt = 1; $setNumberalt <= $weightdetail->altsets; $setNumberalt++)
+                                                @php
+                                                    $setPercentagealt = $altPercentages[$setNumberalt - 1];
+                                                    $calculatedAltWeight = $altBaseWeight * $setPercentagealt;
+                                                @endphp
+                                                <tr class="border-b border-gray-300">
+                                                    <td class="py-4">{{ $setNumberalt }}</td>
+                                                    <td class="py-4 workouts text-center">
+                                                        {{ number_format($calculatedAltWeight, 2) }}</td>
+                                                    <td class="py-4">
+                                                        <div class="flex items-center justify-center space-x-4">
+                                                            <button class="px-2 py-1 text-white"
+                                                                onclick="decrementValue(this)">-</button>
+                                                            <span
+                                                                class="w-16 h-7 bg-white text-black text-center rounded border-none p-1">{{ $weightdetail->altreps }}</span>
+                                                            <button class="px-2 py-1 text-white"
+                                                                onclick="incrementValue(this)">+</button>
+                                                        </div>
+                                                    </td>
+                                                    <td class="py-4">
+                                                        <label class="inline-flex items-center me-5 cursor-pointer">
+                                                            <input type="checkbox" value=""
+                                                                class="sr-only peer timer-checkbox"
+                                                                data-rest-time="{{ $weightdetail->altrest }}">
+                                                            <div
+                                                                class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
+                                                            </div>
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                            @endfor
+                                        </tbody>
+                                    </div>
+                                </table>
+                            @endforeach
+                        </div>
+                    </div>
 
+                    {{-- end weight--}}
 
 
 
@@ -206,58 +375,6 @@
                     </div> --}}
 
                     {{-- end table 2 --}}
-
-
-                    {{-- table 3 weightlifting --}}
-                    {{-- <div class="w-full bg-black text-xs bg-opacity-50 p-4 rounded-lg mb-6">
-                        <div class="w-full flex justify-between items-center text-white text-lg">
-                            <h1 class="font-bold mx-auto">Weightlifting</h1>
-                            <i class="fa fa-chevron-down toggle-icon" aria-hidden="true"></i>
-                        </div>
-                        <table class="w-full text-white hidden tablee">
-                            <thead class="justify-between">
-                                <tr>
-                                    <th class="py-2">Set</th>
-                                    <th class="px-2">Reps</th>
-                                    <th class="col-span-2"></th>
-                                </tr>
-                            </thead>
-                            <tbody class="table-body"> <!-- Initially hidden table body -->
-                                @foreach ($detailsweight as $weightdetail)
-                                    <tr class="border-b border-gray-300">
-                                        <td class="py-4">{{ $weightdetail->sets }}</td>
-                                        <td class="py-4 workouts">{{ $weightdetail->workouts->workout }}</td>
-                                        <td class="py-4">
-                                            <div class="flex items-center justify-center space-x-4">
-                                                <button class="px-2 py-1 text-white"
-                                                    onclick="decrementValue(this)">-</button>
-                                                <span
-                                                    class="w-16 bg-white text-black text-center rounded border-none p-1">{{ $weightdetail->reps }}</span>
-                                                <button class="px-2 py-1 text-white"
-                                                    onclick="incrementValue(this)">+</button>
-                                            </div>
-                                        </td>
-                                        <td class="py-4">
-                                            <label class="inline-flex items-center me-5 cursor-pointer">
-                                                <input type="checkbox" value="" class="sr-only peer timer-checkbox" data-rest-time="{{ $weightdetail->rest }}">
-                                                <div
-                                                    class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
-                                                </div>
-                                            </label>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                <!-- Additional rows for weightlifting -->
-
-
-                                <!-- Repeat similar rows as needed -->
-                            </tbody>
-                        </table>
-                    </div> --}}
-
-                    {{-- end table 3 --}}
-
-
 
                     <div class="notes text-xs mb-6 w-full">
                         <textarea placeholder="Notes" class="w-full h-20 text-black bg-white rounded-lg p-2 border-none"></textarea>
@@ -377,31 +494,43 @@
             });
         </script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        document.querySelectorAll('.primary-btn').forEach(function (button) {
-            button.addEventListener('click', function () {
-                const targetId = button.getAttribute('data-target');
-                const primaryBody = document.querySelector(targetId);
-                const altBody = primaryBody.parentElement.querySelector('.alt-body');
-                primaryBody.classList.remove('hidden');
-                altBody.classList.add('hidden');
-            });
-        });
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelectorAll('.primary-btn').forEach(function(button) {
+                    button.addEventListener('click', function() {
+                        const targetId = button.getAttribute('data-target');
+                        const primaryBody = document.querySelector(targetId);
+                        const altBody = primaryBody.parentElement.querySelector('.alt-body');
+                        primaryBody.classList.remove('hidden');
+                        altBody.classList.add('hidden');
+                    });
+                });
 
-        document.querySelectorAll('.alt-btn').forEach(function (button) {
-            button.addEventListener('click', function () {
-                const targetId = button.getAttribute('data-target');
-                console.log(button);
-                const altBody = document.querySelector(targetId);
-                const primaryBody = altBody.parentElement.querySelector('.primary-body');
-                altBody.classList.remove('hidden');
-                primaryBody.classList.add('hidden');
+                document.querySelectorAll('.alt-btn').forEach(function(button) {
+                    button.addEventListener('click', function() {
+                        const targetId = button.getAttribute('data-target');
+                        console.log(button);
+                        const altBody = document.querySelector(targetId);
+                        const primaryBody = altBody.parentElement.querySelector('.primary-body');
+                        altBody.classList.remove('hidden');
+                        primaryBody.classList.add('hidden');
+                    });
+                });
             });
-        });
-    });
-</script>
-
+        </script>
+        <script>
+            function toggleContent(icon) {
+                const content = icon.closest('.w-full').querySelector('.content');
+                content.classList.toggle('hidden');
+                if (content.classList.contains('hidden')) {
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                } else {
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                }
+            }
+        </script>
     @endsection
 </body>
 
