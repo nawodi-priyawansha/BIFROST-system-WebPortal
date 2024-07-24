@@ -5,15 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Warmup extends Model
+class Strength extends Model
 {
     use HasFactory;
-
     protected $fillable = [
         'category_id',
         'workout_id',
-        'reps',
         'weight',
+        'sets',
+        'rest',
+        'reps',
+        'intensity',
+        'altweight',
+        'altsets',
+        'altrest',
+        'altreps',
+        'altintensity',
         'date'
     ];
 
@@ -21,5 +28,4 @@ class Warmup extends Model
     {
         return $this->belongsTo(WorkoutLibrary::class, 'workout_id');
     }
-
 }
