@@ -16,10 +16,15 @@ return new class extends Migration
             $table->foreignId('category_id')->nullable()->constrained('category_options')->onDelete('cascade');
             $table->foreignId('workout_id')->nullable()->constrained('workout_libraries')->onDelete('cascade');
             $table->float('weight');
-            $table->integer('sets');
-            $table->integer('rest'); // Assuming rest is in seconds
-            $table->string('intensity'); // Adjust if you have a specific enum or validation
-            $table->enum('type', ['alternate', 'primary']); // Using ENUM for predefined types
+            $table->time('rest');
+            $table->string('intensity'); 
+
+            $table->foreignId('alt_category_id')->nullable()->constrained('category_options')->onDelete('cascade');
+            $table->foreignId('alt_workout_id')->nullable()->constrained('workout_libraries')->onDelete('cascade');
+            $table->float('alt_weight');
+            $table->time('alt_rest');
+            $table->string('alt_intensity'); 
+            
             $table->string('date');
             $table->timestamps();
         });
