@@ -16,15 +16,15 @@ return new class extends Migration
             $table->foreignId('category_id')->nullable()->constrained('category_options')->onDelete('cascade');
             $table->foreignId('workout_id')->nullable()->constrained('workout_libraries')->onDelete('cascade');
             $table->float('weight');
-            $table->integer('sets');
-            $table->integer('reps');
-            $table->string('rest'); // Assuming rest is in seconds
-            $table->string('intensity'); // Adjust if you have a specific enum or validation
-            $table->float('altweight');
-            $table->integer('altsets');
-            $table->integer('altreps');
-            $table->string('altrest'); // Assuming rest is in seconds
-            $table->string('altintensity');
+            $table->time('rest');
+            $table->string('intensity'); 
+
+            $table->foreignId('alt_category_id')->nullable()->constrained('category_options')->onDelete('cascade');
+            $table->foreignId('alt_workout_id')->nullable()->constrained('workout_libraries')->onDelete('cascade');
+            $table->float('alt_weight');
+            $table->time('alt_rest');
+            $table->string('alt_intensity'); 
+            
             $table->string('date');
             $table->timestamps();
         });
@@ -38,3 +38,4 @@ return new class extends Migration
         Schema::dropIfExists('weightliftings');
     }
 };
+
