@@ -137,6 +137,9 @@ Route::middleware(['admin'])->group(function () {
     // get warmup
     Route::Post('/get-wormup', [SessionController::class, 'getwarmup']);
 
+    //stroe strenght
+    Route::post('/save-strength', [SessionController::class, 'strengthstore'])->name('save-strength');
+
 
     // store
     Route::post('/client-update', [SessionController::class, 'update'])->name('clients.update');
