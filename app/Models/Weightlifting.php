@@ -21,12 +21,15 @@ class Weightlifting extends Model
         'alt_intensity',
         'date',
     ];
-    
+
     public function sets()
     {
         return $this->hasMany(WeightliftingSet::class);
     }
-
+    public function workouts()
+    {
+        return $this->belongsTo(WorkoutLibrary::class, 'workout_id');
+    }
     public static function store($data)
     {
         // dd($data);

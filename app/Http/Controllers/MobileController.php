@@ -151,10 +151,19 @@ class MobileController extends Controller
          $tabweightweight = 'weightlifting';
          $date = $dayWithDate;
          $detailsweight = Weightlifting::where('date', $date)
+             ->with('sets')
+             ->with('sets.weightlifting')
              ->with('workouts')
              ->with('workouts.categoryOption')
              ->get();
-        //dd($detailswarmup);
+
+            //  foreach ($detailsweight as $weightlifting) {
+            //     foreach ($weightlifting->sets as $set) {
+            //         dd($set->sets, $set->reps); // Dump and display the values of sets and reps
+            //     }
+            // }
+
+            //dd($weightlifting->sets_count);
         //return view('mobile.user.workout', compact('dayWithDate','detailswarmup','detailsstrength','detailsconditioning','detailsweight'));
         return view('mobile.user.workout', compact('dayWithDate','detailswarmup','detailsstrength','detailsweight'));
     }
