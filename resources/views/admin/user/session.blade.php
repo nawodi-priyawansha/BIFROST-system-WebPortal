@@ -392,6 +392,7 @@
                 case "weightlifting":
                     document.getElementById('selectdatewe').value = dayName;
                     document.getElementById('selecttabwe').value = tabId;
+                    getWeightlifting(dayName)
                     break;
                 case "test":
                     document.getElementById('selectdatet').value = dayName;

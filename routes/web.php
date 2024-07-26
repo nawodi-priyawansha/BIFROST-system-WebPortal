@@ -138,7 +138,10 @@ Route::middleware(['admin'])->group(function () {
     Route::Post('/get-wormup', [SessionController::class, 'getwarmup']);
     // store weightlifting
     Route::post('/store-weightlifting',[SessionController::class,'storeweightlifting']);
-
+    // get Weightlifting
+    Route::post('/get-Weightlifting',[SessionController::class,'getWeightlifting']);
+    // update Weightlifting
+    Route::post('/update-Weightlifting', [SessionController::class, 'updateWeightlifting'])->name('updateWeightlifting');
 
     // store
     Route::post('/client-update', [SessionController::class, 'update'])->name('clients.update');

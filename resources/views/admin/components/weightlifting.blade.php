@@ -1,6 +1,17 @@
 <div id="weightlifting" hidden>
     {{-- hidden input field --}}
     <input type="text" name="selecttabwe" id="selecttabwe" hidden>
+
+
+    <div class="flex gap-5 p-4 mr-8 rounded-md mb-4 font-bold text-xl">
+        <div class="flex justify-center text-center items-center w-1/2">Primary</div>
+        <div class="flex justify-center text-center items-center w-1/2">Alternate</div>
+        <button class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base">Clear</button>
+    </div>
+    {{-- display  weightlifting --}}
+    <div id="weightlifting-container"></div>
+
+
     <form action="/store-weightlifting" method="POST">
         @csrf
         <input type="text" name="selectdatewe" id="selectdatewe" hidden>
@@ -9,11 +20,12 @@
                 <div class="ui-block flex flex-col text-lg p-4 bg-gray-50 mr-8 rounded-md gap-4 mb-4 ">
                     <!-- Your UI block content here -->
                     <div class="flex gap-5 justify-between">
-                        <div class="flex-col w-full ">
+                        {{-- Primary Category and Workouts --}}
+                        <div class="flex-col w-full border-r border-r-black">
                             <div class="flex items-center border-b">
                                 <label for="categorywe_1" class="w-60 block mb-1">Category <span
                                         class="text-red-500">*</span></label>
-                                <select id="categorywe_1" name="categorywe_1" onchange="getworkoutWe(this)" 
+                                <select id="categorywe_1" name="categorywe_1" onchange="getworkoutWe(this)"
                                     class="w-1/3 px-3 py-3 border flex rounded mb-2" required>
                                     <option value="" selected disabled>-- Select Category --</option>
                                 </select>
@@ -51,7 +63,7 @@
                                             </button>
                                             <input type="text" id="setswe_1" name="setswe_1" data-input-counter
                                                 class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center my-2 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none"
-                                                placeholder="0" readonly required/>
+                                                placeholder="0" readonly required />
                                             <button type="button"
                                                 onclick="increment(this.parentNode.querySelector('input').id)"
                                                 class="increment-custom bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
@@ -81,7 +93,7 @@
                                             </button>
                                             <input type="text" id="repswe_1" name="repswe_1" data-input-counter
                                                 class="bg-gray-50 border-x-0 border-gray-300 h-11 my-2 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none"
-                                                placeholder="0" readonly required/>
+                                                placeholder="0" readonly required />
                                             <button type="button"
                                                 onclick="increment(this.parentNode.querySelector('input').id)"
                                                 class="increment-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
@@ -190,7 +202,7 @@
                                             <input type="text" id="alt-setswe_1" name="alt-setswe_1"
                                                 data-input-counter
                                                 class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full my-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none"
-                                                placeholder="0" readonly required/>
+                                                placeholder="0" readonly required />
                                             <button type="button"
                                                 onclick="increment(this.parentNode.querySelector('input').id)"
                                                 class="increment-custom bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
@@ -220,7 +232,7 @@
                                             <input type="text" id="alt-repswe_1" name="alt-repswe_1"
                                                 data-input-counter
                                                 class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none"
-                                                placeholder="0" readonly required/>
+                                                placeholder="0" readonly required />
                                             <button type="button"
                                                 onclick="increment(this.parentNode.querySelector('input').id)"
                                                 class="increment-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
@@ -288,9 +300,11 @@
         </div>
         <div id="cloneDisplayContainer"></div>
         <div class=" flex flex-col gap-5">
+            {{-- Clone UI button --}}
             <button id="cloneButton"type="button"
                 class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base w-32"> Another
             </button>
+            {{-- Save Button --}}
             <button id="submitButton" type="submit"
                 class="bg-[#FB1018] text-white py-2 px-4 rounded mb-2 hover:bg-red-700 w-24">Save</button>
         </div>
@@ -299,7 +313,7 @@
 
 
 
-
+{{-- Clone Ui Script --}}
 <script>
     // Function to update input names and IDs for the cloned element
     function updateNamesAndIds(element, index) {
@@ -436,7 +450,7 @@
 
 
 <script>
-    // Rest increment Decrement
+    // Rest increment Increment
     function incrementRest(id) {
         // Get the current time value
         let input = document.getElementById(id); // Ensure you get the input element using the id
@@ -459,7 +473,7 @@
         input.value = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
     }
 
-
+    // Rest increment Decrement
     function decrementRest(id) {
         // Get the current time value
         let input = document.getElementById(id); // Ensure you get the input element using the id
@@ -552,8 +566,31 @@
 
         // Get the remaining part after the base
         const remainingPart = idParts.slice(1).join('_');
+        const isCategory = selectElement.id === `categorywe_${remainingPart}`;
         const isAltCategory = selectElement.id === `alt-categorywe_${remainingPart}`;
-        const workoutSelectId = isAltCategory ? `alt-workoutwe_${remainingPart}` : `workoutwe_${remainingPart}`;
+        const isECategory = selectElement.id === `categoryweight_${remainingPart}`;
+        const isEAltCategory = selectElement.id === `altcategoryweight_${remainingPart}`;
+
+        let workoutSelectId;
+
+        if (isAltCategory) {
+            workoutSelectId = `alt-workoutwe_${remainingPart}`;
+        } else if (isCategory) {
+            workoutSelectId = `workoutwe_${remainingPart}`;
+        } else if (isECategory) {
+            workoutSelectId = `workoutweight_${remainingPart}`;
+        } else if (isEAltCategory) {
+            workoutSelectId = `altworkoutweight_${remainingPart}`;
+        }
+
+        console.log(`Constructed workoutSelectId: ${workoutSelectId}`);
+
+        const workoutSelect = document.getElementById(workoutSelectId);
+
+        if (!workoutSelect) {
+            console.error(`Element with ID ${workoutSelectId} not found in the DOM.`);
+            return;
+        }
 
         $.ajax({
             url: "/get-workout",
@@ -566,7 +603,6 @@
             success: function(response) {
                 console.log(response);
                 const workouts = response.workouts || [];
-                const workoutSelect = document.getElementById(workoutSelectId);
                 clearOptions(workoutSelect);
 
                 workouts.forEach(workout => {
@@ -591,6 +627,7 @@
     function clearOptions(selectElement) {
         selectElement.innerHTML = '<option value="" selected disabled>-- Select Workout --</option>';
     }
+
 
 
 
@@ -813,4 +850,333 @@
     document.addEventListener('DOMContentLoaded', function() {
         getcategorywe();
     });
+</script>
+
+
+
+
+
+
+
+
+
+
+{{-- get weightlifting --}}
+<script>
+    function getWeightlifting(date) {
+        console.log("get Weightlifting date: " + date);
+        $.ajax({
+            url: "/get-Weightlifting",
+            type: "POST",
+            data: {
+                date: date,
+                _token: $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                // console.log(response);
+                // Assuming response is an array of arrays
+                // response.forEach(subArray => {
+                setWeightlifting(response.weightlifting, response.categoryOptions);
+                // });
+            },
+
+            error: function(xhr, status, error) {
+                console.error(error);
+            },
+        });
+    }
+
+    function setWeightlifting(weightlifting, categoryOptions) {
+        console.log(weightlifting);
+
+        // Get the container where the information will be displayed
+        const container = document.getElementById('weightlifting-container');
+
+        // Clear the container
+        container.innerHTML = '';
+
+        // Initialize the htmlContent variable
+        let htmlContent = '';
+
+        // Build HTML content
+        weightlifting.forEach(item => {
+            // Create a string with the primary category options
+            let categoryOptionsHTML = '<option value="" selected disabled>-- Select Category --</option>';
+            categoryOptions.forEach(category => {
+                categoryOptionsHTML +=
+                    `<option value="${category.id}" ${category.id == item.category_id ? 'selected' : ''}>${category.category_name}</option>`;
+            });
+
+            // Create a string with the alternative category options
+            let altCategoryOptionsHTML = '';
+            if (item.alt_category_id) {
+                altCategoryOptionsHTML = '<option value="" selected disabled>-- Select Category --</option>';
+                categoryOptions.forEach(category => {
+                    altCategoryOptionsHTML +=
+                        `<option value="${category.id}" ${category.id == item.alt_category_id ? 'selected' : ''}>${category.category_name}</option>`;
+                });
+            }
+
+            // Build the setsHTML for each set in the item
+            const setsHTML = Array.isArray(item.sets) ? item.sets.map(set => {
+                // Check if sets or reps are null and set visibility accordingly
+                const isSetsVisible = set.sets !== null && set.sets !== undefined;
+                const isRepsVisible = set.reps !== null && set.reps !== undefined;
+
+                return `
+                    <div>
+                        <input name="setsid_${item.id}" value="${set.id}" hidden>
+                        
+                        ${isSetsVisible ? `
+                        <div class="flex items-center sets-view">
+                            <label for="custom-numberweight_${item.id}" class="w-60 block mb-1">SETS <span class="text-red-500">*</span></label>
+                            <div class="relative flex items-center max-w-[8rem]">
+                                <button type="button" onclick="decrement(this.parentNode.querySelector('input').id)" class="decrement-custom bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                    <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
+                                    </svg>
+                                </button>
+                                <input type="text" value="${set.sets}" id="setsweight_${item.id}" name="setsweight_${item.id}" data-input-counter class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center my-2 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" placeholder="0" readonly required />
+                                <button type="button" onclick="increment(this.parentNode.querySelector('input').id)" class="increment-custom bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                    <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>` : ''}
+
+                        ${isRepsVisible ? `
+                        <div class="flex items-center border-b">
+                            <label for="repsweight_${item.id}" class="w-60 block mb-1">REPS <span class="text-red-500">*</span></label>
+                            <div class="relative flex items-center max-w-[8rem]">
+                                <button type="button" onclick="decrement(this.parentNode.querySelector('input').id)" class="decrement-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                    <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
+                                    </svg>
+                                </button>
+                                <input type="text" value="${set.reps}" id="repsweight_${item.id}" name="repsweight_${item.id}" data-input-counter class="bg-gray-50 border-x-0 border-gray-300 h-11 my-2 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" placeholder="0" readonly required />
+                                <button type="button" onclick="increment(this.parentNode.querySelector('input').id)" class="increment-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                    <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>` : ''}
+                    </div>
+                `;
+            }).join('') : '';
+
+
+            // Build the altSetsHTML for each alt set in the item
+            const altSetsHTML = Array.isArray(item.sets) ? item.sets.map(set => {
+                // Check if alt_sets or alt_reps are null and set visibility accordingly
+                const isAltSetsVisible = set.alt_sets !== null && set.alt_sets !== undefined;
+                const isAltRepsVisible = set.alt_reps !== null && set.alt_reps !== undefined;
+
+                return `
+                <div>
+                    <input name="altsetsid_${item.id}" value="${set.id}" hidden>
+                    
+                    ${isAltSetsVisible ? `
+                    <div class="flex items-center sets-view">
+                        <label for="altcustomnumberweight_${item.id}" class="w-60 block mb-1">SETS <span class="text-red-500">*</span></label>
+                        <div class="relative flex items-center max-w-[8rem]">
+                            <button type="button" onclick="decrement(this.parentNode.querySelector('input').id)" class="decrement-custom bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
+                                </svg>
+                            </button>
+                            <input type="text" value="${set.alt_sets}" id="altsetsweight_${item.id}" name="altsetsweight_${item.id}" data-input-counter class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center my-2 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" placeholder="0" readonly required />
+                            <button type="button" onclick="increment(this.parentNode.querySelector('input').id)" class="increment-custom bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>` : ''}
+                    
+                    ${isAltRepsVisible ? `
+                    <div class="flex items-center border-b">
+                        <label for="altrepsweight_${item.id}" class="w-60 block mb-1">REPS <span class="text-red-500">*</span></label>
+                        <div class="relative flex items-center max-w-[8rem]">
+                            <button type="button" onclick="decrement(this.parentNode.querySelector('input').id)" class="decrement-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
+                                </svg>
+                            </button>
+                            <input type="text" value="${set.alt_reps}" id="altrepsweight_${item.id}" name="altrepsweight_${item.id}" data-input-counter class="bg-gray-50 border-x-0 border-gray-300 h-11 my-2 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" placeholder="0" readonly required />
+                            <button type="button" onclick="increment(this.parentNode.querySelector('input').id)" class="increment-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>` : ''}
+                </div>
+            `;
+            }).join('') : '';
+
+
+            // Build the final HTML for the current item
+            htmlContent += `
+                <form action="{{ route('updateWeightlifting') }}" method="POST">
+                    @csrf
+                    <div class="flex flex-col text-lg p-4 bg-gray-50 mr-8 rounded-md gap-4 mb-4">
+                        <div class="flex gap-5 justify-between">
+                            {{-- Primary Category and Workouts --}}
+                            <div class="flex-col w-full border-r border-r-black">
+                                <div class="item-container">
+                                    <div hidden><h3>Item ID: ${item.id}</h3></div>
+                                    <div class="flex border-b mt-4">
+                                    <label for="categoryweight_${item.id}" class="w-60 block mb-1">Category <span class="text-red-500">*</span></label>
+                                    <select id="categoryweight_${item.id}" name="categoryweight_${item.id}" onchange="getworkoutWe(this)" class="w-1/3 px-3 py-3 border rounded mb-2" required>
+                                        ${categoryOptionsHTML}
+                                    </select>
+                                    </div>
+                                    <div class="flex items-center border-b">
+                                        <label for="workoutweight_${item.id}" class="w-60 block mb-1">
+                                            Workout<span class="text-red-500">*</span>
+                                        </label>
+                                        <select id="workoutweight_${item.id}" name="workoutweight_${item.id}" class="w-1/3 px-3 py-3 border flex rounded mb-2">
+                                            <option value="" selected disabled>-- Select Workout --</option>
+                                            <!-- Populate options dynamically -->
+                                            <option value="${item.workout_id}" selected>${item.workout_type}</option>
+                                        </select>
+                                    </div>
+                                    <div class="flex items-center border-b mt-2">
+                                        <label for="weigthweight_${item.id}" class="w-60 block mb-1">Weight <span
+                                                class="text-red-500">*</span></label>
+                                        <input type="number" id="weigthweight_${item.id}" name="weigthweight_${item.id}" value="${item.weight}"
+                                            class="w-1/3 px-3 py-3 border flex rounded mb-2" required>
+                                        <label for="" class="border bg-white py-3 px-3 mb-2 ">%</label>
+                                    </div>
+                                    <div class="border-b" id="duplicateSetUI">
+                                        <div class="sets-container">
+                                            ${setsHTML}
+                                        </div>
+                                        <div class="duplicate-sets" id="duplicate-sets_${item.id}"></div>
+                                        <div class="ml-60">
+                                            <button id="addset_${item.id}" onclick="duplicateSet(this.id)" type="button" class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base">
+                                                <i class="fas fa-plus text-[12px]"></i> Add set
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center border-b">
+                                        <label for="restweight_${item.id}" class="w-60 block mb-1">Rest <span class="text-red-500">*</span></label>
+                                        <div class="relative flex items-center max-w-[8rem]">
+                                            <button type="button" onclick="decrementRest(this.parentNode.querySelector('input').id)" class="decrement-rest bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                                <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
+                                                </svg>
+                                            </button>
+                                            <input type="text" value="${item.rest}" id="restweight_${item.id}" name="restweight_${item.id}" placeholder="00:00" class="bg-gray-50 border-x-0 border-gray-300 h-11 my-2 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" readonly required>
+                                            <button type="button" onclick="incrementRest(this.parentNode.querySelector('input').id)" class="increment-rest bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                                <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center border-b">
+                                        <label for="intensityweight_${item.id}" class="w-60 block mb-1">
+                                            Intensity <span class="text-red-500">*</span>
+                                        </label>
+                                        <select id="intensityweight_${item.id}" name="intensityweight_${item.id}"
+                                            class="w-1/3 px-3 py-3 border flex rounded my-2" required>
+                                            <!-- Dynamically setting the selected option -->
+                                            <option value="low" ${item.intensity === 'low' ? 'selected' : ''}>Low</option>
+                                            <option value="medium" ${item.intensity === 'medium' ? 'selected' : ''}>Medium</option>
+                                            <option value="high" ${item.intensity === 'high' ? 'selected' : ''}>High</option>
+                                            <option value="extreme" ${item.intensity === 'extreme' ? 'selected' : ''}>Extreme</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            {{-- Alternate Category and Workouts --}}
+                            <div class="flex-col w-full">
+                                ${altCategoryOptionsHTML ? `
+                                    <div class="flex items-center border-b mt-4">
+                                        <label for="altcategoryweight_${item.id}" class="w-60 block mb-1">Alternative Category <span class="text-red-500">*</span></label>
+                                        <select id="altcategoryweight_${item.id}" name="altcategoryweight_${item.id}" onchange="getworkoutWe(this)" class="w-1/3 px-3 py-3 border rounded mb-2" required>
+                                            ${altCategoryOptionsHTML}
+                                        </select>
+                                    </div>
+                                ` : ''}
+                                <div class="flex items-center border-b">
+                                    <label for="altworkoutweight_${item.category_id}" class="w-60 block mb-1">
+                                        Workout<span class="text-red-500">*</span>
+                                    </label>
+                                    <select id="altworkoutweight_${item.id}" name="altworkoutweight_${item.id}" class="w-1/3 px-3 py-3 border flex rounded mb-2">
+                                        <option value="" selected disabled>-- Select Workout --</option>
+                                        <!-- Populate options dynamically -->
+                                        <option value="${item.alt_workout_id}" selected>${item.alt_workout_type}</option>
+                                    </select>
+                                </div>
+                                <div class="flex items-center border-b mt-2">
+                                    <label for="altweigthweight_${item.id}" class="w-60 block mb-1">Weight <span
+                                            class="text-red-500">*</span></label>
+                                    <input type="number" id="altweigthweight_${item.id}" name="altweigthweight_${item.id}" value="${item.alt_weight}"
+                                        class="w-1/3 px-3 py-3 border flex rounded mb-2" required>
+                                    <label for="" class="border bg-white py-3 px-3 mb-2 ">%</label>
+                                </div>
+                                ${altSetsHTML ? `
+                                    <div class="border-b" id="duplicateSetUIAlterEdit">
+                                        <div class="">
+                                            <div>
+                                                ${altSetsHTML}
+                                            </div>
+                                            <div class="duplicate-sets" id="altduplicate-sets_${item.id}"></div>
+                                            <div class="ml-60">
+                                                <button id="altaddset_${item.id}" onclick="duplicateSet(this.id)" type="button" class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base">
+                                                    <i class="fas fa-plus text-[12px]"></i> Add set
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ` : ''}
+                                <div class="flex items-center border-b">
+                                    <label for="altrestweight_${item.id}" class="w-60 block mb-1">Rest <span class="text-red-500">*</span></label>
+                                    <div class="relative flex items-center max-w-[8rem]">
+                                        <button type="button" onclick="decrementRest(this.parentNode.querySelector('input').id)" class="decrement-rest bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                            <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
+                                            </svg>
+                                        </button>
+                                        <input type="text" value="${item.alt_rest}" id="altrestweight_${item.id}" name="altrestweight_${item.id}" placeholder="00:00" class="bg-gray-50 border-x-0 border-gray-300 h-11 my-2 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" readonly required>
+                                        <button type="button" onclick="incrementRest(this.parentNode.querySelector('input').id)" class="increment-rest bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                            <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                               <div class="flex items-center border-b">
+                                    <label for="altintensityweight_${item.id}" class="w-60 block mb-1">
+                                        Intensity <span class="text-red-500">*</span>
+                                    </label>
+                                    <select id="altintensityweight_${item.id}" name="altintensityweight_${item.id}"
+                                        class="w-1/3 px-3 py-3 border flex rounded my-2" required>
+                                        <!-- Dynamically setting the selected option based on item.alt_intensity -->
+                                        <option value="low" ${item.alt_intensity === 'low' ? 'selected' : ''}>Low</option>
+                                        <option value="medium" ${item.alt_intensity === 'medium' ? 'selected' : ''}>Medium</option>
+                                        <option value="high" ${item.alt_intensity === 'high' ? 'selected' : ''}>High</option>
+                                        <option value="extreme" ${item.alt_intensity === 'extreme' ? 'selected' : ''}>Extreme</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded">Update</button>
+                </form>
+            `;
+
+
+        });
+
+        // Update the container with the built HTML content
+        container.innerHTML = htmlContent;
+
+
+
+    }
 </script>

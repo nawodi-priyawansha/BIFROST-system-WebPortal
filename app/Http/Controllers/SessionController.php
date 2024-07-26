@@ -462,4 +462,71 @@ class SessionController extends Controller
         }
     }
     // Store Weightlifting End
+
+    // get Weightlifting Start
+    public function getWeightlifting(Request $request)
+    {
+        try {
+            $date = $request->input("date");
+
+            // Get Weightlifting with category, workout, altCategory, and altWorkout relationships
+            $weightlifting = Weightlifting::where('date', $date)
+                ->with(['category', 'workout', 'altCategory', 'altWorkout'])
+                ->get();
+
+            // Fetch workouts based on the type
+            $workouts = WorkoutLibrary::where('type', 'weightlifting')
+                ->with('categoryOption') // Load the category options
+                ->get();
+
+            // Get unique category options based on the fetched workouts
+            $categoryOptions = $workouts->pluck('categoryOption')->unique('id');
+
+            // Map the weightlifting data to include the sets
+            $result = $weightlifting->map(function ($item) {
+                // Fetch sets for the current weightlifting item
+                $sets = WeightliftingSet::where('weightlifting_id', $item->id)->get();
+
+                return [
+                    'id' => $item->id,
+
+                    'category_id' => $item->category_id,
+                    'category_name' => $item->category ? $item->category->category_name : null,
+
+                    'workout_id' => $item->workout_id,
+                    'workout_type' => $item->workout ? $item->workout->workout : null,
+
+                    'weight' => $item->weight,
+                    'rest' => $item->rest,
+                    'intensity' => $item->intensity,
+
+                    'alt_category_id' => $item->alt_category_id,
+                    'alt_category_name' => $item->altCategory ? $item->altCategory->category_name : null,
+
+                    'alt_workout_id' => $item->alt_workout_id,
+                    'alt_workout_type' => $item->altWorkout ? $item->altWorkout->workout : null,
+
+                    'alt_weight' => $item->alt_weight,
+                    'alt_rest' => $item->alt_rest,
+                    'alt_intensity' => $item->alt_intensity,
+
+                    'date' => $item->date,
+                    'sets' => $sets, // Include the sets in the result
+                ];
+            });
+
+            return response()->json([
+                'weightlifting' => $result,
+                'categoryOptions' => $categoryOptions,
+            ]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    // update weightlifting
+    public function updateWeightlifting(Request $request)
+    {
+        dd($request);
+    }
 }
