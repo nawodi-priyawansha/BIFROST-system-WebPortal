@@ -17,4 +17,8 @@ class CategoryOption extends Model
         return $this->hasMany(WorkoutLibrary::class);
         
     }
+    public function workoutLibrary()
+    {
+        return $this->belongsTo(WorkoutLibrary::class, 'workout_id');
+    }
 }
