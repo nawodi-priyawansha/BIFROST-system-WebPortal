@@ -8,6 +8,8 @@ use App\Models\ClientManagement;
 use App\Models\Strength;
 use App\Models\StrengthSetRep;
 use App\Models\Warmup;
+use App\Models\Weightlifting;
+use App\Models\WeightliftingSet;
 use App\Models\WorkoutLibrary;
 use DateTime;
 use Illuminate\Http\Request;
@@ -194,8 +196,7 @@ class SessionController extends Controller
 
     public function storewarmup(Request $request)
     {
-        // // Validate the incoming request data
-        // dd($request);
+        // Validate the incoming request data
         $request->validate([
             'categoryw_*' => 'required|exists:category_options,id',
             'workoutw_*' => 'required|exists:workout_libraries,id',
@@ -319,119 +320,152 @@ class SessionController extends Controller
 
         return response()->json(['result' => $result, 'categoryOptions' => $categoryOptions]);
     }
+    // Store Weightlifting Start
+    //  Store Weightlifting
+    public function storeweightlifting(Request $request)
+    {
+        // dd($request);
+        // Validate the request data
+        $request->validate([
+            'selectdatewe' => 'required',
+            'categorywe_*' => 'required|integer|exists:category_options,id',
+            'workoutwe_*' => 'required|integer|exists:workout_libraries,id',
+            'weigthwe_*' => 'required|integer',
+            'setswe_*' => 'required|integer',
+            'repswe_*' => 'required|integer',
+            // Add restwe_* validation
+            'restwe_*' => 'required|date_format:H:i:s',
+            'intensitywe_*' => 'required|string',
 
+            'alt-categorywe_*' => 'required|integer|exists:category_options,id',
+            'alt-workoutwe_*' => 'required|integer|exists:workout_libraries,id',
+            'alt-weigthwe_*' => 'required|integer',
+            'alt-setswe_*' => 'required|integer',
+            'alt-repswe_*' => 'required|integer',
+            // Add alt-restwe_* validation
+            'alt-restwe_*' => 'required|date_format:H:i:s',
+            'alt-intensitywe_*' => 'required|string',
+        ]);
 
-    // public function strengthstore(Request $request)
-    // {
-    //     // Log the incoming request
-    //   dd($request);
-    //     Log::info('Received request data:', $request->all());
+        $requestData = $request->all();
+        $maxIndex = 10; // Maximum index to check, adjust this as needed
 
-    //     // Validate the incoming request data
-    //     $validated = $request->validate([
-    //         'categorys_*' => 'required|exists:category_options,id',
-    //         'workouts_*' => 'required|exists:workout_libraries,id',
-    //         'weigth_*' => 'required|numeric',
+        // Loop through each index
+        for ($index = 1; $index <= $maxIndex; $index++) {
+            $processedData = []; // Initialize the array for the current index
 
-    //         'rest_*' => 'nullable|string',
-    //         'intensity_*' => 'required|string',
-    //         'alt-categorys_*' => 'required|exists:category_options,id',
-    //         'alt-workouts_*' => 'required|exists:workout_libraries,id',
-    //         'alt-weigth_*' => 'required|numeric',
+            // Iterate over all request data
+            foreach ($requestData as $key => $value) {
+                // Check if the key contains the current index
+                if (strpos($key, "_$index") !== false) {
+                    // Add the key-value pair to the array
+                    $processedData[$key] = $value;
+                }
+            }
 
-    //         'alt-rest_*' => 'required|string',
-    //         'alt-intensity_*' => 'required|string',
-    //         'selectdates_*' => 'required|string',
-    //     ]);
+            if (!empty($processedData)) {
+                // Call the filterdata function to process and store the data
+                // dd($processedData);
+                $this->filterdata($processedData, $index, $request->input('selectdatewe'));
+            }
+        }
 
-    //     // Log validation results
-    //     Log::info('Validated data:', $validated);
+        return redirect()->back();
+    }
 
-    //     // Extract the data from the request
-    //     $strengths = [];
-    //     $date = $request->input('selectdates');  // Assuming the date is common for all entries
+    public function filterdata($processedData, $index, $date)
+    {
+        // Initialize an array to hold the parsed data
+        $parsedData = [];
+        $setParsedData = [];
 
-    //     // Collect strength data from the request
-    //     foreach ($request->all() as $key => $value) {
-    //         if (preg_match('/^categorys_(\d+)$/', $key, $matches)) {
-    //             $index = $matches[1];
-    //             $strengths[$index]['category_id'] = $value;
-    //         } elseif (preg_match('/^workouts_(\d+)$/', $key, $matches)) {
-    //             $index = $matches[1];
-    //             $strengths[$index]['workout_id'] = $value;
-    //         } elseif (preg_match('/^weigth_(\d+)$/', $key, $matches)) {
-    //             $index = $matches[1];
-    //             $strengths[$index]['weight'] = $value;
-    //         }  elseif (preg_match('/^rest_(\d+)$/', $key, $matches)) {
-    //             $index = $matches[1];
-    //             $strengths[$index]['rest'] = $value;
-    //         } 
-    //         elseif (preg_match('/^intensity_(\d+)$/', $key, $matches)) {
-    //             $index = $matches[1];
-    //             $strengths[$index]['intensity'] = $value;
-    //         } 
-    //         elseif (preg_match('/^alt-categorys_(\d+)$/', $key, $matches)) {
-    //             $index = $matches[1];
-    //             $strengths[$index]['alt_category_id'] = $value;
-    //         }
-    //         elseif (preg_match('/^alt-workouts_(\d+)$/', $key, $matches)) {
-    //             $index = $matches[1];
-    //             $strengths[$index]['alt_workout_id'] = $value;
-    //         }
-    //         elseif (preg_match('/^alt-weigth_(\d+)$/', $key, $matches)) {
-    //             $index = $matches[1];
-    //             $strengths[$index]['altweight'] = $value;
-    //         } elseif (preg_match('/^alt-rest_(\d+)$/', $key, $matches)) {
-    //             $index = $matches[1];
-    //             $strengths[$index]['altrest'] = $value;
-    //         } elseif (preg_match('/^alt-intensity_(\d+)$/', $key, $matches)) {
-    //             $index = $matches[1];
-    //             $strengths[$index]['altintensity'] = $value;
-    //         }
-    //     }
+        // Extract the indexed values from the input data
+        $fields = ['category', 'workout', 'weigth', 'rest', 'intensity', 'alt-category', 'alt-workout', 'alt-weigth', 'alt-rest', 'alt-intensity'];
 
-    //     // Log collected strengths data
-    //     Log::info('Collected strength data:', $strengths);
+        foreach ($fields as $field) {
+            $key = $field . 'we_' . $index;
+            if (isset($processedData[$key])) {
+                $parsedData[$field] = $processedData[$key];
+            }
+        }
 
-    //     // Store each strength record
-    //     $createdRecords = [];
-    //     $skippedRecords = [];
+        if ($date) {
+            $parsedData['date'] = $date;
+        }
 
-    //     foreach ($strengths as $strengthData) {
-    //         // Add the common date to each record
-    //         $strengthData['date'] = $date;
+        // Process the data as needed
+        $WeightliftingData = Weightlifting::store($parsedData);
 
-    //         // Ensure all required fields are set before creating the record
-    //         if (
-    //             !empty($strengthData['category_id']) && !empty($strengthData['weight']) &&
-    //             !empty($strengthData['sets']) && !empty($strengthData['reps'])
-    //         ) {
-    //             try {
-    //                 $record = Strength::create($strengthData);
-    //                 $createdRecords[] = $record->toArray();
-    //                 Log::info('Successfully created strength record:', $strengthData);
-    //             } catch (\Exception $e) {
-    //                 Log::error('Error creating strength record:', ['error' => $e->getMessage(), 'data' => $strengthData]);
-    //                 $skippedRecords[] = $strengthData;
-    //             }
-    //         } else {
-    //             Log::warning('Skipping creation of strength record due to missing required fields:', $strengthData);
-    //             $skippedRecords[] = $strengthData;
-    //         }
-    //     }
+        $setFields = ['setswe', 'repswe', 'alt-setswe', 'alt-repswe'];
+        foreach ($setFields as $setField) {
+            // Check for keys with numbers
+            $patternWithNumbers = '/^' . preg_quote($setField . '_' . $index) . '[0-9]+$/';
+            // Check for keys without numbers
+            $patternWithoutNumbers = '/^' . preg_quote($setField . '_' . $index) . '$/';
 
-    //     // Log final summaries
-    //     Log::info('Records successfully created:', $createdRecords);
-    //     Log::info('Records skipped due to missing fields or errors:', $skippedRecords);
+            foreach ($processedData as $key => $value) {
+                if (preg_match($patternWithNumbers, $key) || preg_match($patternWithoutNumbers, $key)) {
+                    $setParsedData[$key] = $value;
+                }
+            }
+        }
+        // Add the foreign key if Weightlifting data is available
+        if ($WeightliftingData) {
+            $setParsedData['foreignKey'] = $WeightliftingData->id;
+        }
 
-    //     // Redirect or respond as needed
-    //     return redirect()->back()->with('success', 'Data saved successfully!');
-    // }
+        // add part
+        // Initialize arrays to hold the parsed data
+        $sets = [];
+        $reps = [];
+        $altSets = [];
+        $altReps = [];
+        $foreignKey = $WeightliftingData->id;
 
+        // Iterate over all processed data
+        foreach ($processedData as $key => $value) {
+            // Check for setswe keys
+            if (strpos($key, 'setswe_') === 0) {
+                $suffix = explode('_', $key)[1]; // Extract numeric suffix
+                $sets[$suffix] = $value;
+            } elseif (strpos($key, 'repswe_') === 0) {
+                $suffix = explode('_', $key)[1]; // Extract numeric suffix
+                $reps[$suffix] = $value;
+            } elseif (strpos($key, 'alt-setswe_') === 0) {
+                $suffix = explode('_', $key)[1]; // Extract numeric suffix
+                $altSets[$suffix] = $value;
+            } elseif (strpos($key, 'alt-repswe_') === 0) {
+                $suffix = explode('_', $key)[1]; // Extract numeric suffix
+                $altReps[$suffix] = $value;
+            } elseif ($key === 'foreignKey') {
+                $foreignKey = $value;
+            }
+        }
 
+        // Combine parsed data into rows
+        $combinedData = [];
+        $allKeys = array_merge(array_keys($sets), array_keys($reps), array_keys($altSets), array_keys($altReps));
+        $uniqueIndexes = array_unique($allKeys);
 
+        foreach ($uniqueIndexes as $index) {
+            $row = [
+                isset($sets[$index]) ? $sets[$index] : null,
+                isset($reps[$index]) ? $reps[$index] : null,
+                isset($altSets[$index]) ? $altSets[$index] : null,
+                isset($altReps[$index]) ? $altReps[$index] : null,
+                $foreignKey,
+            ];
+            $combinedData[] = $row;
+        }
 
-
+        // Process the combined data as needed
+        // Example: Store the combined data in another table
+        foreach ($combinedData as $row) {
+            // dd($row);
+            WeightliftingSet::store($row);
+        }
+    }
+    // Store Weightlifting End
     public function strengthstore(Request $request)
     {
 
@@ -632,5 +666,4 @@ class SessionController extends Controller
     // dd($data);
     return $data;
 }
-
 }

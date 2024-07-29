@@ -42,7 +42,7 @@
                                 <label for="" class="border bg-white py-3 px-3 mb-2 ">%</label>
                             </div>
                             <!-- SETS Section -->
-                            <div class="border-b" id="duplicateSetUI">
+                            <div class="border-b" id="duplicateSetUIStrength">
                                 <div class="">
                                     <div class="flex items-center sets-view">
                                         <label for="sets_1" class="w-60 block mb-1">SETS <span
@@ -106,9 +106,9 @@
                                         </div>
                                     </div>
 
-                                    <div class="duplicate-sets-strength" id="duplicate-sets_1"></div>
+                                    <div class="duplicate-sets-strength" id="duplicatestrength-sets_1"></div>
                                     <div class="ml-60">
-                                        <button id="addset_1" onclick="duplicateSetStrength(this.id)" type="button"
+                                        <button id="addsetstrength_1" onclick="duplicateSetStrength(this.id)" type="button"
                                             class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base">
                                             <i class="fas fa-plus text-[12px]"></i> Add set</button>
                                     </div>
@@ -186,7 +186,7 @@
                             </div>
 
                             {{-- alternate sets --}}
-                            <div class="border-b" id="altduplicateSetUI">
+                            <div class="border-b" id="altduplicateSetUIStrength">
                                 <div class="">
                                     <div class="flex items-center">
                                         <label for="alt-sets" class="w-60 block">SETS <span
@@ -249,9 +249,9 @@
                                             </button>
                                         </div>
                                     </div>
-                                    <div class="altduplicate-setsstrength" id="alt-duplicate-sets_1"></div>
+                                    <div class="altduplicate-setsstrength" id="alt-duplicatestrength-sets_1"></div>
                                     <div class="ml-60">
-                                        <button id="altaddset_1" onclick="altduplicateSetStrength(this.id)"
+                                        <button id="altaddsetstrength_1" onclick="altduplicateSetStrength(this.id)"
                                             type="button"
                                             class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base">
                                             <i class="fas fa-plus text-[12px]"></i> Add set</button>
@@ -307,7 +307,7 @@
         
         <div id="cloneDisplayContainerStrength"></div>
         <div class=" flex flex-col gap-5">
-            <a class=" bg-black text-white py-2 px-4 rounded mt-2 text-center text-base w-32" id="cloneButton">Another</a>
+            <a class=" bg-black text-white py-2 px-4 rounded mt-2 text-center text-base w-32" id="cloneButtonstrength">Another</a>
             <button type="submit" class="bg-[#FB1018] text-white py-2 px-4  rounded mb-2 hover:bg-red-700 w-24">Save</button>
         </div>
 
@@ -527,7 +527,7 @@
     }
 
     // Event listener for the main clone button
-    document.getElementById('cloneButton').addEventListener('click', function() {
+    document.getElementById('cloneButtonstrength').addEventListener('click', function() {
         const uiContainerStrength = document.getElementById('uiContainerStrength');
         const cloneDisplayContainerStrength = document.getElementById('uiContainerStrength');
         const newContainer = uiContainerStrength.cloneNode(true);
@@ -580,7 +580,7 @@
 
 
     // duplicate Set
-    let setCounter = 1;
+    let setCounterstrength = 1;
 
     function duplicateSetStrength(id) {
         console.log(id)
@@ -590,7 +590,7 @@
         const remainingfind = idPartfind.slice(1).join('_');
         console.log("idsss " + remainingfind)
 
-        setCounter++;
+        setCounterstrength++;
         const originalSet = document.getElementById(id);
         console.log(originalSet);
 
@@ -605,8 +605,8 @@
         // Update the id and name attributes of the input field
         const input = clone.querySelector('input');
         if (input) {
-            input.id = `sets_${remainingfind}${setCounter}`;
-            input.name = `sets_${remainingfind}${setCounter}`;
+            input.id = `sets_${remainingfind}${ setCounterstrength}`;
+            input.name = `sets_${remainingfind}${ setCounterstrength}`;
             input.value = '0';
         }
 
@@ -628,7 +628,7 @@
         const setuiElement = document.createElement('div');
         setuiElement.innerHTML = `
         <div class="flex items-center sets-view">
-            <label for="custom-numberwe_${remainingfind}${setCounter}" class="w-60 block mb-1">
+            <label for="custom-numberwe_${remainingfind}${ setCounterstrength}" class="w-60 block mb-1">
                 SETS <span class="text-red-500">*</span>
             </label>
             <div class="relative flex items-center max-w-[8rem]">
@@ -637,7 +637,7 @@
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
                     </svg>
                 </button>
-                <input type="text" id="sets_${remainingfind}${setCounter}" name="sets_${remainingfind}${setCounter}" data-input-counter class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center my-2 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" placeholder="0" readonly />
+                <input type="text" id="sets_${remainingfind}${ setCounterstrength}" name="sets_${remainingfind}${ setCounterstrength}" data-input-counter class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center my-2 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" placeholder="0" readonly />
                 <button type="button" class="increment-custom bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none"  onclick="increment(this.parentNode.querySelector('input').id)">
                     <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
@@ -647,7 +647,7 @@
             
         </div>
         <div class="flex items-center border-b">
-                                    <label for="reps_${remainingfind}${setCounter}" class="w-60 block mb-1">REPS <span
+                                    <label for="reps_${remainingfind}${ setCounterstrength}" class="w-60 block mb-1">REPS <span
                                             class="text-red-500">*</span></label>
                                     <div class="relative flex items-center max-w-[8rem]">
                                         <button type="button"
@@ -659,7 +659,7 @@
                                                     stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
                                             </svg>
                                         </button>
-                                        <input type="text" id="reps_${remainingfind}${setCounter}" name="reps_${remainingfind}${setCounter}" data-input-counter
+                                        <input type="text" id="reps_${remainingfind}${ setCounterstrength}" name="reps_${remainingfind}${ setCounterstrength}" data-input-counter
                                             class="bg-gray-50 border-x-0 border-gray-300 h-11 my-2 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none"
                                             placeholder="0" readonly />
                                         <button type="button"
@@ -700,7 +700,7 @@
 
 
     // altduplicate Set
-    let altsetCounter = 1;
+    let altsetCounterstrength = 1;
 
     function altduplicateSetStrength(id) {
         console.log(id);
@@ -708,7 +708,7 @@
         const remainingfind = idPartfind.slice(1).join('_');
         console.log("idsss " + remainingfind);
 
-        altsetCounter++;
+        altsetCounterstrength++;
         const originalSet = document.getElementById(id);
         console.log(originalSet);
 
@@ -723,8 +723,8 @@
         // Update the id and name attributes of the input fields
         const altinputs = altclone.querySelectorAll('input');
         altinputs.forEach((input) => {
-            input.id = input.id.replace(/_\d+$/, `_${altsetCounter}`);
-            input.name = input.name.replace(/_\d+$/, `_${altsetCounter}`);
+            input.id = input.id.replace(/_\d+$/, `_${altsetCounterstrength}`);
+            input.name = input.name.replace(/_\d+$/, `_${altsetCounterstrength}`);
             input.value = '0'; // Reset the value
         });
 
@@ -732,7 +732,7 @@
         const altsetuiElement = document.createElement('div');
         altsetuiElement.innerHTML = `
         <div class="flex items-center sets-view">
-            <label for="alt-custom-numberwe_${remainingfind}${altsetCounter}" class="w-60 block mb-1">
+            <label for="alt-custom-numberwe_${remainingfind}${altsetCounterstrength}" class="w-60 block mb-1">
                 SETS <span class="text-red-500">*</span>
             </label>
             <div class="relative flex items-center max-w-[8rem]">
@@ -741,7 +741,7 @@
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
                     </svg>
                 </button>
-                <input type="text" id="alt-sets_${remainingfind}${altsetCounter}" name="alt-sets_${remainingfind}${altsetCounter}" data-input-counter class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center my-2 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" placeholder="0" readonly />
+                <input type="text" id="alt-sets_${remainingfind}${altsetCounterstrength}" name="alt-sets_${remainingfind}${altsetCounterstrength}" data-input-counter class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center my-2 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" placeholder="0" readonly />
                 <button type="button" class="increment-custom bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none" onclick="increment(this.parentNode.querySelector('input').id)">
                     <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
@@ -750,7 +750,7 @@
             </div>
         </div>
         <div class="flex items-center border-b">
-            <label for="alt-reps_${remainingfind}${altsetCounter}" class="w-60 block mb-1">
+            <label for="alt-reps_${remainingfind}${altsetCounterstrength}" class="w-60 block mb-1">
                 REPS <span class="text-red-500">*</span>
             </label>
             <div class="relative flex items-center max-w-[8rem]">
@@ -759,7 +759,7 @@
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
                     </svg>
                 </button>
-                <input type="text" id="alt-reps_${remainingfind}${altsetCounter}" name="alt-reps_${remainingfind}${altsetCounter}" data-input-counter class="bg-gray-50 border-x-0 border-gray-300 h-11 my-2 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" placeholder="0" readonly />
+                <input type="text" id="alt-reps_${remainingfind}${altsetCounterstrength}" name="alt-reps_${remainingfind}${altsetCounterstrength}" data-input-counter class="bg-gray-50 border-x-0 border-gray-300 h-11 my-2 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" placeholder="0" readonly />
                 <button type="button" onclick="increment(this.parentNode.querySelector('input').id)" class="increment-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
                     <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
