@@ -14,10 +14,8 @@ use App\Models\Warmup;
 use App\Models\Weightlifting;
 use App\Models\WeightliftingSet;
 use App\Models\WorkoutLibrary;
-use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class SessionController extends Controller
 {

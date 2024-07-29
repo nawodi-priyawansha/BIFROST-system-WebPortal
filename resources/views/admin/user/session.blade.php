@@ -33,10 +33,10 @@
                     <div class="rounded w-11/12 mx-auto mt-4 mb-4">
                         <!-- Tabs -->
                         <ul id="tabs" class="inline-flex pt-2 px-1 w-full border-black border-b">
-                            {{-- <li
+                            <li
                                 class="tab-item px-4 text-black py-2 rounded-t hover:border-t hover:border-l hover:border-r hover:border-black">
                                 <a href="warmup">Warmup</a>
-                            </li> --}}
+                            </li>
                             <li class="tab-item px-4 text-black py-2 rounded-t hover:border-t hover:border-l hover:border-r hover:border-black"
                                 id="default-tab">
                                 <a href="strength">Strength</a>
