@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Log;
 use DateTime;
+use Exception;
 use App\Models\Access;
 use App\Models\Warmup;
 use Illuminate\Http\Request;
@@ -266,7 +268,7 @@ class SessionController extends Controller
         return redirect()->back()->with('message', 'Warmup updated successfully');
     }
     // delete warmup
-    public function deleteAllBySelectDate(Request $request)
+    public function deleteAllBySelectDateWarmups(Request $request)
     {
         $selectDate = $request->input('selectdatewd');
 
@@ -527,6 +529,120 @@ class SessionController extends Controller
     // update weightlifting
     public function updateWeightlifting(Request $request)
     {
-        dd($request);
+        // dd($request);
+        try {
+            // Validate the incoming request data
+            $request->validate([
+                'id_*' => 'required|integer|exists:weightliftings,id',
+                'categoryweight_*' => 'required|integer|exists:category_options,id',
+                'workoutweight_*' => 'required|integer|exists:workout_libraries,id',
+                'weigthweight_*' => 'required|integer',
+                'setsweight_*' => 'required|integer',
+                'repsweight_*' => 'required|integer',
+                'restweight_*' => 'required|date_format:H:i:s',
+                'intensityweight_*' => 'required|string',
+                'altcategoryweight_*' => 'required|integer|exists:category_options,id',
+                'altworkoutweight_*' => 'required|integer|exists:workout_libraries,id',
+                'altweigthweight_*' => 'required|integer',
+                'altsetsweight_*' => 'required|integer',
+                'altrepsweight_*' => 'required|integer',
+                'altrestweight_*' => 'required|date_format:H:i:s',
+                'altintensityweight_*' => 'required|string',
+            ]);
+
+            // Dynamically find the ID from the request
+            $weightliftingId = null;
+            foreach ($request->all() as $key => $value) {
+                if (strpos($key, 'id_') === 0) {
+                    $weightliftingId = $value;
+                    break; // Exit the loop once the ID is found
+                }
+            }
+
+            // Check if ID was found
+            if (!$weightliftingId) {
+                return response()->json(['message' => 'ID not found'], 400);
+            }
+
+            // Retrieve the existing weightlifting record by ID
+            $weightlifting = Weightlifting::findOrFail($weightliftingId);
+
+            // Update the weightlifting record with new data
+            $weightlifting->update([
+                'category_id' => $request->input('categoryweight_' . $weightliftingId),
+                'workout_id' => $request->input('workoutweight_' . $weightliftingId),
+                'weight' => $request->input('weigthweight_' . $weightliftingId),
+                'rest' => $request->input('restweight_' . $weightliftingId),
+                'intensity' => $request->input('intensityweight_' . $weightliftingId),
+                'alt_category_id' => $request->input('altcategoryweight_' . $weightliftingId),
+                'alt_workout_id' => $request->input('altworkoutweight_' . $weightliftingId),
+                'alt_weight' => $request->input('altweigthweight_' . $weightliftingId),
+                'alt_rest' => $request->input('altrestweight_' . $weightliftingId),
+                'alt_intensity' => $request->input('altintensityweight_' . $weightliftingId),
+            ]);
+
+            // Update existing weightlifting sets
+            foreach ($request->all() as $key => $value) {
+                if (preg_match('/^setsid_(\d+)$/', $key, $matches)) {
+                    $index = $matches[1];
+                    $weightliftingSet = WeightliftingSet::findOrFail($request->input('setsid_' . $index));
+                    $weightliftingSet->update([
+                        'sets' => $request->input('setsweight_' . $index),
+                        'reps' => $request->input('repsweight_' . $index),
+                        'alt_sets' => $request->input('altsetsweight_' . $index),
+                        'alt_reps' => $request->input('altrepsweight_' . $index),
+                        'weightlifting_id' => $weightlifting->id,
+                    ]);
+                }
+            }
+
+            // Create new weightlifting sets
+            foreach ($request->all() as $key => $value) {
+                if (preg_match('/^setswe_(\d+)(\d+)$/', $key, $matches)) {
+                    $index = $matches[2];
+                    WeightliftingSet::create([
+                        'sets' => $request->input('setswe_' . $weightliftingId . $index),
+                        'reps' => $request->input('repswe_' . $weightliftingId . $index),
+                        'alt_sets' => $request->input('alt-setswe_' . $weightliftingId . $index),
+                        'alt_reps' => $request->input('alt-repswe_' . $weightliftingId . $index),
+                        'weightlifting_id' => $weightlifting->id,
+                    ]);
+                }
+            }
+            // dd("Weightlifting data updated successfully");
+            return redirect()->back()->with('success', 'Weightlifting data updated successfully');
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            // Handle validation exceptions
+            dd($e);
+            return redirect()->back()->withErrors($e->errors())->withInput();
+        } catch (\Exception $e) {
+            // Handle other exceptions
+            dd($e);
+            return redirect()->back()->with('error', 'An error occurred while updating the weightlifting data.');
+        }
     }
+    public function deleteAllBySelectDateWeightlifting(Request $request)
+    {
+        $selectedDate = $request->input('selectdateweDelete');
+
+        // Validate the selected date
+        $request->validate([
+            'selectdateweDelete' => 'required',
+        ]);
+
+        try {
+            // Attempt to delete the records
+            Weightlifting::where('date', $selectedDate)->delete();
+
+            // Redirect back with success message
+            return redirect()->back()->with('status', 'Weightlifting sessions deleted successfully!');
+        } catch (Exception $e) {
+            // Log the exception message for debugging
+            Log::error('Error deleting weightlifting sessions: ' . $e->getMessage());
+
+            // Redirect back with error message
+            return redirect()->back()->with('error', 'An error occurred while deleting weightlifting sessions.');
+        }
+    }
+
 }

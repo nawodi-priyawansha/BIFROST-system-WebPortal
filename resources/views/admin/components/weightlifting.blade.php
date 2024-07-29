@@ -6,7 +6,12 @@
     <div class="flex gap-5 p-4 mr-8 rounded-md mb-4 font-bold text-xl">
         <div class="flex justify-center text-center items-center w-1/2">Primary</div>
         <div class="flex justify-center text-center items-center w-1/2">Alternate</div>
-        <button class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base">Clear</button>
+        <form action="{{ route('Weightlifting.deleteAllBySelectDate') }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <input type="text" name="selectdateweDelete" id="selectdateweDelete" hidden>
+            <button class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base">Clear</button>
+        </form>
     </div>
     {{-- display  weightlifting --}}
     <div id="weightlifting-container"></div>
@@ -15,9 +20,9 @@
     <form action="/store-weightlifting" method="POST">
         @csrf
         <input type="text" name="selectdatewe" id="selectdatewe" hidden>
-        <div class="duplicateUi flex flex-col text-lg p-4 bg-gray-50 mr-8 rounded-md gap-4 mb-4 " id="uiContainer">
+        <div class="duplicateUi flex flex-col text-lg  bg-gray-50 mr-8 rounded-md gap-4 mb-4 " id="uiContainer">
             <div class="" data-index="1">
-                <div class="ui-block flex flex-col text-lg p-4 bg-gray-50 mr-8 rounded-md gap-4 mb-4 ">
+                <div class="ui-block flex flex-col text-lg p-4 bg-gray-50  rounded-md gap-4 mb-4 ">
                     <!-- Your UI block content here -->
                     <div class="flex gap-5 justify-between">
                         {{-- Primary Category and Workouts --}}
@@ -699,36 +704,36 @@
             
         </div>
         <div class="flex items-center border-b">
-                                    <label for="repswe_${remainingfind}${setCounter}" class="w-60 block mb-1">REPS <span
-                                            class="text-red-500">*</span></label>
-                                    <div class="relative flex items-center max-w-[8rem]">
-                                        <button type="button"
-                                            onclick="decrement(this.parentNode.querySelector('input').id)"
-                                            class="decrement-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
-                                            <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
-                                            </svg>
-                                        </button>
-                                        <input type="text" id="repswe_${remainingfind}${setCounter}" name="repswe_${remainingfind}${setCounter}" data-input-counter
-                                            class="bg-gray-50 border-x-0 border-gray-300 h-11 my-2 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none"
-                                            placeholder="0" readonly />
-                                        <button type="button"
-                                            onclick="increment(this.parentNode.querySelector('input').id)"
-                                            class="increment-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
-                                            <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                viewBox="0 0 18 18">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
-                                            </svg>
-                                        </button>
-                                    </div>
+            <label for="repswe_${remainingfind}${setCounter}" class="w-60 block mb-1">REPS <span
+                    class="text-red-500">*</span></label>
+            <div class="relative flex items-center max-w-[8rem]">
+                <button type="button"
+                    onclick="decrement(this.parentNode.querySelector('input').id)"
+                    class="decrement-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                    <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                        <path stroke="currentColor" stroke-linecap="round"
+                            stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
+                    </svg>
+                </button>
+                <input type="text" id="repswe_${remainingfind}${setCounter}" name="repswe_${remainingfind}${setCounter}" data-input-counter
+                    class="bg-gray-50 border-x-0 border-gray-300 h-11 my-2 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none"
+                    placeholder="0" readonly />
+                <button type="button"
+                    onclick="increment(this.parentNode.querySelector('input').id)"
+                    class="increment-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                    <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 18 18">
+                        <path stroke="currentColor" stroke-linecap="round"
+                            stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
+                    </svg>
+                </button>
+            </div>
                                     
             <button type="button" class="remove-set bg-red-500 text-white p-2 rounded ml-2">
                     Remove
-                </button>
+            </button>
                                 </div>
                                 
         `;
@@ -918,25 +923,25 @@
             }
 
             // Build the setsHTML for each set in the item
-            const setsHTML = Array.isArray(item.sets) ? item.sets.map(set => {
+            const setsHTML = Array.isArray(item.sets) ? item.sets.map((set, index) => {
                 // Check if sets or reps are null and set visibility accordingly
                 const isSetsVisible = set.sets !== null && set.sets !== undefined;
                 const isRepsVisible = set.reps !== null && set.reps !== undefined;
 
                 return `
                     <div>
-                        <input name="setsid_${item.id}" value="${set.id}" hidden>
+                        <input name="setsid_${index}" value="${set.id}" hidden>
                         
                         ${isSetsVisible ? `
                         <div class="flex items-center sets-view">
-                            <label for="custom-numberweight_${item.id}" class="w-60 block mb-1">SETS <span class="text-red-500">*</span></label>
+                            <label for="custom-numberweight_${index}" class="w-60 block mb-1">SETS <span class="text-red-500">*</span></label>
                             <div class="relative flex items-center max-w-[8rem]">
                                 <button type="button" onclick="decrement(this.parentNode.querySelector('input').id)" class="decrement-custom bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
                                     <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
                                     </svg>
                                 </button>
-                                <input type="text" value="${set.sets}" id="setsweight_${item.id}" name="setsweight_${item.id}" data-input-counter class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center my-2 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" placeholder="0" readonly required />
+                                <input type="text" value="${set.sets}" id="setsweight_${index}" name="setsweight_${index}" data-input-counter class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center my-2 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" placeholder="0" readonly required />
                                 <button type="button" onclick="increment(this.parentNode.querySelector('input').id)" class="increment-custom bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
                                     <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
@@ -947,14 +952,14 @@
 
                         ${isRepsVisible ? `
                         <div class="flex items-center border-b">
-                            <label for="repsweight_${item.id}" class="w-60 block mb-1">REPS <span class="text-red-500">*</span></label>
+                            <label for="repsweight_${index}" class="w-60 block mb-1">REPS <span class="text-red-500">*</span></label>
                             <div class="relative flex items-center max-w-[8rem]">
                                 <button type="button" onclick="decrement(this.parentNode.querySelector('input').id)" class="decrement-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
                                     <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
                                     </svg>
                                 </button>
-                                <input type="text" value="${set.reps}" id="repsweight_${item.id}" name="repsweight_${item.id}" data-input-counter class="bg-gray-50 border-x-0 border-gray-300 h-11 my-2 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" placeholder="0" readonly required />
+                                <input type="text" value="${set.reps}" id="repsweight_${index}" name="repsweight_${index}" data-input-counter class="bg-gray-50 border-x-0 border-gray-300 h-11 my-2 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" placeholder="0" readonly required />
                                 <button type="button" onclick="increment(this.parentNode.querySelector('input').id)" class="increment-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
                                     <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
@@ -968,25 +973,23 @@
 
 
             // Build the altSetsHTML for each alt set in the item
-            const altSetsHTML = Array.isArray(item.sets) ? item.sets.map(set => {
+            const altSetsHTML = Array.isArray(item.sets) ? item.sets.map((set, index) => {
                 // Check if alt_sets or alt_reps are null and set visibility accordingly
                 const isAltSetsVisible = set.alt_sets !== null && set.alt_sets !== undefined;
                 const isAltRepsVisible = set.alt_reps !== null && set.alt_reps !== undefined;
 
                 return `
-                <div>
-                    <input name="altsetsid_${item.id}" value="${set.id}" hidden>
-                    
+                <div>                    
                     ${isAltSetsVisible ? `
                     <div class="flex items-center sets-view">
-                        <label for="altcustomnumberweight_${item.id}" class="w-60 block mb-1">SETS <span class="text-red-500">*</span></label>
+                        <label for="altcustomnumberweight_${index}" class="w-60 block mb-1">SETS <span class="text-red-500">*</span></label>
                         <div class="relative flex items-center max-w-[8rem]">
                             <button type="button" onclick="decrement(this.parentNode.querySelector('input').id)" class="decrement-custom bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
                                 <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
                                 </svg>
                             </button>
-                            <input type="text" value="${set.alt_sets}" id="altsetsweight_${item.id}" name="altsetsweight_${item.id}" data-input-counter class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center my-2 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" placeholder="0" readonly required />
+                            <input type="text" value="${set.alt_sets}" id="altsetsweight_${index}" name="altsetsweight_${index}" data-input-counter class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center my-2 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" placeholder="0" readonly required />
                             <button type="button" onclick="increment(this.parentNode.querySelector('input').id)" class="increment-custom bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
                                 <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
@@ -997,14 +1000,14 @@
                     
                     ${isAltRepsVisible ? `
                     <div class="flex items-center border-b">
-                        <label for="altrepsweight_${item.id}" class="w-60 block mb-1">REPS <span class="text-red-500">*</span></label>
+                        <label for="altrepsweight_${index}" class="w-60 block mb-1">REPS <span class="text-red-500">*</span></label>
                         <div class="relative flex items-center max-w-[8rem]">
                             <button type="button" onclick="decrement(this.parentNode.querySelector('input').id)" class="decrement-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
                                 <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
                                 </svg>
                             </button>
-                            <input type="text" value="${set.alt_reps}" id="altrepsweight_${item.id}" name="altrepsweight_${item.id}" data-input-counter class="bg-gray-50 border-x-0 border-gray-300 h-11 my-2 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" placeholder="0" readonly required />
+                            <input type="text" value="${set.alt_reps}" id="altrepsweight_${index}" name="altrepsweight_${index}" data-input-counter class="bg-gray-50 border-x-0 border-gray-300 h-11 my-2 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" placeholder="0" readonly required />
                             <button type="button" onclick="increment(this.parentNode.querySelector('input').id)" class="increment-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
                                 <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
@@ -1012,8 +1015,7 @@
                             </button>
                         </div>
                     </div>` : ''}
-                </div>
-            `;
+                </div>`;
             }).join('') : '';
 
 
@@ -1021,6 +1023,8 @@
             htmlContent += `
                 <form action="{{ route('updateWeightlifting') }}" method="POST">
                     @csrf
+                    
+                    <input name="id_${item.id}" value="${item.id}" hidden>
                     <div class="flex flex-col text-lg p-4 bg-gray-50 mr-8 rounded-md gap-4 mb-4">
                         <div class="flex gap-5 justify-between">
                             {{-- Primary Category and Workouts --}}
@@ -1037,7 +1041,7 @@
                                         <label for="workoutweight_${item.id}" class="w-60 block mb-1">
                                             Workout<span class="text-red-500">*</span>
                                         </label>
-                                        <select id="workoutweight_${item.id}" name="workoutweight_${item.id}" class="w-1/3 px-3 py-3 border flex rounded mb-2">
+                                        <select id="workoutweight_${item.id}" name="workoutweight_${item.id}" class="w-1/3 px-3 py-3 border mt-2 flex rounded mb-2">
                                             <option value="" selected disabled>-- Select Workout --</option>
                                             <!-- Populate options dynamically -->
                                             <option value="${item.workout_id}" selected>${item.workout_type}</option>
@@ -1097,16 +1101,17 @@
                                 ${altCategoryOptionsHTML ? `
                                     <div class="flex items-center border-b mt-4">
                                         <label for="altcategoryweight_${item.id}" class="w-60 block mb-1">Alternative Category <span class="text-red-500">*</span></label>
-                                        <select id="altcategoryweight_${item.id}" name="altcategoryweight_${item.id}" onchange="getworkoutWe(this)" class="w-1/3 px-3 py-3 border rounded mb-2" required>
+                                        <select id="altcategoryweight_${item.id}" name="altcategoryweight_${item.id}" onchange="getworkoutWe(this)" class="w-1/3 px-3 py-3 border rounded mb-2 mr-5" required>
                                             ${altCategoryOptionsHTML}
                                         </select>
+                                        <button type="submit" class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base">Edit</button>
                                     </div>
                                 ` : ''}
                                 <div class="flex items-center border-b">
                                     <label for="altworkoutweight_${item.category_id}" class="w-60 block mb-1">
                                         Workout<span class="text-red-500">*</span>
                                     </label>
-                                    <select id="altworkoutweight_${item.id}" name="altworkoutweight_${item.id}" class="w-1/3 px-3 py-3 border flex rounded mb-2">
+                                    <select id="altworkoutweight_${item.id}" name="altworkoutweight_${item.id}" class="w-1/3 px-3 py-3 mt-2 border flex rounded mb-2">
                                         <option value="" selected disabled>-- Select Workout --</option>
                                         <!-- Populate options dynamically -->
                                         <option value="${item.alt_workout_id}" selected>${item.alt_workout_type}</option>
@@ -1125,9 +1130,9 @@
                                             <div>
                                                 ${altSetsHTML}
                                             </div>
-                                            <div class="duplicate-sets" id="altduplicate-sets_${item.id}"></div>
+                                            <div class="altduplicate-setss" id="alt-duplicate-sets_${item.id}"></div>
                                             <div class="ml-60">
-                                                <button id="altaddset_${item.id}" onclick="duplicateSet(this.id)" type="button" class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base">
+                                                <button id="altaddset_${item.id}" onclick="altduplicateSet(this.id)" type="button" class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base">
                                                     <i class="fas fa-plus text-[12px]"></i> Add set
                                                 </button>
                                             </div>
@@ -1166,7 +1171,6 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded">Update</button>
                 </form>
             `;
 
