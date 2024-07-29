@@ -9,7 +9,7 @@
         @csrf
         <input type="text" name="selectdates" id="selectdates" hidden>
         <input type="text" name="selecttabs" id="selecttabs" hidden>
-        <div class="ui-block flex flex-col text-lg p-4 bg-gray-50 mr-8 rounded-md gap-4 mb-4 ">
+       
             <div class="duplicateUiStrength" data-index="1" id="uiContainerStrength">
                 <div class="ui-block flex flex-col text-lg p-4 bg-gray-50 mr-8 rounded-md gap-4 mb-4 ">
 
@@ -260,7 +260,7 @@
                             </div>
 
                             {{-- alternate Rest --}}
-                            <div class="flex items-center border-b">
+                            <div class="flex items-center border-b mt-4">
                                 <label for="alt-rest" class="w-60 block mb-1">Rest <span
                                         class="text-red-500">*</span></label>
                                 <div class="relative flex items-center max-w-[8rem] my-2">
@@ -304,7 +304,7 @@
 
                 </div>
             </div>
-        </div>
+        
         <div id="cloneDisplayContainerStrength"></div>
         <div class=" flex flex-col gap-5">
             <a class=" bg-black text-white py-2 px-4 rounded mt-2 text-center text-base w-32" id="cloneButton">Another</a>
@@ -605,8 +605,8 @@
         // Update the id and name attributes of the input field
         const input = clone.querySelector('input');
         if (input) {
-            input.id = `setss_${remainingfind}${setCounter}`;
-            input.name = `setss_${remainingfind}${setCounter}`;
+            input.id = `sets_${remainingfind}${setCounter}`;
+            input.name = `sets_${remainingfind}${setCounter}`;
             input.value = '0';
         }
 
@@ -637,7 +637,7 @@
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
                     </svg>
                 </button>
-                <input type="text" id="setss_${remainingfind}${setCounter}" name="setss_${remainingfind}${setCounter}" data-input-counter class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center my-2 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" placeholder="0" readonly />
+                <input type="text" id="sets_${remainingfind}${setCounter}" name="sets_${remainingfind}${setCounter}" data-input-counter class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center my-2 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" placeholder="0" readonly />
                 <button type="button" class="increment-custom bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none"  onclick="increment(this.parentNode.querySelector('input').id)">
                     <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
@@ -647,7 +647,7 @@
             
         </div>
         <div class="flex items-center border-b">
-                                    <label for="repswe_${remainingfind}${setCounter}" class="w-60 block mb-1">REPS <span
+                                    <label for="reps_${remainingfind}${setCounter}" class="w-60 block mb-1">REPS <span
                                             class="text-red-500">*</span></label>
                                     <div class="relative flex items-center max-w-[8rem]">
                                         <button type="button"
@@ -659,7 +659,7 @@
                                                     stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
                                             </svg>
                                         </button>
-                                        <input type="text" id="repswe_${remainingfind}${setCounter}" name="repswe_${remainingfind}${setCounter}" data-input-counter
+                                        <input type="text" id="reps_${remainingfind}${setCounter}" name="reps_${remainingfind}${setCounter}" data-input-counter
                                             class="bg-gray-50 border-x-0 border-gray-300 h-11 my-2 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none"
                                             placeholder="0" readonly />
                                         <button type="button"
@@ -741,7 +741,7 @@
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
                     </svg>
                 </button>
-                <input type="text" id="alt-setss_${remainingfind}${altsetCounter}" name="alt-setss_${remainingfind}${altsetCounter}" data-input-counter class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center my-2 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" placeholder="0" readonly />
+                <input type="text" id="alt-sets_${remainingfind}${altsetCounter}" name="alt-sets_${remainingfind}${altsetCounter}" data-input-counter class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center my-2 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" placeholder="0" readonly />
                 <button type="button" class="increment-custom bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none" onclick="increment(this.parentNode.querySelector('input').id)">
                     <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
@@ -750,7 +750,7 @@
             </div>
         </div>
         <div class="flex items-center border-b">
-            <label for="alt-repss_${remainingfind}${altsetCounter}" class="w-60 block mb-1">
+            <label for="alt-reps_${remainingfind}${altsetCounter}" class="w-60 block mb-1">
                 REPS <span class="text-red-500">*</span>
             </label>
             <div class="relative flex items-center max-w-[8rem]">
@@ -759,7 +759,7 @@
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
                     </svg>
                 </button>
-                <input type="text" id="alt-repss_${remainingfind}${altsetCounter}" name="alt-repss_${remainingfind}${altsetCounter}" data-input-counter class="bg-gray-50 border-x-0 border-gray-300 h-11 my-2 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" placeholder="0" readonly />
+                <input type="text" id="alt-reps_${remainingfind}${altsetCounter}" name="alt-reps_${remainingfind}${altsetCounter}" data-input-counter class="bg-gray-50 border-x-0 border-gray-300 h-11 my-2 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" placeholder="0" readonly />
                 <button type="button" onclick="increment(this.parentNode.querySelector('input').id)" class="increment-reps bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
                     <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />

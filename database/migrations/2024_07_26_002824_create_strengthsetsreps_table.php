@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('reps')->nullable();
             $table->integer('alt_sets')->nullable();
             $table->integer('alt_reps')->nullable();
-            $table->foreignId('weightlifting_id')->constrained('strengths')->onDelete('cascade');
+            $table->foreignId('strength_id')->constrained('strengths')->onDelete('cascade');
             $table->timestamps();
         });
     }

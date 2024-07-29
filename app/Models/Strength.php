@@ -16,6 +16,8 @@ class Strength extends Model
         'rest',
         'reps',
         'intensity',
+        'alt_category_id',
+        'alt_workout_id',
         'altweight',
         'altsets',
         'altrest',
@@ -27,5 +29,9 @@ class Strength extends Model
     public function workouts()
     {
         return $this->belongsTo(WorkoutLibrary::class, 'workout_id');
+    }
+
+    public function setstrength(){
+        return $this->hasMany(Strength::class);
     }
 }
