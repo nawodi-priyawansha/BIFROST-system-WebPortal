@@ -139,6 +139,9 @@ Route::middleware(['admin'])->group(function () {
     // store weightlifting
     Route::post('/store-weightlifting',[SessionController::class,'storeweightlifting']);
 
+    //stroe strenght
+    Route::post('/save-strength', [SessionController::class, 'strengthstore'])->name('save-strength');
+
 
     // store
     Route::post('/client-update', [SessionController::class, 'update'])->name('clients.update');
