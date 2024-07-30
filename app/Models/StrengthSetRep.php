@@ -21,7 +21,7 @@ class StrengthSetRep extends Model
 
     public function strengthing()
     {
-        return $this->belongsTo(Strength::class);
+        return $this->belongsTo(Strength::class,'strength_id');
     }
 
     /**

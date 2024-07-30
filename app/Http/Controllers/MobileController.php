@@ -134,6 +134,8 @@ class MobileController extends Controller
         $tabstrength = 'strength';
         $date = $dayWithDate;
         $detailsstrength = Strength::where('date', $date)
+            ->with('sets')
+            ->with('sets.strengthing')
             ->with('workouts')
             ->with('workouts.categoryOption')
             ->get();
@@ -163,7 +165,7 @@ class MobileController extends Controller
             //     }
             // }
 
-            //dd($weightlifting->sets_count);
+            //dd($detailsstrength);
         //return view('mobile.user.workout', compact('dayWithDate','detailswarmup','detailsstrength','detailsconditioning','detailsweight'));
         return view('mobile.user.workout', compact('dayWithDate','detailswarmup','detailsstrength','detailsweight'));
     }

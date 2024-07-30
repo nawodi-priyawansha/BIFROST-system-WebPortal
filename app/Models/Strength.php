@@ -34,4 +34,8 @@ class Strength extends Model
     public function setstrength(){
         return $this->hasMany(Strength::class);
     }
+    public function sets()
+    {
+        return $this->hasMany(StrengthSetRep::class, 'strength_id');
+    }
 }
