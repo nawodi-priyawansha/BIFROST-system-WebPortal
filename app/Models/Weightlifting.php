@@ -21,6 +21,7 @@ class Weightlifting extends Model
         'alt_intensity',
         'date',
     ];
+
     // Define relationship to category
     public function category()
     {
@@ -33,6 +34,7 @@ class Weightlifting extends Model
         return $this->belongsTo(WorkoutLibrary::class, 'workout_id');
     }
     // Define the relationship with WeightliftingSet
+
     public function sets()
     {
         return $this->hasMany(WeightliftingSet::class, 'weightlifting_id');
@@ -48,7 +50,10 @@ class Weightlifting extends Model
     {
         return $this->belongsTo(WorkoutLibrary::class, 'alt_workout_id');
     }
-
+    public function workouts()
+    {
+        return $this->belongsTo(WorkoutLibrary::class, 'workout_id');
+    }
     public static function store($data)
     {
         // dd($data);

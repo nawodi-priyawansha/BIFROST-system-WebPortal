@@ -30,6 +30,7 @@ class WeightliftingSet extends Model
      */
     public static function store(array $data)
     {
+
         // Create and save a new WeightliftingSet record
         return self::create([
             'sets' => $data[0] ?? null,
