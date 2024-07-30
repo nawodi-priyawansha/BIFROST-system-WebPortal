@@ -19,7 +19,7 @@ class WeightliftingSet extends Model
 
     public function weightlifting()
     {
-        return $this->belongsTo(Weightlifting::class);
+        return $this->belongsTo(Weightlifting::class, 'weightlifting_id');
     }
 
         /**
@@ -30,7 +30,6 @@ class WeightliftingSet extends Model
      */
     public static function store(array $data)
     {
-
 
         // Create and save a new WeightliftingSet record
         return self::create([

@@ -133,11 +133,23 @@ Route::middleware(['admin'])->group(function () {
     // update warmup
     Route::Post('/update-warmup', [SessionController::class, 'updatewarmup']);
     // delete
-    Route::delete('/delete-warmups', [SessionController::class, 'deleteAllBySelectDate'])->name('warmups.deleteAllBySelectDate');
+    Route::delete('/delete-warmups', [SessionController::class, 'deleteAllBySelectDateWarmups'])->name('warmups.deleteAllBySelectDate');
     // get warmup
     Route::Post('/get-wormup', [SessionController::class, 'getwarmup']);
+
     // store weightlifting
     Route::post('/store-weightlifting',[SessionController::class,'storeweightlifting']);
+
+    // get Weightlifting
+    Route::post('/get-Weightlifting',[SessionController::class,'getWeightlifting']);
+    // update Weightlifting
+    Route::post('/update-Weightlifting', [SessionController::class, 'updateWeightlifting'])->name('updateWeightlifting');
+    // delete
+    Route::delete('/delete-Weightlifting', [SessionController::class, 'deleteAllBySelectDateWeightlifting'])->name('Weightlifting.deleteAllBySelectDate');
+
+
+    //stroe strenght
+    Route::post('/save-strength', [SessionController::class, 'strengthstore'])->name('save-strength');
 
 
     // store

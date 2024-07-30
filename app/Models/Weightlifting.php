@@ -22,9 +22,33 @@ class Weightlifting extends Model
         'date',
     ];
 
+    // Define relationship to category
+    public function category()
+    {
+        return $this->belongsTo(CategoryOption::class, 'category_id');
+    }
+
+    // Define relationship to workout
+    public function workout()
+    {
+        return $this->belongsTo(WorkoutLibrary::class, 'workout_id');
+    }
+    // Define the relationship with WeightliftingSet
+
     public function sets()
     {
-        return $this->hasMany(WeightliftingSet::class);
+        return $this->hasMany(WeightliftingSet::class, 'weightlifting_id');
+    }
+    // Define the relationship with the alternative Category
+    public function altCategory()
+    {
+        return $this->belongsTo(CategoryOption::class, 'alt_category_id');
+    }
+
+    // Define the relationship with the alternative WorkoutLibrary
+    public function altWorkout()
+    {
+        return $this->belongsTo(WorkoutLibrary::class, 'alt_workout_id');
     }
     public function workouts()
     {
