@@ -32,7 +32,7 @@ class Strength extends Model
         return $this->belongsTo(CategoryOption::class, 'category_id');
     }
 
-    public function workout()
+    public function workouts()
     {
         return $this->belongsTo(WorkoutLibrary::class, 'workout_id');
     }
@@ -67,10 +67,10 @@ class Strength extends Model
         $strengthing->altrest = $data['alt-rests'] ?? '00:00:00'; // Use default if not provided
         $strengthing->altintensity = $data['alt-intensitys'];
         $strengthing->date = $data['date'];
-    
+
         // Save the model to the database
         $strengthing->save();
-    
+
         return $strengthing;
     }
     public function sets()
