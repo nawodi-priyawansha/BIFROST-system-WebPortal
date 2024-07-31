@@ -384,6 +384,8 @@
                 case "strength":
                     document.getElementById('selectdates').value = dayName;
                     document.getElementById('selecttabs').value = tabId;
+                    document.getElementById('selectdatestrenghtDelete').value = dayName;
+                    getstrength(dayName)
                     break;
                 case "conditioning":
                     document.getElementById('selectdatec').value = dayName;
