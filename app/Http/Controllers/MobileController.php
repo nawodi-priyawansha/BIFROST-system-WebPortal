@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ClientManagement;
+use App\Models\Conditioning;
 use Exception;
 use Carbon\Carbon;
 use App\Models\Score;
@@ -172,7 +173,22 @@ class MobileController extends Controller
 
     public function workouttimer()
     {
-        return view("mobile.user.workout-timer");
+        $storedDay = session('selected_day');
+        // Format the stored day to the desired format
+        $date = Carbon::createFromFormat('d/m/Y', $storedDay);
+        $dayName = $date->format('l'); // Get the full day name (e.g., Monday)
+        $formattedDate = $date->format('d/m/y'); // Format the date
+
+        // Combine day name and date
+        $dayWithDate = $formattedDate . ' ' . $dayName;
+          //get warup details for specific date
+         $tabconditioning = 'conditioning';
+         $date = $dayWithDate;
+         $detailsconditioning = Conditioning::where('date', $date)
+         ->with('workout')
+         ->get();
+
+        return view("mobile.user.workout-timer",compact('dayWithDate','detailsconditioning'));
     }
 
     public function histroyview()
