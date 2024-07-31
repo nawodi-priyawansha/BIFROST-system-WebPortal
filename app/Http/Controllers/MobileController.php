@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\ClientManagement;
+use App\Models\Conditioning;
 use Exception;
 use Carbon\Carbon;
 use App\Models\Score;
+use App\Models\Strength;
 use App\Models\UserScore;
+use App\Models\Warmup;
+use App\Models\Weightlifting;
 use Illuminate\Http\Request;
 use PhpParser\Node\Expr\FuncCall;
 use Illuminate\Support\Facades\Auth;
@@ -110,7 +114,7 @@ class MobileController extends Controller
     public function workout()
     {
         $storedDay = session('selected_day');
-
+//dd($storedDay);
         // Format the stored day to the desired format
         $date = Carbon::createFromFormat('d/m/Y', $storedDay);
         $dayName = $date->format('l'); // Get the full day name (e.g., Monday)
@@ -122,42 +126,69 @@ class MobileController extends Controller
         //get warup details for specific date
         $tabwarmup = 'warmup';
         $date = $dayWithDate;
-        $detailswarmup = ClientManagement::where('tab', $tabwarmup)
-            ->where('date', $dayWithDate)
+        $detailswarmup = Warmup::where('date', $dayWithDate)
             ->with('workouts')
+            ->with('workouts.categoryOption')
             ->get();
 
-
-        //get warup details for specific date
+        // //get warup details for specific date
         $tabstrength = 'strength';
         $date = $dayWithDate;
-        $detailsstrength = ClientManagement::where('tab', $tabstrength)
-            ->where('date', $date)
-            ->with('workouts')
+        $detailsstrength = Strength::where('date', $date)
+            ->with('sets')
+            ->with('sets.strengthing')
+            ->with('workout')
+            ->with('workout.categoryOption')
             ->get();
 
-         //get warup details for specific date
-         $tabconditioning = 'conditioning';
-         $date = $dayWithDate;
-         $detailsconditioning = ClientManagement::where('tab', $tabconditioning)
-             ->where('date', $date)
-             ->with('workouts')
-             ->get();
+        //  //get warup details for specific date
+        //  $tabconditioning = 'conditioning';
+        //  $date = $dayWithDate;
+        //  $detailsconditioning = ClientManagement::where('tab', $tabconditioning)
+        //      ->where('date', $date)
+        //      ->with('workouts')
+        //      ->get();
 
-         //get warup details for specific date
+
+        //  //get warup details for specific date
          $tabweightweight = 'weightlifting';
          $date = $dayWithDate;
-         $detailsweight = ClientManagement::where('tab', $tabweightweight)
-             ->where('date', $date)
+         $detailsweight = Weightlifting::where('date', $date)
+             ->with('sets')
+             ->with('sets.weightlifting')
              ->with('workouts')
+             ->with('workouts.categoryOption')
              ->get();
 
-        return view('mobile.user.workout', compact('dayWithDate','detailswarmup','detailsstrength','detailsconditioning','detailsweight'));
+            //  foreach ($detailsweight as $weightlifting) {
+            //     foreach ($weightlifting->sets as $set) {
+            //         dd($set->sets, $set->reps); // Dump and display the values of sets and reps
+            //     }
+            // }
+
+            //dd($detailsstrength);
+        //return view('mobile.user.workout', compact('dayWithDate','detailswarmup','detailsstrength','detailsconditioning','detailsweight'));
+        return view('mobile.user.workout', compact('dayWithDate','detailswarmup','detailsstrength','detailsweight'));
     }
 
     public function workouttimer()
     {
-        return view("mobile.user.workout-timer");
+        $storedDay = session('selected_day');
+        // Format the stored day to the desired format
+        $date = Carbon::createFromFormat('d/m/Y', $storedDay);
+        $dayName = $date->format('l'); // Get the full day name (e.g., Monday)
+        $formattedDate = $date->format('d/m/y'); // Format the date
+
+        // Combine day name and date
+        $dayWithDate = $formattedDate . ' ' . $dayName;
+          //get warup details for specific date
+         $tabconditioning = 'conditioning';
+         $date = $dayWithDate;
+         $detailsconditioning = Conditioning::where('date', $date)
+         ->with('workout')
+         ->get();
+
+        return view("mobile.user.workout-timer",compact('dayWithDate','detailsconditioning'));
     }
 
     public function histroyview()

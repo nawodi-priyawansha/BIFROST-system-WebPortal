@@ -109,30 +109,61 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/save/newclient/add', [ClientManagementController::class, 'addnewclient'])->name('newProfileclientsave');
     //editclient
     Route::post('/save/newclient/edit/{id}', [ClientManagementController::class, 'updatenewclient'])->name('updatenewclient');
-
-    Route::post('/clients/update',[ClientManagementController::class, 'updatenewclient'])->name(('updatenewclient'));
+    // update profile
+    Route::post('/clients/update', [ClientManagementController::class, 'updatenewclient'])->name(('updatenewclient'));
+    //delete profile
     Route::delete('/profile/{id}', [ClientManagementController::class, 'deleteProfile'])->name('deleteProfile');
+    //edit
     Route::get('/edit/{id}', [ClientManagementController::class, 'editclient'])->name('editclient');
-    Route::delete('/remove-image/{id}',[ClientManagementController::class, 'removeImage'])->name('removeImage');
-
+// Route::get('/edit/{id}', [ClientManagementController::class, 'editclient'])->name('editclient'); function missing
 
 
     // store
-    Route::post('/clients', [ClientManagementController::class, 'store'])->name('clients.store');
+    Route::post('/clients', [SessionController::class, 'store'])->name('clients.store');
     // Get Category
-    Route::post('/getCategory', [ClientManagementController::class, 'getCategory'])->name('getCategory');
+    Route::post('/getCategory', [SessionController::class, 'getCategory'])->name('getCategory');
 
     // get data
-    Route::post('/class-manager', [ClientManagementController::class, 'getdata']);
+    Route::post('/class-manager', [SessionController::class, 'getdata']);
     // // get workout
-    Route::post('/get-workout', [ClientManagementController::class, 'getworkout']);
+    Route::post('/get-workout', [SessionController::class, 'getworkout']);
+
+    // store warmup
+    Route::Post('/store-warmup', [SessionController::class, 'storewarmup']);
+    // update warmup
+    Route::Post('/update-warmup', [SessionController::class, 'updatewarmup']);
+    // delete
+    Route::delete('/delete-warmups', [SessionController::class, 'deleteAllBySelectDateWarmups'])->name('warmups.deleteAllBySelectDate');
+    // get warmup
+    Route::Post('/get-wormup', [SessionController::class, 'getwarmup']);
+
+    // store weightlifting
+    Route::post('/store-weightlifting',[SessionController::class,'storeweightlifting']);
+    // get Weightlifting
+    Route::post('/get-Weightlifting',[SessionController::class,'getWeightlifting']);
+    // update Weightlifting
+    Route::post('/update-Weightlifting', [SessionController::class, 'updateWeightlifting'])->name('updateWeightlifting');
+    // delete
+    Route::delete('/delete-Weightlifting', [SessionController::class, 'deleteAllBySelectDateWeightlifting'])->name('Weightlifting.deleteAllBySelectDate');
+
+    // store conditioning
+    Route::post('/store-conditioning',[SessionController::class,'storeconditioning']);
+    // get conditioning
+    Route::post('/getConditioning',[SessionController::class,'getConditioning']);
+
+    //stroe strenght
+    Route::post('/save-strength', [SessionController::class, 'strengthstore'])->name('save-strength');
+    Route::post('/get-strengthdata', [SessionController::class, 'getstrength'])->name('get-strength');
+    Route::post('/update-strenthdata',[SessionController::class,'updatestrength' ])->name("updatestrength");
+    Route::delete('/delete-strengthdata',[SessionController::class, 'deleteAllByDelectDataStrenght'])->name('deletestrength');
+
     // store
-    Route::post('/client-update', [ClientManagementController::class, 'update'])->name('clients.update');
+    Route::post('/client-update', [SessionController::class, 'update'])->name('clients.update');
 
     //workout librabry
     Route::get('/admin/workoutlibrary', [WorkoutLibraryController::class, 'viewworkoutlibrary'])->name('viewworkoutlibrary');
     Route::post('/save-workout-library', [WorkoutLibraryController::class, 'listworkoutlibrary'])->name('save.workoutlibrary');
-    Route::delete('/workout-library/{id}',[WorkoutLibraryController::class, 'delete'])->name('workout-library.delete');
+    Route::delete('/workout-library/{id}', [WorkoutLibraryController::class, 'delete'])->name('workout-library.delete');
 
     // session
     Route::get('/admin/session', [SessionController::class, 'viewsession'])->name('viewsession');
@@ -140,8 +171,6 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/communication', [CommunicationController::class, 'viewcommunication'])->name('viewviewcommunication');
     //statistic
     Route::get('/admin/statistics', [StatisticsController::class, 'viewstatistics'])->name('viewviewstatistics');
-
-
 });
 
 //user dashboard route
@@ -167,8 +196,6 @@ Route::middleware(['user'])->group(function () {
     Route::post('/user/save-goal', [UserGoalController::class, 'saveGoal'])->name('save.goal');
     //setting
     Route::get('/user/setting', [UserSettingController::class, 'viewsetting'])->name('usersetting');
-
-
 });
 
 
@@ -196,4 +223,3 @@ Route::get('forgot/password', function () {
 Route::post('send-forgot-password-email', [MailController::class, 'sendForgotPasswordEmail']);
 Route::get('/resetpassword/{token}', [MailController::class, 'resetpassword_index'])->name('resetpassword');
 Route::post('frogot-password/new-pin', [MailController::class, 'insert_new_pin'])->name('frogot-password');
-

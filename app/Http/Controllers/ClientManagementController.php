@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Access;
-use App\Models\ClientManagement;
-use App\Models\Newprofile;
-use App\Models\User;
-use App\Models\WorkoutLibrary;
-use Carbon\Carbon;
 use DateTime;
+use Carbon\Carbon;
+use App\Models\User;
+use App\Models\Access;
+use App\Models\Warmup;
+use App\Models\Newprofile;
 use Illuminate\Http\Request;
+use App\Models\WorkoutLibrary;
+use App\Models\ClientManagement;
+use PhpParser\Node\Expr\FuncCall;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use PhpParser\Node\Expr\FuncCall;
 
 class ClientManagementController extends Controller
 {
@@ -35,164 +37,6 @@ class ClientManagementController extends Controller
         }
     }
 
-    // get category
-    public function getCategory(Request $request)
-    {
-        $tab = strtolower($request->input('tab'));
-
-        // Fetch workouts based on the type
-        $workouts = WorkoutLibrary::where('type', $tab)
-            ->with('categoryOption') // Load the category options
-            ->get();
-
-        // Get unique category options based on the fetched workouts
-        $categoryOptions = $workouts->pluck('categoryOption')->unique('id');
-
-        return response()->json([
-            'category_options' => $categoryOptions
-        ]);
-    }
-
-    public function store(Request $request)
-    {
-        // dd($request);
-        // Retrieve the date and tab from the request
-        $date = $request->selectdate;
-        $tab = strtolower($request->selecttab);
-
-        // Initialize arrays to store the data
-        $arrays = [];
-
-        // Process primary data
-        foreach ($request->all() as $key => $value) {
-            if (preg_match('/^(category|workout|sets|reps|rest|intensity)$/', $key)) {
-                $arrays[1][$key] = $value;
-                $arrays[1]['type'] = 'primary';
-            } elseif (preg_match('/^(category|workout|sets|reps|rest|intensity)_(\d+)$/', $key, $matches)) {
-                $type = $matches[1];
-                $index = $matches[2];
-                if (!isset($arrays[$index])) {
-                    $arrays[$index] = [];
-                }
-                $arrays[$index][$type] = $value;
-                if (!isset($arrays[$index]['type'])) {
-                    $arrays[$index]['type'] = 'primary';
-                }
-            }
-            if (preg_match('/^(alt-category|alt-workout|alt-sets|alt-reps|alt-rest|alt-intensity)$/', $key)) {
-                $type = str_replace('alt-', '', $key);
-                $arrays['alt'][$type] = $value;
-                $arrays['alt']['type'] = 'alternate';
-            } elseif (preg_match('/^(alt-category|alt-workout|alt-sets|alt-reps|alt-rest|alt-intensity)_(\d+)$/', $key, $matches)) {
-                $type = str_replace('alt-', '', $matches[1]);
-                $index = $matches[2];
-                if (!isset($arrays['alt_' . $index])) {
-                    $arrays['alt_' . $index] = [];
-                }
-                $arrays['alt_' . $index][$type] = $value;
-                if (!isset($arrays['alt_' . $index]['type'])) {
-                    $arrays['alt_' . $index]['type'] = 'alternate';
-                }
-            }
-        }
-
-        // Save primary data to the database
-        foreach ($arrays as $index => $data) {
-            if (strpos($index, 'alt') === false) {
-                $clientManagement = new ClientManagement();
-                $clientManagement->category = $data['category'] ?? null;
-                $clientManagement->workout = $data['workout'] ?? null;
-                $clientManagement->sets = $data['sets'] ?? null;
-                $clientManagement->reps = $data['reps'] ?? null;
-                $clientManagement->rest = $data['rest'] ?? null;
-                $clientManagement->intensity = $data['intensity'] ?? null;
-                $clientManagement->date = $date;
-                $clientManagement->tab = $tab;
-                $clientManagement->type = $data['type'] ?? 'primary';
-                $clientManagement->save();
-            }
-        }
-
-        // Save alternate data to the database
-        foreach ($arrays as $index => $data) {
-            if (strpos($index, 'alt') !== false) {
-                $clientManagement = new ClientManagement();
-                $clientManagement->category = $data['category'] ?? null;
-                $clientManagement->workout = $data['workout'] ?? null;
-                $clientManagement->sets = $data['sets'] ?? null;
-                $clientManagement->reps = $data['reps'] ?? null;
-                $clientManagement->rest = $data['rest'] ?? null;
-                $clientManagement->intensity = $data['intensity'] ?? null;
-                $clientManagement->date = $date;
-                $clientManagement->tab = $tab;
-                $clientManagement->type = $data['type'] ?? 'alternate';
-                $clientManagement->save();
-            }
-        }
-
-        return redirect()->back();
-    }
-
-
-
-
-    public function getdata(Request $request)
-    {
-        $tab = strtolower($request->tab);
-        $date = $request->date;
-        $workouts = WorkoutLibrary::where('type', $tab)->with('categoryOption',)->get();
-        $details = ClientManagement::where('tab', $tab)
-            ->where('date', $date)
-            ->with('workouts.categoryOption')
-            ->get();
-
-        return response()->json(['workouts' => $workouts, 'details' => $details]);
-    }
-    public function getworkout(Request $request)
-    {
-        $tab = strtolower($request->tab);
-        $id = $request->id;
-        // category option id andb type filter
-        $workouts = WorkoutLibrary::where([
-            ['type', $tab],
-            ['category_options_id', $id],
-        ])->get();
-        return response()->json(['workouts' => $workouts]);
-    }
-    public function update(Request $request)
-    {
-        // Extracting data from the request
-        $data = $request->all();
-
-        // Loop through the data to find detail ids and update the corresponding records
-        foreach ($data as $key => $value) {
-            if (preg_match('/^detail_id_(\d+)$/', $key, $matches)) {
-                $id = $matches[1];
-
-                // Find the ClientManagement record by id
-                $clientManagement = ClientManagement::find($value);
-
-                if ($clientManagement) {
-                    // Update the fields
-                    $clientManagement->category = $data["category_$id"] ?? null;
-                    $clientManagement->workout = $data["workout_$id"] ?? null;
-                    $clientManagement->sets = $data["sets_$id"] ?? null;
-                    $clientManagement->reps = $data["reps_$id"] ?? null;
-
-                    // Format the time here
-                    $restTime = DateTime::createFromFormat('H:i', $data["rest_$id"]);
-                    $clientManagement->rest = $restTime ? $restTime->format('h:i') : null;
-
-                    $clientManagement->intensity = $data["intensity_$id"] ?? null;
-
-                    // Save the updated record
-                    $clientManagement->save();
-                }
-            }
-        }
-        return redirect()->back();
-    }
-
     public function newProfileclientShow($action = 'add', $id = null)
     {
         // Debug to see what's being passed
@@ -210,6 +54,7 @@ class ClientManagementController extends Controller
         return view('admin.user.client-newprofile', compact('action', 'member'));
     }
 
+    // add new function
     public function addnewclient(Request $request)
     {
         try {
@@ -282,6 +127,8 @@ class ClientManagementController extends Controller
             return redirect()->back()->withErrors(['error' => 'An error occurred: ' . $e->getMessage()])->withInput();
         }
     }
+
+    // update function
     public function updatenewclient(Request $request, $id)
     {
         try {
@@ -300,7 +147,7 @@ class ClientManagementController extends Controller
                 'bmr' => 'required|numeric|min:0',
                 'primary-goal' => 'required|string|max:255',
                 'subscription_level' => 'required|string|max:255',
-                'profile_image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Max 2MB per file
+                'profile_image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             ]);
 
             // Fetch the profile to update
@@ -308,25 +155,35 @@ class ClientManagementController extends Controller
 
             // Update user associated with the profile if email changes
             if ($profile->email !== $validatedData['email']) {
-                // Check if the email already exists
                 if (User::where('email', $validatedData['email'])->exists()) {
                     return redirect()->back()->withErrors(['email' => 'The email has already been taken.'])->withInput();
                 }
                 $profile->user->update(['email' => $validatedData['email']]);
             }
 
+            // Delete old images if any
+            $oldImagePaths = $profile->image_paths ? json_decode($profile->image_paths, true) : [];
+            foreach ($oldImagePaths as $oldImagePath) {
+                if (Storage::disk('public')->exists($oldImagePath)) {
+                    Storage::disk('public')->delete($oldImagePath);
+                }
+            }
+
             // Handle image uploads if provided
-            $imagePaths = $profile->image_paths ? json_decode($profile->image_paths, true) : [];
+            $imagePaths = [];
             if ($request->hasFile('profile_image')) {
                 foreach ($request->file('profile_image') as $file) {
                     $imageName = time() . '-' . $file->getClientOriginalName();
                     $filePath = $file->storeAs('profile_images', $imageName, 'public');
                     $imagePaths[] = $filePath;
+                    \Log::info('Uploaded file path: ' . $filePath);
                 }
             }
 
+            \Log::info('Image paths before update: ', $imagePaths);
+
             // Update the profile data
-            $profile->update([
+            $updateSuccessful = $profile->update([
                 'name' => $validatedData['name'],
                 'nickname' => $validatedData['nickname'],
                 'dob' => Carbon::parse($validatedData['dob']),
@@ -339,17 +196,23 @@ class ClientManagementController extends Controller
                 'bmr' => $validatedData['bmr'],
                 'primary_goal' => $validatedData['primary-goal'],
                 'subscription_level' => $validatedData['subscription_level'],
-                'image_paths' => json_encode($imagePaths) // Store updated image paths in JSON format
+                'image_paths' => json_encode($imagePaths),
             ]);
 
-            // Optionally, you can return a response or redirect
-            return redirect()->route('viewadminclientmanagement')->with('success', 'Profile updated successfully!');
+            \Log::info('Profile data after update: ', $profile->toArray());
+
+            if ($updateSuccessful) {
+                return redirect()->route('viewadminclientmanagement')->with('success', 'Profile updated successfully!');
+            } else {
+                return redirect()->back()->withErrors(['error' => 'Profile update failed.'])->withInput();
+            }
         } catch (\Exception $e) {
+            \Log::error('Error updating profile: ' . $e->getMessage());
             return redirect()->back()->withErrors(['error' => 'An error occurred: ' . $e->getMessage()])->withInput();
         }
     }
 
-
+    // delete profile
     public function deleteProfile($id)
     {
         // dd($id);
