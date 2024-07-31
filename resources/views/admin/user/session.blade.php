@@ -385,17 +385,18 @@
                     document.getElementById('selectdates').value = dayName;
                     document.getElementById('selecttabs').value = tabId;
                     document.getElementById('selectdatestrenghtDelete').value = dayName;
-                    getstrength(dayName)
+                    getstrength(dayName);
                     break;
                 case "conditioning":
                     document.getElementById('selectdatec').value = dayName;
                     document.getElementById('selecttabc').value = tabId;
+                    getconditioning(dayName);
                     break;
                 case "weightlifting":
                     document.getElementById('selectdatewe').value = dayName;
                     document.getElementById('selecttabwe').value = tabId;
                     document.getElementById('selectdateweDelete').value = dayName;
-                    getWeightlifting(dayName)
+                    getWeightlifting(dayName);
                     break;
                 case "test":
                     document.getElementById('selectdatet').value = dayName;

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Access;
 use App\Models\ClientManagement;
+use App\Models\Conditioning;
 use App\Models\Strength;
 use App\Models\StrengthSetRep;
 use App\Models\Warmup;
@@ -644,7 +645,7 @@ class SessionController extends Controller
         }
     }
 
-// strenght store
+    // strenght store
     public function strengthstore(Request $request)
     {
         // dd($request);
@@ -971,5 +972,101 @@ class SessionController extends Controller
             // Redirect back with error message
             return redirect()->back()->with('error', 'An error occurred while deleting Strength sessions.');
         }
+    }
+    // store conditioning
+    public function storeconditioning(Request $request)
+    {
+        // dd($request);
+
+        // Validate the incoming request data
+        $request->validate([
+            'selectdatec' => 'required|string',
+            'rounds' => 'nullable|integer', // `rounds` is optional
+            'amrap' => 'nullable', // `amrapCheckbox` should be a boolean
+            'categoryc_*' => 'required|integer|exists:category_options,id',
+            'workoutc_*' => 'required|integer|exists:workout_libraries,id',
+            'repsc_*' => 'required|integer',
+            'weigthc_*' => 'required|numeric',
+            'timeTC_*' => 'required|string', // Validate time as string to ensure proper format
+            'unit_*' => 'required|string', // Corrected 'unit_' to 'unit_*' to handle multiple fields
+        ]);
+        // dd($request);
+
+        // Prepare date for insertion
+        $date = $request->input('selectdatec'); // Format: 31/07/24 Wednesday
+
+        // Process each set of data
+        $entries = [];
+        foreach ($request->except(['_token', 'selectdatec', 'rounds', 'amrap']) as $key => $value) {
+            if (preg_match('/^categoryc_(\d+)$/', $key, $matches)) {
+                $index = $matches[1];
+
+                // Retrieve checkbox value from the request
+                $amrap = $request->input('amrap', false); // Default to false if checkbox is not present
+
+                // Convert to boolean if necessary
+                $amrap = filter_var($amrap, FILTER_VALIDATE_BOOLEAN);
+
+                $entries[] = [
+                    'rounds' => $request->input('rounds'),
+                    'category_id' => $request->input('categoryc_' . $index),
+                    'workout_id' => $request->input('workoutc_' . $index),
+                    'reps' => $request->input('repsc_' . $index),
+                    'weight' => $request->input('weigthc_' . $index),
+                    'unit' => $request->input('unit_' . $index),
+                    'time_to_complete' => $request->input('timeTC_' . $index),
+                    'date' => $date,
+                    'amrap' => $amrap, // Include 'amrap' in the data if needed
+                ];
+            }
+        }
+
+        // Insert data into the database
+        foreach ($entries as $entry) {
+            Conditioning::create($entry);
+        }
+
+        return redirect()->back();
+    }
+    // get conditioning
+    public function getConditioning(Request $request)
+    {
+        $date = $request->input('date');
+
+        // Fetch conditioning data with related category and workout details
+        $conditionings = Conditioning::with(['category', 'workout'])
+            ->where('date', $date)
+            ->get();
+
+        // Fetch workouts based on the type and include related category options
+        $workouts = WorkoutLibrary::where('type', 'conditioning')
+            ->with('categoryOption') // Ensure the relationship is correct
+            ->get();
+
+        // Get unique category options based on the fetched workouts
+        $categoryOptions = $workouts->pluck('categoryOption')->unique('id')->values();
+
+        // Transform the result to include the desired fields
+        $result = $conditionings->map(function ($item) {
+            return [
+                'id' => $item->id,
+                'date' => $item->date,
+                'category_id' => $item->category_id,
+                'weight' => $item->weight,
+                'category_name' => $item->category ? $item->category->category_name : null,
+                'workout_id' => $item->workout_id,
+                'workout_type' => $item->workout ? $item->workout->type : null,
+                'reps' => $item->reps,
+                'rounds' => $item->rounds,
+                'complete_time' => $item->time_to_complete,
+                'unit' => $item->unit,
+                'amrap' => $item->amrap,
+            ];
+        });
+
+        return response()->json([
+            'result' => $result,
+            'categoryOptions' => $categoryOptions
+        ]);
     }
 }
