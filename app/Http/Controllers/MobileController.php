@@ -136,8 +136,8 @@ class MobileController extends Controller
         $detailsstrength = Strength::where('date', $date)
             ->with('sets')
             ->with('sets.strengthing')
-            ->with('workouts')
-            ->with('workouts.categoryOption')
+            ->with('workout')
+            ->with('workout.categoryOption')
             ->get();
 
         //  //get warup details for specific date

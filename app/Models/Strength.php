@@ -32,7 +32,7 @@ class Strength extends Model
         return $this->belongsTo(CategoryOption::class, 'category_id');
     }
 
-    public function workouts()
+    public function workout()
     {
         return $this->belongsTo(WorkoutLibrary::class, 'workout_id');
     }
