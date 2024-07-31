@@ -81,8 +81,8 @@
                                     <div class="flex justify-between items-center text-base font-bold">
                                         <button class="px-4 py-2 rounded primary-btn"
                                             data-target="#primary-weight-{{ $strengthIndex }}">
-                                            {{ $strengthdetail->workouts->categoryOption->category_name }} -
-                                            {{ $strengthdetail->workouts->workout }}
+                                            {{ $strengthdetail->workout->categoryOption->category_name }} -
+                                            {{ $strengthdetail->workout->workout }}
                                         </button>
                                         <button class="px-4 py-2 border rounded alt-btn"
                                             data-target="#alt-weight-{{ $strengthIndex }}">ALT</button>
