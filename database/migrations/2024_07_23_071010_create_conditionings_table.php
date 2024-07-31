@@ -13,17 +13,19 @@ return new class extends Migration
     {
         Schema::create('conditionings', function (Blueprint $table) {
             $table->id();
-            $table->integer('rounds'); // Number of rounds
+            $table->integer('rounds')->nullable();
+            $table->boolean('amrap')->nullable();
             $table->foreignId('category_id')->nullable()
                 ->constrained('category_options')
                 ->onDelete('cascade');
             $table->foreignId('workout_id')->nullable()
                 ->constrained('workout_libraries')
                 ->onDelete('cascade');
-            $table->integer('reps'); // Number of repetitions
-            $table->float('complete_time'); // Time in minutes or seconds
+            $table->integer('reps');
             $table->float('weight')->nullable();
+            $table->enum('unit', ['%', 'Kg']); // Enum column for unit
             $table->string('date');
+            $table->string('time_to_complete');
             $table->timestamps();
         });
     }
