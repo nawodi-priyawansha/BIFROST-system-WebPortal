@@ -21,4 +21,5 @@ class CategoryOption extends Model
     {
         return $this->belongsTo(WorkoutLibrary::class, 'workout_id');
     }
+    
 }

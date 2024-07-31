@@ -458,8 +458,8 @@
 
 {{-- data fetch and update --}}
 <script>
-    function getconditioning() {
-        var selectDate = document.getElementById('selectdatec').value;
+    function getconditioning(date) {
+        var selectDate = date;
         console.log(selectDate);
         $.ajax({
             url: "/getConditioning",
@@ -482,7 +482,4 @@
         console.log(array);
     }
 
-    document.addEventListener("DOMContentLoaded", function() {
-        getconditioning();
-    });
 </script>
