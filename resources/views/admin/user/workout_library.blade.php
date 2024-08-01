@@ -69,6 +69,7 @@
                                             <option value="strength">Strength</option>
                                             <option value="conditioning">Conditioning</option>
                                             <option value="weightlifting">Weightlifting</option>
+                                            <option value="test">Test</option>
                                         </select>
                                     </div>
 
@@ -118,6 +119,7 @@
                         <option value="strength">Strength</option>
                         <option value="conditioning">Conditioning</option>
                         <option value="weightlifting">Weightlifting</option>
+                        <option value="test">Test</option>
                     </select>
                     <button type="submit" class="bg-black h-10 px-6 text-white rounded-md">Search</button>
                 </form>

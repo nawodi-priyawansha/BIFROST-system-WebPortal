@@ -154,6 +154,20 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/update-strenthdata',[SessionController::class,'updatestrength' ])->name("updatestrength");
     Route::delete('/delete-strengthdata',[SessionController::class, 'deleteAllByDelectDataStrenght'])->name('deletestrength');
 
+    //store test
+    //getmembers
+    Route::post('/get-members', [SessionController::class, 'getmember'])->name('getmembers');
+    // storetest
+    Route::post('/save-test',[SessionController::class, 'storeTest'])->name('storeTest');
+    //gettestdata
+    Route::post('/get-testdata', [SessionController::class, 'gettest'])->name('get-testdata');
+    //testupdate
+    Route::post('/update-test',[SessionController::class, 'updatest'])->name('update-test');
+    //testdelete
+    Route::delete('/delete-test',[SessionController::class, 'deletealldatatest'])->name('delete-test');
+
+
+
     // store
     Route::post('/client-update', [SessionController::class, 'update'])->name('clients.update');
 

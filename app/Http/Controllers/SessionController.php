@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Access;
 use App\Models\ClientManagement;
+use App\Models\Newprofile;
 use App\Models\Strength;
 use App\Models\StrengthSetRep;
+use App\Models\Test;
 use App\Models\Warmup;
 use App\Models\Weightlifting;
 use App\Models\WeightliftingSet;
@@ -644,7 +646,7 @@ class SessionController extends Controller
         }
     }
 
-// strenght store
+    // strenght store
     public function strengthstore(Request $request)
     {
         // dd($request);
@@ -971,5 +973,183 @@ class SessionController extends Controller
             // Redirect back with error message
             return redirect()->back()->with('error', 'An error occurred while deleting Strength sessions.');
         }
+    }
+
+
+    public function getmember(Request $request)
+    {
+        // Fetch all members
+        $members = Newprofile::all();
+
+        // Log the members data
+        Log::info('Members Data:', $members->toArray());
+
+        return response()->json([
+            'members' => $members->map(function ($member) {
+                return [
+                    'id' => $member->id,
+                    'name' => $member->name,
+                ];
+            })
+        ]);
+    }
+
+
+    public function storeTest(Request $request)
+    {
+        //  dd($request);
+        $request->validate([
+            'test-category_*' => 'required|exists:category_options,id',
+            'test-workout_*' => 'required|exists:workout_libraries,id',
+            'test-member_*' => 'required',
+            'selectdatet_*' => 'required',
+        ]);
+
+        $requestData = $request->all();
+        $maxIndex = 10; // Maximum index to check, adjust this as needed
+
+        for ($index = 1; $index <= $maxIndex; $index++) {
+            $processedData = []; // Initialize the array for the current index
+
+            // Iterate over all request data
+            foreach ($requestData as $key => $value) {
+                // Check if the key contains the current index
+                if (strpos($key, "_$index") !== false) {
+                    // Add the key-value pair to the array
+                    $processedData[$key] = $value;
+                }
+            }
+
+            if (!empty($processedData)) {
+                // Call the filterdatastrength function to process and store the data
+                $this->filterdatastest($processedData, $index, $request->input("selectdatet"));
+            }
+        }
+        return redirect()->back()->with('success', 'Data saved successfully!');
+    }
+    public function filterdatastest($processedData, $index, $date)
+
+    {
+        $parsedData = [];
+        // Extract the indexed values from the input data
+        $fields = ['test-category', 'test-workout', 'test-member'];
+        // dd($fields);
+        foreach ($fields as $field) {
+            $key = $field . '_' . $index;
+            if (isset($processedData[$key])) {
+                $parsedData[$field] = $processedData[$key];
+            }
+        }
+        // dd($parsedData);
+
+        if ($date) {
+
+            $parsedData['date'] = $date;
+        }
+        // dd($parsedData);
+        Test::store($parsedData);
+    }
+
+    public function gettest(Request $request)
+    {
+        try {
+            $date = $request->input("date");
+            Log::info('Received date: ' . $date);
+
+            $testRecords = Test::where('date', $date)
+                ->with(['category', 'workout', 'member'])
+                ->get();
+
+            Log::info('Test records fetched: ' . $testRecords->count());
+            $memebers = Newprofile::all();
+            $workouts = WorkoutLibrary::where('type', 'Test')->with('categoryOption')->get();
+            $categoryOptions = $workouts->pluck('categoryOption')->unique('id');
+
+            $result = $testRecords->map(function ($item) {
+                return [
+                    'id' => $item->id,
+                    'category_id' => $item->category_id,
+                    'category_name' => $item->category ? $item->category->category_name : null,
+                    'workout_id' => $item->workout_id,
+                    'workout_name' => $item->workout ? $item->workout->workout : null,
+                    'member_id' => $item->member_id,
+                    'member_name' => $item->member ? $item->member->name : null
+                ];
+            });
+            Log::info('Test records fetched: ' . $result);
+            $responseData = [
+                'message' => 'Test data successfully retrieved.',
+                'Test' => $result,
+                'Members' => $memebers,
+                'categoryOptions' => $categoryOptions
+            ];
+
+            Log::info('Response data:', $responseData);
+
+            return response()->json($responseData);
+        } catch (\Exception $e) {
+            Log::error('Error in test: ' . $e->getMessage());
+            return response()->json(['error' => 'An error occurred while fetching test data.'], 500);
+        }
+    }
+
+    public function updatest(Request $request)
+    {
+        // dd($request);
+        try {
+            $request->validate([
+                'id_*' => 'required|integer|exists:weightliftings,id',
+                'categorytest_*' => 'required|integer|exists:category_options,id',
+                'workouttest_*' => 'required|integer|exists:workout_libraries,id',
+                'test-member_*' => 'required',
+            ]);
+            $testId = null;
+            foreach ($request->all() as $key => $value) {
+                if (strpos($key, 'id_') === 0) {
+                    $testId = $value;
+                    break; // Exit the loop once the ID is found
+                }
+            }
+            // Check if ID was found
+            if (!$testId) {
+                return response()->json(['message' => 'ID not found'], 400);
+            }
+            $test=Test::findOrFail($testId);
+            $test->update([
+                'category_id' => $request->input('categorytest_' . $testId),
+                'workout_id' => $request->input('workouttest_' . $testId),
+                'member_id'=>$request->input('test-member_' . $testId)
+
+            ]);
+
+
+            return redirect()->back()->with('success', 'test update successfully');
+        } catch (\Exception $e) {
+            dd($e);
+            return redirect()->back()->with('error', 'an error occurred while updateing the test data');
+        }
+    }
+
+    public function deletealldatatest(Request $request){
+        // dd($request);
+        $selectedDate = $request->input('selectdatetestDelete');
+        // Validate the selected date
+        $request->validate([
+            'selectdatetestDelete' => 'required',
+        ]);
+        try {
+            // Attempt to delete the records
+            Test::where('date', $selectedDate)->delete();
+
+            // Redirect back with success message
+            return redirect()->back()->with('status', 'Strength sessions deleted successfully!');
+        } catch (Exception $e) {
+            // Log the exception message for debugging
+            Log::error('Error deleting Strength sessions: ' . $e->getMessage());
+
+            // Redirect back with error message
+            return redirect()->back()->with('error', 'An error occurred while deleting Strength sessions.');
+        }
+
     }
 }

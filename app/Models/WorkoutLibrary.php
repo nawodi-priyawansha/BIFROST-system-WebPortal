@@ -37,5 +37,8 @@ class WorkoutLibrary extends Model
     {
         return $this->hasMany(Weightlifting::class, 'workout_id'); // Assuming 'workout_id' is the foreign key
     }
-
+    public function tests()
+    {
+        return $this->hasMany(Test::class, 'workout_id');
+    }
 }
