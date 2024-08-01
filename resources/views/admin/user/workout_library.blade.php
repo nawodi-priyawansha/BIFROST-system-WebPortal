@@ -46,18 +46,7 @@
                                 <form class="space-y-4" action="{{ route('save.workoutlibrary') }}" method="POST">
                                     @csrf
                                     <input type="hidden" id="workoutId" name="id">
-                                    <div class="flex items-center space-x-4">
-                                        <label for="category" class="w-32 font-semibold">Category <span
-                                                class="text-red-500">*</span></label>
-                                        <select id="category" name="category"
-                                            class="p-2 border border-gray-300 rounded flex-1">
-                                            <option value="Select" selected>--Select--</option>
-                                            @foreach ($categoryOptions as $categoryOption)
-                                                <option value="{{ $categoryOption->id }}">
-                                                    {{ $categoryOption->category_name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
+
 
                                     <div class="flex items-center space-x-4">
                                         <label for="type" class="w-32 font-semibold">Type <span
@@ -69,6 +58,19 @@
                                             <option value="strength">Strength</option>
                                             <option value="conditioning">Conditioning</option>
                                             <option value="weightlifting">Weightlifting</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="flex items-center space-x-4">
+                                        <label for="category" class="w-32 font-semibold">Category <span
+                                                class="text-red-500">*</span></label>
+                                        <select id="category" name="category"
+                                            class="p-2 border border-gray-300 rounded flex-1">
+                                            <option value="Select" selected>--Select--</option>
+                                            @foreach ($categoryOptions as $categoryOption)
+                                                <option value="{{ $categoryOption->id }}">
+                                                    {{ $categoryOption->category_name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
 
