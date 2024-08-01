@@ -35,7 +35,7 @@
                         <ul id="tabs" class="inline-flex pt-2 px-1 w-full border-black border-b">
                             <li
                                 class="tab-item px-4 text-black py-2 rounded-t hover:border-t hover:border-l hover:border-r hover:border-black">
-                                <a href="warmup">Warmup</a>
+                                <a href="warmup" id="warmupTab">Warmup</a>
                             </li>
                             <li class="tab-item px-4 text-black py-2 rounded-t hover:border-t hover:border-l hover:border-r hover:border-black"
                                 id="default-tab">
@@ -43,11 +43,11 @@
                             </li>
                             <li
                                 class="tab-item px-4 text-black py-2 rounded-t hover:border-t hover:border-l hover:border-r hover:border-black">
-                                <a href="weightlifting">Weightlifting</a>
+                                <a href="weightlifting" id="weightliftingTab">Weightlifting</a>
                             </li>
                             <li
                                 class="tab-item px-4 text-black py-2 rounded-t hover:border-t hover:border-l hover:border-r hover:border-black">
-                                <a href="conditioning">Conditioning</a>
+                                <a href="conditioning" id="conditioningTab">Conditioning</a>
                             </li>
                             <li
                                 class="tab-item px-4 text-black py-2 rounded-t hover:border-t hover:border-l hover:border-r hover:border-black">

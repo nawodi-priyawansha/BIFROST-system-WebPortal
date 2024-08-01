@@ -6,18 +6,81 @@
     <div class="flex gap-5 p-4 mr-8 rounded-md mb-4 font-bold text-xl">
         <div class="flex justify-center text-center items-center w-1/2">Primary</div>
         <div class="flex justify-center text-center items-center w-1/2">Alternate</div>
-        <form action="{{ route('Weightlifting.deleteAllBySelectDate') }}" method="POST">
+        <form id="deleteFormWe">
             @csrf
             @method('DELETE')
             <input type="text" name="selectdateweDelete" id="selectdateweDelete" hidden>
-            <button class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base">Clear</button>
+            <button type="submit" class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base">Clear</button>
         </form>
+        <script>
+            $(document).ready(function() {
+                const date = document.getElementById('selectdateweDelete').value;
+                $('#deleteFormWe').on('submit', function(event) {
+                    event.preventDefault(); // Prevent the default form submission
+
+                    $.ajax({
+                        url: '{{ route('Weightlifting.deleteAllBySelectDate') }}',
+                        type: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            _method: 'DELETE',
+                            selectdateweDelete: $('#selectdateweDelete').val()
+                        },
+                        success: function(response) {
+                            // Handle the response
+                            // alert(response.status);
+                            getWeightlifting(date);
+                            // Optionally, update the UI to reflect the changes
+                        },
+                        error: function(xhr) {
+                            // Handle error
+                            console.error(xhr.responseText);
+                        }
+                    });
+                });
+            });
+
+            $(document).ready(function() {
+                const tab = document.getElementById('weightliftingTab');
+
+                $('#storeFromWe').on('submit', function(event) {
+                    event.preventDefault(); // Prevent the default form submission
+
+                    $.ajax({
+                        url: '/store-weightlifting',
+                        type: 'POST',
+                        data: $(this).serialize(), // Serialize form data
+                        success: function(response) {
+                            // Handle the response
+                            // Clear input fields
+                            $('#storeFromWe')[0].reset();
+
+                            const cloneDisplayContainer = document.getElementById(
+                                'cloneDisplayContainer');
+                            cloneDisplayContainer.innerHTML = '';
+
+                            // Trigger the tab click
+                            if (tab) {
+                                tab.click();
+                            }
+
+                            // Optionally, update the UI to reflect the changes
+                            // alert(response.message); // Uncomment if you want to show a message
+                        },
+                        error: function(xhr) {
+                            // Handle error
+                            console.error(xhr.responseText);
+                        }
+                    });
+                });
+            });
+        </script>
     </div>
     {{-- display  weightlifting --}}
     <div id="weightlifting-container"></div>
 
 
-    <form action="/store-weightlifting" method="POST">
+    <form id="storeFromWe">
         @csrf
         <input type="text" name="selectdatewe" id="selectdatewe" hidden>
         <div class="duplicateUi flex flex-col text-lg  bg-gray-50 mr-8 rounded-md gap-4 mb-4 " id="uiContainer">
@@ -307,7 +370,8 @@
         <div class=" flex flex-col gap-5">
             {{-- Clone UI button --}}
             <button id="cloneButton"type="button"
-                class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base w-32"> Another
+                class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base w-32">
+                Another
             </button>
             {{-- Save Button --}}
             <button id="submitButton" type="submit"
@@ -869,6 +933,7 @@
 {{-- get weightlifting --}}
 <script>
     function getWeightlifting(date) {
+        console.log(date);
         console.log("get Weightlifting date: " + date);
         $.ajax({
             url: "/get-Weightlifting",
