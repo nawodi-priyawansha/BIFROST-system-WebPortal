@@ -1,70 +1,100 @@
 <div id="conditioning" hidden>
     {{-- hidden input field --}}
-    <input type="text" name="selecttabc" id="selecttabc">
-    <div id="info-conditioning" class="info-conditioning"></div>
-    <form id="conditioning-form" action="/store-conditioning" method="POST">
-        @csrf
-        <input type="text" name="selectdatec" id="selectdatec">
-        <div class="ui-block flex flex-col text-lg pt-4 px-4 bg-gray-50 mr-8 rounded-md">
-            <div class="flex-col w-full">
-                <div class="flex items-center border-b">
-                    <label for="rounds" class="w-60 block ">Rounds </label>
-                    <div class="relative flex items-center max-w-[8rem] mb-2 w-1/2">
-                        <button type="button" onclick="decrement(this.parentNode.querySelector('input').id)"
-                            class="decrement-rounds bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
-                            <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="M1 1h16" />
-                            </svg>
-                        </button>
-                        <input type="text" id="rounds" name="rounds" data-input-counter
-                            class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none"
-                            placeholder="0" readonly />
-                        <button type="button" onclick="increment(this.parentNode.querySelector('input').id)"
-                            class="increment-rounds bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
-                            <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="M9 1v16M1 9h16" />
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="ml-10 flex items-center w-1/2">
-                        <label for="amrapCheckbox" class="w-24 block">AMRAP</label>
-                        <input type="checkbox" id="amrapCheckbox" name="amrap"
-                            class="h-11 w-11 px-3 py-3 border border-gray-300 rounded mb-2 checked:bg-blue-600 checked:border-transparent">
-                    </div>
+    <input type="text" name="selecttabc" id="selecttabc" hidden>
+    <div class="ui-block flex flex-col text-lg pt-4 px-4 bg-gray-50 mr-8 rounded-md">
+        <div class="flex-col w-full">
+            <div class="flex items-center border-b">
+                <label for="roundCond" class="w-60 block">Rounds</label>
+                <div class="relative flex items-center max-w-[8rem] mb-2 w-1/2">
+                    <button type="button" onclick="decrementR(this.parentNode.querySelector('input').id)"
+                        class="decrement-roundCond bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                        <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M1 1h16" />
+                        </svg>
+                    </button>
+                    <input type="text" id="roundCond" name="roundCond" data-input-counter
+                        class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none"
+                        placeholder="0" readonly />
+                    <button type="button" onclick="incrementR(this.parentNode.querySelector('input').id)"
+                        class="increment-roundCond bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                        <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 1v16M1 9h16" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="ml-10 flex items-center w-1/2">
+                    <label for="amrapCheckboxCon" class="w-24 block">AMRAP</label>
+                    <input type="checkbox" id="amrapCheckboxCon" name="amrapCheckboxCon"
+                        class="h-11 w-11 px-3 py-3 border border-gray-300 rounded mb-2 checked:bg-blue-600 checked:border-transparent"
+                        onchange="syncCheckboxes()">
+                </div>
+                <div class="flex justify-end items-center ml-auto mr-8">
+                    <button class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base" onclick="deleteCond()" type="button">Clear</button>
                 </div>
             </div>
         </div>
+    </div>
+
+    {{-- fetch data --}}
+    <div id="info-conditioning" class="info-conditioning">
+
+    </div>
+
+    <script>
+        function syncCheckboxes() {
+            var checkboxCon = document.getElementById('amrapCheckboxCon');
+            var checkbox = document.getElementById('amrapCheckbox');
+
+            if (checkboxCon.checked) {
+                checkbox.checked = true; // Check the checkbox if checkboxCon is checked
+            } else {
+                checkbox.checked = false; // Uncheck the checkbox if checkboxCon is not checked
+            }
+        }
+
+        function decrementR(id) {
+            const input = document.getElementById(id);
+            const val = document.getElementById("rounds");
+            const currentValue = parseInt(input.value) || 0;
+            if (currentValue > 0) {
+                input.value = currentValue - 1;
+                val.value = input.value;
+            }
+        }
+
+        function incrementR(id) {
+            const input = document.getElementById(id);
+            const val = document.getElementById("rounds");
+            const currentValue = parseInt(input.value) || 0;
+            input.value = currentValue + 1;
+            val.value = input.value;
+        }
+
+        function assgin() {
+            const input = document.getElementById("roundCond");
+            const val = document.getElementById("rounds");
+            console.log("value :" + input.value);
+            val.value = input.value;
+        }
+    </script>
+    <form id="conditioning-form" action="/store-conditioning" method="POST">
+        @csrf
+        <input type="text" name="selectdatec" id="selectdatec" hidden>
+
+        <input type="hidden" id="rounds" name="rounds" data-input-counter
+            class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" />
+
+        <input type="checkbox" id="amrapCheckbox" name="amrap"
+            class="h-11 w-11 px-3 py-3 border border-gray-300 rounded mb-2 checked:bg-blue-600 checked:border-transparent"
+            hidden>
+
         <div class="duplicateUiC" data-index="1">
             <div class="ui-block flex flex-col text-lg pt-2 px-4 pb-4 bg-gray-50 mr-8 rounded-md gap-4 mb-4">
                 <div class="flex-col w-full">
-                    {{-- <div class="flex items-center border-b">
-                        <label for="rounds_1" class="w-60 block mb-1">Rounds <span class="text-red-500">*</span></label>
-                        <div class="relative flex items-center max-w-[8rem] mb-2">
-                            <button type="button" onclick="decrement(this.parentNode.querySelector('input').id)"
-                                class="decrement-rounds bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
-                                <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="M1 1h16" />
-                                </svg>
-                            </button>
-                            <input type="text" id="rounds_1" name="rounds_1" data-input-counter
-                                class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none"
-                                placeholder="0" readonly />
-                            <button type="button" onclick="increment(this.parentNode.querySelector('input').id)"
-                                class="increment-rounds bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
-                                <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="M9 1v16M1 9h16" />
-                                </svg>
-                            </button>
-                        </div>
-                    </div> --}}
                     <div class="flex items-center border-b">
                         <label for="categoryc_1" class="w-60 block mb-1">Category <span
                                 class="text-red-500">*</span></label>
@@ -134,7 +164,7 @@
                             <input type="text" id="timeTC_1" name="timeTC_1" data-input-counter
                                 placeholder="00:00"
                                 class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none"
-                                placeholder="0" readonly required/>
+                                placeholder="0" readonly required />
                             <button type="button"
                                 onclick="adjustRestTime(this.parentNode.querySelector('input').id, 1)"
                                 class="increment-timeTC bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
@@ -161,7 +191,7 @@
 
 {{-- click Button --}}
 <script>
-     document.getElementById('save-button').addEventListener('click', function(event) {
+    document.getElementById('save-button').addEventListener('click', function(event) {
         // Get the original and cloned elements
         const rounds = document.getElementById('rounds').value.trim();
         const amrapCheckbox = document.getElementById('amrapCheckbox').checked;
@@ -182,7 +212,8 @@
             const timeInput = clone.querySelector('input[name^="timeTC_"]');
 
             // Check if required fields are filled
-            if (categorySelect.value && workoutSelect.value && repsInput.value && weightInput.value && timeInput.value) {
+            if (categorySelect.value && workoutSelect.value && repsInput.value && weightInput.value &&
+                timeInput.value) {
                 isValid = true;
             } else {
                 isValid = false;
@@ -388,7 +419,7 @@
     });
     // {{-- Get workout --}}
     function getworkoutC(selectElement) {
-        // console.log(selectElement);
+        console.log(selectElement);
         const tab = "conditioning"; // Assuming the tab is predefined for warmup
         const selectId = selectElement.value; // Get the value of the selected element
 
@@ -399,6 +430,8 @@
         let workoutSelectId;
         if (idParts[0] === 'categoryc') {
             workoutSelectId = `workoutc_${idParts[1]}`;
+        } else if (idParts[0] === 'categorycon') {
+            workoutSelectId = `workoutcon_${idParts[1]}`;
         } else {
             console.error('Unknown category type');
             return;
@@ -479,7 +512,204 @@
     }
 
     function setConditioning(array, categoryOptionsArray) {
-        console.log(array);
-    }
+        console.log(categoryOptionsArray);
+        // Get the container where the information will be displayed
+        const conditioningDiv = document.getElementById('info-conditioning');
+        const rounds = document.getElementById('roundCond');
+        rounds.value = array.length > 0 && array[0].rounds ? array[0].rounds : 0;
+        // Clear any existing content
+        assgin();
 
+        // checkbox
+        var checkbox = document.getElementById('amrapCheckboxCon');
+        if (array.length > 0) {
+            if (array[0].amrap == 1) {
+                checkbox.checked = true; // Check the checkbox if amrap is 1
+            } else {
+                checkbox.checked = false; // Uncheck the checkbox if amrap is not 1
+            }
+        } else {
+            checkbox.checked = false; // Uncheck the checkbox if array is empty
+        }
+
+        // Retrieve the value of the input field with ID 'roundCond'
+        const roundCondValue = document.getElementById('roundCond').value;
+
+        conditioningDiv.innerHTML = '';
+
+        // Build HTML content
+        let htmlContent = '';
+        array.forEach(item => {
+            // Create a string with the desired HTML structure
+            let categoryOptionsHTML = '<option value="" selected disabled>-- Select Category --</option>';
+
+            // Add options from categoryOptionsArray
+            categoryOptionsArray.forEach(category => {
+                categoryOptionsHTML +=
+                    `<option value="${category.id}" ${category.id === item.category_id ? 'selected' : ''}>${category.category_name}</option>`;
+            });
+
+            htmlContent += `
+            <input type="text" name="id" value="${item.id}" hidden>
+            <div class="flex flex-col text-lg p-4 bg-gray-50 mr-8 rounded-md gap-4 mb-4">
+                <div class="flex-col w-full">
+                    <div class="flex items-center border-b">
+                        <label for="categorycon_${item.id}" class="w-60 block mb-1">Category <span class="text-red-500">*</span></label>
+                        <select id="categorycon_${item.id}" name="categorycon_${item.id}" onchange="getworkoutC(this)"
+                            class="w-1/3 px-3 py-3 border flex rounded mb-2">
+                            ${categoryOptionsHTML}
+                        </select>
+                        <div class="flex justify-end items-center ml-auto mr-8">   
+                            <button class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base" type="button" onclick="conEdit(${item.id})">Edit</button>
+                        </div>
+                    </div>
+                    <div class="flex items-center border-b mt-2">
+                        <label for="workoutcon_${item.id}" class="w-60 block mb-1">Workout <span class="text-red-500">*</span></label>
+                        <select id="workoutcon_${item.id}" name="workoutcon_${item.id}" class="w-1/3 px-3 py-3 border flex rounded mb-2">
+                            <option value="" selected disabled>-- Select Workout --</option>
+                            <!-- Populate options dynamically -->
+                            <option value="${item.workout_id}" selected>${item.workout_type}</option>
+                        </select>
+                    </div>
+                    <div class="flex items-center border-b mt-2">
+                        <label for="repscon_${item.id}" class="w-60 block mb-1">REPS <span class="text-red-500">*</span></label>
+                        <div class="relative flex items-center max-w-[8rem] mb-2">
+                            <!-- Decrement Button -->
+                            <button type="button" onclick="decrement(this.parentNode.querySelector('input').id)"
+                                id="decrement-repscon_${item.id}"
+                                class="decrement-repscon_${item.id} bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="M1 1h16" />
+                                </svg>
+                            </button>
+                            <!-- Input Field -->
+                            <input type="text" id="repscon_${item.id}" name="repscon_${item.id}" data-input-counter
+                                class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none"
+                                placeholder="0" value="${item.reps}" readonly />
+                            <!-- Increment Button -->
+                            <button type="button" onclick="increment(this.parentNode.querySelector('input').id)"
+                                id="increment-repscon_${item.id}"
+                                class="increment-repscon_${item.id} bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="M9 1v16M1 9h16" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex items-center border-b mt-2">
+                        <label for="weightcon_${item.id}" class="w-60 block mb-1">Weight <span class="text-red-500">*</span></label>
+                        <input type="number" id="weightcon_${item.id}" name="weightcon_${item.id}" value="${item.weight}"
+                            class="w-1/3 px-3 py-3 border flex rounded mb-2">
+                        <select id="unitcon_${item.id}" name="unit_${item.id}" class="border bg-white py-3 px-3 mb-2 rounded">
+                            <option value="%" ${item.unit === '%' ? 'selected' : ''}>%</option>
+                            <option value="Kg" ${item.unit === 'Kg' ? 'selected' : ''}>Kg</option>
+                        </select>
+                    </div>
+                    <div class="flex items-center border-b mt-2">
+                    <label for="timeTCcon_${item.id}" class="w-60 block mb-1">Time To Complete <span class="text-red-500">*</span></label>
+                    <div class="relative flex items-center max-w-[8rem] mb-2">
+                        <!-- Decrement Button -->
+                        <button type="button" onclick="adjustRestTime(this.parentNode.querySelector('input').id, -1)"
+                            id="decrement-timeTCcon_${item.id}"
+                            class="decrement-timeTCcon_${item.id} bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                            <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="M1 1h16" />
+                            </svg>
+                        </button>
+                        <!-- Input Field -->
+                        <input type="text" id="timeTCcon_${item.id}" name="timeTCcon_${item.id}" data-input-counter
+                            class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none"
+                            placeholder="0" value="${item.complete_time}" readonly />
+                        <!-- Increment Button -->
+                        <button type="button" onclick="adjustRestTime(this.parentNode.querySelector('input').id, 1)"
+                            id="increment-timeTCcon_${item.id}"
+                            class="increment-timeTCcon_${item.id} bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                            <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="M9 1v16M1 9h16" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                </div>
+                <hr>
+            </div>
+
+        `;
+        });
+        conditioningDiv.innerHTML = htmlContent;
+    }
+    // edit
+    function conEdit(id) {
+        console.log(id);
+
+        // Fetch values from the DOM elements
+        const category = document.getElementById(`categorycon_${id}`).value;
+        const workout = document.getElementById(`workoutcon_${id}`).value;
+        const reps = document.getElementById(`repscon_${id}`).value;
+        const weight = document.getElementById(`weightcon_${id}`).value;
+        const timeToComplete = document.getElementById(`timeTCcon_${id}`).value;
+        const unit = document.getElementById(`unitcon_${id}`).value;
+        const rounds = document.getElementById('roundCond').value;
+        const date = document.getElementById('selectdatec').value;
+
+        // Get the checkbox state
+        const amrapCheckbox = document.getElementById('amrapCheckboxCon');
+        const isChecked = amrapCheckbox.checked;
+        console.log(isChecked);
+
+        // Configure and send the AJAX request
+        $.ajax({
+            url: '/update-conditioning',
+            type: 'POST',
+            data: {
+                id: id,
+                category: category,
+                workout: workout,
+                reps: reps,
+                weight: weight,
+                timeToComplete: timeToComplete,
+                rounds: rounds,
+                date: date,
+                unit: unit,
+                isChecked: isChecked,
+                _token: $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                // Handle successful response
+                console.log('Success:', response);
+            },
+            error: function(xhr, status, error) {
+                // Handle error response
+                console.error('Error:', status, error);
+            }
+        });
+    }
+    // delete
+    function deleteCond(){
+        const date = document.getElementById('selectdatec').value;
+        $.ajax({
+            url: '/delete-conditioning',
+            type: 'POST',
+            data: {
+                date: date,
+                _token: $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                alert(response.message);
+                getconditioning(date);
+                // Optionally, refresh the page or update the UI to reflect the deletion
+            },
+            error: function(xhr) {
+                alert('An error occurred while deleting the records.');
+            }
+        });
+    }
 </script>
