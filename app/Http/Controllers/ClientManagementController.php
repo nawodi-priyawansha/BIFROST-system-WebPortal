@@ -60,8 +60,8 @@ class ClientManagementController extends Controller
         try {
             // Validate incoming request data
             $validatedData = $request->validate([
-                'name' => 'required|string|max:255',
-                'nickname' => 'nullable|string|max:255',
+                'firstname' => 'required|string|max:255',
+                'lastname' => 'nullable|string|max:255',
                 'dob' => 'required|date',
                 'gender' => 'required|in:Male,Female',
                 'age' => 'required|integer|min:0',
@@ -96,7 +96,7 @@ class ClientManagementController extends Controller
 
             // Create new user
             $user = new User();
-            $user->name = $validatedData['name'];
+            $user->name = $validatedData['firstname'];
             $user->email = $validatedData['email'];
             $user->pin = $pin;
             $user->user_type = 'client'; // Default user type
@@ -105,8 +105,8 @@ class ClientManagementController extends Controller
             // Create new profile associated with the user
             $profile = new Newprofile();
             $profile->user_id = $user->id;
-            $profile->name = $validatedData['name'];
-            $profile->nickname = $validatedData['nickname'];
+            $profile->firstname = $validatedData['firstname'];
+            $profile->lastname = $validatedData['lastname'];
             $profile->dob = Carbon::parse($validatedData['dob']);
             $profile->gender = $validatedData['gender'];
             $profile->age = $validatedData['age'];
@@ -134,8 +134,8 @@ class ClientManagementController extends Controller
         try {
             // Validate incoming request data
             $validatedData = $request->validate([
-                'name' => 'required|string|max:255',
-                'nickname' => 'nullable|string|max:255',
+                'firstname' => 'required|string|max:255',
+                'lastname' => 'nullable|string|max:255',
                 'dob' => 'required|date',
                 'gender' => 'required|in:Male,Female',
                 'age' => 'required|integer|min:0',
@@ -184,8 +184,8 @@ class ClientManagementController extends Controller
 
             // Update the profile data
             $updateSuccessful = $profile->update([
-                'name' => $validatedData['name'],
-                'nickname' => $validatedData['nickname'],
+                'firstname' => $validatedData['firstname'],
+                'lastname' => $validatedData['lastname'],
                 'dob' => Carbon::parse($validatedData['dob']),
                 'gender' => $validatedData['gender'],
                 'age' => $validatedData['age'],
