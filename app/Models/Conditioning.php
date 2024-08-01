@@ -20,8 +20,6 @@ class Conditioning extends Model
         'unit', 
         'amrap',
     ];
-
-    // Define the relationship with the CategoryOption model
     public function category()
     {
         return $this->belongsTo(CategoryOption::class);
@@ -30,6 +28,6 @@ class Conditioning extends Model
     // Define the relationship with the WorkoutLibrary model
     public function workout()
     {
-        return $this->belongsTo(WorkoutLibrary::class);
+        return $this->belongsTo(WorkoutLibrary::class, 'workout_id');
     }
 }

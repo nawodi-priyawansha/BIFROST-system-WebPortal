@@ -150,6 +150,11 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/store-conditioning',[SessionController::class,'storeconditioning']);
     // get conditioning
     Route::post('/getConditioning',[SessionController::class,'getConditioning']);
+    // update conditioning
+    Route::post('/update-conditioning',[SessionController::class,'updateConditioning']);
+    // delete conditioning
+    Route::post('/delete-conditioning', [SessionController::class, 'deleteConditioning']);
+
 
     //stroe strenght
     Route::post('/save-strength', [SessionController::class, 'strengthstore'])->name('save-strength');
