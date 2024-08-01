@@ -139,13 +139,21 @@ Route::middleware(['admin'])->group(function () {
 
     // store weightlifting
     Route::post('/store-weightlifting',[SessionController::class,'storeweightlifting']);
-
     // get Weightlifting
     Route::post('/get-Weightlifting',[SessionController::class,'getWeightlifting']);
     // update Weightlifting
     Route::post('/update-Weightlifting', [SessionController::class, 'updateWeightlifting'])->name('updateWeightlifting');
     // delete
     Route::delete('/delete-Weightlifting', [SessionController::class, 'deleteAllBySelectDateWeightlifting'])->name('Weightlifting.deleteAllBySelectDate');
+
+    // store conditioning
+    Route::post('/store-conditioning',[SessionController::class,'storeconditioning']);
+    // get conditioning
+    Route::post('/getConditioning',[SessionController::class,'getConditioning']);
+    // update conditioning
+    Route::post('/update-conditioning',[SessionController::class,'updateConditioning']);
+    // delete conditioning
+    Route::post('/delete-conditioning', [SessionController::class, 'deleteConditioning']);
 
 
     //stroe strenght

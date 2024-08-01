@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Access;
 use App\Models\ClientManagement;
+
 use App\Models\Newprofile;
+
+use App\Models\Conditioning;
+
 use App\Models\Strength;
 use App\Models\StrengthSetRep;
 use App\Models\Test;
@@ -976,6 +980,7 @@ class SessionController extends Controller
     }
 
 
+
     public function getmember(Request $request)
     {
         // Fetch all members
@@ -1150,6 +1155,204 @@ class SessionController extends Controller
             // Redirect back with error message
             return redirect()->back()->with('error', 'An error occurred while deleting Strength sessions.');
         }
+
+
+    // store conditioning
+    public function storeconditioning(Request $request)
+    {
+        // dd($request);
+
+        // Validate the incoming request data
+        $request->validate([
+            'selectdatec' => 'required|string',
+            'rounds' => 'nullable|integer', // `rounds` is optional
+            'amrap' => 'nullable', // `amrapCheckbox` should be a boolean
+            'categoryc_*' => 'required|integer|exists:category_options,id',
+            'workoutc_*' => 'required|integer|exists:workout_libraries,id',
+            'repsc_*' => 'required|integer',
+            'weigthc_*' => 'required|numeric',
+            'timeTC_*' => 'required|string', // Validate time as string to ensure proper format
+            'unit_*' => 'required|string', // Corrected 'unit_' to 'unit_*' to handle multiple fields
+        ]);
+        // dd($request);
+
+        // Prepare date for insertion
+        $date = $request->input('selectdatec'); // Format: 31/07/24 Wednesday
+
+        // Process each set of data
+        $entries = [];
+        foreach ($request->except(['_token', 'selectdatec', 'rounds', 'amrap']) as $key => $value) {
+            if (preg_match('/^categoryc_(\d+)$/', $key, $matches)) {
+                $index = $matches[1];
+
+                // Retrieve checkbox value from the request
+                $amrap = $request->input('amrap', false); // Default to false if checkbox is not present
+
+                // Convert to boolean if necessary
+                $amrap = filter_var($amrap, FILTER_VALIDATE_BOOLEAN);
+                // dd($amrap);
+                $entries[] = [
+                    'rounds' => $request->input('rounds'),
+                    'category_id' => $request->input('categoryc_' . $index),
+                    'workout_id' => $request->input('workoutc_' . $index),
+                    'reps' => $request->input('repsc_' . $index),
+                    'weight' => $request->input('weigthc_' . $index),
+                    'unit' => $request->input('unit_' . $index),
+                    'time_to_complete' => $request->input('timeTC_' . $index),
+                    'date' => $date,
+                    'amrap' => $amrap, // Include 'amrap' in the data if needed
+                ];
+                if ($amrap == "true") {
+                    $amrap = 1;
+                } else if ($amrap == "false") {
+                    $amrap = 0;
+                }
+                $this->allUpdate($date, $request->input('rounds'), $amrap);
+            }
+        }
+
+        // Insert data into the database
+        foreach ($entries as $entry) {
+            Conditioning::create($entry);
+        }
+
+        return redirect()->back();
+    }
+    // get conditioning
+    public function getConditioning(Request $request)
+    {
+        $date = $request->input('date');
+
+        // Fetch conditioning data with related category and workout details
+        $conditionings = Conditioning::where('date', $date)
+            ->with(['category', 'workout'])
+            ->get();
+
+        // Fetch workouts based on the type and include related category options
+        $workouts = WorkoutLibrary::where('type', 'conditioning')
+            ->with('categoryOption')
+            ->get();
+
+        // Get unique category options based on the fetched workouts
+        $categoryOptions = $workouts->pluck('categoryOption')->unique('id');
+
+        // Transform the result to include the desired fields
+        $result = $conditionings->map(function ($item) {
+            return [
+                'id' => $item->id,
+                'date' => $item->date,
+                'category_id' => $item->category_id,
+                'weight' => $item->weight,
+                'category_name' => $item->category ? $item->category->category_name : null,
+                'workout_id' => $item->workout_id,
+                'workout_type' => $item->workout ? $item->workout->workout : null,
+                'reps' => $item->reps,
+                'rounds' => $item->rounds,
+                'complete_time' => $item->time_to_complete,
+                'unit' => $item->unit,
+                'amrap' => $item->amrap,
+            ];
+        });
+
+        return response()->json([
+            'result' => $result,
+            'categoryOptions' => $categoryOptions
+        ]);
+    }
+    public function updateConditioning(Request $request)
+    {
+        // Validate incoming request data
+        $validated = $request->validate([
+            'id' => 'required|integer|exists:conditionings,id',
+            'category' => 'required',
+            'workout' => 'required',
+            'reps' => 'required|integer',
+            'weight' => 'required',
+            'timeToComplete' => 'required',
+            'rounds' => 'nullable|integer',
+            'date' => 'required',
+            'isChecked' => 'nullable',
+            'unit' => 'required',
+        ]);
+
+        // Find the Conditioning record by ID
+        $conditioning = Conditioning::find($validated['id']);
+        if (!$conditioning) {
+            Log::error('Conditioning not found', ['id' => $validated['id']]);
+            return response()->json(['error' => 'Conditioning not found'], 404);
+        }
+
+        if ($request->isChecked == "true") {
+            $amrap = 1;
+        } else if ($request->isChecked == "false") {
+            $amrap = 0;
+        }
+
+        // Log the current state before update
+        Log::info('Updating Conditioning record', [
+            'id' => $conditioning->id,
+            'old_data' => $conditioning->toArray(),
+            'new_data' => $validated
+        ]);
+
+        // Update the Conditioning record
+        $conditioning->rounds = $validated['rounds'];
+        $conditioning->category_id  = $validated['category'];
+        $conditioning->workout_id  = $validated['workout'];
+        $conditioning->reps = $validated['reps'];
+        $conditioning->weight = $validated['weight'];
+        $conditioning->time_to_complete = $validated['timeToComplete'];
+        $conditioning->date = $validated['date'];
+        $conditioning->unit = $validated['unit'];
+        $conditioning->amrap = $amrap;
+        // $conditioning->is_checked = $validated['isChecked'];
+        $conditioning->save();
+
+        // Update all records with the same date
+        $this->allUpdate($validated['date'], $validated['rounds'], $amrap);
+
+        // Log the successful update
+        Log::info('Conditioning record updated successfully', [
+            'id' => $conditioning->id,
+            'updated_data' => $conditioning->toArray()
+        ]);
+
+        // Return a success response
+        return response()->json(['message' => 'Conditioning updated successfully'], 200);
+    }
+
+    public function allUpdate($date, $rounds, $amrap)
+    {
+        // Update rounds and amrap for all records with the same date
+        Conditioning::where('date', $date)->update([
+            'rounds' => $rounds,
+            'amrap' => $amrap
+        ]);
+
+        Log::info('Updated all Conditioning records with date', [
+            'date' => $date,
+            'rounds' => $rounds,
+            'amrap' => $amrap
+        ]);
+    }
+    public function deleteConditioning(Request $request)
+    {
+        // Validate the request
+        $validated = $request->validate([
+            'date' => 'required'
+        ]);
+
+        // Delete records by date
+        $deleted = Conditioning::where('date', $validated['date'])->delete();
+
+        // Log the deletion
+        Log::info('Deleted Conditioning records', [
+            'date' => $validated['date'],
+            'deleted_count' => $deleted
+        ]);
+
+        // Return a success response
+        return response()->json(['message' => 'Conditioning records deleted successfully', 'deleted_count' => $deleted], 200);
 
     }
 }

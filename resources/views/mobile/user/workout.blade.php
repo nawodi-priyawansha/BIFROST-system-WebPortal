@@ -81,8 +81,8 @@
                                     <div class="flex justify-between items-center text-base font-bold">
                                         <button class="px-4 py-2 rounded primary-btn"
                                             data-target="#primary-weight-{{ $strengthIndex }}">
-                                            {{ $strengthdetail->workouts->categoryOption->category_name }} -
-                                            {{ $strengthdetail->workouts->workout }}
+                                            {{ $strengthdetail->workout->categoryOption->category_name }} -
+                                            {{ $strengthdetail->workout->workout }}
                                         </button>
                                         <button class="px-4 py-2 border rounded alt-btn"
                                             data-target="#alt-weight-{{ $strengthIndex }}">ALT</button>
@@ -136,8 +136,8 @@
                                                         </td>
                                                         <td class="py-4">
                                                             <label class="inline-flex items-center me-5 cursor-pointer">
-                                                                <input type="checkbox" id="toggleTimer" value="" class="sr-only peer timer-checkbox" data-rest-time="{{ $strengthdetail->rest }}">
-                                                                <div id="toggleBackground" class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600">
+                                                                <input type="checkbox" id="toggleTimer{{ $strengthIndex }}-{{ $setNumber }}" value="" class="sr-only peer timer-checkbox" data-rest-time="{{ $strengthdetail->rest }}">
+                                                                <div id="toggleBackground{{ $strengthIndex }}-{{ $setNumber }}" class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600">
                                                                 </div>
                                                             </label>
                                                         </td>
@@ -195,11 +195,8 @@
                                                         </td>
                                                         <td class="py-4">
                                                             <label class="inline-flex items-center me-5 cursor-pointer">
-                                                                <input type="checkbox" value=""
-                                                                    class="sr-only peer timer-checkbox"
-                                                                    data-rest-time="{{ $strengthdetail->alt_rest }}">
-                                                                <div
-                                                                    class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
+                                                                <input type="checkbox" id="toggleTimer{{ $strengthIndex }}-alt-{{ $setNumberalt }}" value="" class="sr-only peer timer-checkbox" data-rest-time="{{ $strengthdetail->altrest }}">
+                                                                <div id="toggleBackground{{ $strengthIndex }}-alt-{{ $setNumberalt }}" class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600">
                                                                 </div>
                                                             </label>
                                                         </td>
@@ -281,11 +278,8 @@
                                                         </td>
                                                         <td class="py-4">
                                                             <label class="inline-flex items-center me-5 cursor-pointer">
-                                                                <input type="checkbox" value=""
-                                                                    class="sr-only peer timer-checkbox"
-                                                                    data-rest-time="{{ $weightdetail->rest }}">
-                                                                <div
-                                                                    class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
+                                                                <input type="checkbox" id="toggleTimer{{ $weightIndex }}-{{ $setNumber }}" value="" class="sr-only peer timer-checkbox" data-rest-time="{{ $weightdetail->rest }}">
+                                                                <div id="toggleBackground{{ $weightIndex }}-{{ $setNumber }}" class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600">
                                                                 </div>
                                                             </label>
                                                         </td>
@@ -343,11 +337,8 @@
                                                         </td>
                                                         <td class="py-4">
                                                             <label class="inline-flex items-center me-5 cursor-pointer">
-                                                                <input type="checkbox" value=""
-                                                                    class="sr-only peer timer-checkbox"
-                                                                    data-rest-time="{{ $weightdetail->alt_rest }}">
-                                                                <div
-                                                                    class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
+                                                                <input type="checkbox" id="toggleTimer{{ $weightIndex }}-alt-{{ $setNumberalt }}" value="" class="sr-only peer timer-checkbox" data-rest-time="{{ $weightdetail->alt_rest }}">
+                                                                <div id="toggleBackground{{ $weightIndex }}-alt-{{ $setNumberalt }}" class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600">
                                                                 </div>
                                                             </label>
                                                         </td>
@@ -417,7 +408,8 @@
 
                     <button id="resetButton" class="px-4 py-2 rounded w-full mb-6">RESET TIMER</button>
 
-                    <div id="timer" class="timer text-center w-full bg-orange-600 p-4 rounded-lg text-2xl mb-10">
+                    <div id="timer"
+                        class="timer text-center w-full bg-orange-600 p-4 rounded-lg text-2xl mb-10">
                         00:00:00
                     </div>
                 </div>
@@ -485,83 +477,99 @@
             });
         </script>
         <script>
-            let timerInterval;
-            let elapsedTime = 0;
-    
-            function startTimer() {
-                elapsedTime = 0;
-                timerInterval = setInterval(() => {
-                    elapsedTime++;
-                    updateTimerDisplay(elapsedTime);
-                    changeTimerColor(elapsedTime);
-                    if (elapsedTime >= 240) {  // 4 minutes
-                        clearInterval(timerInterval);
-                        beep(3);
-                    }
-                }, 1000);
-            }
-    
-            function stopTimer() {
-                clearInterval(timerInterval);
-            }
-    
-            function resetTimer() {
-                clearInterval(timerInterval);
-                elapsedTime = 0;
-                updateTimerDisplay(elapsedTime);
-                const timerElement = document.getElementById('timer');
-                timerElement.classList.remove('bg-red-600', 'bg-yellow-600', 'bg-green-600');
-                timerElement.classList.add('bg-orange-600');
-    
-                const toggleBackground = document.getElementById('toggleBackground');
-                toggleBackground.classList.remove('bg-red-600', 'bg-yellow-600', 'bg-green-600');
-                toggleBackground.classList.add('bg-gray-600');
-            }
-    
-            function updateTimerDisplay(seconds) {
-                const minutes = Math.floor(seconds / 60);
-                const remainingSeconds = seconds % 60;
-                const displayMinutes = minutes < 10 ? '0' + minutes : minutes;
-                const displaySeconds = remainingSeconds < 10 ? '0' + remainingSeconds : remainingSeconds;
-                document.getElementById('timer').textContent = `00:${displayMinutes}:${displaySeconds}`;
-            }
-    
-            function changeTimerColor(seconds) {
-                const timerElement = document.getElementById('timer');
-                const toggleBackground = document.getElementById('toggleBackground');
-                timerElement.classList.remove('bg-orange-600', 'bg-red-600', 'bg-yellow-600', 'bg-green-600');
-                toggleBackground.classList.remove('bg-orange-600', 'bg-red-600', 'bg-yellow-600', 'bg-green-600');
-                if (seconds <= 120) {
-                    timerElement.classList.add('bg-red-600');
-                    toggleBackground.classList.add('bg-red-600');
-                } else if (seconds <= 180) {
-                    timerElement.classList.add('bg-yellow-600');
-                    toggleBackground.classList.add('bg-yellow-600');
-                } else if (seconds <= 240) {
-                    timerElement.classList.add('bg-green-600');
-                    toggleBackground.classList.add('bg-green-600');
-                }
-            }
-    
-            function beep(times) {
-                for (let i = 0; i < times; i++) {
-                    setTimeout(() => {
-                        const audio = new Audio('beep.mp3');  // Ensure you have a beep.mp3 file or change the path to a beep sound file
-                        audio.play();
-                    }, i * 1000);
-                }
-            }
-    
-            document.getElementById('resetButton').addEventListener('click', resetTimer);
-    
-            document.getElementById('toggleTimer').addEventListener('change', (event) => {
-                if (event.target.checked) {
-                    startTimer();
-                } else {
-                    stopTimer();
-                    resetTimer();
-                }
-            });
+            let timerIntervals = {};
+let elapsedTimes = {};
+
+function startTimer(setNumber) {
+    console.log(setNumber);
+    elapsedTimes[setNumber] = 0;
+    timerIntervals[setNumber] = setInterval(() => {
+        elapsedTimes[setNumber]++;
+        updateTimerDisplay(setNumber, elapsedTimes[setNumber]);
+        changeTimerColor(setNumber, elapsedTimes[setNumber]);
+        if (elapsedTimes[setNumber] >= 240) { // 4 minutes
+            clearInterval(timerIntervals[setNumber]);
+            beep(3);
+        }
+    }, 1000);
+}
+
+function stopTimer(setNumber) {
+    clearInterval(timerIntervals[setNumber]);
+}
+
+function resetTimer(setNumber) {
+    clearInterval(timerIntervals[setNumber]);
+    elapsedTimes[setNumber] = 0;
+    updateTimerDisplay(setNumber, elapsedTimes[setNumber]);
+
+    const timerElement = document.getElementById(`timer`);
+    if (timerElement) {
+        timerElement.classList.remove('bg-red-600', 'bg-yellow-600', 'bg-green-600');
+        timerElement.classList.add('bg-orange-600');
+    }
+
+    const toggleBackground = document.getElementById(`toggleBackground${setNumber}`);
+    if (toggleBackground) {
+        toggleBackground.classList.remove('bg-red-600', 'bg-yellow-600', 'bg-green-600');
+        toggleBackground.classList.add('bg-gray-600');
+    }
+}
+
+function updateTimerDisplay(setNumber, seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    const displayMinutes = minutes < 10 ? '0' + minutes : minutes;
+    const displaySeconds = remainingSeconds < 10 ? '0' + remainingSeconds : remainingSeconds;
+
+    const timerElement = document.getElementById(`timer`);
+    if (timerElement) {
+        timerElement.textContent = `00:${displayMinutes}:${displaySeconds}`;
+    }
+}
+
+function changeTimerColor(setNumber, seconds) {
+    const timerElement = document.getElementById(`timer`);
+    const toggleBackground = document.getElementById(`toggleBackground${setNumber}`);
+
+    if (timerElement && toggleBackground) {
+        timerElement.classList.remove('bg-orange-600', 'bg-red-600', 'bg-yellow-600', 'bg-green-600');
+        toggleBackground.classList.remove('bg-orange-600', 'bg-red-600', 'bg-yellow-600', 'bg-green-600');
+
+        if (seconds <= 120) {
+            timerElement.classList.add('bg-red-600');
+            toggleBackground.classList.add('bg-red-600');
+        } else if (seconds <= 180) {
+            timerElement.classList.add('bg-yellow-600');
+            toggleBackground.classList.add('bg-yellow-600');
+        } else if (seconds <= 240) {
+            timerElement.classList.add('bg-green-600');
+            toggleBackground.classList.add('bg-green-600');
+        }
+    }
+}
+
+function beep(times) {
+    for (let i = 0; i < times; i++) {
+        setTimeout(() => {
+            const audio = new Audio('/audio/beep.mp3');
+            audio.play();
+        }, i * 1000);
+    }
+}
+
+document.querySelectorAll('.timer-checkbox').forEach((checkbox, index) => {
+    checkbox.addEventListener('change', (event) => {
+        const setNumber = checkbox.id.replace('toggleTimer', '');
+        if (event.target.checked) {
+            startTimer(setNumber);
+        } else {
+            stopTimer(setNumber);
+            resetTimer(setNumber);
+        }
+    });
+});
+
         </script>
 
         <script>
