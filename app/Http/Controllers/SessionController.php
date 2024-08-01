@@ -635,7 +635,7 @@ class SessionController extends Controller
             Weightlifting::where('date', $selectedDate)->delete();
 
             // Redirect back with success message
-            return redirect()->back()->with('status', 'Weightlifting sessions deleted successfully!');
+            return response()->json("deleted weightlifting");
         } catch (Exception $e) {
             // Log the exception message for debugging
             Log::error('Error deleting weightlifting sessions: ' . $e->getMessage());

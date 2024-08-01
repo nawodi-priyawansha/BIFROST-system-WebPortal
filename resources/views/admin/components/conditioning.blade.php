@@ -33,7 +33,8 @@
                         onchange="syncCheckboxes()">
                 </div>
                 <div class="flex justify-end items-center ml-auto mr-8">
-                    <button class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base" onclick="deleteCond()" type="button">Clear</button>
+                    <button class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base" onclick="deleteCond()"
+                        type="button">Clear</button>
                 </div>
             </div>
         </div>
@@ -81,7 +82,41 @@
             val.value = input.value;
         }
     </script>
-    <form id="conditioning-form" action="/store-conditioning" method="POST">
+    <script>
+        $(document).ready(function() {
+            $('#conditioning-form').on('submit', function(event) {
+                event.preventDefault(); // Prevent the default form submission
+                console.log("hellloooo")
+                $.ajax({
+                    url: '/store-conditioning',
+                    type: 'POST',
+                    data: $(this).serialize(), // Serialize form data
+                    success: function(response) {
+                        // Handle the response
+                        // alert(response.message);
+
+                        // Clear input fields
+                        $('#conditioning-form')[0].reset();
+                        const showUIC = document.getElementById('showUIC');
+                        showUIC.innerHTML = ''; // Clears the content inside the div
+
+                        // Optionally, update the UI or trigger other actions
+                        // Example: Switch tabs or update content
+                        const tab = document.getElementById('conditioningTab');
+                        if (tab) {
+                            tab.click();
+                        }
+                    },
+                    error: function(xhr) {
+                        // Handle error
+                        console.error(xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+
+    <form id="conditioning-form">
         @csrf
         <input type="text" name="selectdatec" id="selectdatec" hidden>
 
@@ -180,17 +215,17 @@
 
             </div>
         </div>
-        <div class="showUIC"></div>
-
+        <div class="showUIC" id="showUIC"></div>
+        <button id="save-button" type="submit"
+            class="bg-[#FB1018] text-white py-2 px-4 rounded mb-2 hover:bg-red-700">Save</button>
     </form>
-    <button id="save-button" type="submit"
-        class="bg-[#FB1018] text-white py-2 px-4 rounded mb-2 hover:bg-red-700">Save</button>
+
     <button class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base hidden" id="another"
         type="button">Another</button>
 </div>
 
 {{-- click Button --}}
-<script>
+{{-- <script>
     document.getElementById('save-button').addEventListener('click', function(event) {
         // Get the original and cloned elements
         const rounds = document.getElementById('rounds').value.trim();
@@ -232,7 +267,7 @@
             document.getElementById('conditioning-form').submit(); // Manually submit the form if valid
         }
     });
-</script>
+</script> --}}
 {{-- UI Duplicate --}}
 <script>
     function addAnotherClick() {
@@ -693,7 +728,7 @@
         });
     }
     // delete
-    function deleteCond(){
+    function deleteCond() {
         const date = document.getElementById('selectdatec').value;
         $.ajax({
             url: '/delete-conditioning',
