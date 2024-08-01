@@ -10,7 +10,7 @@
             <input type="text" name="selectdatestrenghtDelete" id="selectdatestrenghtDelete" hidden>
             <button class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base">Clear</button>
         </form>
-        
+
     </div>
     {{-- display  strength --}}
     <div id="strength-container"></div>
@@ -380,40 +380,10 @@
         options.forEach(option => selectElement.add(option));
     }
 
-    // Function to get workouts via AJAX based on selected category
-    // function getworkoutS(selectElement) {
-    //     const tab = "strength";
-    //     const selectId = selectElement.value;
-    //     const isAltCategory = selectElement.id.startsWith("alt-categorys");
-    //     const workoutSelectId = isAltCategory ? `alt-workouts_${selectElement.id.split('_')[1]}` :
-    //         `workouts_${selectElement.id.split('_')[1]}`;
 
-    //     $.ajax({
-    //         url: "/get-workout",
-    //         type: "POST",
-    //         data: {
-    //             tab: tab,
-    //             id: selectId,
-    //             _token: $('meta[name="csrf-token"]').attr('content')
-    //         },
-    //         success: function(response) {
-    //             console.log("Response", response)
-    //             const workouts = response.workouts || [];
-    //             const workoutSelect = document.getElementById(workoutSelectId);
-    //             clearOptionstrength(workoutSelect);
-
-    //             workouts.forEach(workout => {
-    //                 setWorkout(workoutSelect, workout.id, workout.workout);
-    //             });
-    //         },
-    //         error: function(xhr, status, error) {
-    //             console.error(error);
-    //         },
-    //     });
-    // }
     // Function to get workoutwe via AJAX based on selected category
     function getworkoutS(selectElement) {
-        console.log("this is select element",selectElement);
+        console.log("this is select element", selectElement);
         const tab = "strength";
         const selectId = selectElement.value; // Get the value of the selected element
 
@@ -471,7 +441,7 @@
         });
     }
 
-    
+
 
     // Function to set workout options
     function setWorkout(selectElement, id, workout) {
@@ -518,10 +488,8 @@
         });
     }
 
-    
-
     function setstrengthing(Strength, categoryOptions) {
-        console.log("this is strength",Strength);
+        console.log("this is strength", Strength);
 
         // Get the container where the information will be displayed
         const container = document.getElementById('strength-container');
@@ -535,7 +503,8 @@
         // Build HTML content
         Strength.forEach(item => {
             // Create a string with the primary category options
-            let strengthcategoryOptionsHTML = '<option value="" selected disabled>-- Select Category --</option>';
+            let strengthcategoryOptionsHTML =
+                '<option value="" selected disabled>-- Select Category --</option>';
             categoryOptions.forEach(category => {
                 strengthcategoryOptionsHTML +=
                     `<option value="${category.id}" ${category.id == item.category_id ? 'selected' : ''}>${category.category_name}</option>`;
@@ -544,7 +513,8 @@
             // Create a string with the alternative category options
             let strengthaltCategoryOptionsHTML = '';
             if (item.alt_category_id) {
-                strengthaltCategoryOptionsHTML = '<option value="" selected disabled>-- Select Category --</option>';
+                strengthaltCategoryOptionsHTML =
+                    '<option value="" selected disabled>-- Select Category --</option>';
                 categoryOptions.forEach(category => {
                     strengthaltCategoryOptionsHTML +=
                         `<option value="${category.id}" ${category.id == item.alt_category_id ? 'selected' : ''}>${category.category_name}</option>`;
