@@ -53,22 +53,22 @@
                         class="space-y-6 text-xs  rounded-lg shadow-lg bg-white p-2">
                         @csrf
                         <div class="text-xs">
-                            {{-- Name and Nickname Row --}}
+                            {{-- firstname and lastname Row --}}
                             <div class="w-full h-full p-2 grid grid-cols-1 md:grid-cols-2 md:border-b gap-4">
                                 <div class="form-group flex flex-wrap md:flex-nowrap items-center w-full">
-                                    <label for="name"
-                                        class="block text-gray-700 font-bold w-full md:w-[38%] mb-1 md:mb-0 pr-4">Name <span
+                                    <label for="firstname"
+                                        class="block text-gray-700 font-bold w-full md:w-[38%] mb-1 md:mb-0 pr-4">First Name <span
                                             class="text-red-500">*</span></label>
-                                    <input type="text" id="name" name="name"
+                                    <input type="text" id="firstname" name="firstname"
                                         class="form-control w-full md:w-3/4 rounded px-4 py-2 border" required
-                                        value="{{ old('name', isset($member) ? $member->name : '') }}">
+                                        value="{{ old('firstname', isset($member) ? $member->firstname : '') }}">
                                 </div>
                                 <div class="form-group flex flex-wrap md:flex-nowrap items-center w-full">
-                                    <label for="nickname"
-                                        class="block text-gray-700 font-bold w-full md:w-1/3 mb-1 md:mb-0 pr-4 md:ml-4">Nickname</label>
-                                    <input type="text" id="nickname" name="nickname"
+                                    <label for="lastname"
+                                        class="block text-gray-700 font-bold w-full md:w-1/3 mb-1 md:mb-0 pr-4 md:ml-4">Last Name</label>
+                                    <input type="text" id="lastname" name="lastname"
                                         class="form-control w-full md:w-3/4 border rounded px-4 py-2"
-                                        value="{{ old('nickname', isset($member) ? $member->nickname : '') }}">
+                                        value="{{ old('lastname', isset($member) ? $member->lastname : '') }}">
                                 </div>
                             </div>
                             {{-- DOB , Gender and Age  --}}
@@ -492,24 +492,19 @@
         </script>
 
 
-        {{-- BMR Calculator Script --}}
+        {{-- BMI Calculator Script --}}
         <script>
             document.addEventListener("DOMContentLoaded", function() {
                 // Function to calculate BMR
                 function calculateBMR() {
-                    const age = parseInt(document.getElementById('age').value) || 0;
                     const weight = parseFloat(document.getElementById('weight').value) || 0;
                     const height = parseFloat(document.getElementById('height').value) || 0;
-                    const gender = document.querySelector('input[name="gender"]:checked');
 
-                    if (gender && gender.value) {
-                        if (gender.value === 'Male') {
-                            return 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age);
-                        } else if (gender.value === 'Female') {
-                            return 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age);
-                        }
+                    if(weight && height){
+                        const heightInM = height / 100;
+                        return weight / heightInM;
                     }
-                    return 0; // Default case, though gender should always be selected
+                    return 0;
                 }
 
                 // Update BMR when inputs change
@@ -521,16 +516,12 @@
                 }
 
                 // Event listeners for inputs
-                document.getElementById('age').addEventListener('input', updateBMR);
                 document.getElementById('weight').addEventListener('input', updateBMR);
                 document.getElementById('height').addEventListener('input', updateBMR);
-                document.querySelectorAll('input[name="gender"]').forEach(item => {
-                    item.addEventListener('change', updateBMR);
-                });
             });
         </script>
 
-        
+
     @endsection
 </body>
 
