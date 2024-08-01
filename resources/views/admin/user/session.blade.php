@@ -400,9 +400,7 @@
                     break;
                 case "test":
                     document.getElementById('selectdatet').value = dayName;
-                    document.getElementById('selecttabtt').value = tabId;
-                    document.getElementById('selectdatetestDelete').value = dayName;
-                    gettest(dayName)
+                    document.getElementById('selecttabt').value = tabId;
                     break;
                 default:
                     console.log("Unknown tabId: " + tabId);
