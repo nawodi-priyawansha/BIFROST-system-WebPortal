@@ -10,8 +10,8 @@ class Newprofile extends Model
     use HasFactory;
     protected $table = 'members';
     protected $fillable = [
-        'name',
-        'nickname',
+        'firstname',
+        'lastname',
         'dob',
         'gender',
         'age',
@@ -37,7 +37,7 @@ class Newprofile extends Model
     {
         $this->attributes['progress_photos'] = json_encode($value);
     }
-    
+
     public function user()
     {
         return $this->belongsTo(User::class);

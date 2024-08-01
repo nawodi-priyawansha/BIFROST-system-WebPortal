@@ -51,9 +51,9 @@
                             @foreach ($members as $member)
                                 <tr class="bg-gray-100">
                                     <td dir="ltr" class="p-3 border-s-2 border-y-2 border-gray-300 text-left">
-                                        {{ $member->name }}
+                                        {{ $member->firstname }}
                                     </td>
-                                    <td class="p-3 border-y-2 border-gray-300 text-left"> {{ $member->nickname }}</td>
+                                    <td class="p-3 border-y-2 border-gray-300 text-left"> {{ $member->lastname }}</td>
                                     <td class="p-3 border-y-2 border-gray-300 text-left">{{ $member->phone }} </td>
                                     <td class="p-3 border-y-2 border-gray-300 text-left">{{ $member->subscription_level }}
                                     </td>
@@ -65,7 +65,7 @@
                                                 <i class="text-[#fd8300] bi bi-pencil"></i>
                                                 <span class="text-black">Edit</span>
                                             </a>
-                                            
+
                                             <form action="{{ route('deleteProfile', $member->id) }}" method="POST"
                                                 onsubmit="return confirm('Are you sure you want to delete this profile?');">
                                                 @csrf

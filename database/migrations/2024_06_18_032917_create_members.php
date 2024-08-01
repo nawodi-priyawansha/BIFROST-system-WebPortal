@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('members', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('name');
-            $table->string('nickname')->nullable();
+            $table->string('firstname');
+            $table->string('lastname')->nullable();
             $table->date('dob');
             $table->enum('gender', ['Male', 'Female']);
             $table->integer('age');
@@ -40,7 +40,7 @@ return new class extends Migration
         // Schema::table('members', function (Blueprint $table) {
         //     $table->dropForeign(['user_id']);
         // });
-        
+
         Schema::dropIfExists('members');
     }
 };
