@@ -57,7 +57,9 @@
                                     <td class="p-3 border-y-2 border-gray-300 text-left">{{ $member->phone }} </td>
                                     <td class="p-3 border-y-2 border-gray-300 text-left">{{ $member->subscription_level }}
                                     </td>
-                                    <td class="p-3 border-y-2 border-gray-300 text-left">{{ $member->created_at }} </td>
+                                    <td class="p-3 border-y-2 border-gray-300 text-left">
+                                        {{ \Carbon\Carbon::parse($member->created_at)->format('Y F') }} <!-- Format the date -->
+                                    </td>
 
                                     <td dir="rtl" class="p-3 border-y-2 justify-between  border-gray-300 text-left">
                                         <div class="flex space-x">
