@@ -55,10 +55,22 @@
                             // Clear input fields
                             $('#storeFromWe')[0].reset();
 
+                            // Clear specific elements
                             const cloneDisplayContainer = document.getElementById(
                                 'cloneDisplayContainer');
-                            cloneDisplayContainer.innerHTML = '';
+                            if (cloneDisplayContainer) {
+                                cloneDisplayContainer.innerHTML = ''; // Clear content
+                            }
 
+                            var duplicateSets = document.querySelector(".duplicate-sets");
+                            if (duplicateSets) {
+                                duplicateSets.innerHTML = ""; // Clear content
+                            }
+
+                            var altDuplicateSets = document.querySelector(".altduplicate-setss");
+                            if (altDuplicateSets) {
+                                altDuplicateSets.innerHTML = ""; // Clear content
+                            }
                             // Trigger the tab click
                             if (tab) {
                                 tab.click();
