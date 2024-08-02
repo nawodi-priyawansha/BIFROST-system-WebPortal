@@ -3,15 +3,70 @@
     <div class="flex justify-end items-center ml-auto mr-8">
         {{-- hidden input field --}}
         <input type="text" name="selecttabw" id="selecttabw" hidden>
-        <form action="{{ route('warmups.deleteAllBySelectDate') }}" method="POST">
+        <form id="deleteWarmupsForm">
             @csrf
             @method('DELETE')
             <input type="text" name="selectdatewd" id="selectdatewd" hidden>
-            <button class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base">Clear</button>
+            <button type="button" class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base"
+                onclick="deleteWarmups()">Clear</button>
         </form>
+        <script>
+            function deleteWarmups() {
+                // Serialize the form data
+                const formData = $('#deleteWarmupsForm').serialize();
+                const tab = document.getElementById('warmupTab');
+
+                // AJAX request
+                $.ajax({
+                    url: '{{ route('warmups.deleteAllBySelectDate') }}',
+                    type: 'POST',
+                    data: formData,
+                    success: function(response) {
+                        // Handle the response
+                        alert(response.message); // Display a success message or handle UI update
+                        if (tab) {
+                            tab.click();
+                        }
+
+                    },
+                    error: function(xhr) {
+                        // Handle error
+                        console.error(xhr.responseText);
+                    }
+                });
+            }
+
+            function storeWarmup() {
+                // Serialize the form data
+                const formData = $('#storeWarmupForm').serialize();
+                const tab = document.getElementById('warmupTab');
+                console.log("call warmap")
+                // AJAX request
+                $.ajax({
+                    url: '/store-warmup',
+                    type: 'POST',
+                    data: formData,
+                    success: function(response) {
+                        // Handle the response
+                        alert(response.message); // Display a success message or handle UI update
+
+                        if (tab) {
+                            tab.click();
+                        }
+                        // Optionally, clear the form fields
+                        $('#storeWarmupForm')[0].reset();
+                    },
+                    error: function(xhr) {
+                        // Handle error
+                        console.error(xhr.responseText);
+                        alert('An error occurred while saving the data.');
+                    }
+                });
+            }
+        </script>
     </div>
     <div id="warmup-info"></div>
-    <form action="/store-warmup" method="POST">
+    <form id="storeWarmupForm">
         @csrf
         <input type="text" name="selectdatew" id="selectdatew" hidden>
         <div class="ui-block flex flex-col text-lg p-4 bg-gray-50 mr-8 rounded-md gap-4 mb-4 ">
@@ -80,11 +135,11 @@
         <a class="duplicateBtn bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base cursor-pointer">Another</a>
         <div class="flex mt-12">
             @if ($accessType == 'write')
-                <button type="submit"
-                    class="bg-[#FB1018] text-white py-2 px-4 rounded mb-2 hover:bg-red-700">Save</button>
+                <button type="button" class="bg-[#FB1018] text-white py-2 px-4 rounded mb-2 hover:bg-red-700"
+                    onclick="storeWarmup()">Save</button>
             @else
-                <button type="submit" class="bg-[#FB1018] text-white py-2 px-4 rounded mb-2 hover:bg-red-700"
-                    disabled>Save</button>
+                <button type="button" class="bg-[#FB1018] text-white py-2 px-4 rounded mb-2 hover:bg-red-700"
+                    onclick="storeWarmup()" disabled>Save</button>
             @endif
         </div>
     </form>
@@ -268,7 +323,7 @@
                 `<option value="${item.category_id}" selected>${item.category_name}</option>`;
 
             htmlContent += `
-            <form action="/update-warmup" method="POST">
+            <form  id="warmupEdit_${item.id}">
             @csrf
                 <input type="text" name="id" value="${item.id}" hidden>
                 <div class="flex flex-col text-lg p-4 bg-gray-50 mr-8 rounded-md gap-4 mb-4">
@@ -280,7 +335,7 @@
                                 ${categoryOptionsHTML}
                             </select>
                             <div class="flex justify-end items-center ml-auto mr-8">   
-                                <button class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base" type="submit">Edit</button>
+                                <button type="button" class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base" onclick="editWarmup(${item.id})">Edit</button>
                             </div>
                         </div>
                         <div class="flex items-center border-b mt-2">
@@ -341,4 +396,35 @@
     document.addEventListener('DOMContentLoaded', function() {
         getCategoryW();
     });
+</script>
+<script>
+    function editWarmup(id) {
+        // Construct the form ID dynamically
+        const formId = `#warmupEdit_${id}`;
+        const tab = document.getElementById('warmupTab');
+
+        // Serialize the form data
+        const formData = $(formId).serialize();
+
+        // AJAX request
+        $.ajax({
+            url: '/update-warmup',
+            type: 'POST',
+            data: formData,
+            success: function(response) {
+                // Handle the response
+                alert(response.message); // Display a success message or handle UI update
+                if (tab) {
+                    tab.click();
+                }
+                // Optionally, clear the form fields or update the UI
+                $(formId)[0].reset();
+            },
+            error: function(xhr) {
+                // Handle error
+                console.error(xhr.responseText);
+                alert('An error occurred while updating the data.');
+            }
+        });
+    }
 </script>
