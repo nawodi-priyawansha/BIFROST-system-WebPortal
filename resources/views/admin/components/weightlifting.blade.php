@@ -28,7 +28,7 @@
                         },
                         success: function(response) {
                             // Handle the response
-                            // alert(response.status);
+                            alert(response.message);
                             getWeightlifting(date);
                             // Optionally, update the UI to reflect the changes
                         },
@@ -55,17 +55,29 @@
                             // Clear input fields
                             $('#storeFromWe')[0].reset();
 
+                            // Clear specific elements
                             const cloneDisplayContainer = document.getElementById(
                                 'cloneDisplayContainer');
-                            cloneDisplayContainer.innerHTML = '';
+                            if (cloneDisplayContainer) {
+                                cloneDisplayContainer.innerHTML = ''; // Clear content
+                            }
 
+                            var duplicateSets = document.querySelector(".duplicate-sets");
+                            if (duplicateSets) {
+                                duplicateSets.innerHTML = ""; // Clear content
+                            }
+
+                            var altDuplicateSets = document.querySelector(".altduplicate-setss");
+                            if (altDuplicateSets) {
+                                altDuplicateSets.innerHTML = ""; // Clear content
+                            }
                             // Trigger the tab click
                             if (tab) {
                                 tab.click();
                             }
 
                             // Optionally, update the UI to reflect the changes
-                            // alert(response.message); // Uncomment if you want to show a message
+                            alert(response.message); // Uncomment if you want to show a message
                         },
                         error: function(xhr) {
                             // Handle error
@@ -1086,7 +1098,7 @@
 
             // Build the final HTML for the current item
             htmlContent += `
-                <form action="{{ route('updateWeightlifting') }}" method="POST">
+                <form action="{{ route('updateWeightlifting') }}" method="POST" id="updateWeightlifting_${item.id}">
                     @csrf
                     
                     <input name="id_${item.id}" value="${item.id}" hidden>
@@ -1169,7 +1181,7 @@
                                         <select id="altcategoryweight_${item.id}" name="altcategoryweight_${item.id}" onchange="getworkoutWe(this)" class="w-1/3 px-3 py-3 border rounded mb-2 mr-5" required>
                                             ${altCategoryOptionsHTML}
                                         </select>
-                                        <button type="submit" class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base">Edit</button>
+                                        <button type="button" class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base" onclick="updateweightlifting(${item.id})">Edit</button>
                                     </div>
                                 ` : ''}
                                 <div class="flex items-center border-b">
@@ -1247,5 +1259,32 @@
 
 
 
+    }
+
+    function updateweightlifting(id) {
+        // Construct the form ID dynamically
+        const formId = `#updateWeightlifting_${id}`;
+        const tab = document.getElementById('weightliftingTab');
+        // Serialize form data
+        const formData = $(formId).serialize();
+
+        // AJAX request
+        $.ajax({
+            url: '{{ route('updateWeightlifting') }}',
+            type: 'POST',
+            data: formData,
+            success: function(response) {
+                // Handle the response
+                if (tab) {
+                    tab.click();
+                }
+                alert(response.message);
+                $(formId)[0].reset();
+            },
+            error: function(xhr) {
+                // Handle error
+                console.error(xhr.responseText);
+            }
+        });
     }
 </script>
