@@ -3,16 +3,81 @@
     <input type="text" name="selecttabt" id="selecttabt" hidden>
     <div class="flex gap-5 p-4 mr-8 rounded-md mb-4 justify-end font-bold text-xl">
         
-        <form action="{{ route('delete-test') }}" method="POST">
+        <form id="deletefortest">
             @csrf
             @method('DELETE')
             <input type="text" name="selectdatetestDelete" id="selectdatetestDelete" hidden>
             <button class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base flex justify-end ml-auto mr-8">Clear</button>
         </form>
 
+        <script>
+            $(document).ready(function() {
+                const date = document.getElementById('selectdatetestDelete').value;
+                $('#deletefortest').on('submit', function(event) {
+                    event.preventDefault(); // Prevent the default form submission
+
+                    $.ajax({
+                        url: '{{ route('delete-test') }}',
+                        type: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            _method: 'DELETE',
+                            selectdatetestDelete: $('#selectdatetestDelete').val()
+                        },
+                        success: function(response) {
+                            // Handle the response
+                            // alert(response.status);
+                            gettest(date);
+                            // Optionally, update the UI to reflect the changes
+                        },
+                        error: function(xhr) {
+                            // Handle error
+                            console.error(xhr.responseText);
+                        }
+                    });
+                });
+            });
+            $(document).ready(function() {
+                $('#storeformtest').on('submit', function(event) {
+                    event.preventDefault(); // Prevent the default form submission
+
+                    $.ajax({
+                        url: '/save-test',
+                        type: 'POST',
+                        data: $(this).serialize(), // Serialize form data
+                        success: function(response) {
+                            // Clear input fields
+                            $('#storeformtest')[0].reset();
+
+                            // Clear the clone display container
+                            const cloneDisplayContainerTest = document.getElementById(
+                                'cloneDisplayContainerTest');
+                            if (cloneDisplayContainerTest) {
+                                cloneDisplayContainerTest.innerHTML = '';
+                            }
+
+                            // Trigger the tab click
+                            const tab = document.getElementById('testTab');
+                            if (tab) {
+                                tab.click();
+                            }
+
+                            // Optionally, update the UI to reflect the changes
+                            // alert(response.message); // Uncomment if you want to show a message
+                        },
+                        error: function(xhr) {
+                            // Handle error
+                            console.error(xhr.responseText);
+                        }
+                    });
+                });
+            });
+        </script>
+
+
     </div>
     <div id="test-container"></div>
-    <form action="{{ route('storeTest') }}" method="POST">
+    <form id="storeformtest">
         @csrf
         <input type="text" name="selectdatet" id="selectdatet" hidden>
         <input type="text" name="selecttabtt" id="selecttabtt" hidden>
@@ -298,6 +363,33 @@
             }
         });
     }
+    function updatest(id) {
+    // Construct the form ID dynamically
+    const formId = `#updatetest_${id}`;
+    const tab = document.getElementById('testTab');
+    
+    // Serialize form data
+    const formData = $(formId).serialize();
+
+    // AJAX request
+    $.ajax({
+        url: '/update-test', // Ensure this matches your route definition
+        type: 'POST',
+        data: formData,
+        success: function(response) {
+            // Handle the response
+            if (tab) {
+                tab.click(); // Trigger tab click if needed
+            }
+            alert(response.message);
+            $(formId)[0].reset(); // Reset the form
+        },
+        error: function(xhr) {
+            // Handle error
+            console.error(xhr.responseText);
+        }
+    });
+}
 
     function setsTest(Test, categoryOptions, Members) {
         console.log("this is strenght", );
@@ -333,7 +425,7 @@
 
             // Build the final HTML for the current item
             htmlContent += `
-                <form action="{{ route('update-test') }}" method="POST">
+                <form id="updatetest_${item.id}">
                     @csrf
                     
                     <input name="id_${item.id}" value="${item.id}" hidden>
@@ -349,7 +441,7 @@
                                                ${testcategoryOptionsHTML}
                                             </select>
 
-                                            <div class="flex justify-end items-center ml-auto mr-8"><button type="submit" class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base">Edit</button></div>
+                                            <div class="flex justify-end items-center ml-auto mr-8"><button type="button" class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base" onclick="updatest(${item.id})">Edit</button></div>
                                          
                                      </div>
                                      

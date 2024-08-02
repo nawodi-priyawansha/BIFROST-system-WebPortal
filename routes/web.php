@@ -160,6 +160,7 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/save-strength', [SessionController::class, 'strengthstore'])->name('save-strength');
     Route::post('/get-strengthdata', [SessionController::class, 'getstrength'])->name('get-strength');
     Route::post('/update-strenthdata',[SessionController::class,'updatestrength' ])->name("updatestrength");
+    // Route::get('/update-strenthdata',[SessionController::class,'updatestrength' ])->name("updatestrength");
     Route::delete('/delete-strengthdata',[SessionController::class, 'deleteAllByDelectDataStrenght'])->name('deletestrength');
 
     //store test

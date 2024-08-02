@@ -944,14 +944,14 @@ class SessionController extends Controller
                     ]);
                 }
             }
-            return redirect()->back()->with('success', 'Weightlifting data updated successfully');
+            return response()->json(['message'=>'update suceess']);
         } catch (\Illuminate\Validation\ValidationException $e) {
             // Handle validation exceptions
-            dd($e);
+          
             return redirect()->back()->withErrors($e->errors())->withInput();
         } catch (\Exception $e) {
             // Handle other exceptions
-            dd($e);
+          
             return redirect()->back()->with('error', 'An error occurred while updating the weightlifting data.');
         }
     }
@@ -1128,9 +1128,9 @@ class SessionController extends Controller
             ]);
 
 
-            return redirect()->back()->with('success', 'test update successfully');
+            return response()->json(['message'=>'update suceess']);
         } catch (\Exception $e) {
-            dd($e);
+            
             return redirect()->back()->with('error', 'an error occurred while updateing the test data');
         }
     }

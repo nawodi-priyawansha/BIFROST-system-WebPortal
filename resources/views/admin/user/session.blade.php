@@ -38,8 +38,8 @@
                                 <a href="warmup" id="warmupTab">Warmup</a>
                             </li>
                             <li class="tab-item px-4 text-black py-2 rounded-t hover:border-t hover:border-l hover:border-r hover:border-black"
-                                id="default-tab">
-                                <a href="strength">Strength</a>
+                               >
+                                <a href="strength" id="strenghtTab">Strength</a>
                             </li>
                             <li
                                 class="tab-item px-4 text-black py-2 rounded-t hover:border-t hover:border-l hover:border-r hover:border-black">
@@ -51,7 +51,7 @@
                             </li>
                             <li
                                 class="tab-item px-4 text-black py-2 rounded-t hover:border-t hover:border-l hover:border-r hover:border-black">
-                                <a href="test">Test</a>
+                                <a href="test" id="testTab">Test</a>
                             </li>
                         </ul>
                     </div>
