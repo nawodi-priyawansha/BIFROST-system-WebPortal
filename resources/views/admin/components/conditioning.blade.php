@@ -93,7 +93,7 @@
                     data: $(this).serialize(), // Serialize form data
                     success: function(response) {
                         // Handle the response
-                        // alert(response.message);
+                        alert(response.message);
 
                         // Clear input fields
                         $('#conditioning-form')[0].reset();
@@ -720,6 +720,7 @@
             success: function(response) {
                 // Handle successful response
                 console.log('Success:', response);
+                alert(response.message);
             },
             error: function(xhr, status, error) {
                 // Handle error response

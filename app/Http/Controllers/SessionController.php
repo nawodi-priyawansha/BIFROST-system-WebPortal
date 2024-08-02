@@ -207,35 +207,41 @@ class SessionController extends Controller
             'weigthw_*' => 'required|numeric',
             'selectdatew' => 'required',  // Validate the date
         ]);
+        try {
+            // Extract the data from the request
+            $warmups = [];
+            $date = $request->input('selectdatew');  // Get the date
 
-        // Extract the data from the request
-        $warmups = [];
-        $date = $request->input('selectdatew');  // Get the date
-
-        foreach ($request->all() as $key => $value) {
-            if (preg_match('/^categoryw_(\d+)$/', $key, $matches)) {
-                $index = $matches[1];
-                $warmups[$index]['category_id'] = $value;
-            } elseif (preg_match('/^workoutw_(\d+)$/', $key, $matches)) {
-                $index = $matches[1];
-                $warmups[$index]['workout_id'] = $value;
-            } elseif (preg_match('/^repsw_(\d+)$/', $key, $matches)) {
-                $index = $matches[1];
-                $warmups[$index]['reps'] = $value;
-            } elseif (preg_match('/^weigthw_(\d+)$/', $key, $matches)) {
-                $index = $matches[1];
-                $warmups[$index]['weight'] = $value;
+            foreach ($request->all() as $key => $value) {
+                if (preg_match('/^categoryw_(\d+)$/', $key, $matches)) {
+                    $index = $matches[1];
+                    $warmups[$index]['category_id'] = $value;
+                } elseif (preg_match('/^workoutw_(\d+)$/', $key, $matches)) {
+                    $index = $matches[1];
+                    $warmups[$index]['workout_id'] = $value;
+                } elseif (preg_match('/^repsw_(\d+)$/', $key, $matches)) {
+                    $index = $matches[1];
+                    $warmups[$index]['reps'] = $value;
+                } elseif (preg_match('/^weigthw_(\d+)$/', $key, $matches)) {
+                    $index = $matches[1];
+                    $warmups[$index]['weight'] = $value;
+                }
             }
-        }
 
-        // Store each warmup set with the date
-        foreach ($warmups as $warmupData) {
-            $warmupData['date'] = $date;  // Add the date to each record
-            Warmup::create($warmupData);
-        }
+            // Store each warmup set with the date
+            foreach ($warmups as $warmupData) {
+                $warmupData['date'] = $date;  // Add the date to each record
+                Warmup::create($warmupData);
+            }
 
-        // Redirect or respond with a success message
-        return redirect()->back()->with('success', 'Warmup data stored successfully!');
+            // Redirect or respond with a success message
+            return response()->json(['message' => 'Warmup data saved successfully!']);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'An error occurred while store warmups.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
     public function updateWarmup(Request $request)
@@ -244,33 +250,37 @@ class SessionController extends Controller
         $validatedData = $request->validate([
             'id' => 'required|integer|exists:warmups,id',
         ]);
+        try {
+            // Find the warmup record by ID
+            $warmup = Warmup::findOrFail($validatedData['id']);
 
-        // Find the warmup record by ID
-        $warmup = Warmup::findOrFail($validatedData['id']);
+            // Loop through the request data to update corresponding fields
+            foreach ($request->all() as $key => $value) {
+                if (preg_match('/^categorywe_(\d+)$/', $key, $matches)) {
+                    $index = $matches[1];
 
-        // Loop through the request data to update corresponding fields
-        foreach ($request->all() as $key => $value) {
-            if (preg_match('/^categorywe_(\d+)$/', $key, $matches)) {
-                $index = $matches[1];
+                    $validatedFormData = $request->validate([
+                        "categorywe_$index" => 'required|integer|exists:category_options,id',
+                        "workoutwe_$index" => 'required|integer|exists:workout_libraries,id',
+                        "repswe_$index" => 'required|integer|min:1',
+                        "weightwe_$index" => 'required|numeric|min:0',
+                    ]);
 
-                $validatedFormData = $request->validate([
-                    "categorywe_$index" => 'required|integer|exists:category_options,id',
-                    "workoutwe_$index" => 'required|integer|exists:workout_libraries,id',
-                    "repswe_$index" => 'required|integer|min:1',
-                    "weightwe_$index" => 'required|numeric|min:0',
-                ]);
-
-                // Update the warmup record with the validated data
-                $warmup->category_id = $validatedFormData["categorywe_$index"];
-                $warmup->workout_id = $validatedFormData["workoutwe_$index"];
-                $warmup->reps = $validatedFormData["repswe_$index"];
-                $warmup->weight = $validatedFormData["weightwe_$index"];
-                $warmup->save();
+                    // Update the warmup record with the validated data
+                    $warmup->category_id = $validatedFormData["categorywe_$index"];
+                    $warmup->workout_id = $validatedFormData["workoutwe_$index"];
+                    $warmup->reps = $validatedFormData["repswe_$index"];
+                    $warmup->weight = $validatedFormData["weightwe_$index"];
+                    $warmup->save();
+                }
             }
-        }
 
-        // Return a response
-        return redirect()->back()->with('message', 'Warmup updated successfully');
+            // Return a response
+            return response()->json(['message' => 'Warmup updated successfully']);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            // Handle validation exceptions
+            return response()->json(['errors' => $e->errors()], 422);
+        }
     }
     // delete warmup
     public function deleteAllBySelectDateWarmups(Request $request)
@@ -281,11 +291,19 @@ class SessionController extends Controller
         $request->validate([
             'selectdatewd' => 'required',  // Assuming selectdatew is a date
         ]);
+        try {
+            // Delete all warmups with the given selectdatew
+            Warmup::where('date', $selectDate)->delete();
 
-        // Delete all warmups with the given selectdatew
-        Warmup::where('date', $selectDate)->delete();
-
-        return redirect()->back()->with('message', 'All warmups for the selected date have been deleted successfully');
+            return response()->json([
+                'message' => 'All warmups for the selected date have been deleted successfully'
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'An error occurred while deleting warmups.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
     // get Warmup
     public function getwarmup(Request $request)
@@ -349,31 +367,40 @@ class SessionController extends Controller
             'alt-restwe_*' => 'required|date_format:H:i:s',
             'alt-intensitywe_*' => 'required|string',
         ]);
+        try {
+            $requestData = $request->all();
+            $maxIndex = 10; // Maximum index to check, adjust this as needed
 
-        $requestData = $request->all();
-        $maxIndex = 10; // Maximum index to check, adjust this as needed
+            // Loop through each index
+            for ($index = 1; $index <= $maxIndex; $index++) {
+                $processedData = []; // Initialize the array for the current index
 
-        // Loop through each index
-        for ($index = 1; $index <= $maxIndex; $index++) {
-            $processedData = []; // Initialize the array for the current index
+                // Iterate over all request data
+                foreach ($requestData as $key => $value) {
+                    // Check if the key contains the current index
+                    if (strpos($key, "_$index") !== false) {
+                        // Add the key-value pair to the array
+                        $processedData[$key] = $value;
+                    }
+                }
 
-            // Iterate over all request data
-            foreach ($requestData as $key => $value) {
-                // Check if the key contains the current index
-                if (strpos($key, "_$index") !== false) {
-                    // Add the key-value pair to the array
-                    $processedData[$key] = $value;
+                if (!empty($processedData)) {
+                    // Call the filterdata function to process and store the data
+                    // dd($processedData);
+                    $this->filterdata($processedData, $index, $request->input('selectdatewe'));
                 }
             }
 
-            if (!empty($processedData)) {
-                // Call the filterdata function to process and store the data
-                // dd($processedData);
-                $this->filterdata($processedData, $index, $request->input('selectdatewe'));
-            }
+            return response()->json([
+                'message' => 'Weightlifting record stored successfully'
+            ], 201);
+        } catch (\Exception $e) {
+            // Handle exceptions and return an error response
+            return response()->json([
+                'message' => 'Failed to store Weightlifting record',
+                'error' => $e->getMessage()
+            ], 500);
         }
-
-        return redirect()->back();
     }
 
     public function filterdata($processedData, $index, $date)
@@ -615,37 +642,45 @@ class SessionController extends Controller
                 }
             }
             // dd("Weightlifting data updated successfully");
-            return redirect()->back()->with('success', 'Weightlifting data updated successfully');
+            return response()->json(['message' => 'Weightlifting data updated successfully'], 200);
         } catch (\Illuminate\Validation\ValidationException $e) {
             // Handle validation exceptions
-            dd($e);
-            return redirect()->back()->withErrors($e->errors())->withInput();
+            return response()->json(['errors' => $e->errors()], 422);
         } catch (\Exception $e) {
             // Handle other exceptions
-            dd($e);
-            return redirect()->back()->with('error', 'An error occurred while updating the weightlifting data.');
+            return response()->json(['message' => 'An error occurred while updating the weightlifting data.'], 500);
         }
     }
     public function deleteAllBySelectDateWeightlifting(Request $request)
     {
-        $selectedDate = $request->input('selectdateweDelete');
-
         // Validate the selected date
-        $request->validate([
+        $validated = $request->validate([
             'selectdateweDelete' => 'required',
         ]);
 
+        $selectedDate = $validated['selectdateweDelete'];
+
         try {
             // Attempt to delete the records
-            Weightlifting::where('date', $selectedDate)->delete();
+            $deletedCount = Weightlifting::where('date', $selectedDate)->delete();
 
-            // Redirect back with success message
-            return response()->json("deleted weightlifting");
-        } catch (Exception $e) {
+            // Check if the request expects a JSON response
+            if ($request->expectsJson()) {
+                return response()->json(['message' => 'Weightlifting sessions deleted successfully', 'deleted_count' => $deletedCount], 200);
+            }
+
+            // For non-AJAX requests, redirect back with success message
+            return redirect()->back()->with('success', 'Weightlifting sessions deleted successfully');
+        } catch (\Exception $e) {
             // Log the exception message for debugging
             Log::error('Error deleting weightlifting sessions: ' . $e->getMessage());
 
-            // Redirect back with error message
+            // Check if the request expects a JSON response
+            if ($request->expectsJson()) {
+                return response()->json(['message' => 'An error occurred while deleting weightlifting sessions.'], 500);
+            }
+
+            // For non-AJAX requests, redirect back with error message
             return redirect()->back()->with('error', 'An error occurred while deleting weightlifting sessions.');
         }
     }
@@ -1175,48 +1210,57 @@ class SessionController extends Controller
             'unit_*' => 'required|string', // Corrected 'unit_' to 'unit_*' to handle multiple fields
         ]);
         // dd($request);
+        try {
+            // Prepare date for insertion
+            $date = $request->input('selectdatec'); // Format: 31/07/24 Wednesday
 
-        // Prepare date for insertion
-        $date = $request->input('selectdatec'); // Format: 31/07/24 Wednesday
+            // Process each set of data
+            $entries = [];
+            foreach ($request->except(['_token', 'selectdatec', 'rounds', 'amrap']) as $key => $value) {
+                if (preg_match('/^categoryc_(\d+)$/', $key, $matches)) {
+                    $index = $matches[1];
 
-        // Process each set of data
-        $entries = [];
-        foreach ($request->except(['_token', 'selectdatec', 'rounds', 'amrap']) as $key => $value) {
-            if (preg_match('/^categoryc_(\d+)$/', $key, $matches)) {
-                $index = $matches[1];
+                    // Retrieve checkbox value from the request
+                    $amrap = $request->input('amrap', false); // Default to false if checkbox is not present
 
-                // Retrieve checkbox value from the request
-                $amrap = $request->input('amrap', false); // Default to false if checkbox is not present
-
-                // Convert to boolean if necessary
-                $amrap = filter_var($amrap, FILTER_VALIDATE_BOOLEAN);
-                // dd($amrap);
-                $entries[] = [
-                    'rounds' => $request->input('rounds'),
-                    'category_id' => $request->input('categoryc_' . $index),
-                    'workout_id' => $request->input('workoutc_' . $index),
-                    'reps' => $request->input('repsc_' . $index),
-                    'weight' => $request->input('weigthc_' . $index),
-                    'unit' => $request->input('unit_' . $index),
-                    'time_to_complete' => $request->input('timeTC_' . $index),
-                    'date' => $date,
-                    'amrap' => $amrap, // Include 'amrap' in the data if needed
-                ];
-                if ($amrap == "true") {
-                    $amrap = 1;
-                } else if ($amrap == "false") {
-                    $amrap = 0;
+                    // Convert to boolean if necessary
+                    $amrap = filter_var($amrap, FILTER_VALIDATE_BOOLEAN);
+                    // dd($amrap);
+                    $entries[] = [
+                        'rounds' => $request->input('rounds'),
+                        'category_id' => $request->input('categoryc_' . $index),
+                        'workout_id' => $request->input('workoutc_' . $index),
+                        'reps' => $request->input('repsc_' . $index),
+                        'weight' => $request->input('weigthc_' . $index),
+                        'unit' => $request->input('unit_' . $index),
+                        'time_to_complete' => $request->input('timeTC_' . $index),
+                        'date' => $date,
+                        'amrap' => $amrap, // Include 'amrap' in the data if needed
+                    ];
+                    if ($amrap == "true") {
+                        $amrap = 1;
+                    } else if ($amrap == "false") {
+                        $amrap = 0;
+                    }
+                    $this->allUpdate($date, $request->input('rounds'), $amrap);
                 }
-                $this->allUpdate($date, $request->input('rounds'), $amrap);
             }
-        }
 
-        // Insert data into the database
-        foreach ($entries as $entry) {
-            Conditioning::create($entry);
-        }
+            // Insert data into the database
+            foreach ($entries as $entry) {
+                Conditioning::create($entry);
+            }
 
-        return redirect()->back();
+            return response()->json([
+                'message' => 'Conditioning record stored successfully'
+            ], 201);
+        } catch (\Exception $e) {
+            // Handle exceptions and return an error response
+            return response()->json([
+                'message' => 'Failed to store conditioning record',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
     // get conditioning
     public function getConditioning(Request $request)
@@ -1274,51 +1318,59 @@ class SessionController extends Controller
             'isChecked' => 'nullable',
             'unit' => 'required',
         ]);
+        try {
+            // Find the Conditioning record by ID
+            $conditioning = Conditioning::find($validated['id']);
+            if (!$conditioning) {
+                Log::error('Conditioning not found', ['id' => $validated['id']]);
+                return response()->json(['error' => 'Conditioning not found'], 404);
+            }
 
-        // Find the Conditioning record by ID
-        $conditioning = Conditioning::find($validated['id']);
-        if (!$conditioning) {
-            Log::error('Conditioning not found', ['id' => $validated['id']]);
-            return response()->json(['error' => 'Conditioning not found'], 404);
+            if ($request->isChecked == "true") {
+                $amrap = 1;
+            } else if ($request->isChecked == "false") {
+                $amrap = 0;
+            }
+
+            // Log the current state before update
+            Log::info('Updating Conditioning record', [
+                'id' => $conditioning->id,
+                'old_data' => $conditioning->toArray(),
+                'new_data' => $validated
+            ]);
+
+            // Update the Conditioning record
+            $conditioning->rounds = $validated['rounds'];
+            $conditioning->category_id  = $validated['category'];
+            $conditioning->workout_id  = $validated['workout'];
+            $conditioning->reps = $validated['reps'];
+            $conditioning->weight = $validated['weight'];
+            $conditioning->time_to_complete = $validated['timeToComplete'];
+            $conditioning->date = $validated['date'];
+            $conditioning->unit = $validated['unit'];
+            $conditioning->amrap = $amrap;
+            // $conditioning->is_checked = $validated['isChecked'];
+            $conditioning->save();
+
+            // Update all records with the same date
+            $this->allUpdate($validated['date'], $validated['rounds'], $amrap);
+
+            // Log the successful update
+            Log::info('Conditioning record updated successfully', [
+                'id' => $conditioning->id,
+                'updated_data' => $conditioning->toArray()
+            ]);
+
+            // Return a success response
+            return response()->json(['message' => 'Conditioning updated successfully'], 200);
+        } catch (\Exception $e) {
+            // Handle exceptions and return an error response
+            Log::error('Failed to update conditioning record', [
+                'error' => $e->getMessage(),
+                'request_data' => $request->all()
+            ]);
+            return response()->json(['error' => 'Failed to update conditioning record', 'message' => $e->getMessage()], 500);
         }
-
-        if ($request->isChecked == "true") {
-            $amrap = 1;
-        } else if ($request->isChecked == "false") {
-            $amrap = 0;
-        }
-
-        // Log the current state before update
-        Log::info('Updating Conditioning record', [
-            'id' => $conditioning->id,
-            'old_data' => $conditioning->toArray(),
-            'new_data' => $validated
-        ]);
-
-        // Update the Conditioning record
-        $conditioning->rounds = $validated['rounds'];
-        $conditioning->category_id  = $validated['category'];
-        $conditioning->workout_id  = $validated['workout'];
-        $conditioning->reps = $validated['reps'];
-        $conditioning->weight = $validated['weight'];
-        $conditioning->time_to_complete = $validated['timeToComplete'];
-        $conditioning->date = $validated['date'];
-        $conditioning->unit = $validated['unit'];
-        $conditioning->amrap = $amrap;
-        // $conditioning->is_checked = $validated['isChecked'];
-        $conditioning->save();
-
-        // Update all records with the same date
-        $this->allUpdate($validated['date'], $validated['rounds'], $amrap);
-
-        // Log the successful update
-        Log::info('Conditioning record updated successfully', [
-            'id' => $conditioning->id,
-            'updated_data' => $conditioning->toArray()
-        ]);
-
-        // Return a success response
-        return response()->json(['message' => 'Conditioning updated successfully'], 200);
     }
 
     public function allUpdate($date, $rounds, $amrap)
@@ -1341,18 +1393,25 @@ class SessionController extends Controller
         $validated = $request->validate([
             'date' => 'required'
         ]);
+        try {
+            // Delete records by date
+            $deleted = Conditioning::where('date', $validated['date'])->delete();
 
-        // Delete records by date
-        $deleted = Conditioning::where('date', $validated['date'])->delete();
+            // Log the deletion
+            Log::info('Deleted Conditioning records', [
+                'date' => $validated['date'],
+                'deleted_count' => $deleted
+            ]);
 
-        // Log the deletion
-        Log::info('Deleted Conditioning records', [
-            'date' => $validated['date'],
-            'deleted_count' => $deleted
-        ]);
-
-        // Return a success response
-        return response()->json(['message' => 'Conditioning records deleted successfully', 'deleted_count' => $deleted], 200);
-
+            // Return a success response
+            return response()->json(['message' => 'Conditioning records deleted successfully', 'deleted_count' => $deleted], 200);
+        } catch (\Exception $e) {
+            // Handle exceptions and return an error response
+            Log::error('Failed to delete conditioning records', [
+                'error' => $e->getMessage(),
+                'request_data' => $request->all()
+            ]);
+            return response()->json(['error' => 'Failed to delete conditioning records', 'message' => $e->getMessage()], 500);
+        }
     }
 }
