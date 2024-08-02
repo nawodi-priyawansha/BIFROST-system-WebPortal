@@ -243,8 +243,9 @@
 
                                 </div>
                                 <div class="w-1/2 flex items-center justify-end">
-                                    <label for=""
-                                        class="text-white p-1 px-4 rounded-md bg-black whitespace-nowrap text-sm">Training App</label>
+                                    <a href="{{ route('mobile.trainingday') }}" class="text-white p-1 px-4 rounded-md bg-black whitespace-nowrap text-sm">
+                                        Training App
+                                    </a>
                                 </div>
                             </div>
                             <!-- Table with session details -->
