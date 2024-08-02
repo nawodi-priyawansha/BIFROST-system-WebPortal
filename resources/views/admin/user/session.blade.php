@@ -33,8 +33,9 @@
                     <div class="rounded w-12/12 mx-auto mt-4 mb-4 px-5">
                         <!-- Tabs -->
                         <ul id="tabs" class="inline-flex pt-2 px-1 w-full border-black border-b">
+
                             <li class="me-2 tab-item text-black rounded-t hover:border-t hover:border-l hover:border-r hover:border-black">
-                                <a href="warmup" class="inline-flex items-center p-4 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500">
+                                <a href="warmup" id="warmupTab" class="inline-flex items-center p-4 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500">
                                     <img src="{{ asset('icon/warmup.png') }}" alt="Warmup Icon" class="w-5 h-5 mr-2" />
                                     <span>Warmup</span>
                                 </a>
@@ -48,14 +49,14 @@
                             </li>
                             <li
                                 class="me-2 tab-item  text-black rounded-t hover:border-t hover:border-l hover:border-r hover:border-black">
-                                <a href="weightlifting" class="inline-flex items-center p-4 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500">
+                                <a href="weightlifting" id="weightliftingTab" class="inline-flex items-center p-4 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500">
                                     <img src="{{ asset('icon/weightlifting.png') }}" alt="Weightlifting Icon" class="w-5 h-5 mr-2" />
                                     <span>Weightlifting</span>
                                 </a>
                             </li>
                             <li
                                 class="me-2 tab-item  text-black rounded-t hover:border-t hover:border-l hover:border-r hover:border-black">
-                                <a href="conditioning" class="inline-flex items-center p-4 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500">
+                                <a href="conditioning" id="conditioningTab" class="inline-flex items-center p-4 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500">
                                     <img src="{{ asset('icon/conditioning.png') }}" alt="Conditioning Icon" class="w-5 h-5 mr-2" />
                                     <span>Conditioning</span>
                                 </a>
@@ -414,7 +415,9 @@
                     break;
                 case "test":
                     document.getElementById('selectdatet').value = dayName;
-                    document.getElementById('selecttabt').value = tabId;
+                    document.getElementById('selecttabtt').value = tabId;
+                    document.getElementById('selectdatetestDelete').value = dayName;
+                    gettest(dayName)
                     break;
                 default:
                     console.log("Unknown tabId: " + tabId);
