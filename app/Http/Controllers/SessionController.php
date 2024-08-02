@@ -630,17 +630,27 @@ class SessionController extends Controller
 
             // Create new weightlifting sets
             foreach ($request->all() as $key => $value) {
-                if (preg_match('/^setswe_(\d+)(\d+)$/', $key, $matches)) {
+                if (preg_match('/^setswe_(\d+)(\d+)$/', $key, $matches) || preg_match('/^alt-setswe_(\d+)(\d+)$/', $key, $matches)) {
                     $index = $matches[2];
+                    $sets = $request->input('setswe_' . $weightliftingId . $index);
+                    $reps = $request->input('repswe_' . $weightliftingId . $index);
+                    $alt_sets = $request->input('alt-setswe_' . $weightliftingId . $index);
+                    $alt_reps = $request->input('alt-repswe_' . $weightliftingId . $index);
+            
+                    // Debugging statements
+                    Log::info("Processing set: setswe_" . $weightliftingId . $index);
+                    Log::info("Sets: $sets, Reps: $reps, Alt Sets: $alt_sets, Alt Reps: $alt_reps");
+            
                     WeightliftingSet::create([
-                        'sets' => $request->input('setswe_' . $weightliftingId . $index),
-                        'reps' => $request->input('repswe_' . $weightliftingId . $index),
-                        'alt_sets' => $request->input('alt-setswe_' . $weightliftingId . $index),
-                        'alt_reps' => $request->input('alt-repswe_' . $weightliftingId . $index),
+                        'sets' => $sets,
+                        'reps' => $reps,
+                        'alt_sets' => $alt_sets,
+                        'alt_reps' => $alt_reps,
                         'weightlifting_id' => $weightlifting->id,
                     ]);
                 }
             }
+            
             // dd("Weightlifting data updated successfully");
             return response()->json(['message' => 'Weightlifting data updated successfully'], 200);
         } catch (\Illuminate\Validation\ValidationException $e) {

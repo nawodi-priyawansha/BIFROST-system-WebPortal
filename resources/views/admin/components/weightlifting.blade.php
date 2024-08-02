@@ -62,6 +62,10 @@
                                 cloneDisplayContainer.innerHTML = ''; // Clear content
                             }
 
+
+                            // Optionally, update the UI to reflect the changes
+                            alert(response.message); // Uncomment if you want to show a message
+
                             var duplicateSets = document.querySelector(".duplicate-sets");
                             if (duplicateSets) {
                                 duplicateSets.innerHTML = ""; // Clear content
@@ -71,13 +75,11 @@
                             if (altDuplicateSets) {
                                 altDuplicateSets.innerHTML = ""; // Clear content
                             }
+                            // Optionally, update the UI or trigger other actions
                             // Trigger the tab click
                             if (tab) {
                                 tab.click();
                             }
-
-                            // Optionally, update the UI to reflect the changes
-                            alert(response.message); // Uncomment if you want to show a message
                         },
                         error: function(xhr) {
                             // Handle error
@@ -819,7 +821,8 @@
         });
 
         // Find the container element with class 'duplicate-sets' using parentNode traversal
-        const container = originalSet.closest('.border-b').querySelector('.duplicate-sets');
+        const container = originalSet.closest('.border-b').querySelector('.duplicate-setsClone') || originalSet.closest(
+            '.border-b').querySelector('.duplicate-sets');
         console.log(container);
 
         if (container) {
@@ -829,6 +832,7 @@
         }
 
         console.log(`Duplicated Set ID: ${input ? input.id : 'N/A'}`);
+
     }
 
 
@@ -906,7 +910,8 @@
     `;
 
         // Add the new set UI element to the container
-        const altcontainer = originalSet.closest('.border-b').querySelector('.altduplicate-setss');
+        const altcontainer = originalSet.closest('.border-b').querySelector('.altduplicate-setssClone') || originalSet
+            .closest('.border-b').querySelector('.altduplicate-setss');
         console.log(altcontainer);
 
         if (altcontainer) {
@@ -921,6 +926,7 @@
         }
 
         console.log(`Duplicated Set ID: ${altinputs.length > 0 ? altinputs[0].id : 'N/A'}`);
+
     }
 
 
@@ -1135,7 +1141,7 @@
                                         <div class="sets-container">
                                             ${setsHTML}
                                         </div>
-                                        <div class="duplicate-sets" id="duplicate-sets_${item.id}"></div>
+                                        <div class="duplicate-setsClone" id="duplicate-sets_${item.id}"></div>
                                         <div class="ml-60">
                                             <button id="addset_${item.id}" onclick="duplicateSet(this.id)" type="button" class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base">
                                                 <i class="fas fa-plus text-[12px]"></i> Add set
@@ -1207,7 +1213,7 @@
                                             <div>
                                                 ${altSetsHTML}
                                             </div>
-                                            <div class="altduplicate-setss" id="alt-duplicate-sets_${item.id}"></div>
+                                            <div  class="altduplicate-setssClone" id="alt-duplicate-sets_${item.id}"></div>
                                             <div class="ml-60">
                                                 <button id="altaddset_${item.id}" onclick="altduplicateSet(this.id)" type="button" class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base">
                                                     <i class="fas fa-plus text-[12px]"></i> Add set
@@ -1268,6 +1274,7 @@
         // Serialize form data
         const formData = $(formId).serialize();
 
+        console.log(formData);
         // AJAX request
         $.ajax({
             url: '{{ route('updateWeightlifting') }}',

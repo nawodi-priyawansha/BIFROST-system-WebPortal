@@ -99,8 +99,7 @@
                         $('#conditioning-form')[0].reset();
                         const showUIC = document.getElementById('showUIC');
                         showUIC.innerHTML = ''; // Clears the content inside the div
-
-                        // Optionally, update the UI or trigger other actions
+                       
                         // Example: Switch tabs or update content
                         const tab = document.getElementById('conditioningTab');
                         if (tab) {
@@ -216,7 +215,7 @@
             </div>
         </div>
         <div class="showUIC" id="showUIC"></div>
-        <button id="save-button" type="submit"
+        <button id="save-button" type="button"
             class="bg-[#FB1018] text-white py-2 px-4 rounded mb-2 hover:bg-red-700">Save</button>
     </form>
 
@@ -224,50 +223,7 @@
         type="button">Another</button>
 </div>
 
-{{-- click Button --}}
-{{-- <script>
-    document.getElementById('save-button').addEventListener('click', function(event) {
-        // Get the original and cloned elements
-        const rounds = document.getElementById('rounds').value.trim();
-        const amrapCheckbox = document.getElementById('amrapCheckbox').checked;
-        let isValid = false;
 
-        // Validate original elements
-        if (rounds || amrapCheckbox) {
-            isValid = true; // Original fields are valid
-        }
-
-        // Validate cloned elements
-        document.querySelectorAll('.duplicateUiC').forEach(function(clone) {
-            const categorySelect = clone.querySelector('select[name^="categoryc_"]');
-            const workoutSelect = clone.querySelector('select[name^="workoutc_"]');
-            const repsInput = clone.querySelector('input[name^="repsc_"]');
-            const weightInput = clone.querySelector('input[name^="weigthc_"]');
-            const unitSelect = clone.querySelector('select[name^="unit_"]');
-            const timeInput = clone.querySelector('input[name^="timeTC_"]');
-
-            // Check if required fields are filled
-            if (categorySelect.value && workoutSelect.value && repsInput.value && weightInput.value &&
-                timeInput.value) {
-                isValid = true;
-            } else {
-                isValid = false;
-            }
-
-            // Provide feedback if validation fails
-            if (!isValid) {
-                alert('Please fill in all required fields in each set of inputs.');
-                event.preventDefault(); // Prevent form submission
-                return;
-            }
-        });
-
-        // Only submit the form if all validations pass
-        if (isValid) {
-            document.getElementById('conditioning-form').submit(); // Manually submit the form if valid
-        }
-    });
-</script> --}}
 {{-- UI Duplicate --}}
 <script>
     function addAnotherClick() {
@@ -420,11 +376,11 @@
                     sortSelectOptions(document.getElementById(id));
                 });
 
-                //TO DO Set the default selected category to "hinge" (case-insensitive) and trigger onchange
+                // Set the default selected category to "hinge" (case-insensitive) and trigger onchange
                 ['categoryc_1'].forEach(id => {
                     const categorySelect = document.getElementById(id);
                     const options = categorySelect.options;
-                    const defaultCategory = "hinge".toLowerCase();
+                    const defaultCategory = "Cardio".toLowerCase();
                     let optionFound = false;
 
                     for (let i = 0; i < options.length; i++) {
