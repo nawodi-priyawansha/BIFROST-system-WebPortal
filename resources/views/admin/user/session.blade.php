@@ -40,9 +40,10 @@
                                     <span>Warmup</span>
                                 </a>
                             </li>
+
                             <li class="me-2 tab-item text-black  rounded-t hover:border-t hover:border-l hover:border-r hover:border-black"
                                 id="default-tab">
-                                <a href="strength" class="inline-flex items-center p-4 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500 px-6">
+                                <a href="strength" id="strenghtTab" class="inline-flex items-center p-4 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500 px-6">
                                     <img src="{{ asset('icon/strength.png') }}" alt="Strength Icon" class="w-5 h-5 mr-2" />
                                     <span>Strength</span>
                                 </a>
@@ -63,7 +64,7 @@
                             </li>
                             <li
                                 class="me-2 tab-item text-black rounded-t hover:border-t hover:border-l hover:border-r hover:border-black w-100">
-                                <a href="test" class="inline-flex items-center p-4 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500 px-10">
+                                <a href="test" id="testTab" class="inline-flex items-center p-4 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500 px-10">
                                     <img src="{{ asset('icon/test.png') }}" alt="Test Icon" class="w-5 h-5 mr-2" />
                                     <span>Test</span>
                                 </a>

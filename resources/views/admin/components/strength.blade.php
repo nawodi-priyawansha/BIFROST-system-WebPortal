@@ -4,17 +4,89 @@
     <div class="flex gap-5 p-4 mr-8 rounded-md mb-4 font-bold text-xl">
         <div class="flex justify-center text-center items-center w-1/2">Primary</div>
         <div class="flex justify-center text-center items-center w-1/2">Alternate</div>
-        <form action="{{ route('deletestrength') }}" method="POST">
+        <form id="deleteforstrenght">
             @csrf
             @method('DELETE')
             <input type="text" name="selectdatestrenghtDelete" id="selectdatestrenghtDelete" hidden>
             <button class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base">Clear</button>
         </form>
+        <script>
+            $(document).ready(function() {
+                const date = document.getElementById('selectdatestrenghtDelete').value;
+                $('#deleteforstrenght').on('submit', function(event) {
+                    event.preventDefault(); // Prevent the default form submission
+
+                    $.ajax({
+                        url: '{{ route('deletestrength') }}',
+                        type: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            _method: 'DELETE',
+                            selectdatestrenghtDelete: $('#selectdatestrenghtDelete').val()
+                        },
+                        success: function(response) {
+                            // Handle the response
+                            // alert(response.status);
+                            getstrength(date);
+                            // Optionally, update the UI to reflect the changes
+                        },
+                        error: function(xhr) {
+                            // Handle error
+                            console.error(xhr.responseText);
+                        }
+                    });
+                });
+            });
+            $(document).ready(function() {
+                $('#storeformss').on('submit', function(event) {
+                    event.preventDefault(); // Prevent the default form submission
+
+                    $.ajax({
+                        url: '/save-strength',
+                        type: 'POST',
+                        data: $(this).serialize(), // Serialize form data
+                        success: function(response) {
+                            // Clear input fields
+                            $('#storeformss')[0].reset();
+
+                            // Clear the clone display container
+                            const cloneDisplayContainerStrength = document.getElementById(
+                                'cloneDisplayContainerStrength');
+                            if (cloneDisplayContainerStrength) {
+                                cloneDisplayContainerStrength.innerHTML = '';
+                            }
+                            var duplicateSets = document.querySelector(".duplicate-sets-strength");
+                            if (duplicateSets) {
+                                duplicateSets.innerHTML = ""; // Clear content
+                            }
+
+                            var altDuplicateSets = document.querySelector(".altduplicate-setsstrength");
+                            if (altDuplicateSets) {
+                                altDuplicateSets.innerHTML = ""; // Clear content
+                            }
+
+                            // Trigger the tab click
+                            const tab = document.getElementById('strenghtTab');
+                            if (tab) {
+                                tab.click();
+                            }
+
+                            // Optionally, update the UI to reflect the changes
+                            // alert(response.message); // Uncomment if you want to show a message
+                        },
+                        error: function(xhr) {
+                            // Handle error
+                            console.error(xhr.responseText);
+                        }
+                    });
+                });
+            });
+        </script>
 
     </div>
     {{-- display  strength --}}
     <div id="strength-container"></div>
-    <form action="{{ route('save-strength') }}" method="POST">
+    <form id="storeformss">
         @csrf
         <input type="text" name="selectdates" id="selectdates" hidden>
         <input type="text" name="selecttabs" id="selecttabs" hidden>
@@ -461,6 +533,8 @@
         getCategoryS();
     });
 
+    
+
     function getstrength(date) {
         console.log("Fetching strength data for date: " + date);
         $.ajax({
@@ -484,6 +558,33 @@
                     xhr: xhr,
                     error: error
                 });
+            }
+        });
+    }
+
+    function updatestrength(id) {
+        // Construct the form ID dynamically
+        const formId = `#updatestrenght_${id}`;
+        const tab = document.getElementById('strenghtTab');
+        // Serialize form data
+        const formData = $(formId).serialize();
+
+        // AJAX request
+        $.ajax({
+            url:'{{ route('updatestrength') }}',
+            type: 'POST',
+            data: formData,
+            success: function(response) {
+                // Handle the response
+                if (tab) {
+                    tab.click();
+                }
+                alert(response.message);
+                $(formId)[0].reset();
+            },
+            error: function(xhr) {
+                // Handle error
+                console.error(xhr.responseText);
             }
         });
     }
@@ -620,7 +721,7 @@
 
             // Build the final HTML for the current item
             htmlContent += `
-                <form action="{{ route('updatestrength') }}" method="POST">
+                <form  id="updatestrenght_${item.id}">
                     @csrf
                     
                     <input name="id_${item.id}" value="${item.id}" hidden>
@@ -703,7 +804,7 @@
                                         <select id="altcategorystrength_${item.id}" name="altcategorystrength_${item.id}" onchange="getworkoutS(this)" class="w-1/3 px-3 py-3 border rounded mb-2 mr-5" required>
                                             ${strengthaltCategoryOptionsHTML}
                                         </select>
-                                        <button type="submit" class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base">Edit</button>
+                                        <button type="button" onclick="updatestrength(${item.id})" class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base">Edit</button>
                                     </div>
                                 ` : ''}
                                 <div class="flex items-center border-b">
@@ -827,30 +928,32 @@
 
     // Function to add a remove button to the cloned element
     function addRemoveButtonToElementstrength(element) {
-        var removeButton = document.createElement("button");
-        removeButton.innerText = "Remove";
-        removeButton.classList.add(
-            'removeBtnStrength',
-            'bg-[#FB1018]',
-            'text-white',
-            'py-2',
-            'px-4',
-            'rounded',
-            'mb-2',
-            'w-24',
-            'flex-shrink-0'
-        );
-        removeButton.addEventListener("click", function() {
-            element.remove();
-        });
-        element.appendChild(removeButton);
+        // Check if a remove button already exists
+        if (!element.querySelector('.removeBtnStrength')) {
+            var removeButton = document.createElement("button");
+            removeButton.innerText = "Remove";
+            removeButton.classList.add(
+                'removeBtnStrength',
+                'bg-[#FB1018]',
+                'text-white',
+                'py-2',
+                'px-4',
+                'rounded',
+                'mb-2',
+                'w-24',
+                'flex-shrink-0'
+            );
+            removeButton.addEventListener("click", function() {
+                element.remove();
+            });
+            element.appendChild(removeButton);
+        }
     }
 
     // Function to handle the duplication of UI elements
     function handleUiDuplications(event) {
         var cloneButton = event.target;
-        var originalUiElement = cloneButton.closest(
-            '.duplicateUiStrength'); // Adjusted to find the closest element with class `duplicateUi`
+        var originalUiElement = cloneButton.closest('.duplicateUiStrength');
 
         // Retrieve or set the index for the new clone
         var index = parseInt(originalUiElement.dataset.index) || 1;
@@ -875,7 +978,7 @@
         updateNamesAndIdss(clonedElement, index);
 
         // Remove old buttons and add a new remove button
-        clonedElement.querySelectorAll(".duplicateBtnStrength, .removeBtnStrength").forEach(function(button) {
+        clonedElement.querySelectorAll(".removeBtnStrength").forEach(function(button) {
             button.remove();
         });
         addRemoveButtonToElementstrength(clonedElement);
@@ -887,7 +990,7 @@
     // Event listener for the main clone button
     document.getElementById('cloneButtonstrength').addEventListener('click', function() {
         const uiContainerStrength = document.getElementById('uiContainerStrength');
-        const cloneDisplayContainerStrength = document.getElementById('uiContainerStrength');
+        const cloneDisplayContainerStrength = document.getElementById('cloneDisplayContainerStrength');
         const newContainer = uiContainerStrength.cloneNode(true);
 
         // Retrieve or set the index for the new clone
@@ -901,7 +1004,7 @@
             duplicateSets.innerHTML = ""; // Clear content
         }
 
-        // Clear content of duplicate-sets in the cloned container
+        // Clear content of altduplicate-sets in the cloned container
         var altduplicateSets = newContainer.querySelector(".altduplicate-setsstrength");
         if (altduplicateSets) {
             altduplicateSets.innerHTML = ""; // Clear content
@@ -927,6 +1030,7 @@
         button.addEventListener("click", handleUiDuplications);
     });
 </script>
+
 
 
 {{-- create duplicate sets and reps --}}
