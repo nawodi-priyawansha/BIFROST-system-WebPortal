@@ -2,30 +2,48 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use Exception;
 use App\Models\Access;
-use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
+use App\Models\Newprofile;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class UserDashboardController extends Controller
 {
     //user dashboard
     public function viewdashboard()
     {
-        $userId = Auth::id(); // Get the currently authenticated user's ID
+        try {
+            $user = Auth::user(); // Get the currently authenticated user
 
-        // Fetch the access record for the user
-        $access = Access::where('user_id', $userId)->first();
+            if (!$user) {
+                // If the user is not authenticated, return the unauthorized view
+                return view('error.unauthorized');
+            }
 
-        if ($access && $access->user_dashboard === 'enable') {
-            // Pass the access type to the view using compact
-            $accessType = $access->access_type;
-            return view('user.user.dashboard', compact('accessType'));
-        } else {
-            // Redirect to an unauthorized access view
-            return view('error.useruthorized');
+            $member = Newprofile::where('user_id', $user->id)->first();
+            // Decode the image paths if necessary
+            $imagePaths = json_decode($member->image_paths, true);
+
+            // Check if decoding was successful
+            if (is_array($imagePaths) && !empty($imagePaths)) {
+                $profileImage = 'storage/' . $imagePaths[0]; // Assuming you want the first image
+            } else {
+                $profileImage = 'storage/default-profile.png'; // Default image if no image paths
+            }
+            // dd($profileImage);
+
+            return view('user.user.dashboard', compact('user', 'member', 'profileImage'));
+        } catch (Exception $e) {
+            // Log the error message
+            Log::error('Error in viewdashboard: ' . $e->getMessage());
+
+            // Return a generic error view or an unauthorized view
+            return view('error.unauthorized');
         }
     }
 
