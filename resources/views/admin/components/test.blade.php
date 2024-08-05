@@ -2,7 +2,7 @@
 <div id="test" hidden>
     <input type="text" name="selecttabt" id="selecttabt" hidden>
     <div class="flex gap-5 p-4 mr-8 rounded-md mb-4 justify-end font-bold text-xl">
-        
+
         <form id="deletefortest">
             @csrf
             @method('DELETE')
@@ -367,7 +367,7 @@
     // Construct the form ID dynamically
     const formId = `#updatetest_${id}`;
     const tab = document.getElementById('testTab');
-    
+
     // Serialize form data
     const formData = $(formId).serialize();
 
@@ -418,7 +418,7 @@
                 '<option value="" selected disabled>-- Select Member --</option>';
             Members.forEach(member => {
                 memberOptionsHTML +=
-                    `<option value="${member.id}" ${member.id == item.member_id ? 'selected' : ''}>${member.name}</option>`;
+                    `<option value="${member.id}" ${member.id == item.member_id ? 'selected' : ''}>${member.firstname}</option>`;
             });
 
 
@@ -427,7 +427,7 @@
             htmlContent += `
                 <form id="updatetest_${item.id}">
                     @csrf
-                    
+
                     <input name="id_${item.id}" value="${item.id}" hidden>
                     <div class="flex flex-col text-lg p-4 bg-gray-50 mr-8 rounded-md gap-4 mb-4">
                         <div class="flex gap-5 justify-between">
@@ -442,9 +442,9 @@
                                             </select>
 
                                             <div class="flex justify-end items-center ml-auto mr-8"><button type="button" class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base" onclick="updatest(${item.id})">Edit</button></div>
-                                         
+
                                      </div>
-                                     
+
 
                                     <div class="flex items-center border-b">
                                         <label for="workouttest_${item.id}" class="w-60 block mb-1">

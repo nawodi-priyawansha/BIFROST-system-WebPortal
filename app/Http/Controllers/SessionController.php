@@ -636,11 +636,11 @@ class SessionController extends Controller
                     $reps = $request->input('repswe_' . $weightliftingId . $index);
                     $alt_sets = $request->input('alt-setswe_' . $weightliftingId . $index);
                     $alt_reps = $request->input('alt-repswe_' . $weightliftingId . $index);
-            
+
                     // Debugging statements
                     Log::info("Processing set: setswe_" . $weightliftingId . $index);
                     Log::info("Sets: $sets, Reps: $reps, Alt Sets: $alt_sets, Alt Reps: $alt_reps");
-            
+
                     WeightliftingSet::create([
                         'sets' => $sets,
                         'reps' => $reps,
@@ -650,7 +650,7 @@ class SessionController extends Controller
                     ]);
                 }
             }
-            
+
             // dd("Weightlifting data updated successfully");
             return response()->json(['message' => 'Weightlifting data updated successfully'], 200);
         } catch (\Illuminate\Validation\ValidationException $e) {
@@ -907,7 +907,7 @@ class SessionController extends Controller
     // updatestrenght
     public function updatestrength(Request $request)
     {
-        // dd($request); 
+        // dd($request);
 
         try {
             $request->validate([
@@ -992,11 +992,11 @@ class SessionController extends Controller
             return response()->json(['message'=>'update suceess']);
         } catch (\Illuminate\Validation\ValidationException $e) {
             // Handle validation exceptions
-          
+
             return redirect()->back()->withErrors($e->errors())->withInput();
         } catch (\Exception $e) {
             // Handle other exceptions
-          
+
             return redirect()->back()->with('error', 'An error occurred while updating the weightlifting data.');
         }
     }
@@ -1038,7 +1038,7 @@ class SessionController extends Controller
             'members' => $members->map(function ($member) {
                 return [
                     'id' => $member->id,
-                    'name' => $member->name,
+                    'name' => $member->firstname,
                 ];
             })
         ]);
@@ -1175,7 +1175,7 @@ class SessionController extends Controller
 
             return response()->json(['message'=>'update suceess']);
         } catch (\Exception $e) {
-            
+
             return redirect()->back()->with('error', 'an error occurred while updateing the test data');
         }
     }
