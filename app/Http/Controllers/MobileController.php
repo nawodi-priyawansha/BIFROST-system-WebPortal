@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ClientManagement;
 use App\Models\Conditioning;
+use App\Models\DailyWarmup;
 use Exception;
 use Carbon\Carbon;
 use App\Models\Score;
@@ -14,6 +15,7 @@ use App\Models\Weightlifting;
 use Illuminate\Http\Request;
 use PhpParser\Node\Expr\FuncCall;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 class MobileController extends Controller
@@ -169,6 +171,44 @@ class MobileController extends Controller
             //dd($detailsstrength);
         //return view('mobile.user.workout', compact('dayWithDate','detailswarmup','detailsstrength','detailsconditioning','detailsweight'));
         return view('mobile.user.workout', compact('dayWithDate','detailswarmup','detailsstrength','detailsweight'));
+    }
+
+    //store daily warmup workout after clicking
+    public function storewarmupdaily(Request $request){
+        try {
+
+        $validatedData = $request->validate([
+            'warmup_id' => 'required|integer|exists:warmups,id',
+        ]);
+
+        $userId = Auth::user()->id;
+
+         // Check if a record already exists for this user and workout
+         $dailyWarmup = DailyWarmup::where('member_id', $userId)
+         ->where('warmup_id', $validatedData['warmup_id'])
+         ->first();
+
+         if ($dailyWarmup) {
+            // Update the existing record
+            $dailyWarmup->touch(); // Update the timestamps
+            $message = 'Warm-up updated successfully';
+        }
+        else{
+            DailyWarmup::create([
+                'member_id' => $userId,
+                'warmup_id' => $validatedData['warmup_id'],
+            ]);
+            $message = 'Warm-up saved successfully';
+        }
+
+        return response()->json([
+            'success' => $message,
+            'daily_warmup_id' => $dailyWarmup->id
+        ]);
+        } catch (\Exception $e) {
+            Log::error('Error saving warm-up: ' . $e->getMessage());
+            return response()->json(['error' => 'An error occurred while saving the warm-up'], 500);
+        }
     }
 
     public function workouttimer()

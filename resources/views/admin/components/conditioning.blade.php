@@ -99,7 +99,7 @@
                         $('#conditioning-form')[0].reset();
                         const showUIC = document.getElementById('showUIC');
                         showUIC.innerHTML = ''; // Clears the content inside the div
-                       
+
                         // Example: Switch tabs or update content
                         const tab = document.getElementById('conditioningTab');
                         if (tab) {
@@ -215,7 +215,7 @@
             </div>
         </div>
         <div class="showUIC" id="showUIC"></div>
-        <button id="save-button" type="button"
+        <button id="save-button" type="submit"
             class="bg-[#FB1018] text-white py-2 px-4 rounded mb-2 hover:bg-red-700">Save</button>
     </form>
 
@@ -550,7 +550,7 @@
                             class="w-1/3 px-3 py-3 border flex rounded mb-2">
                             ${categoryOptionsHTML}
                         </select>
-                        <div class="flex justify-end items-center ml-auto mr-8">   
+                        <div class="flex justify-end items-center ml-auto mr-8">
                             <button class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base" type="button" onclick="conEdit(${item.id})">Edit</button>
                         </div>
                     </div>
