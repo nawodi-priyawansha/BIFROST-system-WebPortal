@@ -22,7 +22,7 @@
                         Library </strong></span>
 
                 <div class="flex justify-between p-5">
-                    <h1 class="text-2xl  font-medium mb-5 font-source-sans"> Workout Library</h1>
+                    <h1 class="text-2xl  font-medium font-source-sans"> Workout Library</h1>
 
                     @if ($accessType == 'write')
                         <button id="openPopupBtn" class="bg-black h-10 px-6 text-white rounded-md">+ ADD</button>
@@ -58,6 +58,7 @@
                                             <option value="strength">Strength</option>
                                             <option value="conditioning">Conditioning</option>
                                             <option value="weightlifting">Weightlifting</option>
+                                            <option value="test">Test</option>
                                         </select>
                                     </div>
 
@@ -104,7 +105,7 @@
                     {{-- pop up view end --}}
                 </div>
                 {{-- filtering --}}
-                <form class="flex flex-col md:flex-row gap-3 px-4 w-1/2" method="GET"
+                {{-- <form class="flex flex-col md:flex-row gap-3 px-4 w-1/2" method="GET"
                     action="{{ route('viewworkoutlibrary') }}">
                     <select id="categoryOption" name="categoryOption"
                         class="w-full h-10 border-2 border-black focus:outline-none focus:border-border-black text-black rounded px-2 md:px-3 py-0 md:py-1 tracking-wider">
@@ -120,15 +121,45 @@
                         <option value="strength">Strength</option>
                         <option value="conditioning">Conditioning</option>
                         <option value="weightlifting">Weightlifting</option>
+                        <option value="test">Test</option>
                     </select>
                     <button type="submit" class="bg-black h-10 px-6 text-white rounded-md">Search</button>
-                </form>
+                </form> --}}
                 {{-- filtering --}}
 
 
                 <div class="bg-white p-5 rounded-lg shadow-md">
-                    <table class="w-full border-collapse mb-5 text-sm">
+                    <table class="w-full border-collapse text-sm">
                         <thead>
+                            <tr class="mb-5">
+                                <form class="flex flex-col md:flex-row gap-3 px-4 w-1/2" method="GET"
+                                    action="{{ route('viewworkoutlibrary') }}">
+                                    <td class="pr-2">
+                                        <select id="categoryOption" name="categoryOption"
+                                            class="w-full mb-5 h-10 border-2 border-black focus:outline-none focus:border-border-black text-black rounded px-2 md:px-3 py-0 md:py-1 tracking-wider">
+                                            <option value="" selected>--Select Category--</option>
+                                            @foreach ($categoryOptions as $categoryOption)
+                                                <option value="{{ $categoryOption->id }}">
+                                                    {{ $categoryOption->category_name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    <td class="pr-2">
+                                        <select id="type" name="type"
+                                            class="w-full mb-5 h-10 border-2 border-black focus:outline-none focus:border-border-black text-black rounded px-2 md:px-3 py-0 md:py-1 tracking-wider">
+                                            <option value="" selected>--Select Type--</option>
+                                            <option value="warmup">Warmup</option>
+                                            <option value="strength">Strength</option>
+                                            <option value="conditioning">Conditioning</option>
+                                            <option value="weightlifting">Weightlifting</option>
+                                            <option value="test">Test</option>
+                                        </select>
+                                    </td>
+                                    <td class="pr-2">
+                                        <button type="submit" class="bg-black h-10 px-6 text-white rounded-md mb-5">Search</button>
+                                    </td>
+                                </form>
+                            </tr>
                             <tr>
                                 <th class="p-3 border-s-2 border-y-2 border-gray-300 bg-white text-left" dir="ltr">
                                     Category</th>

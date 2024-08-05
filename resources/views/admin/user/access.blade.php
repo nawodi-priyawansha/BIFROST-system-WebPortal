@@ -38,14 +38,14 @@
                             <td class="py-2 pr-6 text-gray-700 sm:w-1/4">Name</td>
                             <td class="py-2 sm:pl-0 sm:w-3/4">
                                 <input type="text" name="name" id="name_{{ $user->id }}"
-                                    value="{{ $user->name }}" class="bg-transparent" disabled>
+                                    value="{{ $user->name }}" class="bg-transparent flex w-full" disabled>
                             </td>
                         </tr>
                         <tr class="border-b flex text-sm flex-col sm:table-row">
                             <td class="py-2 pr-6 text-gray-700 sm:w-1/4">Email</td>
                             <td class="py-2 sm:pl-0 sm:w-3/4">
                                 <input type="text" name="email" id="email_{{ $user->id }}"
-                                    value="{{ $user->email }}" class="bg-transparent" disabled>
+                                    value="{{ $user->email }}" class="bg-transparent flex w-full" disabled>
                             </td>
                         </tr>
 
@@ -56,10 +56,10 @@
                                     value="{{ $user->pin }}" class="bg-transparent" disabled>
                             </td>
                         </tr>
-                        <tr class=" flex flex-col sm:table-row">
+                        <tr class=" flex flex-col sm:table-row border-b">
                             <td class="py-2 pr-6 text-gray-700 sm:w-1/5">Access</td>
                             <td class="py-1 pl-2 sm:pl-0 sm:w-full">
-                                <div class="access-buttons text-xs flex flex-wrap gap-1 sm:gap-2">
+                                <div class="access-buttons text-xs flex flex-wrap gap-1 sm:gap-2 my-1">
                                     <div class="input-container mb-0">
                                         <input type="checkbox" id="dashboard_{{ $user->id }}" name="dashboard"
                                             {{ $user->dashboard == 'enable' ? 'checked' : '' }}
@@ -125,7 +125,7 @@
 
                             </td>
                         </tr>
-                        <tr>
+                        {{-- <tr>
                             <td></td>
                             <td>
                                 <div class="access-buttons flex flex-wrap gap-2 sm:gap-2 mt-0 mb-1 p-0">
@@ -180,7 +180,7 @@
                                     </div>
                                 </div>
                             </td>
-                        </tr>
+                        </tr> --}}
 
                         <tr class="border-b flex flex-col sm:table-row">
                             <td class="py-2 pr-6  text-gray-700 sm:w-1/4">Access Type</td>

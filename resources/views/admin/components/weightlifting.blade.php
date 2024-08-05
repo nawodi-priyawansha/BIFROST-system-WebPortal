@@ -6,18 +6,95 @@
     <div class="flex gap-5 p-4 mr-8 rounded-md mb-4 font-bold text-xl">
         <div class="flex justify-center text-center items-center w-1/2">Primary</div>
         <div class="flex justify-center text-center items-center w-1/2">Alternate</div>
-        <form action="{{ route('Weightlifting.deleteAllBySelectDate') }}" method="POST">
+        <form id="deleteFormWe">
             @csrf
             @method('DELETE')
             <input type="text" name="selectdateweDelete" id="selectdateweDelete" hidden>
-            <button class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base">Clear</button>
+            <button type="submit" class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base">Clear</button>
         </form>
+        <script>
+            $(document).ready(function() {
+                const date = document.getElementById('selectdateweDelete').value;
+                $('#deleteFormWe').on('submit', function(event) {
+                    event.preventDefault(); // Prevent the default form submission
+
+                    $.ajax({
+                        url: '{{ route('Weightlifting.deleteAllBySelectDate') }}',
+                        type: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            _method: 'DELETE',
+                            selectdateweDelete: $('#selectdateweDelete').val()
+                        },
+                        success: function(response) {
+                            // Handle the response
+                            alert(response.message);
+                            getWeightlifting(date);
+                            // Optionally, update the UI to reflect the changes
+                        },
+                        error: function(xhr) {
+                            // Handle error
+                            console.error(xhr.responseText);
+                        }
+                    });
+                });
+            });
+
+            $(document).ready(function() {
+                const tab = document.getElementById('weightliftingTab');
+
+                $('#storeFromWe').on('submit', function(event) {
+                    event.preventDefault(); // Prevent the default form submission
+
+                    $.ajax({
+                        url: '/store-weightlifting',
+                        type: 'POST',
+                        data: $(this).serialize(), // Serialize form data
+                        success: function(response) {
+                            // Handle the response
+                            // Clear input fields
+                            $('#storeFromWe')[0].reset();
+
+                            // Clear specific elements
+                            const cloneDisplayContainer = document.getElementById(
+                                'cloneDisplayContainer');
+                            if (cloneDisplayContainer) {
+                                cloneDisplayContainer.innerHTML = ''; // Clear content
+                            }
+
+
+                            // Optionally, update the UI to reflect the changes
+                            alert(response.message); // Uncomment if you want to show a message
+
+                            var duplicateSets = document.querySelector(".duplicate-sets");
+                            if (duplicateSets) {
+                                duplicateSets.innerHTML = ""; // Clear content
+                            }
+
+                            var altDuplicateSets = document.querySelector(".altduplicate-setss");
+                            if (altDuplicateSets) {
+                                altDuplicateSets.innerHTML = ""; // Clear content
+                            }
+                            // Optionally, update the UI or trigger other actions
+                            // Trigger the tab click
+                            if (tab) {
+                                tab.click();
+                            }
+                        },
+                        error: function(xhr) {
+                            // Handle error
+                            console.error(xhr.responseText);
+                        }
+                    });
+                });
+            });
+        </script>
     </div>
     {{-- display  weightlifting --}}
     <div id="weightlifting-container"></div>
 
 
-    <form action="/store-weightlifting" method="POST">
+    <form id="storeFromWe">
         @csrf
         <input type="text" name="selectdatewe" id="selectdatewe" hidden>
         <div class="duplicateUi flex flex-col text-lg  bg-gray-50 mr-8 rounded-md gap-4 mb-4 " id="uiContainer">
@@ -307,7 +384,8 @@
         <div class=" flex flex-col gap-5">
             {{-- Clone UI button --}}
             <button id="cloneButton"type="button"
-                class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base w-32"> Another
+                class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base w-32">
+                Another
             </button>
             {{-- Save Button --}}
             <button id="submitButton" type="submit"
@@ -743,7 +821,8 @@
         });
 
         // Find the container element with class 'duplicate-sets' using parentNode traversal
-        const container = originalSet.closest('.border-b').querySelector('.duplicate-sets');
+        const container = originalSet.closest('.border-b').querySelector('.duplicate-setsClone') || originalSet.closest(
+            '.border-b').querySelector('.duplicate-sets');
         console.log(container);
 
         if (container) {
@@ -753,6 +832,7 @@
         }
 
         console.log(`Duplicated Set ID: ${input ? input.id : 'N/A'}`);
+
     }
 
 
@@ -830,7 +910,8 @@
     `;
 
         // Add the new set UI element to the container
-        const altcontainer = originalSet.closest('.border-b').querySelector('.altduplicate-setss');
+        const altcontainer = originalSet.closest('.border-b').querySelector('.altduplicate-setssClone') || originalSet
+            .closest('.border-b').querySelector('.altduplicate-setss');
         console.log(altcontainer);
 
         if (altcontainer) {
@@ -845,6 +926,7 @@
         }
 
         console.log(`Duplicated Set ID: ${altinputs.length > 0 ? altinputs[0].id : 'N/A'}`);
+
     }
 
 
@@ -869,6 +951,7 @@
 {{-- get weightlifting --}}
 <script>
     function getWeightlifting(date) {
+        console.log(date);
         console.log("get Weightlifting date: " + date);
         $.ajax({
             url: "/get-Weightlifting",
@@ -1021,7 +1104,7 @@
 
             // Build the final HTML for the current item
             htmlContent += `
-                <form action="{{ route('updateWeightlifting') }}" method="POST">
+                <form action="{{ route('updateWeightlifting') }}" method="POST" id="updateWeightlifting_${item.id}">
                     @csrf
                     
                     <input name="id_${item.id}" value="${item.id}" hidden>
@@ -1058,7 +1141,7 @@
                                         <div class="sets-container">
                                             ${setsHTML}
                                         </div>
-                                        <div class="duplicate-sets" id="duplicate-sets_${item.id}"></div>
+                                        <div class="duplicate-setsClone" id="duplicate-sets_${item.id}"></div>
                                         <div class="ml-60">
                                             <button id="addset_${item.id}" onclick="duplicateSet(this.id)" type="button" class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base">
                                                 <i class="fas fa-plus text-[12px]"></i> Add set
@@ -1104,7 +1187,7 @@
                                         <select id="altcategoryweight_${item.id}" name="altcategoryweight_${item.id}" onchange="getworkoutWe(this)" class="w-1/3 px-3 py-3 border rounded mb-2 mr-5" required>
                                             ${altCategoryOptionsHTML}
                                         </select>
-                                        <button type="submit" class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base">Edit</button>
+                                        <button type="button" class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base" onclick="updateweightlifting(${item.id})">Edit</button>
                                     </div>
                                 ` : ''}
                                 <div class="flex items-center border-b">
@@ -1130,7 +1213,7 @@
                                             <div>
                                                 ${altSetsHTML}
                                             </div>
-                                            <div class="altduplicate-setss" id="alt-duplicate-sets_${item.id}"></div>
+                                            <div  class="altduplicate-setssClone" id="alt-duplicate-sets_${item.id}"></div>
                                             <div class="ml-60">
                                                 <button id="altaddset_${item.id}" onclick="altduplicateSet(this.id)" type="button" class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base">
                                                     <i class="fas fa-plus text-[12px]"></i> Add set
@@ -1182,5 +1265,33 @@
 
 
 
+    }
+
+    function updateweightlifting(id) {
+        // Construct the form ID dynamically
+        const formId = `#updateWeightlifting_${id}`;
+        const tab = document.getElementById('weightliftingTab');
+        // Serialize form data
+        const formData = $(formId).serialize();
+
+        console.log(formData);
+        // AJAX request
+        $.ajax({
+            url: '{{ route('updateWeightlifting') }}',
+            type: 'POST',
+            data: formData,
+            success: function(response) {
+                // Handle the response
+                if (tab) {
+                    tab.click();
+                }
+                alert(response.message);
+                $(formId)[0].reset();
+            },
+            error: function(xhr) {
+                // Handle error
+                console.error(xhr.responseText);
+            }
+        });
     }
 </script>

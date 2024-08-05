@@ -12,7 +12,7 @@
     <title>Document</title>
     <style>
         .w-1\/3 {
-            width: 40% !important;
+            width: 50% !important;
         }
     </style>
 </head>
@@ -30,28 +30,44 @@
             <div class="border rounded-b-lg bg-white shadow-md mt-10 text-sm">
                 <div>
                     {{-- Tab Names --}}
-                    <div class="rounded w-11/12 mx-auto mt-4 mb-4">
+                    <div class="rounded w-12/12 mx-auto mt-4 mb-4 px-5">
                         <!-- Tabs -->
                         <ul id="tabs" class="inline-flex pt-2 px-1 w-full border-black border-b">
-                            <li
-                                class="tab-item px-4 text-black py-2 rounded-t hover:border-t hover:border-l hover:border-r hover:border-black">
-                                <a href="warmup">Warmup</a>
+
+                            <li class="me-2 tab-item text-black rounded-t hover:border-t hover:border-l hover:border-r hover:border-black">
+                                <a href="warmup" id="warmupTab" class="inline-flex items-center p-4 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500">
+                                    <img src="{{ asset('icon/warmup.png') }}" alt="Warmup Icon" class="w-5 h-5 mr-2" />
+                                    <span>Warmup</span>
+                                </a>
                             </li>
-                            <li class="tab-item px-4 text-black py-2 rounded-t hover:border-t hover:border-l hover:border-r hover:border-black"
+
+                            <li class="me-2 tab-item text-black  rounded-t hover:border-t hover:border-l hover:border-r hover:border-black"
                                 id="default-tab">
-                                <a href="strength">Strength</a>
+                                <a href="strength" id="strenghtTab" class="inline-flex items-center p-4 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500 px-6">
+                                    <img src="{{ asset('icon/strength.png') }}" alt="Strength Icon" class="w-5 h-5 mr-2" />
+                                    <span>Strength</span>
+                                </a>
                             </li>
                             <li
-                                class="tab-item px-4 text-black py-2 rounded-t hover:border-t hover:border-l hover:border-r hover:border-black">
-                                <a href="weightlifting">Weightlifting</a>
+                                class="me-2 tab-item  text-black rounded-t hover:border-t hover:border-l hover:border-r hover:border-black">
+                                <a href="weightlifting" id="weightliftingTab" class="inline-flex items-center p-4 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500">
+                                    <img src="{{ asset('icon/weightlifting.png') }}" alt="Weightlifting Icon" class="w-5 h-5 mr-2" />
+                                    <span>Weightlifting</span>
+                                </a>
                             </li>
                             <li
-                                class="tab-item px-4 text-black py-2 rounded-t hover:border-t hover:border-l hover:border-r hover:border-black">
-                                <a href="conditioning">Conditioning</a>
+                                class="me-2 tab-item  text-black rounded-t hover:border-t hover:border-l hover:border-r hover:border-black">
+                                <a href="conditioning" id="conditioningTab" class="inline-flex items-center p-4 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500">
+                                    <img src="{{ asset('icon/conditioning.png') }}" alt="Conditioning Icon" class="w-5 h-5 mr-2" />
+                                    <span>Conditioning</span>
+                                </a>
                             </li>
                             <li
-                                class="tab-item px-4 text-black py-2 rounded-t hover:border-t hover:border-l hover:border-r hover:border-black">
-                                <a href="test">Test</a>
+                                class="me-2 tab-item text-black rounded-t hover:border-t hover:border-l hover:border-r hover:border-black w-100">
+                                <a href="test" id="testTab" class="inline-flex items-center p-4 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500 px-10">
+                                    <img src="{{ asset('icon/test.png') }}" alt="Test Icon" class="w-5 h-5 mr-2" />
+                                    <span>Test</span>
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -400,7 +416,9 @@
                     break;
                 case "test":
                     document.getElementById('selectdatet').value = dayName;
-                    document.getElementById('selecttabt').value = tabId;
+                    document.getElementById('selecttabtt').value = tabId;
+                    document.getElementById('selectdatetestDelete').value = dayName;
+                    gettest(dayName)
                     break;
                 default:
                     console.log("Unknown tabId: " + tabId);
