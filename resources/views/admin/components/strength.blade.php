@@ -60,7 +60,8 @@
                                 duplicateSets.innerHTML = ""; // Clear content
                             }
 
-                            var altDuplicateSets = document.querySelector(".altduplicate-setsstrength");
+                            var altDuplicateSets = document.querySelector(
+                                ".altduplicate-setsstrength");
                             if (altDuplicateSets) {
                                 altDuplicateSets.innerHTML = ""; // Clear content
                             }
@@ -533,7 +534,7 @@
         getCategoryS();
     });
 
-    
+
 
     function getstrength(date) {
         console.log("Fetching strength data for date: " + date);
@@ -568,12 +569,13 @@
         const tab = document.getElementById('strenghtTab');
         // Serialize form data
         const formData = $(formId).serialize();
-
+        console.log(formData);
         // AJAX request
         $.ajax({
-            url:'{{ route('updatestrength') }}',
+            url: '{{ route('updatestrength') }}',
             type: 'POST',
             data: formData,
+
             success: function(response) {
                 // Handle the response
                 if (tab) {
@@ -758,9 +760,9 @@
                                         <div class="sets-container">
                                             ${setsHTML}
                                         </div>
-                                        <div class="duplicate-sets" id="duplicate-sets_${item.id}"></div>
+                                        <div class="duplicate-sets-strength" id="duplicate-sets_${item.id}"></div>
                                         <div class="ml-60">
-                                            <button id="addset_${item.id}" onclick="duplicateSet(this.id)" type="button" class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base">
+                                            <button id="addset_${item.id}" onclick="duplicateSetStrength(this.id)" type="button" class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base">
                                                 <i class="fas fa-plus text-[12px]"></i> Add set
                                             </button>
                                         </div>
@@ -830,9 +832,9 @@
                                             <div>
                                                 ${altSetsHTML}
                                             </div>
-                                            <div class="altduplicate-setss" id="alt-duplicate-sets_${item.id}"></div>
+                                            <div class="altduplicate-setsstrength" id="alt-duplicate-sets_${item.id}"></div>
                                             <div class="ml-60">
-                                                <button id="altaddset_${item.id}" onclick="altduplicateSet(this.id)" type="button" class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base">
+                                                <button id="altaddset_${item.id}" onclick="altduplicateSetStrength(this.id)" type="button" class="bg-black text-white py-2 px-4 rounded mb-2 mt-2 text-base">
                                                     <i class="fas fa-plus text-[12px]"></i> Add set
                                                 </button>
                                             </div>
