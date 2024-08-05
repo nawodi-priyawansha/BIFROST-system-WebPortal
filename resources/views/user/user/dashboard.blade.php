@@ -33,28 +33,6 @@
                             </div>
                         </div>
                     </div>
-                    {{-- Search bar --}}
-                    <div class="relative w-full mr-6">
-                        <form id="searchForm" class="flex items-end justify-end">
-                            @csrf
-                            <input placeholder="e.g. Umindu Chethiya"
-                                class="rounded-full h-16 bg-transparent py-2 pl-8 pr-32 outline-none border-2 border-gray-100 shadow-md hover:outline-none"
-                                type="text" name="query" id="query" autocomplete="off">
-                            <div id="nameSuggestions"
-                                class="absolute mt-1 w-full bg-white border border-gray-300 rounded-lg shadow-lg hidden">
-                                <!-- Suggestions will be displayed here -->
-                            </div>
-                            <button type="submit"
-                                class="absolute top-3 right-3 inline-flex items-center justify-center h-10 px-4 py-2 text-sm text-white transition duration-150 ease-in-out rounded-full bg-[#fb1018] hover:bg-[#fb1018] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#fb1018]">
-                                <svg class="-ml-0.5 mr-2 w-4 h-4 sm:h-5 sm:w-5" xmlns="http://www.w3.org/2000/svg"
-                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                                </svg>
-                                Search
-                            </button>
-                        </form>
-                    </div>
                 </div>
 
             </div>
@@ -71,7 +49,7 @@
                         </div>
                         <div class="flex items-center mt-4 space-x-4 ">
                             <div>
-                                <img src="{{ asset('img/valhalla-bg.jpg') }}" alt="Profile Picture"
+                                <img src="{{ asset($profileImage) }}" alt="Profile Picture"
                                     class="w-12 h-12 rounded-[50%] lg:w-20 lg:h-20">
                             </div>
                             <div class="flex flex-col">
@@ -79,19 +57,22 @@
                                 <h5 id="nameDisplay"
                                     class="text-lg font-semibold overflow-hidden text-ellipsis lg:text-2xl">
                                     <!-- User's name will be displayed here -->
+                                    {{ $user->name }}
                                 </h5>
-                                <h6 class="text-gray-500 text-sm lg:text-lg">Male, 28 years</h6>
+                                <h6 class="text-gray-500 text-sm lg:text-lg"><span>{{ $member->gender }}</span>,
+                                    <span>{{ $member->age }}</span> years
+                                </h6>
                             </div>
                         </div>
                         <div class="flex justify-between border-t border-black items-center mt-6">
                             <div class="text-center">
                                 <h6 class="text-black text-sm lg:text-lg">HEIGHT</h6>
-                                <p class="text-gray-800 text-xl lg:text-3xl">185 cm</p>
+                                <p class="text-gray-800 text-xl lg:text-3xl">{{ $member->height }} cm</p>
                             </div>
                             <div class="border-l border-black h-12"></div> <!-- Divider -->
                             <div class="text-center">
                                 <h6 class="text-black text-sm lg:text-lg">WEIGHT</h6>
-                                <p class="text-gray-800 text-xl lg:text-3xl">125 kg</p>
+                                <p class="text-gray-800 text-xl lg:text-3xl">{{ $member->weight }} kg</p>
                             </div>
                         </div>
                     </div>
@@ -243,13 +224,14 @@
 
                                 </div>
                                 <div class="w-1/2 flex items-center justify-end">
-                                    <a href="{{ route('mobile.trainingday') }}" class="text-white p-1 px-4 rounded-md bg-black whitespace-nowrap text-sm">
+                                    <a href="{{ route('mobile.trainingday') }}"
+                                        class="text-white p-1 px-4 rounded-md bg-black whitespace-nowrap text-sm">
                                         Training App
                                     </a>
                                 </div>
                             </div>
                             <!-- Table with session details -->
-                            <div class="">
+                            <div class="mx-4 mt-4">
                                 <div class="overflow-y-auto md:overflow-y-visible max-h-screen md:max-h-full">
                                     <table class="table-auto w-full border-collapse text-md">
                                         <thead>
@@ -426,60 +408,5 @@
         </div>
     @endsection
 </body>
-<!-- javascript for handling search bar -->
-<script>
-    $(document).ready(function() {
-        // Retrieve user's name from session storage if available
-        var userName = sessionStorage.getItem('userName');
-        if (userName) {
-            $('#nameDisplay').text(userName).removeClass('hidden');
-        }
-
-        $('#searchForm').submit(function(event) {
-            event.preventDefault();
-
-            var query = $('#query').val();
-            console.log('Query:', query); // Log the query being sent
-
-            $.ajax({
-                url: '{{ route('users.search') }}',
-                type: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': $('input[name="_token"]').val(),
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                data: JSON.stringify({
-                    query: query
-                }),
-                success: function(data) {
-                    console.log('Success Response:', data); // Log the successful response
-                    displayResults(data.user);
-                    // Store user's name in session storage
-                    if (data.user) {
-                        sessionStorage.setItem('userName', data.user.name);
-                    } else {
-                        sessionStorage.removeItem('userName');
-                    }
-                },
-                error: function(error) {
-                    console.error('Error:', error); // Log errors to the console
-                }
-            });
-        });
-
-        function displayResults(user) {
-            var nameDisplay = $('#nameDisplay');
-
-            if (user) {
-                nameDisplay.text(user.name); // Update text content with user's name
-                nameDisplay.removeClass('hidden'); // Ensure the element is visible if previously hidden
-            } else {
-                nameDisplay.text('No user found'); // Display message if no user found
-                nameDisplay.addClass('hidden'); // Hide the element if no user is found
-            }
-        }
-    });
-</script>
 
 </html>

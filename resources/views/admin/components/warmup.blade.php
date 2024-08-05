@@ -1,6 +1,6 @@
 <div id="warmup" hidden>
 
-    <div class="flex justify-end items-center ml-auto mr-8">
+    <div class="flex justify-end items-center ml-auto mr-8 gap-5 p-4 font-bold text-xl">
         {{-- hidden input field --}}
         <input type="text" name="selecttabw" id="selecttabw" hidden>
         <form id="deleteWarmupsForm">

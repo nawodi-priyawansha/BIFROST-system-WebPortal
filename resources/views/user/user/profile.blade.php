@@ -61,24 +61,30 @@
                                 </div>
                                 <div class="flex items-center mt-4 space-x-4 ">
                                     <div>
-                                        <img src="{{ asset('img/valhalla-bg.jpg') }}" alt="Profile Picture"
+                                        <img src="{{ asset($profileImage) }}" alt="Profile Picture"
                                             class="w-12 h-12 rounded-[50%] lg:w-20 lg:h-20">
                                     </div>
                                     <div class="flex flex-col">
-                                        <h5 class="text-lg font-semibold overflow-hidden text-ellipsis lg:text-2xl">
-                                            {{ $userName = $user->name ?? null }}</h5>
-                                        <h6 class="text-gray-500 text-sm lg:text-lg">Male, 28 years</h6>
+                                        {{-- here name dispaly below ajex trough --}}
+                                        <h5 id="nameDisplay"
+                                            class="text-lg font-semibold overflow-hidden text-ellipsis lg:text-2xl">
+                                            <!-- User's name will be displayed here -->
+                                            {{ $user->name }}
+                                        </h5>
+                                        <h6 class="text-gray-500 text-sm lg:text-lg"><span>{{ $member->gender }}</span>,
+                                            <span>{{ $member->age }}</span> years
+                                        </h6>
                                     </div>
                                 </div>
                                 <div class="flex justify-between border-t border-black items-center mt-6">
                                     <div class="text-center">
                                         <h6 class="text-black text-sm lg:text-lg">HEIGHT</h6>
-                                        <p class="text-gray-800 text-xl lg:text-3xl">185 cm</p>
+                                        <p class="text-gray-800 text-xl lg:text-3xl">{{ $member->height }} cm</p>
                                     </div>
                                     <div class="border-l border-black h-12"></div> <!-- Divider -->
                                     <div class="text-center">
                                         <h6 class="text-black text-sm lg:text-lg">WEIGHT</h6>
-                                        <p class="text-gray-800 text-xl lg:text-3xl">125 kg</p>
+                                        <p class="text-gray-800 text-xl lg:text-3xl">{{ $member->weight }} kg</p>
                                     </div>
                                 </div>
                             </div>
