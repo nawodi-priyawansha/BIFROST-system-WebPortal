@@ -907,7 +907,7 @@ class SessionController extends Controller
     // updatestrenght
     public function updatestrength(Request $request)
     {
-        // dd($request); 
+
         Log::info('Request Data dd:', ['request' => $request->all()]);
 
         try {
@@ -1053,7 +1053,7 @@ class SessionController extends Controller
             'members' => $members->map(function ($member) {
                 return [
                     'id' => $member->id,
-                    'name' => $member->name,
+                    'name' => $member->firstname,
                 ];
             })
         ]);
