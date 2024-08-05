@@ -232,6 +232,8 @@ Route::post('/mobile/store-readiness', [MobileController::class, 'storescore'])-
 // get workout data
 Route::post('/mobile/class-manager', [ClientManagementController::class, 'getdata'])->name('mobile.class-manager');
 Route::get('/mobile/workout', [MobileController::class, 'workout'])->name('mobile.workout');
+Route::post('/warmup-daily',  [MobileController::class, 'storewarmupdaily']);
+
 Route::get('/mobile/workouttimer', [MobileController::class, 'workouttimer'])->name('mobile.workouttimer');
 Route::get('/mobile/histroyview', [MobileController::class, 'histroyview'])->name('mobile.histroyview');
 
