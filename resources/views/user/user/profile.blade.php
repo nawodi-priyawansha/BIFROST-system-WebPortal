@@ -203,10 +203,10 @@
                 // Get the current date in yyyy-mm-dd format
                 let currentDate = new Date().toISOString().split('T')[0];
                 console.log(currentDate);
-                myFunction(currentDate);
+                prevFunction(currentDate);
             };
 
-            function myFunction(currentDate) {
+            function prevFunction(currentDate) {
 
                 // Get the user ID from the hidden input field
                 let userId = document.getElementById('user_id').value;
@@ -230,7 +230,122 @@
                 });
             }
 
+            function nextFunction(currentDate) {
+
+                // Get the user ID from the hidden input field
+                let userId = document.getElementById('user_id').value;
+
+                // Perform the AJAX request
+                $.ajax({
+                    url: "/nextvdata",
+                    type: "POST",
+                    data: {
+                        date: currentDate,
+                        id: userId,
+                        _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
+                    },
+                    success: function(response) {
+                        console.log(response);
+                        updateImageList(response); 
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error); // Handle error
+                    },
+                });
+            }
+            function updateImageList(response) {
+    // Sort the response array by year and month
+    response.sort((a, b) => {
+        const [yearA, monthA] = a.month.split('-').map(Number);
+        const [yearB, monthB] = b.month.split('-').map(Number);
+        const dateA = new Date(yearA, monthA - 1); // Convert monthIndex to 0-based
+        const dateB = new Date(yearB, monthB - 1);
+        return dateA - dateB;
+    });
+
+    let imageContainer = document.getElementById('some-element');
+    imageContainer.innerHTML = ""; // Clear previous content
+
+    let html = '';
+    response.forEach(function(month) {
+        // Extract year and month from the month string and format it as 'Month YY'
+        const [year, monthIndex] = month.month.split('-').map(Number);
+        const date = new Date(year, monthIndex - 1); // Convert monthIndex to 0-based
+        const monthName = date.toLocaleString('default', {
+            month: 'long'
+        });
+        const yearSuffix = String(year).slice(-2); // Get last two digits of the year
+        const formattedMonth = `${monthName} ${yearSuffix}`;
+
+        html += '<div class="month mx-5 border" data-month="' + month.month + '" data-front="' + month
+            .front_image +
+            '" data-side="' + month.side_image + '" data-back="' + month.back_image + '">';
+        html += '<h2 class="text-center">' + formattedMonth + '</h2>'; // Display formatted month
+        html += '<div class="images-container flex">';
+        html += '<div class="image"><p>Front</p><img src="' +
+            `${window.storagePath}/${month.front_image}` +
+            '" alt="Front Image" class="image"></div>';
+        html += '<div class="image"><p>Side</p><img src="' +
+            `${window.storagePath}/${month.side_image}` +
+            '" alt="Side Image" class="image"></div>';
+        html += '<div class="image"><p>Back</p><img src="' +
+            `${window.storagePath}/${month.back_image}` +
+            '" alt="Back Image" class="image"></div>';
+        html += '</div>'; // Close images-container
+        html += '</div>'; // Close month
+    });
+    imageContainer.innerHTML = html; // Append the generated HTML to the container
+
+    // Add click event listeners to dynamically generated monthDiv elements
+    document.querySelectorAll('.month').forEach(div => {
+        div.addEventListener('click', () => {
+            showImageDetails(div.dataset.month, div.dataset.front, div.dataset.side, div.dataset
+                .back);
+        });
+    });
+
+    // Call showFirstImageDetails for the first image in the response
+    if (response.length > 0) {
+        const firstMonth = response[0];
+        showFirstImageDetails(firstMonth.month, firstMonth.front_image, firstMonth.side_image, firstMonth.back_image);
+    }
+}
+function showFirstImageDetails(month, frontImage, sideImage, backImage) {
+    // Extract year and month from the month string
+    const [year, monthIndex] = month.split('-').map(Number);
+
+    // Create a new Date object with the given year and month
+    const date = new Date(year, monthIndex - 1);
+
+    // Get the full month name and the last two digits of the year
+    const options = {
+        month: 'long',
+        year: 'numeric'
+    };
+    const formattedDate = date.toLocaleDateString('en-US', options);
+
+    // Update the label text with the formatted month and year
+    document.getElementById('currentMonthLabel').textContent = formattedDate;
+
+    // Update the images
+    document.getElementById('currentFrontImage').innerHTML = '<img src="' + window.storagePath + '/' +
+        frontImage + '" alt="Front Image" class="w-64 h-64 object-cover">';
+    document.getElementById('currentSideImage').innerHTML = '<img src="' + window.storagePath + '/' +
+        sideImage + '" alt="Side Image" class="w-64 h-64 object-cover">';
+    document.getElementById('currentBackImage').innerHTML = '<img src="' + window.storagePath + '/' +
+        backImage + '" alt="Back Image" class="w-64 h-64 object-cover">';
+}
+
             function appendData(response) {
+                // Sort the response array by year and month
+                response.sort((a, b) => {
+                    const [yearA, monthA] = a.month.split('-').map(Number);
+                    const [yearB, monthB] = b.month.split('-').map(Number);
+                    const dateA = new Date(yearA, monthA - 1); // Convert monthIndex to 0-based
+                    const dateB = new Date(yearB, monthB - 1);
+                    return dateA - dateB;
+                });
+
                 let imageContainer = document.getElementById('some-element');
                 imageContainer.innerHTML = ""; // Clear previous content
 
@@ -354,11 +469,11 @@
                 if (value === 'prev') {
                     console.log('Previous action for month:', updatedLabelText);
                     // Add your logic to fetch data for the previous month
-                    myFunction(updatedLabelText); // Call a function to fetch data for the previous month
+                    prevFunction(updatedLabelText); // Call a function to fetch data for the previous month
                 } else if (value === 'next') {
                     console.log('Next action for month:', updatedLabelText);
                     // Add your logic to fetch data for the next month
-                    myFunction(updatedLabelText); // Call a function to fetch data for the next month
+                    nextFunction(updatedLabelText); // Call a function to fetch data for the next month
                 }
             }
         </script>

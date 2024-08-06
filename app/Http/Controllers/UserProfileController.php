@@ -151,11 +151,63 @@ class UserProfileController extends Controller
                     'side_image' => $item->side_image,
                     'back_image' => $item->back_image,
                 ];
-            });
+            })
+            ->sortBy('month') // Sort by month
+            ->values(); // Reindex the array to reset the keys
 
         // Return the images as a JSON response
         return response()->json($images);
     }
+    public function handleNextData(Request $request)
+    {
+        // Validate the request data
+        $request->validate([
+            'date' => 'required|date_format:Y-m-d',
+            'id'   => 'required|integer|exists:users,id'
+        ]);
+
+        // Retrieve the date and user ID from the request
+        $date = $request->input('date');
+        $userId = $request->input('id');
+
+        // Convert the date to a Carbon instance
+        $currentDate = Carbon::parse($date);
+
+        // Get the current month and two next months
+        $months = [];
+        for ($i = 0; $i < 3; $i++) {
+            $months[] = [
+                'year' => $currentDate->copy()->addMonths($i)->format('Y'),
+                'month' => $currentDate->copy()->addMonths($i)->format('m')
+            ];
+        }
+
+        // Fetch images for the current and next two months
+        $images = MonthlyImage::where('user_id', $userId)
+            ->where(function ($query) use ($months) {
+                foreach ($months as $month) {
+                    $query->orWhere(function ($query) use ($month) {
+                        $query->whereMonth('month', $month['month'])
+                            ->whereYear('month', $month['year']);
+                    });
+                }
+            })
+            ->get()
+            ->map(function ($item) {
+                return [
+                    'month' => Carbon::parse($item->month)->format('Y-m'),
+                    'front_image' => $item->front_image,
+                    'side_image' => $item->side_image,
+                    'back_image' => $item->back_image,
+                ];
+            })
+            ->sortBy('month') // Sort by month
+            ->values(); // Reindex the array to reset the keys
+
+        // Return the images as a JSON response
+        return response()->json($images);
+    }
+
     // Display new profile creation form
     public function viewnewprofile()
     {
