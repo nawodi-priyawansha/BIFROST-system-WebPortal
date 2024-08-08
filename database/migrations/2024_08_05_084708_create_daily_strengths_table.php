@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('daily_warmups', function (Blueprint $table) {
+        Schema::create('daily_strengths', function (Blueprint $table) {
             $table->id();
             $table->foreignId('member_id')->nullable()->constrained('members')->onDelete('cascade');
-            $table->foreignId('warmup_id')->nullable()->constrained('warmups')->onDelete('cascade');
-            $table->integer('reps')->nullable();
+            $table->foreignId('strength_id')->nullable()->constrained('strengths')->onDelete('cascade');
+            $table->enum('type', ['Primary', 'Alternative']);
             $table->string('date');
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('daily_warmups');
+        Schema::dropIfExists('daily_strength');
     }
 };

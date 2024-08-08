@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-     <!-- Include jQuery -->
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- Include jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Document</title>
 </head>
 
@@ -46,8 +46,7 @@
                                     <tr class="border-b border-gray-300">
                                         {{-- Category --}}
                                         <td class="py-4" onclick="savewarmup(this)"
-                                            data-workout-id="{{ $warmupdetail->id }}"
-                                            data-daily-warmup-id="">
+                                            data-workout-id="{{ $warmupdetail->id }}" data-daily-warmup-id="">
                                             {{ $warmupdetail->workouts->categoryOption->category_name }} -
                                             {{ $warmupdetail->workouts->workout }}</td>
 
@@ -61,7 +60,7 @@
                                                 <button class="px-2 py-1 text-white"
                                                     onclick="decrementValue(this)">-</button>
                                                 <span
-                                                    class="w-16 bg-white text-black text-center rounded border-none p-1">{{ $warmupdetail->reps }}</span>
+                                                    class="w-16 bg-white text-black text-center rounded border-none p-1 reps">{{ $warmupdetail->reps }}</span>
                                                 <button class="px-2 py-1 text-white"
                                                     onclick="incrementValue(this)">+</button>
                                             </div>
@@ -375,55 +374,6 @@
                     </div>
                     {{-- end weight --}}
 
-
-
-                    {{-- table 2 conditioning --}}
-                    {{-- <div class="w-full bg-black text-xs bg-opacity-50 p-4 rounded-lg mb-6">
-                        <div class="w-full flex justify-between items-center text-white text-lg">
-                            <h1 class="font-bold mx-auto">Conditioning</h1>
-                            <i class="fa fa-chevron-down toggle-icon" aria-hidden="true"></i>
-                        </div>
-                        <table class="w-full text-white hidden tablee">
-                            <thead class="justify-between">
-                                <tr>
-                                    <th class="py-2">Set</th>
-                                    <th class="px-2">Reps</th>
-                                    <th class="col-span-2"></th>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody class="table-body"> <!-- Initially hidden table body -->
-                                @foreach ($detailsconditioning as $conditioningdetail)
-                                    <tr class="border-b border-gray-300">
-                                        <td class="py-4">{{ $conditioningdetail->sets }}</td>
-                                        <td class="py-4 workouts">{{ $conditioningdetail->workouts->workout }}</td>
-                                        <td class="py-4">
-                                            <div class="flex items-center justify-center space-x-4">
-                                                <button class="px-2 py-1 text-white"
-                                                    onclick="decrementValue(this)">-</button>
-                                                <span
-                                                    class="w-16 bg-white text-black text-center rounded border-none p-1">{{ $conditioningdetail->reps }}</span>
-                                                <button class="px-2 py-1 text-white"
-                                                    onclick="incrementValue(this)">+</button>
-                                            </div>
-                                        </td>
-                                        <td class="py-4">
-                                            <label class="inline-flex items-center me-5 cursor-pointer">
-                                                <input type="checkbox" value="" class="sr-only peer timer-checkbox" data-rest-time="{{ $conditioningdetail->rest }}">
-                                                <div
-                                                    class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
-                                                </div>
-                                            </label>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                <!-- Add more rows as needed -->
-                            </tbody>
-                        </table>
-                    </div> --}}
-
-                    {{-- end table 2 --}}
-
                     <div class="notes text-xs mb-6 w-full">
                         <textarea placeholder="Notes" class="w-full h-20 text-black bg-white rounded-lg p-2 border-none"></textarea>
                     </div>
@@ -579,17 +529,55 @@
                 }
             }
 
-            document.querySelectorAll('.timer-checkbox').forEach((checkbox, index) => {
-                checkbox.addEventListener('change', (event) => {
-                    const setNumber = checkbox.id.replace('toggleTimer', '');
-                    if (event.target.checked) {
-                        startTimer(setNumber);
-                    } else {
-                        stopTimer(setNumber);
-                        resetTimer(setNumber);
+            document.querySelectorAll('.tablee').forEach((table) => {
+                const checkboxes = table.querySelectorAll('.timer-checkbox');
+                if (checkboxes.length > 0) {
+                    const lastCheckbox = checkboxes[checkboxes.length - 1];
+
+                    checkboxes.forEach((checkbox) => {
+                        checkbox.addEventListener('change', (event) => {
+                            saveStrengthWorkout(checkbox);
+                            const setNumber = checkbox.id.replace('toggleTimer', '');
+                            if (event.target.checked) {
+                                startTimer(setNumber);
+                                if (checkbox === lastCheckbox) {
+                                    saveStrengthWorkout(checkbox);
+                                }
+                            } else {
+                                stopTimer(setNumber);
+                                resetTimer(setNumber);
+                            }
+                        });
+                    });
+                }
+            });
+
+            //save Strength after timer is completed
+            function saveStrengthWorkout(checkbox) {
+                const setNumber = checkbox.id.replace('toggleTimer', '');
+                const strengthIndex = checkbox.getAttribute('data-strength-index');
+                const table = checkbox.closest('table');
+                const repsElement = table.querySelector(`tr:nth-child(${setNumber}) .w-16.h-7.bg-white.text-black`);
+                const reps = repsElement ? repsElement.textContent.trim() : null;
+                const strengthId = checkbox.closest('tr').querySelector('.primary-btn').getAttribute('data-target').replace('#primary-weight-', '');
+
+                $.ajax({
+                    url: "/save-strength-workout",
+                    type: "POST",
+                    data: {
+                        strength_id: strengthId,
+                        set_number: setNumber,
+                        reps: reps,
+                        _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
+                    },
+                    success: function(response) {
+                        console.log(response);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error); // Handle error
                     }
                 });
-            });
+}
         </script>
 
         <script>
@@ -640,27 +628,31 @@
             //save warm-up after toching
             function savewarmup(element) {
                 var workoutId = element.getAttribute('data-workout-id');
+                var dailyWarmupId = element.getAttribute('data-daily-warmup-id');
+                var reps = $(element).closest('tr').find('.reps').text().trim();
                 console.log('Workout ID:', workoutId);
+                console.log('Reps:', reps);
 
                 $.ajax({
-                url: "/warmup-daily",
-                type: "POST",
-                data: {
-                    warmup_id: workoutId,
-                    _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
-                },
-                success: function(response) {
-                    console.log(response);
-                    
-                    //set saved daily warmup-id to warmup workout
-                    if (response.daily_warmup_id) {
-                        element.setAttribute('data-daily-warmup-id', response.daily_warmup_id);
+                    url: dailyWarmupId ? "/warmup-daily/" + dailyWarmupId : "/warmup-daily",
+                    type: dailyWarmupId ? "PUT" : "POST",
+                    data: {
+                        warmup_id: workoutId,
+                        reps: reps,
+                        _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
+                    },
+                    success: function(response) {
+                        console.log(response);
+
+                        //set saved daily warmup-id to warmup workout
+                        if (response.daily_warmup_id) {
+                            element.setAttribute('data-daily-warmup-id', response.daily_warmup_id);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error); // Handle error
                     }
-                },
-                error: function(xhr, status, error) {
-                    console.error(error); // Handle error
-                }
-            });
+                });
             }
         </script>
     @endsection
