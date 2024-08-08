@@ -241,64 +241,31 @@
                                             <tr class="border-b border-black">
                                                 <td class="py-2 pb-4">Warm UP</td>
                                                 <td class="py-2 pb-4">2 x 10 bar only</td>
-                                                <td></td>
-                                                <td class="py-2 pb-4"></td>
                                             </tr>
                                             <tr>
                                                 <td class="py-2 pb-4">Strength</td>
                                                 <td class="py-2 pb-4">3 Rep MAX</td>
-                                                <td class="py-2 pb-4 justify-end flex  sm:flex-row">
-                                                    <input type="text"
-                                                        class="form-input border rounded-md border-black mr-3 w-full sm:w-24">
-                                                    <button
-                                                        class="btn btn-outline-secondary hover:text-yellow-600 mt-2 sm:mt-0">Save</button>
-                                                </td>
                                             </tr>
                                             </tr>
                                             <tr class="border-b border-black">
                                                 <td class="py-2 pb-4"></td>
                                                 <td class="py-2 pb-4">2 x 10 bar only</td>
-                                                <td class="py-2 pb-4 justify-end flex  sm:flex-row">
-                                                    <input type="text"
-                                                        class="form-input border rounded-md border-black mr-3 w-full sm:w-24">
-                                                    <button
-                                                        class="btn btn-outline-secondary hover:text-yellow-600 mt-2 sm:mt-0">Save</button>
-                                                </td>
                                             </tr>
                                             <tr>
                                                 <td class="py-2 pb-4">Conditioning</td>
                                                 <td class="pb-4 py-2">5 sets</td>
-                                                <td class="py-2 text-end pb-4"></td>
                                             </tr>
                                             <tr>
                                                 <td class="py-2 pb-4"></td>
                                                 <td class="pb-4 py-2">- 10 Goblet Squat</td>
-                                                <td class="py-2 pb-4 justify-end flex  sm:flex-row">
-                                                    <input type="text"
-                                                        class="form-input border rounded-md border-black mr-3 w-full sm:w-24">
-                                                    <button
-                                                        class="btn btn-outline-secondary hover:text-yellow-600 mt-2 sm:mt-0">Save</button>
-                                                </td>
                                             </tr>
                                             <tr>
                                                 <td class="py-2 pb-4"></td>
                                                 <td class="py-2 pb-4">- 60 Sec Plank</td>
-                                                <td class="py-2 pb-4 justify-end flex  sm:flex-row">
-                                                    <input type="text"
-                                                        class="form-input border rounded-md border-black mr-3 w-full sm:w-24">
-                                                    <button
-                                                        class="btn btn-outline-secondary hover:text-yellow-600 mt-2 sm:mt-0">Save</button>
-                                                </td>
                                             </tr>
                                             <tr>
                                                 <td class="py-2 pb-4"></td>
                                                 <td class="py-2 pb-4">- 10 Single Arm bent over row</td>
-                                                <td class="py-2 pb-4 justify-end flex  sm:flex-row">
-                                                    <input type="text"
-                                                        class="form-input border rounded-md border-black mr-3 w-full sm:w-24">
-                                                    <button
-                                                        class="btn btn-outline-secondary hover:text-yellow-600 mt-2 sm:mt-0">Save</button>
-                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
