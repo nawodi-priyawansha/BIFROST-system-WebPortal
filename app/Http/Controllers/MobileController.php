@@ -116,7 +116,7 @@ class MobileController extends Controller
     public function workout()
     {
         $storedDay = session('selected_day');
-//dd($storedDay);
+    //dd($storedDay);
         // Format the stored day to the desired format
         $date = Carbon::createFromFormat('d/m/Y', $storedDay);
         $dayName = $date->format('l'); // Get the full day name (e.g., Monday)
@@ -174,40 +174,68 @@ class MobileController extends Controller
     }
 
     //store daily warmup workout after clicking
-    public function storewarmupdaily(Request $request){
+    public function storewarmupdaily(Request $request, $id = null){
         try {
+            $storedDay = session('selected_day');
+            //dd($storedDay);
+            // Format the stored day to the desired format
+            $date = Carbon::createFromFormat('d/m/Y', $storedDay);
+            $dayName = $date->format('l'); // Get the full day name (e.g., Monday)
+            $formattedDate = $date->format('d/m/y'); // Format the date
 
-        $validatedData = $request->validate([
-            'warmup_id' => 'required|integer|exists:warmups,id',
-        ]);
+            // Combine day name and date
+            $dayWithDate = $formattedDate . ' ' . $dayName;
 
-        $userId = Auth::user()->id;
-
-         // Check if a record already exists for this user and workout
-         $dailyWarmup = DailyWarmup::where('member_id', $userId)
-         ->where('warmup_id', $validatedData['warmup_id'])
-         ->first();
-
-         if ($dailyWarmup) {
-            // Update the existing record
-            $dailyWarmup->touch(); // Update the timestamps
-            $message = 'Warm-up updated successfully';
-        }
-        else{
-            DailyWarmup::create([
-                'member_id' => $userId,
-                'warmup_id' => $validatedData['warmup_id'],
+            $validatedData = $request->validate([
+                'warmup_id' => 'required|integer|exists:warmups,id',
+                'reps' => 'required|integer',
             ]);
-            $message = 'Warm-up saved successfully';
-        }
 
-        return response()->json([
-            'success' => $message,
-            'daily_warmup_id' => $dailyWarmup->id
-        ]);
+            $userId = Auth::user()->id;
+
+            // Check if a record already exists for this user and workout
+            $dailyWarmup = DailyWarmup::where('member_id', $userId)
+            ->where('warmup_id', $validatedData['warmup_id'])
+            ->first();
+
+            if ($dailyWarmup) {
+                // Update the existing record
+                $dailyWarmup->update(['reps' => $validatedData['reps']]);
+                $dailyWarmup->touch(); // Update the timestamps
+                $message = 'Warm-up updated successfully';
+            }
+            else{
+                DailyWarmup::create([
+                    'member_id' => $userId,
+                    'warmup_id' => $validatedData['warmup_id'],
+                    'reps' => $validatedData['reps'],
+                    'date' => $dayWithDate,
+                ]);
+                $message = 'Warm-up saved successfully';
+            }
+
+            return response()->json([
+                'success' => $message,
+                'daily_warmup_id' => $dailyWarmup->id
+            ]);
         } catch (\Exception $e) {
             Log::error('Error saving warm-up: ' . $e->getMessage());
             return response()->json(['error' => 'An error occurred while saving the warm-up'], 500);
+        }
+    }
+
+    public function storestrengthdaily(Request $request){
+        try {
+            dd($request);
+            $validatedData = $request->validate([
+                'strength_id' => 'required|integer|exists:strengths,id',
+                'set_number' => 'required|integer',
+                'reps' => 'required|integer'
+            ]);
+
+        } catch (\Exception $e) {
+            Log::error('Error saving strength: ' . $e->getMessage());
+            return response()->json(['error' => 'An error occurred while saving the strength'], 500);
         }
     }
 
