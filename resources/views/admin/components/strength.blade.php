@@ -208,7 +208,8 @@
                                     </svg>
                                 </button>
                                 <input type="text" id="rests_1" name="rests_1" placeholder="00:00"
-                                    class="bg-gray-50 border-x-0 border-gray-300 h-11 my-2 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none"
+                                    value="04:00"
+                                    class="bg-gray-50 border-x-0 restsp border-gray-300 h-11 my-2 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none"
                                     readonly />
                                 <button type="button" onclick="changeRestTime(this, 15)"
                                     class="increment bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
@@ -348,7 +349,8 @@
                                     </svg>
                                 </button>
                                 <input type="text" id="alt-rests_1" name="alt-rests_1" placeholder="00:00"
-                                    class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none"
+                                    value="04:00"
+                                    class="bg-gray-50 border-x-0 restsa border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none"
                                     readonly />
                                 <button type="button" onclick="changeRestTime(this, 15)"
                                     class="increment-rest bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
@@ -926,6 +928,14 @@
             el.name = baseName + '_' + index;
             el.id = baseId + '_' + index;
         });
+        let timeElementA = element.querySelector('.restsa');
+        if (timeElementA) {
+            timeElementA.value = '04:00';
+        }
+        let timeElementP = element.querySelector('.restsp');
+        if (timeElementP) {
+            timeElementP.value = '04:00';
+        }
     }
 
     // Function to add a remove button to the cloned element
