@@ -7,6 +7,7 @@ use App\Models\Access;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use App\Models\DailyWarmup;
 use App\Models\Newprofile;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
@@ -46,6 +47,49 @@ class UserDashboardController extends Controller
             return view('error.unauthorized');
         }
     }
+
+
+    public function getData(Request $request)
+{
+    try {
+        $date = $request->input('date');
+        $user = Auth::user(); // Get the currently authenticated user
+
+        if (!$user) {
+            // If the user is not authenticated, return the unauthorized view
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+        $member = Newprofile::where('user_id', $user->id)->first();
+
+        if (!$member) {
+            // If member is not found, return an empty array
+            return response()->json([]);
+        }
+
+        $warmups = DailyWarmup::with(['member', 'warmup.category'])
+            ->where('member_id', $member->id)
+            ->whereDate('date', $date)
+            ->get()
+            ->map(function ($item) {
+                return [
+                    // 'member' => $item->member,  // Access member details
+                    'warmup' => [
+
+                        'workout' => $item->warmup,  // Access warmup details
+                        'category' => $item->warmup->category,  // Access warmup category details
+                    ],
+                    'reps' => $item->reps,
+                    'date' => $item->date,
+                ];
+            });
+
+        return response()->json(['warmup'=>$warmups]);
+    } catch (Exception $e) {
+        return response()->json(['error' => $e->getMessage()], 500);
+    }
+}
+
 
     //  Dashboard Search Function
     public function search(Request $request)

@@ -197,6 +197,8 @@ Route::middleware(['admin'])->group(function () {
 Route::middleware(['user'])->group(function () {
     // dashboard
     Route::get('/user/dashboard', [UserDashboardController::class, 'viewdashboard'])->name('userdashboard');
+    // Find exercise
+    Route::POST('/find-data',[UserDashboardController::class,'getData'])->name('find-data');
     Route::post('/users/search', [UserDashboardController::class, 'search'])->name('users.search');
 
 

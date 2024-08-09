@@ -218,9 +218,9 @@
                                         class="text-white p-1 px-4 rounded-md bg-[#fb1018] whitespace-nowrap text-sm">Workout-
                                         Deadlift</label>
                                     <label for=""
-                                        class="text-white p-1 px-4 rounded-md bg-black whitespace-nowrap text-sm">12 july
-                                        2024</label>
-
+                                        class="text-white p-1 px-4 rounded-md bg-black whitespace-nowrap text-sm"
+                                        id="datelbl">
+                                    </label>
 
                                 </div>
                                 <div class="w-1/2 flex items-center justify-end">
@@ -233,6 +233,42 @@
                             <!-- Table with session details -->
                             <div class="mx-4 mt-4">
                                 <div class="overflow-y-auto md:overflow-y-visible max-h-screen md:max-h-full">
+                                    <div>
+                                        <div class="flex w-full border-b border-black">
+                                            <div class="w-1/3">
+                                                <p>Warm UP</p>
+                                            </div>
+                                            <div class="w-1/3 my-2">
+                                                <div id="warmup-table-body"></div>
+                                            </div>
+                                        </div>
+                                        <div class="flex w-full border-b border-black">
+                                            <div class="w-1/3">
+                                                <p>Strength</p>
+                                            </div>
+                                            <div class="w-1/3 my-2">
+                                                <div id="">
+                                                    <p>	2 x 10 bar only</p>
+                                                    <p>	3 Rep MAX</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex w-full mt-2">
+                                            <div class="w-1/3">
+                                                <p>Conditioning</p>
+                                            </div>
+                                            <div class="w-1/3 mb-2">
+                                                <div id="">
+                                                    <p>10 Goblet Squat</p>
+                                                    <p>60 Sec Plank</p>
+                                                    <p>10 Single Arm bent over row</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+{{-- 
                                     <table class="table-auto w-full border-collapse text-md">
                                         <thead>
                                             <tr></tr>
@@ -240,7 +276,7 @@
                                         <tbody>
                                             <tr class="border-b border-black">
                                                 <td class="py-2 pb-4">Warm UP</td>
-                                                <td class="py-2 pb-4">2 x 10 bar only</td>
+                                                <td class="py-2 pb-4" id="warmup-table-bodys">2 x 10 bar only</td>
                                             </tr>
                                             <tr>
                                                 <td class="py-2 pb-4">Strength</td>
@@ -268,7 +304,7 @@
                                                 <td class="py-2 pb-4">- 10 Single Arm bent over row</td>
                                             </tr>
                                         </tbody>
-                                    </table>
+                                    </table> --}}
                                 </div>
 
                             </div>
@@ -373,6 +409,80 @@
         </div>
         </div>
         </div>
+
+        <script>
+            window.onload = function() {
+                setDate();
+            };
+
+            function setDate() {
+                var dateValue = document.getElementById('dayshort').value;
+                var date = new Date(dateValue);
+
+                var options = {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric'
+                };
+                var formattedDate = date.toLocaleDateString('en-GB', options);
+
+                var datelbl = document.getElementById('datelbl');
+                datelbl.innerHTML = formattedDate
+
+                // console.log(formattedDate);
+                getExercise(formattedDate);
+            }
+
+            function getExercise() {
+                var dateValue = document.getElementById('dayshort').value;
+                let date = new Date(dateValue);
+
+                // Define options for formatting the date
+                let day = date.getDate().toString().padStart(2, '0'); // Day (e.g., "08")
+                let month = (date.getMonth() + 1).toString().padStart(2, '0'); // Month (e.g., "08")
+                let year = date.getFullYear().toString().slice(-2); // Year (e.g., "24")
+
+                // Array of weekday names
+                let weekdayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+                let weekday = weekdayNames[date.getDay()]; // Full name of the weekday (e.g., "Thursday")
+
+                // Format the date according to the options
+                let formattedDate = `${month}/${day}/${year} ${weekday}`;
+
+                console.log(formattedDate);
+
+                $.ajax({
+                    url: "/find-data",
+                    type: "POST",
+                    data: {
+                        date: formattedDate,
+                        _token: $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        console.log(response);
+                        setExercise(response.warmup);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('AJAX Error:', error); // Handle error
+                    },
+                });
+            }
+
+            function setExercise(warmups) {
+                let tableBody = $('#warmup-table-body'); // Select the table body element
+
+                // Clear the existing table rows
+                tableBody.empty();
+
+                // Iterate through the warmups and create table rows
+                warmups.forEach(function(warmup) {
+                    let row = `<div><tr>
+                        ${warmup.reps} x ${warmup.warmup.workout.weight} ${warmup.warmup.category.category_name} - ${warmup.warmup.workout.category.category_name}
+                    </tr></div>`;
+                    tableBody.append(row); // Append the row to the table body
+                });
+            }
+        </script>
     @endsection
 </body>
 

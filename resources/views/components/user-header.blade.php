@@ -115,6 +115,7 @@
                             function changeDate(days) {
                                 currentDate.setDate(currentDate.getDate() + days);
                                 updateDateDisplay(currentDate);
+                                setDate();
                             }
 
                             // Helper function to check if two dates are the same

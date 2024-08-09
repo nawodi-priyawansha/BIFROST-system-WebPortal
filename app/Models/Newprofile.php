@@ -47,4 +47,8 @@ class Newprofile extends Model
     {
         return $this->hasMany(Test::class, 'member_id');
     }
+    public function dailyWarmups()
+    {
+        return $this->hasMany(DailyWarmup::class, 'warmup_id');
+    }
 }
