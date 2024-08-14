@@ -116,7 +116,7 @@
                             </select>
                         </div>
                         <div class="flex items-center border-b mt-2 ">
-                            <label for="weigths_1" class="w-60 block mb-1">Weigth <span
+                            <label for="weigths_1" class="w-60 block mb-1">Weight <span
                                     class="text-red-500">*</span></label>
                             <input type="text" id="weigths_1" name="weigths_1"
                                 class="w-1/3 px-3 py-3 border flex rounded mb-2">
@@ -258,7 +258,7 @@
                             </select>
                         </div>
                         <div class="flex items-center border-b mt-2">
-                            <label for="weigth" class="w-60 block mb-1">Weigth <span
+                            <label for="weigth" class="w-60 block mb-1">Weight <span
                                     class="text-red-500">*</span></label>
                             <input type="text" id="alt-weigths_1" name="alt-weigths_1"
                                 class="w-1/3 px-3 py-3 border flex rounded mb-2">
