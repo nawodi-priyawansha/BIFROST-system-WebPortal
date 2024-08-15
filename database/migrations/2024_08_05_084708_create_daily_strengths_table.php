@@ -16,6 +16,8 @@ return new class extends Migration
             $table->foreignId('member_id')->nullable()->constrained('members')->onDelete('cascade');
             $table->foreignId('strength_id')->nullable()->constrained('strengths')->onDelete('cascade');
             $table->enum('type', ['Primary', 'Alternative']);
+            $table->integer('reps')->nullable();
+            $table->string('weight')->nullable();
             $table->string('date');
             $table->timestamps();
         });

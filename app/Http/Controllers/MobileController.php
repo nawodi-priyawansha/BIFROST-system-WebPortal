@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ClientManagement;
 use App\Models\Conditioning;
+use App\Models\DailyStrength;
 use App\Models\DailyWarmup;
 use Exception;
 use Carbon\Carbon;
@@ -85,7 +86,7 @@ class MobileController extends Controller
         $userscore = UserScore::where('user_id', $user)->where('selected_day', $dayWithDate)->first();
         // dd($userscore);
 
-        return view("mobile.user.readinessscore", compact('dayWithDate','userscore'));
+        return view("mobile.user.readinessscore", compact('dayWithDate', 'userscore'));
     }
 
     // store Score
@@ -116,7 +117,7 @@ class MobileController extends Controller
     public function workout()
     {
         $storedDay = session('selected_day');
-    //dd($storedDay);
+        //dd($storedDay);
         // Format the stored day to the desired format
         $date = Carbon::createFromFormat('d/m/Y', $storedDay);
         $dayName = $date->format('l'); // Get the full day name (e.g., Monday)
@@ -153,28 +154,29 @@ class MobileController extends Controller
 
 
         //  //get warup details for specific date
-         $tabweightweight = 'weightlifting';
-         $date = $dayWithDate;
-         $detailsweight = Weightlifting::where('date', $date)
-             ->with('sets')
-             ->with('sets.weightlifting')
-             ->with('workouts')
-             ->with('workouts.categoryOption')
-             ->get();
+        $tabweightweight = 'weightlifting';
+        $date = $dayWithDate;
+        $detailsweight = Weightlifting::where('date', $date)
+            ->with('sets')
+            ->with('sets.weightlifting')
+            ->with('workouts')
+            ->with('workouts.categoryOption')
+            ->get();
 
-            //  foreach ($detailsweight as $weightlifting) {
-            //     foreach ($weightlifting->sets as $set) {
-            //         dd($set->sets, $set->reps); // Dump and display the values of sets and reps
-            //     }
-            // }
+        //  foreach ($detailsweight as $weightlifting) {
+        //     foreach ($weightlifting->sets as $set) {
+        //         dd($set->sets, $set->reps); // Dump and display the values of sets and reps
+        //     }
+        // }
 
-            //dd($detailsstrength);
+        //dd($detailsstrength);
         //return view('mobile.user.workout', compact('dayWithDate','detailswarmup','detailsstrength','detailsconditioning','detailsweight'));
-        return view('mobile.user.workout', compact('dayWithDate','detailswarmup','detailsstrength','detailsweight'));
+        return view('mobile.user.workout', compact('dayWithDate', 'detailswarmup', 'detailsstrength', 'detailsweight'));
     }
 
     //store daily warmup workout after clicking
-    public function storewarmupdaily(Request $request, $id = null){
+    public function storewarmupdaily(Request $request, $id = null)
+    {
         try {
             $storedDay = session('selected_day');
             //dd($storedDay);
@@ -195,16 +197,15 @@ class MobileController extends Controller
 
             // Check if a record already exists for this user and workout
             $dailyWarmup = DailyWarmup::where('member_id', $userId)
-            ->where('warmup_id', $validatedData['warmup_id'])
-            ->first();
+                ->where('warmup_id', $validatedData['warmup_id'])
+                ->first();
 
             if ($dailyWarmup) {
                 // Update the existing record
                 $dailyWarmup->update(['reps' => $validatedData['reps']]);
                 $dailyWarmup->touch(); // Update the timestamps
                 $message = 'Warm-up updated successfully';
-            }
-            else{
+            } else {
                 DailyWarmup::create([
                     'member_id' => $userId,
                     'warmup_id' => $validatedData['warmup_id'],
@@ -224,20 +225,179 @@ class MobileController extends Controller
         }
     }
 
-    public function storestrengthdaily(Request $request){
+    public function storestrengthdaily(Request $request)
+    {
+        // Log the received request data
+        Log::info('Received Request Data:', $request->all());
+
+        // Validate the incoming request data
+        $validated = $request->validate([
+            'strength_id' => 'required|exists:strengths,id',
+            'type' => 'required|in:Primary,Alternative',
+            'reps' => 'required|integer',
+            'weight' => 'nullable|numeric', // Add validation rule for weight
+        ]);
+
+        // Log the validated data
+        Log::info('Validated Data:', $validated);
+
+        // Retrieve the authenticated user ID
+        $userId = Auth::id();
+
+        if (!$userId) {
+            Log::warning('User is not authenticated.');
+            return response()->json(['error' => 'User is not authenticated'], 401);
+        }
+
+        // Retrieve and format the date from session
+        $storedDay = session('selected_day');
+        if (!$storedDay) {
+            Log::warning('Selected day is missing from session');
+            return response()->json(['error' => 'Selected day is missing from session'], 400);
+        }
+
         try {
-            dd($request);
-            $validatedData = $request->validate([
-                'strength_id' => 'required|integer|exists:strengths,id',
-                'set_number' => 'required|integer',
-                'reps' => 'required|integer'
+            $date = Carbon::createFromFormat('d/m/Y', $storedDay);
+            $formattedDate = $date->format('d/m/Y'); // Correct format
+
+            // Log the formatted date
+            Log::info('Formatted Date:', ['date' => $formattedDate]);
+
+            // Ensure weight is a float and handle null value
+            $weight = isset($validated['weight']) ? floatval($validated['weight']) : null;
+
+            // Log the weight being saved
+            Log::info('Weight Value:', ['weight' => $weight]);
+
+            // Check if a record already exists for this user and workout and type
+            $dailyStrength = DailyStrength::where('member_id', $userId)
+                ->where('strength_id', $validated['strength_id'])
+                ->where('date', $formattedDate)
+                ->where('type', $validated['type'])
+                ->first();
+
+            if ($dailyStrength) {
+                // Update existing record
+                $dailyStrength->update([
+                    'reps' => $validated['reps'],
+                    'weight' => $weight, // Update weight
+                    'type' => $validated['type'], // Ensure type is updated
+                ]);
+                $message = 'Data successfully updated';
+
+                // Log the update action
+                Log::info('Updated DailyStrength Record:', [
+                    'user_id' => $userId,
+                    'strength_id' => $validated['strength_id'],
+                    'date' => $formattedDate,
+                    'weight'=>$weight,
+                    'type' => $validated['type'],
+                    'updated_data' => array_merge($validated, ['weight' => $weight]) // Include weight in log
+                ]);
+            } else {
+                // Create a new record
+                DailyStrength::create([
+                    'member_id' => $userId,
+                    'strength_id' => $validated['strength_id'],
+                    'type' => $validated['type'],
+                    'date' => $formattedDate,
+                    'reps' => $validated['reps'],
+                    'weight' => $weight, // Save weight
+                ]);
+                $message = 'Data successfully saved';
+
+                // Log the creation action with weight included
+                Log::info('Created New DailyStrength Record:', [
+                    'user_id' => $userId,
+                    'strength_id' => $validated['strength_id'],
+                    'date' => $formattedDate,
+                    'weight'=>$weight,
+                    'type' => $validated['type'],
+                    'created_data' => array_merge($validated, ['weight' => $weight]) // Include weight in log
+                ]);
+            }
+
+            // Respond with success message
+            return response()->json([
+                'message' => $message,
+                'data' => $validated
+            ]);
+        } catch (\Exception $e) {
+            // Log the exception message
+            Log::error('Error saving strength: ' . $e->getMessage(), [
+                'request' => $request->all(),
+                'exception' => $e->getTraceAsString()
             ]);
 
-        } catch (\Exception $e) {
-            Log::error('Error saving strength: ' . $e->getMessage());
             return response()->json(['error' => 'An error occurred while saving the strength'], 500);
         }
     }
+
+
+    // public function storestrengthdaily(Request $request)
+    // {
+    //     Log::info('Received Request Data:', $request->all());
+
+    //     $validated = $request->validate([
+    //         'strength_id' => 'required|exists:strengths,id',
+    //         'type' => 'required|in:Primary,Alternative',
+    //         'reps' => 'required|integer',
+    //         'weight' => 'nullable|numeric',
+    //     ]);
+
+    //     Log::info('Validated Data:', $validated);
+
+    //     $userId = Auth::id();
+
+    //     if (!$userId) {
+    //         Log::warning('User is not authenticated.');
+    //         return response()->json(['error' => 'User is not authenticated'], 401);
+    //     }
+
+    //     $storedDay = session('selected_day');
+    //     if (!$storedDay) {
+    //         Log::warning('Selected day is missing from session');
+    //         return response()->json(['error' => 'Selected day is missing from session'], 400);
+    //     }
+
+    //     try {
+    //         // Log the data intended for update or creation
+    //         Log::info('Data for updateOrCreate:', [
+    //             'member_id' => $userId,
+    //             'strength_id' => $validated['strength_id'],
+    //             'date' => $storedDay,
+    //             'type' => $validated['type'],
+    //             'reps' => $validated['reps'],
+    //             'weight' => $validated['weight'],
+    //         ]);
+
+    //         // Update or create the record
+    //         $dailyStrength = DailyStrength::updateOrCreate(
+    //             [
+    //                 'member_id' => $userId,
+    //                 'strength_id' => $validated['strength_id'],
+    //                 'date' => $storedDay,
+    //             ],
+    //             [
+    //                 'type' => $validated['type'], // Ensure this is passed correctly
+    //                 'reps' => $validated['reps'],
+    //                 'weight' => $validated['weight'],
+    //             ]
+    //         );
+
+    //         Log::info('DailyStrength record updated or created', [
+    //             'type' => $validated['type'],
+    //             'record' => $dailyStrength->toArray()
+    //         ]);
+
+    //         return response()->json(['success' => 'Record saved successfully', 'data' => $dailyStrength], 200);
+    //     } catch (\Exception $e) {
+    //         Log::error('Error saving DailyStrength record:', ['error' => $e->getMessage()]);
+    //         return response()->json(['error' => 'Failed to save record'], 500);
+    //     }
+    // }
+
+
 
     public function workouttimer()
     {
@@ -249,14 +409,14 @@ class MobileController extends Controller
 
         // Combine day name and date
         $dayWithDate = $formattedDate . ' ' . $dayName;
-          //get warup details for specific date
-         $tabconditioning = 'conditioning';
-         $date = $dayWithDate;
-         $detailsconditioning = Conditioning::where('date', $date)
-         ->with('workout')
-         ->get();
+        //get warup details for specific date
+        $tabconditioning = 'conditioning';
+        $date = $dayWithDate;
+        $detailsconditioning = Conditioning::where('date', $date)
+            ->with('workout')
+            ->get();
 
-        return view("mobile.user.workout-timer",compact('dayWithDate','detailsconditioning'));
+        return view("mobile.user.workout-timer", compact('dayWithDate', 'detailsconditioning'));
     }
 
     public function histroyview()
