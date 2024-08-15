@@ -238,7 +238,7 @@ Route::get('/mobile/workout', [MobileController::class, 'workout'])->name('mobil
 Route::post('/warmup-daily',  [MobileController::class, 'storewarmupdaily']);
 Route::put('/warmup-daily/{id}', [MobileController::class, 'storewarmupdaily'])->name('warmup.daily.update');
 
-Route::post('/strength-daily',  [MobileController::class, 'storestrengthdaily']);
+Route::post('/save-strength-workout',  [MobileController::class, 'storestrengthdaily']);
 
 Route::get('/mobile/workouttimer', [MobileController::class, 'workouttimer'])->name('mobile.workouttimer');
 Route::get('/mobile/histroyview', [MobileController::class, 'histroyview'])->name('mobile.histroyview');
