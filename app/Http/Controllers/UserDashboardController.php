@@ -50,46 +50,55 @@ class UserDashboardController extends Controller
 
 
     public function getData(Request $request)
-{
-    try {
-        $date = $request->input('date');
-        $user = Auth::user(); // Get the currently authenticated user
+    {
+        try {
+            Log::info('getData function called.');
 
-        if (!$user) {
-            // If the user is not authenticated, return the unauthorized view
-            return response()->json(['error' => 'Unauthorized'], 401);
+            $date = $request->input('date');
+            Log::info('Date received: ' . $date);
+
+            $user = Auth::user(); // Get the currently authenticated user
+            Log::info('Authenticated user: ', ['user' => $user]);
+
+            if (!$user) {
+                // If the user is not authenticated, return the unauthorized view
+                Log::warning('Unauthorized access attempt.');
+                return response()->json(['error' => 'Unauthorized'], 401);
+            }
+
+            $member = Newprofile::where('user_id', $user->id)->first();
+            Log::info('Member found: ', ['member' => $member]);
+
+            if (!$member) {
+                // If member is not found, return an empty array
+                Log::info('No member found for user.');
+                return response()->json([]);
+            }
+
+            $warmups = DailyWarmup::with(['member', 'warmup.category'])
+                ->where('member_id', $member->id)
+                ->whereDate('date', $date)
+                ->get()
+                ->map(function ($item) {
+                    Log::info('Mapping warmup item: ', ['item' => $item]);
+                    return [
+                        // 'member' => $item->member,  // Access member details
+                        'warmup' => [
+                            'workout' => $item->warmup,  // Access warmup details
+                            'category' => $item->warmup->category,  // Access warmup category details
+                        ],
+                        'reps' => $item->reps,
+                        'date' => $item->date,
+                    ];
+                });
+
+            Log::info('Warmups retrieved: ', ['warmups' => $warmups]);
+            return response()->json(['warmup' => $warmups]);
+        } catch (Exception $e) {
+            Log::error('An error occurred: ' . $e->getMessage());
+            return response()->json(['error' => $e->getMessage()], 500);
         }
-
-        $member = Newprofile::where('user_id', $user->id)->first();
-
-        if (!$member) {
-            // If member is not found, return an empty array
-            return response()->json([]);
-        }
-
-        $warmups = DailyWarmup::with(['member', 'warmup.category'])
-            ->where('member_id', $member->id)
-            ->whereDate('date', $date)
-            ->get()
-            ->map(function ($item) {
-                return [
-                    // 'member' => $item->member,  // Access member details
-                    'warmup' => [
-
-                        'workout' => $item->warmup,  // Access warmup details
-                        'category' => $item->warmup->category,  // Access warmup category details
-                    ],
-                    'reps' => $item->reps,
-                    'date' => $item->date,
-                ];
-            });
-
-        return response()->json(['warmup'=>$warmups]);
-    } catch (Exception $e) {
-        return response()->json(['error' => $e->getMessage()], 500);
     }
-}
-
 
     //  Dashboard Search Function
     public function search(Request $request)
