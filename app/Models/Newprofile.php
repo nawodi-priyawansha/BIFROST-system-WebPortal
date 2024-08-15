@@ -51,4 +51,9 @@ class Newprofile extends Model
     {
         return $this->hasMany(DailyWarmup::class, 'warmup_id');
     }
+
+    public function dailyStrenght()
+    {
+        return $this->hasMany(DailyStrength::class, 'strength_id');
+    }
 }
