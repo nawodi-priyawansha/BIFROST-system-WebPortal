@@ -6,6 +6,7 @@ use App\Models\ClientManagement;
 use App\Models\Conditioning;
 use App\Models\DailyStrength;
 use App\Models\DailyWarmup;
+use App\Models\Newprofile;
 use Exception;
 use Carbon\Carbon;
 use App\Models\Score;
@@ -178,41 +179,55 @@ class MobileController extends Controller
     public function storewarmupdaily(Request $request, $id = null)
     {
         try {
+            Log::info('storewarmupdaily function called.');
+
             $storedDay = session('selected_day');
-            //dd($storedDay);
+            Log::info('Stored day from session: ' . $storedDay);
+
             // Format the stored day to the desired format
             $date = Carbon::createFromFormat('d/m/Y', $storedDay);
+            Log::info('Formatted date: ' . $date);
+
             $dayName = $date->format('l'); // Get the full day name (e.g., Monday)
             $formattedDate = $date->format('d/m/y'); // Format the date
 
             // Combine day name and date
             $dayWithDate = $formattedDate . ' ' . $dayName;
+            Log::info('Day with date: ' . $dayWithDate);
 
             $validatedData = $request->validate([
                 'warmup_id' => 'required|integer|exists:warmups,id',
                 'reps' => 'required|integer',
             ]);
+            Log::info('Validated data: ', $validatedData);
 
             $userId = Auth::user()->id;
+            $memberId = Newprofile::where('user_id', $userId)->value('id');
+            Log::info('Authenticated user ID: ' . $userId);
 
             // Check if a record already exists for this user and workout
-            $dailyWarmup = DailyWarmup::where('member_id', $userId)
+            $dailyWarmup = DailyWarmup::where('member_id', $memberId)
                 ->where('warmup_id', $validatedData['warmup_id'])
                 ->first();
+            Log::info('Existing DailyWarmup record: ', ['dailyWarmup' => $dailyWarmup]);
 
             if ($dailyWarmup) {
+                Log::info('Warm-up updated111: ', ['dailyWarmup' => $dailyWarmup]);
                 // Update the existing record
                 $dailyWarmup->update(['reps' => $validatedData['reps']]);
                 $dailyWarmup->touch(); // Update the timestamps
                 $message = 'Warm-up updated successfully';
+                Log::info('Warm-up updated: ', ['dailyWarmup' => $dailyWarmup]);
             } else {
+                Log::info('New warm-up created11: ', ['dailyWarmup' => $dailyWarmup]);
                 DailyWarmup::create([
-                    'member_id' => $userId,
+                    'member_id' => $memberId,
                     'warmup_id' => $validatedData['warmup_id'],
                     'reps' => $validatedData['reps'],
                     'date' => $dayWithDate,
                 ]);
                 $message = 'Warm-up saved successfully';
+                Log::info('New warm-up created: ', ['dailyWarmup' => $dailyWarmup]);
             }
 
             return response()->json([
@@ -243,8 +258,8 @@ class MobileController extends Controller
 
         // Retrieve the authenticated user ID
         $userId = Auth::id();
-
-        if (!$userId) {
+        $memberId = Newprofile::where('user_id', $userId)->value('id');
+        if (!$memberId) {
             Log::warning('User is not authenticated.');
             return response()->json(['error' => 'User is not authenticated'], 401);
         }
@@ -257,8 +272,22 @@ class MobileController extends Controller
         }
 
         try {
+
+            $storedDay = session('selected_day');
+            Log::info('Stored day from session: ' . $storedDay);
+
+            // Format the stored day to the desired format
             $date = Carbon::createFromFormat('d/m/Y', $storedDay);
-            $formattedDate = $date->format('d/m/Y'); // Correct format
+            Log::info('Formatted date: ' . $date);
+
+            $dayName = $date->format('l'); // Get the full day name (e.g., Monday)
+            $formattedDate = $date->format('d/m/y'); // Format the date
+
+            // Combine day name and date
+            $dayWithDate = $formattedDate . ' ' . $dayName;
+
+            // $date = Carbon::createFromFormat('d/m/Y', $storedDay);
+            // $formattedDate = $date->format('d/m/Y'); // Correct format
 
             // Log the formatted date
             Log::info('Formatted Date:', ['date' => $formattedDate]);
@@ -270,9 +299,9 @@ class MobileController extends Controller
             Log::info('Weight Value:', ['weight' => $weight]);
 
             // Check if a record already exists for this user and workout and type
-            $dailyStrength = DailyStrength::where('member_id', $userId)
+            $dailyStrength = DailyStrength::where('member_id', $memberId)
                 ->where('strength_id', $validated['strength_id'])
-                ->where('date', $formattedDate)
+                ->where('date', $dayWithDate)
                 ->where('type', $validated['type'])
                 ->first();
 
@@ -287,20 +316,20 @@ class MobileController extends Controller
 
                 // Log the update action
                 Log::info('Updated DailyStrength Record:', [
-                    'user_id' => $userId,
+                    'user_id' => $memberId,
                     'strength_id' => $validated['strength_id'],
-                    'date' => $formattedDate,
-                    'weight'=>$weight,
+                    'date' => $dayWithDate,
+                    'weight' => $weight,
                     'type' => $validated['type'],
                     'updated_data' => array_merge($validated, ['weight' => $weight]) // Include weight in log
                 ]);
             } else {
                 // Create a new record
                 DailyStrength::create([
-                    'member_id' => $userId,
+                    'member_id' => $memberId,
                     'strength_id' => $validated['strength_id'],
                     'type' => $validated['type'],
-                    'date' => $formattedDate,
+                    'date' => $dayWithDate,
                     'reps' => $validated['reps'],
                     'weight' => $weight, // Save weight
                 ]);
@@ -308,10 +337,10 @@ class MobileController extends Controller
 
                 // Log the creation action with weight included
                 Log::info('Created New DailyStrength Record:', [
-                    'user_id' => $userId,
+                    'user_id' => $memberId,
                     'strength_id' => $validated['strength_id'],
-                    'date' => $formattedDate,
-                    'weight'=>$weight,
+                    'date' => $dayWithDate,
+                    'weight' => $weight,
                     'type' => $validated['type'],
                     'created_data' => array_merge($validated, ['weight' => $weight]) // Include weight in log
                 ]);
