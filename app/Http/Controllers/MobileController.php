@@ -272,8 +272,22 @@ class MobileController extends Controller
         }
 
         try {
+
+            $storedDay = session('selected_day');
+            Log::info('Stored day from session: ' . $storedDay);
+
+            // Format the stored day to the desired format
             $date = Carbon::createFromFormat('d/m/Y', $storedDay);
-            $formattedDate = $date->format('d/m/Y'); // Correct format
+            Log::info('Formatted date: ' . $date);
+
+            $dayName = $date->format('l'); // Get the full day name (e.g., Monday)
+            $formattedDate = $date->format('d/m/y'); // Format the date
+
+            // Combine day name and date
+            $dayWithDate = $formattedDate . ' ' . $dayName;
+
+            // $date = Carbon::createFromFormat('d/m/Y', $storedDay);
+            // $formattedDate = $date->format('d/m/Y'); // Correct format
 
             // Log the formatted date
             Log::info('Formatted Date:', ['date' => $formattedDate]);
@@ -287,7 +301,7 @@ class MobileController extends Controller
             // Check if a record already exists for this user and workout and type
             $dailyStrength = DailyStrength::where('member_id', $memberId)
                 ->where('strength_id', $validated['strength_id'])
-                ->where('date', $formattedDate)
+                ->where('date', $dayWithDate)
                 ->where('type', $validated['type'])
                 ->first();
 
@@ -304,7 +318,7 @@ class MobileController extends Controller
                 Log::info('Updated DailyStrength Record:', [
                     'user_id' => $memberId,
                     'strength_id' => $validated['strength_id'],
-                    'date' => $formattedDate,
+                    'date' => $dayWithDate,
                     'weight' => $weight,
                     'type' => $validated['type'],
                     'updated_data' => array_merge($validated, ['weight' => $weight]) // Include weight in log
@@ -315,7 +329,7 @@ class MobileController extends Controller
                     'member_id' => $memberId,
                     'strength_id' => $validated['strength_id'],
                     'type' => $validated['type'],
-                    'date' => $formattedDate,
+                    'date' => $dayWithDate,
                     'reps' => $validated['reps'],
                     'weight' => $weight, // Save weight
                 ]);
@@ -325,7 +339,7 @@ class MobileController extends Controller
                 Log::info('Created New DailyStrength Record:', [
                     'user_id' => $memberId,
                     'strength_id' => $validated['strength_id'],
-                    'date' => $formattedDate,
+                    'date' => $dayWithDate,
                     'weight' => $weight,
                     'type' => $validated['type'],
                     'created_data' => array_merge($validated, ['weight' => $weight]) // Include weight in log
