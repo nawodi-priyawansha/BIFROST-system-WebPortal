@@ -104,7 +104,9 @@ Route::middleware(['admin'])->group(function () {
     // client management page
     Route::get('/admin/clientmanagement', [ClientManagementController::class, 'viewclientmanagement'])->name('viewadminclientmanagement');
     //fetch data
-    Route::get('/save/newclient/{action?}/{id?}', [ClientManagementController::class, 'newProfileclientShow'])->name('addnewclientview');
+    Route::get('/save/newclient/{action?}/{id?}', [ClientManagementController::class, 'newProfileclientShow'])->name('addnewclientedit');
+
+    Route::get('/view/newclient/{id?}', [ClientManagementController::class, 'clientview'])->name('clientview');
     //add new client
     Route::post('/save/newclient/add', [ClientManagementController::class, 'addnewclient'])->name('newProfileclientsave');
     //editclient
