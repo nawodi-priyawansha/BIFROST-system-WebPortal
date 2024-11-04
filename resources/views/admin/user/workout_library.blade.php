@@ -174,7 +174,7 @@
                             @foreach ($workoutLibraries as $index => $workoutLibrary)
                                 <tr class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }}">
                                     <td class="p-3 border-s-2 border-y-2 border-gray-300 text-left">
-                                        {{ $workoutLibrary->type }}
+                                        {{ ucfirst($workoutLibrary->type) }}
                                     </td>
                                     <td dir="ltr" class="p-3 border-y-2 border-gray-300 text-left">
                                         {{ $workoutLibrary->categoryOption->category_name }}
