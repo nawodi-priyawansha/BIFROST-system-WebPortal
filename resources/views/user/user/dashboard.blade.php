@@ -248,8 +248,8 @@
                                             </div>
                                             <div class="w-1/3 my-2">
                                                 <div id="">
-                                                    <p>	2 x 10 bar only</p>
-                                                    <p>	3 Rep MAX</p>
+                                                    <p> 2 x 10 bar only</p>
+                                                    <p> 3 Rep MAX</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -268,7 +268,7 @@
                                     </div>
 
 
-{{-- 
+                                    {{-- 
                                     <table class="table-auto w-full border-collapse text-md">
                                         <thead>
                                             <tr></tr>
@@ -447,7 +447,7 @@
                 let weekday = weekdayNames[date.getDay()]; // Full name of the weekday (e.g., "Thursday")
 
                 // Format the date according to the options
-                let formattedDate = `${month}/${day}/${year} ${weekday}`;
+                let formattedDate = `${day}/${month}/${year} ${weekday}`;
 
                 console.log(formattedDate);
 

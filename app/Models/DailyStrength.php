@@ -13,6 +13,19 @@ class DailyStrength extends Model
         'member_id',
         'strength_id',
         'reps',
-        'date'
+        'date',
+        'type',
+        'weight',
     ];
+
+    public function member()
+    {
+        return $this->belongsTo(Newprofile::class, 'member_id');
+    }
+    
+    public function strenght()
+    {
+        return $this->belongsTo(Strength::class, 'strength_id');
+    }
+
 }

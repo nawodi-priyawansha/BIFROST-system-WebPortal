@@ -104,7 +104,9 @@ Route::middleware(['admin'])->group(function () {
     // client management page
     Route::get('/admin/clientmanagement', [ClientManagementController::class, 'viewclientmanagement'])->name('viewadminclientmanagement');
     //fetch data
-    Route::get('/save/newclient/{action?}/{id?}', [ClientManagementController::class, 'newProfileclientShow'])->name('addnewclientview');
+    Route::get('/save/newclient/{action?}/{id?}', [ClientManagementController::class, 'newProfileclientShow'])->name('addnewclientedit');
+
+    Route::get('/view/newclient/{id?}', [ClientManagementController::class, 'clientview'])->name('clientview');
     //add new client
     Route::post('/save/newclient/add', [ClientManagementController::class, 'addnewclient'])->name('newProfileclientsave');
     //editclient
@@ -238,7 +240,7 @@ Route::get('/mobile/workout', [MobileController::class, 'workout'])->name('mobil
 Route::post('/warmup-daily',  [MobileController::class, 'storewarmupdaily']);
 Route::put('/warmup-daily/{id}', [MobileController::class, 'storewarmupdaily'])->name('warmup.daily.update');
 
-Route::post('/strength-daily',  [MobileController::class, 'storestrengthdaily']);
+Route::post('/save-strength-workout',  [MobileController::class, 'storestrengthdaily']);
 
 Route::get('/mobile/workouttimer', [MobileController::class, 'workouttimer'])->name('mobile.workouttimer');
 Route::get('/mobile/histroyview', [MobileController::class, 'histroyview'])->name('mobile.histroyview');
